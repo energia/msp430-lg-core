@@ -1,0 +1,631 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+A1101R04	A110x2500.h	/^#define A1101R04 /;"	d
+A1101R08	A110x2500.h	/^#define A1101R08 /;"	d
+A1101R09	A110x2500.h	/^#define A1101R09 /;"	d
+A110LR09	A110x2500.h	/^#define A110LR09 /;"	d
+A110LR09Configure	A110LR09.c	/^bool A110LR09Configure(struct sA110LR09PhyInfo *phyInfo,$/;"	f
+A110LR09ConvertRssiToDbm	A110LR09.c	/^signed int A110LR09ConvertRssiToDbm(struct sA110LR09PhyInfo *phyInfo,$/;"	f
+A110LR09GetLookup	A110LR09.c	/^const struct sA110x2500Lookup* A110LR09GetLookup(unsigned char entry)$/;"	f
+A110LR09GetLookupSize	A110LR09.c	/^unsigned char A110LR09GetLookupSize()$/;"	f
+A110LR09GetPowerLookup	A110LR09.c	/^const struct sA110x2500PowerLookup* A110LR09GetPowerLookup(unsigned char entry)$/;"	f
+A110LR09GetPowerLookupSize	A110LR09.c	/^unsigned char A110LR09GetPowerLookupSize(void)$/;"	f
+A110LR09Init	A110LR09.c	/^bool A110LR09Init(struct sA110LR09PhyInfo *phyInfo,$/;"	f
+A110LR09SetAddr	A110LR09.h	/^#define A110LR09SetAddr(/;"	d
+A110LR09SetAgcctrl1	A110LR09.h	/^#define A110LR09SetAgcctrl1(/;"	d
+A110LR09SetChannr	A110LR09.c	/^bool A110LR09SetChannr(struct sA110LR09PhyInfo *phyInfo, unsigned char value)$/;"	f
+A110LR09SetFifothr	A110LR09.h	/^#define A110LR09SetFifothr(/;"	d
+A110LR09SetFscal3	A110LR09.h	/^#define A110LR09SetFscal3(/;"	d
+A110LR09SetFsctrl0	A110LR09.h	/^#define A110LR09SetFsctrl0(/;"	d
+A110LR09SetIocfg0	A110LR09.h	/^#define A110LR09SetIocfg0(/;"	d
+A110LR09SetIocfg1	A110LR09.h	/^#define A110LR09SetIocfg1(/;"	d
+A110LR09SetIocfg2	A110LR09.h	/^#define A110LR09SetIocfg2(/;"	d
+A110LR09SetMcsm0	A110LR09.h	/^#define A110LR09SetMcsm0(/;"	d
+A110LR09SetMcsm1	A110LR09.h	/^#define A110LR09SetMcsm1(/;"	d
+A110LR09SetMcsm2	A110LR09.h	/^#define A110LR09SetMcsm2(/;"	d
+A110LR09SetMdmcfg2	A110LR09.h	/^#define A110LR09SetMdmcfg2(/;"	d
+A110LR09SetPaTable	A110LR09.c	/^void A110LR09SetPaTable(struct sA110LR09PhyInfo *phyInfo, $/;"	f
+A110LR09SetPktctrl0	A110LR09.h	/^#define A110LR09SetPktctrl0(/;"	d
+A110LR09SetPktctrl1	A110LR09.h	/^#define A110LR09SetPktctrl1(/;"	d
+A110LR09SetPktlen	A110LR09.h	/^#define A110LR09SetPktlen(/;"	d
+A110LR09SetRcctrl0	A110LR09.h	/^#define A110LR09SetRcctrl0(/;"	d
+A110LR09SetRcctrl1	A110LR09.h	/^#define A110LR09SetRcctrl1(/;"	d
+A110LR09SetWorctrl	A110LR09.h	/^#define A110LR09SetWorctrl(/;"	d
+A110LR09SetWorevt0	A110LR09.h	/^#define A110LR09SetWorevt0(/;"	d
+A110LR09SetWorevt1	A110LR09.h	/^#define A110LR09SetWorevt1(/;"	d
+A110LR09Wakeup	A110LR09.h	/^#define A110LR09Wakeup(/;"	d
+A110LR09_0_6_KBAUD_RSSI_OFFSET	A110LR09.h	/^#define A110LR09_0_6_KBAUD_RSSI_OFFSET /;"	d
+A110LR09_100_KBAUD_RSSI_OFFSET	A110LR09.h	/^#define A110LR09_100_KBAUD_RSSI_OFFSET /;"	d
+A110LR09_10_KBAUD_RSSI_OFFSET	A110LR09.h	/^#define A110LR09_10_KBAUD_RSSI_OFFSET /;"	d
+A110LR09_19_2_KBAUD_RSSI_OFFSET	A110LR09.h	/^#define A110LR09_19_2_KBAUD_RSSI_OFFSET /;"	d
+A110LR09_1_2_KBAUD_RSSI_OFFSET	A110LR09.h	/^#define A110LR09_1_2_KBAUD_RSSI_OFFSET /;"	d
+A110LR09_250_KBAUD_RSSI_OFFSET	A110LR09.h	/^#define A110LR09_250_KBAUD_RSSI_OFFSET /;"	d
+A110LR09_300_KBAUD_RSSI_OFFSET	A110LR09.h	/^#define A110LR09_300_KBAUD_RSSI_OFFSET /;"	d
+A110LR09_38_KBAUD_RSSI_OFFSET	A110LR09.h	/^#define A110LR09_38_KBAUD_RSSI_OFFSET /;"	d
+A110LR09_4_8_KBAUD_RSSI_OFFSET	A110LR09.h	/^#define A110LR09_4_8_KBAUD_RSSI_OFFSET /;"	d
+A110LR09_50_KBAUD_RSSI_OFFSET	A110LR09.h	/^#define A110LR09_50_KBAUD_RSSI_OFFSET /;"	d
+A110LR09_ADDR_MASK	A110LR09.h	/^#define A110LR09_ADDR_MASK /;"	d
+A110LR09_AGCCTRL1_MASK	A110LR09.h	/^#define A110LR09_AGCCTRL1_MASK /;"	d
+A110LR09_BAUD_RATE_MULTIPLIER	A110x2500.h	/^#define A110LR09_BAUD_RATE_MULTIPLIER /;"	d
+A110LR09_CHANNR_MASK	A110LR09.h	/^#define A110LR09_CHANNR_MASK /;"	d
+A110LR09_CONFIG_H	A110LR09Config.h	/^#define A110LR09_CONFIG_H$/;"	d
+A110LR09_ETSI	A110LR09.c	/^	#define	A110LR09_ETSI$/;"	d	file:
+A110LR09_ETSI	A110LR09.c	/^  #define	A110LR09_ETSI$/;"	d	file:
+A110LR09_ETSI_M7_GFSK_38_KBAUD	A110LR09Config.h	/^#define A110LR09_ETSI_M7_GFSK_38_KBAUD /;"	d
+A110LR09_FCC	A110LR09.c	/^	#define	A110LR09_FCC$/;"	d	file:
+A110LR09_FIFOTHR_MASK	A110LR09.h	/^#define A110LR09_FIFOTHR_MASK /;"	d
+A110LR09_FSCAL3_MASK	A110LR09.h	/^#define A110LR09_FSCAL3_MASK /;"	d
+A110LR09_FSCTRL0_MASK	A110LR09.h	/^#define A110LR09_FSCTRL0_MASK /;"	d
+A110LR09_H	A110LR09.h	/^#define A110LR09_H$/;"	d
+A110LR09_INFO	A110LR09.h	/^#define A110LR09_INFO /;"	d
+A110LR09_IOCFG0_MASK	A110LR09.h	/^#define A110LR09_IOCFG0_MASK /;"	d
+A110LR09_IOCFG1_MASK	A110LR09.h	/^#define A110LR09_IOCFG1_MASK /;"	d
+A110LR09_IOCFG2_MASK	A110LR09.h	/^#define A110LR09_IOCFG2_MASK /;"	d
+A110LR09_MCSM0_MASK	A110LR09.h	/^#define A110LR09_MCSM0_MASK /;"	d
+A110LR09_MCSM1_MASK	A110LR09.h	/^#define A110LR09_MCSM1_MASK /;"	d
+A110LR09_MCSM2_MASK	A110LR09.h	/^#define A110LR09_MCSM2_MASK /;"	d
+A110LR09_MDMCFG2_MASK	A110LR09.h	/^#define A110LR09_MDMCFG2_MASK /;"	d
+A110LR09_PA_TABLE_SIZE	A110LR09.h	/^#define A110LR09_PA_TABLE_SIZE /;"	d
+A110LR09_PKTCTRL0_MASK	A110LR09.h	/^#define A110LR09_PKTCTRL0_MASK /;"	d
+A110LR09_PKTCTRL1_MASK	A110LR09.h	/^#define A110LR09_PKTCTRL1_MASK /;"	d
+A110LR09_PKTLEN_MASK	A110LR09.h	/^#define A110LR09_PKTLEN_MASK /;"	d
+A110LR09_POWER_0_0_DBM	A110LR09Config.h	/^#define A110LR09_POWER_0_0_DBM /;"	d
+A110LR09_POWER_1_0_DBM	A110LR09Config.h	/^#define A110LR09_POWER_1_0_DBM /;"	d
+A110LR09_POWER_2_0_DBM	A110LR09Config.h	/^#define A110LR09_POWER_2_0_DBM /;"	d
+A110LR09_POWER_3_0_DBM	A110LR09Config.h	/^#define A110LR09_POWER_3_0_DBM /;"	d
+A110LR09_POWER_4_0_DBM	A110LR09Config.h	/^#define A110LR09_POWER_4_0_DBM /;"	d
+A110LR09_USER_ADDR	A110LR09Config.h	/^#define A110LR09_USER_ADDR /;"	d
+A110LR09_USER_AGCCTRL1	A110LR09Config.h	/^#define A110LR09_USER_AGCCTRL1 /;"	d
+A110LR09_USER_CHANNR	A110LR09Config.h	/^#define A110LR09_USER_CHANNR /;"	d
+A110LR09_USER_FIFOTHR	A110LR09Config.h	/^#define A110LR09_USER_FIFOTHR /;"	d
+A110LR09_USER_FSCAL3	A110LR09Config.h	/^#define A110LR09_USER_FSCAL3 /;"	d
+A110LR09_USER_FSCTRL0	A110LR09Config.h	/^#define A110LR09_USER_FSCTRL0 /;"	d
+A110LR09_USER_IOCFG0	A110LR09Config.h	/^#define A110LR09_USER_IOCFG0 /;"	d
+A110LR09_USER_IOCFG1	A110LR09Config.h	/^#define A110LR09_USER_IOCFG1 /;"	d
+A110LR09_USER_IOCFG2	A110LR09Config.h	/^#define A110LR09_USER_IOCFG2 /;"	d
+A110LR09_USER_MCSM0	A110LR09Config.h	/^#define A110LR09_USER_MCSM0 /;"	d
+A110LR09_USER_MCSM1	A110LR09Config.h	/^#define A110LR09_USER_MCSM1 /;"	d
+A110LR09_USER_MCSM2	A110LR09Config.h	/^#define A110LR09_USER_MCSM2 /;"	d
+A110LR09_USER_MDMCFG2	A110LR09Config.h	/^#define A110LR09_USER_MDMCFG2 /;"	d
+A110LR09_USER_PKTCTRL0	A110LR09Config.h	/^#define A110LR09_USER_PKTCTRL0 /;"	d
+A110LR09_USER_PKTCTRL1	A110LR09Config.h	/^#define A110LR09_USER_PKTCTRL1 /;"	d
+A110LR09_USER_PKTLEN	A110LR09Config.h	/^#define A110LR09_USER_PKTLEN /;"	d
+A110X2500_ADDR_MASK	A110x2500.h	/^#define A110X2500_ADDR_MASK /;"	d
+A110X2500_AGCCTRL1_MASK	A110x2500.h	/^#define A110X2500_AGCCTRL1_MASK /;"	d
+A110X2500_CHANNR_MASK	A110x2500.h	/^#define A110X2500_CHANNR_MASK /;"	d
+A110X2500_FIFOTHR_MASK	A110x2500.h	/^#define A110X2500_FIFOTHR_MASK /;"	d
+A110X2500_FSCAL3_MASK	A110x2500.h	/^#define A110X2500_FSCAL3_MASK /;"	d
+A110X2500_FSCTRL0_MASK	A110x2500.h	/^#define A110X2500_FSCTRL0_MASK /;"	d
+A110X2500_H	A110x2500.h	/^#define A110X2500_H$/;"	d
+A110X2500_INFO	A110x2500.h	/^#define A110X2500_INFO /;"	d
+A110X2500_IOCFG0_MASK	A110x2500.h	/^#define A110X2500_IOCFG0_MASK /;"	d
+A110X2500_IOCFG1_MASK	A110x2500.h	/^#define A110X2500_IOCFG1_MASK /;"	d
+A110X2500_IOCFG2_MASK	A110x2500.h	/^#define A110X2500_IOCFG2_MASK /;"	d
+A110X2500_MCSM0_MASK	A110x2500.h	/^#define A110X2500_MCSM0_MASK /;"	d
+A110X2500_MCSM1_MASK	A110x2500.h	/^#define A110X2500_MCSM1_MASK /;"	d
+A110X2500_MCSM2_MASK	A110x2500.h	/^#define A110X2500_MCSM2_MASK /;"	d
+A110X2500_MDMCFG2_MASK	A110x2500.h	/^#define A110X2500_MDMCFG2_MASK /;"	d
+A110X2500_PKTCTRL0_MASK	A110x2500.h	/^#define A110X2500_PKTCTRL0_MASK /;"	d
+A110X2500_PKTCTRL1_MASK	A110x2500.h	/^#define A110X2500_PKTCTRL1_MASK /;"	d
+A110X2500_PKTLEN_MASK	A110x2500.h	/^#define A110X2500_PKTLEN_MASK /;"	d
+A110X2500_RCCTRL0_MASK	A110x2500.h	/^#define A110X2500_RCCTRL0_MASK /;"	d
+A110X2500_RCCTRL1_MASK	A110x2500.h	/^#define A110X2500_RCCTRL1_MASK /;"	d
+A110X2500_WORCTRL_MASK	A110x2500.h	/^#define A110X2500_WORCTRL_MASK /;"	d
+A110X2500_WOREVT0_MASK	A110x2500.h	/^#define A110X2500_WOREVT0_MASK /;"	d
+A110X2500_WOREVT1_MASK	A110x2500.h	/^#define A110X2500_WOREVT1_MASK /;"	d
+A110x2500Gdo0Init	Platform.cpp	/^void A110x2500Gdo0Init()$/;"	f
+A110x2500Radio	A110x2500Radio.h	/^class A110x2500Radio$/;"	c
+A110x2500SpiInit	Platform.cpp	/^void A110x2500SpiInit()$/;"	f
+A110x2500SpiRead	Platform.cpp	/^void A110x2500SpiRead(unsigned char address,$/;"	f
+A110x2500SpiWrite	Platform.cpp	/^void A110x2500SpiWrite(unsigned char address,$/;"	f
+A2500R24	A110x2500.h	/^#define A2500R24 /;"	d
+ABS	CC1101.h	/^#define ABS(/;"	d
+ADDRESS_BROADCAST	A110x2500Radio.h	/^#define ADDRESS_BROADCAST /;"	d
+CC1101	CC1101.h	/^#define CC1101 /;"	d
+CC1101Calibrate	CC1101.c	/^bool CC1101Calibrate(struct sCC1101PhyInfo *phyInfo)$/;"	f
+CC1101Configure	CC1101.c	/^bool CC1101Configure(struct sCC1101PhyInfo *phyInfo, const struct sCC1101 *config)$/;"	f
+CC1101DefaultErrorHandler	CC1101.c	/^void CC1101DefaultErrorHandler(enum eCC1101Error error)$/;"	f
+CC1101EnableFrequencySynthesizer	CC1101.h	/^#define CC1101EnableFrequencySynthesizer(/;"	d
+CC1101ErrorHandler	CC1101.c	/^static void(*CC1101ErrorHandler)(enum eCC1101Error) = NULL;$/;"	v	file:
+CC1101FlushRxFifo	CC1101.h	/^#define CC1101FlushRxFifo(/;"	d
+CC1101FlushTxFifo	CC1101.h	/^#define CC1101FlushTxFifo(/;"	d
+CC1101GdoDisable	CC1101.h	/^#define CC1101GdoDisable(/;"	d
+CC1101GdoEnable	CC1101.h	/^#define CC1101GdoEnable(/;"	d
+CC1101GdoEvent	CC1101.h	/^#define CC1101GdoEvent(/;"	d
+CC1101GdoGetState	CC1101.h	/^#define CC1101GdoGetState(/;"	d
+CC1101GdoInit	CC1101.c	/^void CC1101GdoInit(struct sCC1101PhyInfo *phyInfo, $/;"	f
+CC1101GdoWaitForAssert	CC1101.h	/^#define CC1101GdoWaitForAssert(/;"	d
+CC1101GdoWaitForDeassert	CC1101.h	/^#define CC1101GdoWaitForDeassert(/;"	d
+CC1101GetChip	CC1101.c	/^enum eCC1101Chip CC1101GetChip(struct sCC1101PhyInfo *phyInfo)$/;"	f
+CC1101GetChipPartnum	CC1101.c	/^#define CC1101GetChipPartnum(/;"	d	file:
+CC1101GetChipVersion	CC1101.c	/^#define CC1101GetChipVersion(/;"	d	file:
+CC1101GetCrc	CC1101.h	/^#define CC1101GetCrc(/;"	d
+CC1101GetLqi	CC1101.h	/^#define CC1101GetLqi(/;"	d
+CC1101GetMarcState	CC1101.h	/^#define CC1101GetMarcState(/;"	d
+CC1101GetRegister	CC1101.c	/^unsigned char CC1101GetRegister(struct sCC1101PhyInfo *phyInfo,$/;"	f
+CC1101GetRegisterWithSpiSyncProblem	CC1101.c	/^unsigned char CC1101GetRegisterWithSpiSyncProblem(struct sCC1101PhyInfo *phyInfo, $/;"	f
+CC1101GetRssi	CC1101.h	/^#define CC1101GetRssi(/;"	d
+CC1101GetRxFifoCount	CC1101.h	/^#define CC1101GetRxFifoCount(/;"	d
+CC1101GetSleepState	CC1101.h	/^#define CC1101GetSleepState(/;"	d
+CC1101GetTxFifoCount	CC1101.h	/^#define CC1101GetTxFifoCount(/;"	d
+CC1101Idle	CC1101.h	/^#define CC1101Idle(/;"	d
+CC1101Nop	CC1101.h	/^#define CC1101Nop(/;"	d
+CC1101Read	CC1101.c	/^void CC1101Read(struct sCC1101PhyInfo *phyInfo, $/;"	f
+CC1101ReadRegisters	CC1101.c	/^void CC1101ReadRegisters(struct sCC1101PhyInfo *phyInfo,$/;"	f
+CC1101ReadRxFifo	CC1101.c	/^unsigned char CC1101ReadRxFifo(struct sCC1101PhyInfo *phyInfo, $/;"	f
+CC1101ReceiverOn	CC1101.h	/^#define CC1101ReceiverOn(/;"	d
+CC1101Reset	CC1101.h	/^#define CC1101Reset(/;"	d
+CC1101ResetWakeOnRadio	CC1101.h	/^#define CC1101ResetWakeOnRadio(/;"	d
+CC1101SetAndVerifyState	CC1101.c	/^bool CC1101SetAndVerifyState(struct sCC1101PhyInfo *phyInfo,$/;"	f
+CC1101SetRegister	CC1101.c	/^void CC1101SetRegister(struct sCC1101PhyInfo *phyInfo, $/;"	f
+CC1101Sleep	CC1101.c	/^bool CC1101Sleep(struct sCC1101PhyInfo *phyInfo)$/;"	f
+CC1101SpiInit	CC1101.c	/^void CC1101SpiInit(struct sCC1101PhyInfo *phyInfo, $/;"	f
+CC1101StartWakeOnRadio	CC1101.h	/^#define CC1101StartWakeOnRadio(/;"	d
+CC1101Strobe	CC1101.c	/^void CC1101Strobe(struct sCC1101PhyInfo *phyInfo, unsigned char command)$/;"	f
+CC1101TimeoutEvent	CC1101.c	/^bool CC1101TimeoutEvent(unsigned int *tick)$/;"	f
+CC1101Transmit	CC1101.h	/^#define CC1101Transmit(/;"	d
+CC1101TurnOffCrystalOscillator	CC1101.c	/^bool CC1101TurnOffCrystalOscillator(struct sCC1101PhyInfo *phyInfo)$/;"	f
+CC1101Wakeup	CC1101.c	/^void CC1101Wakeup(struct sCC1101PhyInfo *phyInfo, $/;"	f
+CC1101Write	CC1101.c	/^void CC1101Write(struct sCC1101PhyInfo *phyInfo, $/;"	f
+CC1101WriteRegisters	CC1101.c	/^void CC1101WriteRegisters(struct sCC1101PhyInfo *phyInfo,$/;"	f
+CC1101WriteTxFifo	CC1101.c	/^void CC1101WriteTxFifo(struct sCC1101PhyInfo *phyInfo,$/;"	f
+CC1101_ADC_RETENTION	CC1101.h	/^#define CC1101_ADC_RETENTION /;"	d
+CC1101_ADR_CHK	CC1101.h	/^#define CC1101_ADR_CHK /;"	d
+CC1101_AGCTEST_7_0	CC1101.h	/^#define CC1101_AGCTEST_7_0 /;"	d
+CC1101_AGC_FREEZE	CC1101.h	/^#define CC1101_AGC_FREEZE /;"	d
+CC1101_AGC_LNA_PRIORITY	CC1101.h	/^#define CC1101_AGC_LNA_PRIORITY /;"	d
+CC1101_APPEND_STATUS	CC1101.h	/^#define CC1101_APPEND_STATUS /;"	d
+CC1101_BS_LIMIT	CC1101.h	/^#define CC1101_BS_LIMIT /;"	d
+CC1101_BS_POST_K	CC1101.h	/^#define CC1101_BS_POST_K /;"	d
+CC1101_BS_POST_KP	CC1101.h	/^#define CC1101_BS_POST_KP /;"	d
+CC1101_BS_PRE_K	CC1101.h	/^#define CC1101_BS_PRE_K /;"	d
+CC1101_BS_PRE_KP	CC1101.h	/^#define CC1101_BS_PRE_KP /;"	d
+CC1101_CARRIER_SENSE_ABS_THR	CC1101.h	/^#define CC1101_CARRIER_SENSE_ABS_THR /;"	d
+CC1101_CARRIER_SENSR_REL_THR	CC1101.h	/^#define CC1101_CARRIER_SENSR_REL_THR /;"	d
+CC1101_CCA_MODE	CC1101.h	/^#define CC1101_CCA_MODE /;"	d
+CC1101_CHANBW_E	CC1101.h	/^#define CC1101_CHANBW_E /;"	d
+CC1101_CHANBW_M	CC1101.h	/^#define CC1101_CHANBW_M /;"	d
+CC1101_CHANNR_CHAN	CC1101.h	/^#define CC1101_CHANNR_CHAN /;"	d
+CC1101_CHANSPC_E	CC1101.h	/^#define CC1101_CHANSPC_E /;"	d
+CC1101_CHANSPC_M	CC1101.h	/^#define CC1101_CHANSPC_M /;"	d
+CC1101_CHIPPARTNUM	CC1101.h	/^#define CC1101_CHIPPARTNUM /;"	d
+CC1101_CHIPVERSION	CC1101.h	/^#define CC1101_CHIPVERSION /;"	d
+CC1101_CHP_CURR_CAL_EN	CC1101.h	/^#define CC1101_CHP_CURR_CAL_EN /;"	d
+CC1101_CLOSE_IN_RX	CC1101.h	/^#define CC1101_CLOSE_IN_RX /;"	d
+CC1101_CRC_AUTOFLUSH	CC1101.h	/^#define CC1101_CRC_AUTOFLUSH /;"	d
+CC1101_CRC_EN	CC1101.h	/^#define CC1101_CRC_EN /;"	d
+CC1101_CRC_OK	CC1101.h	/^#define CC1101_CRC_OK /;"	d
+CC1101_DEM_DCFILT_OFF	CC1101.h	/^#define CC1101_DEM_DCFILT_OFF /;"	d
+CC1101_DEVIATION_E	CC1101.h	/^#define CC1101_DEVIATION_E /;"	d
+CC1101_DEVIATION_M	CC1101.h	/^#define CC1101_DEVIATION_M /;"	d
+CC1101_DEVICE_ADDR	CC1101.h	/^#define CC1101_DEVICE_ADDR /;"	d
+CC1101_DRATE_E	CC1101.h	/^#define CC1101_DRATE_E /;"	d
+CC1101_DRATE_M	CC1101.h	/^#define CC1101_DRATE_M /;"	d
+CC1101_EVENT0_15_8	CC1101.h	/^#define CC1101_EVENT0_15_8 /;"	d
+CC1101_EVENT0_7_0	CC1101.h	/^#define CC1101_EVENT0_7_0 /;"	d
+CC1101_EVENT1	CC1101.h	/^#define CC1101_EVENT1 /;"	d
+CC1101_FEC_EN	CC1101.h	/^#define CC1101_FEC_EN /;"	d
+CC1101_FIFO_THR	CC1101.h	/^#define CC1101_FIFO_THR /;"	d
+CC1101_FILTER_LENGTH	CC1101.h	/^#define CC1101_FILTER_LENGTH /;"	d
+CC1101_FOC_BS_CS_GATE	CC1101.h	/^#define CC1101_FOC_BS_CS_GATE /;"	d
+CC1101_FOC_LIMIT	CC1101.h	/^#define CC1101_FOC_LIMIT /;"	d
+CC1101_FOC_POST_K	CC1101.h	/^#define CC1101_FOC_POST_K /;"	d
+CC1101_FOC_PRE_K	CC1101.h	/^#define CC1101_FOC_PRE_K /;"	d
+CC1101_FREQEST	CC1101.h	/^#define CC1101_FREQEST /;"	d
+CC1101_FREQOFF	CC1101.h	/^#define CC1101_FREQOFF /;"	d
+CC1101_FREQOFF_EST	CC1101.h	/^#define CC1101_FREQOFF_EST /;"	d
+CC1101_FREQ_15_8	CC1101.h	/^#define CC1101_FREQ_15_8 /;"	d
+CC1101_FREQ_21_16	CC1101.h	/^#define CC1101_FREQ_21_16 /;"	d
+CC1101_FREQ_23_22	CC1101.h	/^#define CC1101_FREQ_23_22 /;"	d
+CC1101_FREQ_7_0	CC1101.h	/^#define CC1101_FREQ_7_0 /;"	d
+CC1101_FREQ_IF	CC1101.h	/^#define CC1101_FREQ_IF /;"	d
+CC1101_FSCAL0_7_0	CC1101.h	/^#define CC1101_FSCAL0_7_0 /;"	d
+CC1101_FSCAL1_7_0	CC1101.h	/^#define CC1101_FSCAL1_7_0 /;"	d
+CC1101_FSCAL2_7_0	CC1101.h	/^#define CC1101_FSCAL2_7_0 /;"	d
+CC1101_FSCAL3_3_0	CC1101.h	/^#define CC1101_FSCAL3_3_0 /;"	d
+CC1101_FSCAL3_7_6	CC1101.h	/^#define CC1101_FSCAL3_7_6 /;"	d
+CC1101_FSTEST_7_0	CC1101.h	/^#define CC1101_FSTEST_7_0 /;"	d
+CC1101_FS_AUTOCAL	CC1101.h	/^#define CC1101_FS_AUTOCAL /;"	d
+CC1101_GDO0_CFG	CC1101.h	/^#define CC1101_GDO0_CFG /;"	d
+CC1101_GDO0_DIR	CC1101.c	/^#define CC1101_GDO0_DIR /;"	d	file:
+CC1101_GDO0_IE	CC1101.c	/^#define CC1101_GDO0_IE /;"	d	file:
+CC1101_GDO0_IES	CC1101.c	/^#define CC1101_GDO0_IES /;"	d	file:
+CC1101_GDO0_IFG	CC1101.c	/^#define CC1101_GDO0_IFG /;"	d	file:
+CC1101_GDO0_IN	CC1101.c	/^#define CC1101_GDO0_IN /;"	d	file:
+CC1101_GDO0_INV	CC1101.h	/^#define CC1101_GDO0_INV /;"	d
+CC1101_GDO0_PIN	CC1101.c	/^#define CC1101_GDO0_PIN /;"	d	file:
+CC1101_GDO0_SEL	CC1101.c	/^#define CC1101_GDO0_SEL /;"	d	file:
+CC1101_GDO0_SEL2	CC1101.c	/^#define CC1101_GDO0_SEL2 /;"	d	file:
+CC1101_GDO0_TEMP_SENSOR_ENABLE	CC1101.h	/^#define CC1101_GDO0_TEMP_SENSOR_ENABLE /;"	d
+CC1101_GDO1_CFG	CC1101.h	/^#define CC1101_GDO1_CFG /;"	d
+CC1101_GDO1_DS	CC1101.h	/^#define CC1101_GDO1_DS /;"	d
+CC1101_GDO1_INV	CC1101.h	/^#define CC1101_GDO1_INV /;"	d
+CC1101_GDO2_CFG	CC1101.h	/^#define CC1101_GDO2_CFG /;"	d
+CC1101_GDO2_INV	CC1101.h	/^#define CC1101_GDO2_INV /;"	d
+CC1101_H	CC1101.h	/^#define CC1101_H$/;"	d
+CC1101_HYST_LEVEL	CC1101.h	/^#define CC1101_HYST_LEVEL /;"	d
+CC1101_INFO	CC1101.h	/^#define CC1101_INFO /;"	d
+CC1101_LENGTH_CONFIG	CC1101.h	/^#define CC1101_LENGTH_CONFIG /;"	d
+CC1101_LNA2MIX_CURRENT	CC1101.h	/^#define CC1101_LNA2MIX_CURRENT /;"	d
+CC1101_LNA_CURRENT	CC1101.h	/^#define CC1101_LNA_CURRENT /;"	d
+CC1101_LODIV_BUF_CURRENT	CC1101.h	/^#define CC1101_LODIV_BUF_CURRENT /;"	d
+CC1101_LODIV_BUF_CURRENT_TX	CC1101.h	/^#define CC1101_LODIV_BUF_CURRENT_TX /;"	d
+CC1101_LQI	CC1101.h	/^#define CC1101_LQI /;"	d
+CC1101_LQI_EST	CC1101.h	/^#define CC1101_LQI_EST /;"	d
+CC1101_MAGN_TARGET	CC1101.h	/^#define CC1101_MAGN_TARGET /;"	d
+CC1101_MANCHESTER_EN	CC1101.h	/^#define CC1101_MANCHESTER_EN /;"	d
+CC1101_MARCSTATE	CC1101.h	/^#define CC1101_MARCSTATE /;"	d
+CC1101_MARC_STATE	CC1101.h	/^#define CC1101_MARC_STATE /;"	d
+CC1101_MAX_DVGA_GAIN	CC1101.h	/^#define CC1101_MAX_DVGA_GAIN /;"	d
+CC1101_MAX_LNA_GAIN	CC1101.h	/^#define CC1101_MAX_LNA_GAIN /;"	d
+CC1101_MAX_TIMEOUT	CC1101.h	/^#define CC1101_MAX_TIMEOUT /;"	d
+CC1101_MIX_CURRENT	CC1101.h	/^#define CC1101_MIX_CURRENT /;"	d
+CC1101_MOD_FORMAT	CC1101.h	/^#define CC1101_MOD_FORMAT /;"	d
+CC1101_NUM_PREAMBLE	CC1101.h	/^#define CC1101_NUM_PREAMBLE /;"	d
+CC1101_NUM_RXBYTES	CC1101.h	/^#define CC1101_NUM_RXBYTES /;"	d
+CC1101_NUM_TXBYTES	CC1101.h	/^#define CC1101_NUM_TXBYTES /;"	d
+CC1101_PACKET_LENGTH	CC1101.h	/^#define CC1101_PACKET_LENGTH /;"	d
+CC1101_PARTNUM	CC1101.h	/^#define CC1101_PARTNUM /;"	d
+CC1101_PARTNUM_7_0	CC1101.h	/^#define CC1101_PARTNUM_7_0 /;"	d
+CC1101_PATABLE	CC1101.h	/^#define CC1101_PATABLE /;"	d
+CC1101_PA_POWER	CC1101.h	/^#define CC1101_PA_POWER /;"	d
+CC1101_PIN_CTRL_EN	CC1101.h	/^#define CC1101_PIN_CTRL_EN /;"	d
+CC1101_PKSTATUS_CS	CC1101.h	/^#define CC1101_PKSTATUS_CS /;"	d
+CC1101_PKSTATUS_SFD	CC1101.h	/^#define CC1101_PKSTATUS_SFD /;"	d
+CC1101_PKTSTATUS	CC1101.h	/^#define CC1101_PKTSTATUS /;"	d
+CC1101_PKTSTATUS_CCA	CC1101.h	/^#define CC1101_PKTSTATUS_CCA /;"	d
+CC1101_PKTSTATUS_CRC_OK	CC1101.h	/^#define CC1101_PKTSTATUS_CRC_OK /;"	d
+CC1101_PKTSTATUS_GDO0	CC1101.h	/^#define CC1101_PKTSTATUS_GDO0 /;"	d
+CC1101_PKTSTATUS_GDO2	CC1101.h	/^#define CC1101_PKTSTATUS_GDO2 /;"	d
+CC1101_PKTSTATUS_PQT_REACHED	CC1101.h	/^#define CC1101_PKTSTATUS_PQT_REACHED /;"	d
+CC1101_PKT_FORMAT	CC1101.h	/^#define CC1101_PKT_FORMAT /;"	d
+CC1101_PO_TIMEOUT	CC1101.h	/^#define CC1101_PO_TIMEOUT /;"	d
+CC1101_PQT	CC1101.h	/^#define CC1101_PQT /;"	d
+CC1101_PTEST_7_0	CC1101.h	/^#define CC1101_PTEST_7_0 /;"	d
+CC1101_RCCTRL0_STATUS	CC1101.h	/^#define CC1101_RCCTRL0_STATUS /;"	d
+CC1101_RCCTRL0_STATUS_7_0	CC1101.h	/^#define CC1101_RCCTRL0_STATUS_7_0 /;"	d
+CC1101_RCCTRL1_STATUS	CC1101.h	/^#define CC1101_RCCTRL1_STATUS /;"	d
+CC1101_RCCTRL1_STATUS_7_0	CC1101.h	/^#define CC1101_RCCTRL1_STATUS_7_0 /;"	d
+CC1101_RCCTRL_0	CC1101.h	/^#define CC1101_RCCTRL_0 /;"	d
+CC1101_RCCTRL_1	CC1101.h	/^#define CC1101_RCCTRL_1 /;"	d
+CC1101_RC_CAL	CC1101.h	/^#define CC1101_RC_CAL /;"	d
+CC1101_RC_PD	CC1101.h	/^#define CC1101_RC_PD /;"	d
+CC1101_READ_BURST	CC1101.h	/^#define CC1101_READ_BURST /;"	d
+CC1101_READ_SINGLE	CC1101.h	/^#define CC1101_READ_SINGLE /;"	d
+CC1101_REG_ADDR	CC1101.h	/^#define CC1101_REG_ADDR /;"	d
+CC1101_REG_AGCCTRL0	CC1101.h	/^#define CC1101_REG_AGCCTRL0 /;"	d
+CC1101_REG_AGCCTRL1	CC1101.h	/^#define CC1101_REG_AGCCTRL1 /;"	d
+CC1101_REG_AGCCTRL2	CC1101.h	/^#define CC1101_REG_AGCCTRL2 /;"	d
+CC1101_REG_AGCTEST	CC1101.h	/^#define CC1101_REG_AGCTEST /;"	d
+CC1101_REG_BSCFG	CC1101.h	/^#define CC1101_REG_BSCFG /;"	d
+CC1101_REG_CHANNR	CC1101.h	/^#define CC1101_REG_CHANNR /;"	d
+CC1101_REG_DEVIATN	CC1101.h	/^#define CC1101_REG_DEVIATN /;"	d
+CC1101_REG_FIFOTHR	CC1101.h	/^#define CC1101_REG_FIFOTHR /;"	d
+CC1101_REG_FOCCFG	CC1101.h	/^#define CC1101_REG_FOCCFG /;"	d
+CC1101_REG_FREND0	CC1101.h	/^#define CC1101_REG_FREND0 /;"	d
+CC1101_REG_FREND1	CC1101.h	/^#define CC1101_REG_FREND1 /;"	d
+CC1101_REG_FREQ0	CC1101.h	/^#define CC1101_REG_FREQ0 /;"	d
+CC1101_REG_FREQ1	CC1101.h	/^#define CC1101_REG_FREQ1 /;"	d
+CC1101_REG_FREQ2	CC1101.h	/^#define CC1101_REG_FREQ2 /;"	d
+CC1101_REG_FSCAL0	CC1101.h	/^#define CC1101_REG_FSCAL0 /;"	d
+CC1101_REG_FSCAL1	CC1101.h	/^#define CC1101_REG_FSCAL1 /;"	d
+CC1101_REG_FSCAL2	CC1101.h	/^#define CC1101_REG_FSCAL2 /;"	d
+CC1101_REG_FSCAL3	CC1101.h	/^#define CC1101_REG_FSCAL3 /;"	d
+CC1101_REG_FSCTRL0	CC1101.h	/^#define CC1101_REG_FSCTRL0 /;"	d
+CC1101_REG_FSCTRL1	CC1101.h	/^#define CC1101_REG_FSCTRL1 /;"	d
+CC1101_REG_FSTEST	CC1101.h	/^#define CC1101_REG_FSTEST /;"	d
+CC1101_REG_IOCFG0	CC1101.h	/^#define CC1101_REG_IOCFG0 /;"	d
+CC1101_REG_IOCFG1	CC1101.h	/^#define CC1101_REG_IOCFG1 /;"	d
+CC1101_REG_IOCFG2	CC1101.h	/^#define CC1101_REG_IOCFG2 /;"	d
+CC1101_REG_MCSM0	CC1101.h	/^#define CC1101_REG_MCSM0 /;"	d
+CC1101_REG_MCSM1	CC1101.h	/^#define CC1101_REG_MCSM1 /;"	d
+CC1101_REG_MCSM2	CC1101.h	/^#define CC1101_REG_MCSM2 /;"	d
+CC1101_REG_MDMCFG0	CC1101.h	/^#define CC1101_REG_MDMCFG0 /;"	d
+CC1101_REG_MDMCFG1	CC1101.h	/^#define CC1101_REG_MDMCFG1 /;"	d
+CC1101_REG_MDMCFG2	CC1101.h	/^#define CC1101_REG_MDMCFG2 /;"	d
+CC1101_REG_MDMCFG3	CC1101.h	/^#define CC1101_REG_MDMCFG3 /;"	d
+CC1101_REG_MDMCFG4	CC1101.h	/^#define CC1101_REG_MDMCFG4 /;"	d
+CC1101_REG_PKTCTRL0	CC1101.h	/^#define CC1101_REG_PKTCTRL0 /;"	d
+CC1101_REG_PKTCTRL1	CC1101.h	/^#define CC1101_REG_PKTCTRL1 /;"	d
+CC1101_REG_PKTLEN	CC1101.h	/^#define CC1101_REG_PKTLEN /;"	d
+CC1101_REG_PTEST	CC1101.h	/^#define CC1101_REG_PTEST /;"	d
+CC1101_REG_RCCTRL0	CC1101.h	/^#define CC1101_REG_RCCTRL0 /;"	d
+CC1101_REG_RCCTRL1	CC1101.h	/^#define CC1101_REG_RCCTRL1 /;"	d
+CC1101_REG_SYNC0	CC1101.h	/^#define CC1101_REG_SYNC0 /;"	d
+CC1101_REG_SYNC1	CC1101.h	/^#define CC1101_REG_SYNC1 /;"	d
+CC1101_REG_TEST0	CC1101.h	/^#define CC1101_REG_TEST0 /;"	d
+CC1101_REG_TEST1	CC1101.h	/^#define CC1101_REG_TEST1 /;"	d
+CC1101_REG_TEST2	CC1101.h	/^#define CC1101_REG_TEST2 /;"	d
+CC1101_REG_WORCTRL	CC1101.h	/^#define CC1101_REG_WORCTRL /;"	d
+CC1101_REG_WOREVT0	CC1101.h	/^#define CC1101_REG_WOREVT0 /;"	d
+CC1101_REG_WOREVT1	CC1101.h	/^#define CC1101_REG_WOREVT1 /;"	d
+CC1101_RSSI	CC1101.h	/^#define CC1101_RSSI /;"	d
+CC1101_RSSI_7_0	CC1101.h	/^#define CC1101_RSSI_7_0 /;"	d
+CC1101_RXBYTES	CC1101.h	/^#define CC1101_RXBYTES /;"	d
+CC1101_RXFIFO	CC1101.h	/^#define CC1101_RXFIFO /;"	d
+CC1101_RXFIFO_OVERFLOW	CC1101.h	/^#define CC1101_RXFIFO_OVERFLOW /;"	d
+CC1101_RXFIFO_SIZE	CC1101.h	/^#define CC1101_RXFIFO_SIZE /;"	d
+CC1101_RXOFF_MODE	CC1101.h	/^#define CC1101_RXOFF_MODE /;"	d
+CC1101_RX_TIME	CC1101.h	/^#define CC1101_RX_TIME /;"	d
+CC1101_RX_TIME_QUAL	CC1101.h	/^#define CC1101_RX_TIME_QUAL /;"	d
+CC1101_RX_TIME_RSSI	CC1101.h	/^#define CC1101_RX_TIME_RSSI /;"	d
+CC1101_SCAL	CC1101.h	/^#define CC1101_SCAL /;"	d
+CC1101_SFRX	CC1101.h	/^#define CC1101_SFRX /;"	d
+CC1101_SFSTXON	CC1101.h	/^#define CC1101_SFSTXON /;"	d
+CC1101_SFTX	CC1101.h	/^#define CC1101_SFTX /;"	d
+CC1101_SIDLE	CC1101.h	/^#define CC1101_SIDLE /;"	d
+CC1101_SNOP	CC1101.h	/^#define CC1101_SNOP /;"	d
+CC1101_SPWD	CC1101.h	/^#define CC1101_SPWD /;"	d
+CC1101_SRES	CC1101.h	/^#define CC1101_SRES /;"	d
+CC1101_SRX	CC1101.h	/^#define CC1101_SRX /;"	d
+CC1101_STX	CC1101.h	/^#define CC1101_STX /;"	d
+CC1101_SWOR	CC1101.h	/^#define CC1101_SWOR /;"	d
+CC1101_SWORRST	CC1101.h	/^#define CC1101_SWORRST /;"	d
+CC1101_SXOFF	CC1101.h	/^#define CC1101_SXOFF /;"	d
+CC1101_SYNC_LSB	CC1101.h	/^#define CC1101_SYNC_LSB /;"	d
+CC1101_SYNC_MODE	CC1101.h	/^#define CC1101_SYNC_MODE /;"	d
+CC1101_SYNC_MSB	CC1101.h	/^#define CC1101_SYNC_MSB /;"	d
+CC1101_TEST0_0	CC1101.h	/^#define CC1101_TEST0_0 /;"	d
+CC1101_TEST0_7_2	CC1101.h	/^#define CC1101_TEST0_7_2 /;"	d
+CC1101_TEST1_7_0	CC1101.h	/^#define CC1101_TEST1_7_0 /;"	d
+CC1101_TEST2_7_0	CC1101.h	/^#define CC1101_TEST2_7_0 /;"	d
+CC1101_TIME_15_8	CC1101.h	/^#define CC1101_TIME_15_8 /;"	d
+CC1101_TIME_7_0	CC1101.h	/^#define CC1101_TIME_7_0 /;"	d
+CC1101_TXBYTES	CC1101.h	/^#define CC1101_TXBYTES /;"	d
+CC1101_TXFIFO	CC1101.h	/^#define CC1101_TXFIFO /;"	d
+CC1101_TXFIFO_SIZE	CC1101.h	/^#define CC1101_TXFIFO_SIZE /;"	d
+CC1101_TXFIFO_UNDERFLOW	CC1101.h	/^#define CC1101_TXFIFO_UNDERFLOW /;"	d
+CC1101_TXOFF_MODE	CC1101.h	/^#define CC1101_TXOFF_MODE /;"	d
+CC1101_VCO_CORE_H_EN	CC1101.h	/^#define CC1101_VCO_CORE_H_EN /;"	d
+CC1101_VCO_SEL_CAL_EN	CC1101.h	/^#define CC1101_VCO_SEL_CAL_EN /;"	d
+CC1101_VCO_VC_DAC	CC1101.h	/^#define CC1101_VCO_VC_DAC /;"	d
+CC1101_VCO_VC_DAC_7_0	CC1101.h	/^#define CC1101_VCO_VC_DAC_7_0 /;"	d
+CC1101_VERSION	CC1101.h	/^#define CC1101_VERSION /;"	d
+CC1101_VERSION_7_0	CC1101.h	/^#define CC1101_VERSION_7_0 /;"	d
+CC1101_WAIT_TIME	CC1101.h	/^#define CC1101_WAIT_TIME /;"	d
+CC1101_WHITE_DATA	CC1101.h	/^#define CC1101_WHITE_DATA /;"	d
+CC1101_WORTIME0	CC1101.h	/^#define CC1101_WORTIME0 /;"	d
+CC1101_WORTIME1	CC1101.h	/^#define CC1101_WORTIME1 /;"	d
+CC1101_WOR_RES	CC1101.h	/^#define CC1101_WOR_RES /;"	d
+CC1101_WRITE_BURST	CC1101.h	/^#define CC1101_WRITE_BURST /;"	d
+CC1101_WRITE_SINGLE	CC1101.h	/^#define CC1101_WRITE_SINGLE /;"	d
+CC1101_XOSC_FORCE_ON	CC1101.h	/^#define CC1101_XOSC_FORCE_ON /;"	d
+CC110L	CC1101.h	/^#define CC110L /;"	d
+CC110L_CHIPPARTNUM	CC1101.h	/^#define CC110L_CHIPPARTNUM /;"	d
+CC110L_CHIPVERSION	CC1101.h	/^#define CC110L_CHIPVERSION /;"	d
+CC2500	CC1101.h	/^#define CC2500 /;"	d
+CC2500_CHIPPARTNUM	CC1101.h	/^#define CC2500_CHIPPARTNUM /;"	d
+CC2500_CHIPVERSION	CC1101.h	/^#define CC2500_CHIPVERSION /;"	d
+CHANNEL_1	A110x2500Radio.h	/^  CHANNEL_1  = 0x05,  \/\/ ETSI 868.3MHz; FCC\/IC 903MHz$/;"	e	enum:eChannel
+CHANNEL_2	A110x2500Radio.h	/^  CHANNEL_2  = 0x0F,  \/\/ ETSI 868.8MHz; FCC\/IC 904MHz$/;"	e	enum:eChannel
+CHANNEL_3	A110x2500Radio.h	/^  CHANNEL_3  = 0x19,  \/\/ ETSI 869.3MHz; FCC\/IC 905MHz$/;"	e	enum:eChannel
+CHANNEL_4	A110x2500Radio.h	/^  CHANNEL_4  = 0x23,  \/\/ ETSI 869.8MHz; FCC\/IC 906MHz$/;"	e	enum:eChannel
+Enable	CC1101.h	/^  void(*const Enable)(bool);$/;"	m	struct:sCC1101Gdo
+Event	CC1101.h	/^  bool(*const Event)(volatile const unsigned char);$/;"	m	struct:sCC1101Gdo
+Gdo0Assert	CC1101.c	/^void Gdo0Assert()$/;"	f
+Gdo0Deassert	CC1101.c	/^void Gdo0Deassert()$/;"	f
+Gdo0Enable	CC1101.c	/^void Gdo0Enable(bool en)$/;"	f
+Gdo0Event	CC1101.c	/^bool Gdo0Event(unsigned char event)$/;"	f
+Gdo0Init	CC1101.c	/^void Gdo0Init()$/;"	f
+Gdo0State	CC1101.c	/^enum eCC1101GdoState Gdo0State()$/;"	f
+GetState	CC1101.h	/^  enum eCC1101GdoState(*const GetState)(void);$/;"	m	struct:sCC1101Gdo	typeref:enum:sCC1101Gdo::GetState
+Init	CC1101.h	/^  void(*const Init)(void);$/;"	m	struct:sCC1101Gdo
+Init	CC1101.h	/^  void(*const Init)(void);$/;"	m	struct:sCC1101Spi
+NULL	A110LR09.h	/^#define NULL /;"	d
+NULL	CC1101.h	/^#define NULL /;"	d
+PLATFORM_H	Platform.h	/^#define PLATFORM_H$/;"	d
+POWER_0_DBM	A110x2500Radio.h	/^  POWER_0_DBM  = 4    \/\/ 0dBm$/;"	e	enum:ePower
+POWER_1_DBM	A110x2500Radio.h	/^  POWER_1_DBM  = 3,   \/\/ 1dBm$/;"	e	enum:ePower
+POWER_2_DBM	A110x2500Radio.h	/^  POWER_2_DBM  = 2,   \/\/ 2dBm$/;"	e	enum:ePower
+POWER_3_DBM	A110x2500Radio.h	/^  POWER_3_DBM  = 1,   \/\/ 3dBm$/;"	e	enum:ePower
+POWER_4_DBM	A110x2500Radio.h	/^  POWER_4_DBM  = 0,   \/\/ 4dBm$/;"	e	enum:ePower
+POWER_MAX	A110x2500Radio.h	/^#define POWER_MAX /;"	d
+POWER_MIN	A110x2500Radio.h	/^#define POWER_MIN /;"	d
+POWER_TO_VALUE	A110x2500.h	/^#define POWER_TO_VALUE(/;"	d
+Port2Isr	CC1101.c	/^__interrupt void Port2Isr()$/;"	f
+READ_MODIFY_WRITE	A110x2500.h	/^#define READ_MODIFY_WRITE(/;"	d
+RF_GDO0	Platform.h	/^#define RF_GDO0 /;"	d
+RF_SPI_CSN	Platform.h	/^#define RF_SPI_CSN /;"	d
+RF_SPI_MISO	Platform.h	/^#define RF_SPI_MISO /;"	d
+Radio	A110x2500Radio.cpp	/^A110x2500Radio Radio;$/;"	v
+Read	CC1101.h	/^  void(*const Read)(unsigned char, unsigned char*, unsigned char);$/;"	m	struct:sCC1101Spi
+Receiver	CC1101.c	/^void Receiver()$/;"	f
+SPI_CSN_DIR	CC1101.c	/^#define SPI_CSN_DIR /;"	d	file:
+SPI_CSN_OUT	CC1101.c	/^#define SPI_CSN_OUT /;"	d	file:
+SPI_CSN_PIN	CC1101.c	/^#define SPI_CSN_PIN /;"	d	file:
+SPI_CSN_SEL	CC1101.c	/^#define SPI_CSN_SEL /;"	d	file:
+SPI_CSN_SEL2	CC1101.c	/^#define SPI_CSN_SEL2 /;"	d	file:
+SPI_MISO_IN	CC1101.c	/^#define SPI_MISO_IN /;"	d	file:
+SPI_MISO_PIN	CC1101.c	/^#define SPI_MISO_PIN /;"	d	file:
+ST	CC1101.h	/^#define ST(/;"	d
+SpiInit	CC1101.c	/^void SpiInit()$/;"	f
+SpiRead	CC1101.c	/^void SpiRead(unsigned char address, unsigned char *pBuffer, unsigned char count)$/;"	f
+SpiWrite	CC1101.c	/^void SpiWrite(unsigned char address, const unsigned char *pBuffer, unsigned char count)$/;"	f
+Transmitter	CC1101.c	/^void Transmitter()$/;"	f
+WaitForAssert	CC1101.h	/^  void(*const WaitForAssert)(void);$/;"	m	struct:sCC1101Gdo
+WaitForDeassert	CC1101.h	/^  void(*const WaitForDeassert)(void);$/;"	m	struct:sCC1101Gdo
+Write	CC1101.h	/^  void(*const Write)(unsigned char, const unsigned char*, unsigned char);$/;"	m	struct:sCC1101Spi
+_dataStream	A110x2500Radio.h	/^  struct sDataStream _dataStream; \/\/ Data stream used for RX\/TX$/;"	m	class:A110x2500Radio	typeref:struct:A110x2500Radio::sDataStream
+_wakeup	A110x2500Radio.cpp	/^void A110x2500Radio::_wakeup()$/;"	f	class:A110x2500Radio
+addr	CC1101.h	/^  unsigned char addr;     \/\/ Device address$/;"	m	struct:sCC1101
+address	A110x2500Radio.h	/^  uint8_t address;      \/\/ Address for hardware filtering of data stream$/;"	m	struct:sDataStream
+agcctrl0	CC1101.h	/^  unsigned char agcctrl0; \/\/ AGC control 0$/;"	m	struct:sCC1101
+agcctrl1	CC1101.h	/^  unsigned char agcctrl1; \/\/ AGC control 1$/;"	m	struct:sCC1101
+agcctrl2	CC1101.h	/^  unsigned char agcctrl2; \/\/ AGC control 2$/;"	m	struct:sCC1101
+agctest	CC1101.h	/^  unsigned char agctest;  \/\/ AGC test$/;"	m	struct:sCC1101
+baudRate	A110x2500.h	/^  } baudRate;$/;"	m	struct:sA110x2500Lookup	typeref:struct:sA110x2500Lookup::sA110x2500BaudRate
+begin	A110x2500Radio.cpp	/^void A110x2500Radio::begin(uint8_t address, channel_t channel, power_t power)$/;"	f	class:A110x2500Radio
+bool	A110LR09.h	/^#define bool /;"	d
+bool	A110x2500.h	/^#define bool /;"	d
+bool	CC1101.h	/^#define bool /;"	d
+bscfg	CC1101.h	/^  unsigned char bscfg;    \/\/ Bit synchronization configuration$/;"	m	struct:sCC1101
+buildDataStream	A110x2500Radio.cpp	/^void A110x2500Radio::buildDataStream(uint8_t address, $/;"	f	class:A110x2500Radio
+busy	A110x2500Radio.cpp	/^boolean A110x2500Radio::busy()$/;"	f	class:A110x2500Radio
+cc1101	A110LR09.h	/^  struct sCC1101PhyInfo cc1101;$/;"	m	struct:sA110LR09PhyInfo	typeref:struct:sA110LR09PhyInfo::sCC1101PhyInfo
+certified	A110x2500.h	/^  const struct sCC1101 certified;                   \/\/ Certified configuration$/;"	m	struct:sA110x2500Lookup	typeref:struct:sA110x2500Lookup::sCC1101
+channelList	A110x2500.h	/^  const struct sA110x2500ChannelList *channelList;  \/\/ Approved configuration channel list$/;"	m	struct:sA110x2500Lookup	typeref:struct:sA110x2500Lookup::sA110x2500ChannelList
+channel_t	A110x2500Radio.h	/^} channel_t;$/;"	t	typeref:enum:eChannel
+channr	CC1101.h	/^  unsigned char channr;   \/\/ Channel number$/;"	m	struct:sCC1101
+dBm	A110x2500.h	/^  signed int dBm;         \/\/ Power is represented in dBm$/;"	m	struct:sA110x2500PowerLookup
+dataField	A110x2500Radio.h	/^  uint8_t *dataField;   \/\/ Data stream payload$/;"	m	struct:sDataStream
+deviatn	CC1101.h	/^  unsigned char deviatn;  \/\/ Modem deviation setting$/;"	m	struct:sCC1101
+eA110x2500ChannelList	A110x2500.h	/^  const enum eA110x2500ChannelList$/;"	g	struct:sA110x2500ChannelList
+eA110x2500ChannelListApproved	A110x2500.h	/^    eA110x2500ChannelListApproved,    \/\/ List contains approved channels$/;"	e	enum:sA110x2500ChannelList::eA110x2500ChannelList
+eA110x2500ChannelListDisapproved	A110x2500.h	/^    eA110x2500ChannelListDisapproved  \/\/ List contains disapproved channels$/;"	e	enum:sA110x2500ChannelList::eA110x2500ChannelList
+eA110x2500Module	A110x2500.h	/^enum eA110x2500Module$/;"	g
+eA110x2500ModuleLR09	A110x2500.h	/^  eA110x2500ModuleLR09    = A110LR09,$/;"	e	enum:eA110x2500Module
+eA110x2500ModuleR04	A110x2500.h	/^  eA110x2500ModuleR04     = A1101R04,$/;"	e	enum:eA110x2500Module
+eA110x2500ModuleR08	A110x2500.h	/^  eA110x2500ModuleR08     = A1101R08,$/;"	e	enum:eA110x2500Module
+eA110x2500ModuleR09	A110x2500.h	/^  eA110x2500ModuleR09     = A1101R09,$/;"	e	enum:eA110x2500Module
+eA110x2500ModuleR24	A110x2500.h	/^  eA110x2500ModuleR24     = A2500R24$/;"	e	enum:eA110x2500Module
+eA110x2500ModuleUnknown	A110x2500.h	/^  eA110x2500ModuleUnknown = 0x00u,$/;"	e	enum:eA110x2500Module
+eCC1101Chip	CC1101.h	/^enum eCC1101Chip$/;"	g
+eCC1101Chip1101	CC1101.h	/^  eCC1101Chip1101       = CC1101,$/;"	e	enum:eCC1101Chip
+eCC1101Chip110L	CC1101.h	/^  eCC1101Chip110L       = CC110L,$/;"	e	enum:eCC1101Chip
+eCC1101Chip2500	CC1101.h	/^  eCC1101Chip2500       = CC2500$/;"	e	enum:eCC1101Chip
+eCC1101ChipUnknown	CC1101.h	/^  eCC1101ChipUnknown    = 0,$/;"	e	enum:eCC1101Chip
+eCC1101Error	CC1101.h	/^enum eCC1101Error$/;"	g
+eCC1101ErrorSleep	CC1101.h	/^  eCC1101ErrorSleep       = 0x02u$/;"	e	enum:eCC1101Error
+eCC1101ErrorTimeout	CC1101.h	/^  eCC1101ErrorTimeout     = 0x01u,$/;"	e	enum:eCC1101Error
+eCC1101GdoState	CC1101.h	/^enum eCC1101GdoState$/;"	g
+eCC1101GdoStateWaitForAssert	CC1101.h	/^  eCC1101GdoStateWaitForAssert    = 0x00u,$/;"	e	enum:eCC1101GdoState
+eCC1101GdoStateWaitForDeassert	CC1101.h	/^  eCC1101GdoStateWaitForDeassert  = 0x01u$/;"	e	enum:eCC1101GdoState
+eCC1101MarcState	CC1101.h	/^enum eCC1101MarcState$/;"	g
+eCC1101MarcStateBwboost	CC1101.h	/^  eCC1101MarcStateBwboost           = 0x09u,$/;"	e	enum:eCC1101MarcState
+eCC1101MarcStateEndcal	CC1101.h	/^  eCC1101MarcStateEndcal            = 0x0Cu,$/;"	e	enum:eCC1101MarcState
+eCC1101MarcStateFs_lock	CC1101.h	/^  eCC1101MarcStateFs_lock           = 0x0Au,$/;"	e	enum:eCC1101MarcState
+eCC1101MarcStateFstxon	CC1101.h	/^  eCC1101MarcStateFstxon            = 0x12u,$/;"	e	enum:eCC1101MarcState
+eCC1101MarcStateIdle	CC1101.h	/^  eCC1101MarcStateIdle              = 0x01u,$/;"	e	enum:eCC1101MarcState
+eCC1101MarcStateIfadcon	CC1101.h	/^  eCC1101MarcStateIfadcon           = 0x0Bu,$/;"	e	enum:eCC1101MarcState
+eCC1101MarcStateMancal	CC1101.h	/^  eCC1101MarcStateMancal            = 0x05u,$/;"	e	enum:eCC1101MarcState
+eCC1101MarcStateRegon	CC1101.h	/^  eCC1101MarcStateRegon             = 0x07u,$/;"	e	enum:eCC1101MarcState
+eCC1101MarcStateRegon_mc	CC1101.h	/^  eCC1101MarcStateRegon_mc          = 0x04u,$/;"	e	enum:eCC1101MarcState
+eCC1101MarcStateRx	CC1101.h	/^  eCC1101MarcStateRx                = 0x0Du,$/;"	e	enum:eCC1101MarcState
+eCC1101MarcStateRx_end	CC1101.h	/^  eCC1101MarcStateRx_end            = 0x0Eu,$/;"	e	enum:eCC1101MarcState
+eCC1101MarcStateRx_rst	CC1101.h	/^  eCC1101MarcStateRx_rst            = 0x0Fu,$/;"	e	enum:eCC1101MarcState
+eCC1101MarcStateRxfifo_overflow	CC1101.h	/^  eCC1101MarcStateRxfifo_overflow   = 0x11u,$/;"	e	enum:eCC1101MarcState
+eCC1101MarcStateRxtx_switch	CC1101.h	/^  eCC1101MarcStateRxtx_switch       = 0x15u,$/;"	e	enum:eCC1101MarcState
+eCC1101MarcStateSleep	CC1101.h	/^  eCC1101MarcStateSleep             = 0x00u,$/;"	e	enum:eCC1101MarcState
+eCC1101MarcStateStartcal	CC1101.h	/^  eCC1101MarcStateStartcal          = 0x08u,$/;"	e	enum:eCC1101MarcState
+eCC1101MarcStateTx	CC1101.h	/^  eCC1101MarcStateTx                = 0x13u,$/;"	e	enum:eCC1101MarcState
+eCC1101MarcStateTx_end	CC1101.h	/^  eCC1101MarcStateTx_end            = 0x14u,$/;"	e	enum:eCC1101MarcState
+eCC1101MarcStateTxfifo_underflow	CC1101.h	/^  eCC1101MarcStateTxfifo_underflow  = 0x16u,$/;"	e	enum:eCC1101MarcState
+eCC1101MarcStateTxrx_switch	CC1101.h	/^  eCC1101MarcStateTxrx_switch       = 0x10u,$/;"	e	enum:eCC1101MarcState
+eCC1101MarcStateUnknown	CC1101.h	/^  eCC1101MarcStateUnknown           = 0xFFu$/;"	e	enum:eCC1101MarcState
+eCC1101MarcStateVcoon	CC1101.h	/^  eCC1101MarcStateVcoon             = 0x06u,$/;"	e	enum:eCC1101MarcState
+eCC1101MarcStateVcoon_mc	CC1101.h	/^  eCC1101MarcStateVcoon_mc          = 0x03u,$/;"	e	enum:eCC1101MarcState
+eCC1101MarcStateXOff	CC1101.h	/^  eCC1101MarcStateXOff              = 0x02u,$/;"	e	enum:eCC1101MarcState
+eChannel	A110x2500Radio.h	/^typedef enum eChannel$/;"	g
+ePower	A110x2500Radio.h	/^typedef enum ePower$/;"	g
+end	A110x2500Radio.cpp	/^void A110x2500Radio::end()$/;"	f	class:A110x2500Radio
+false	A110LR09.h	/^#define false /;"	d
+false	A110x2500.h	/^#define false /;"	d
+false	CC1101.h	/^#define false /;"	d
+fifothr	CC1101.h	/^  unsigned char fifothr;  \/\/ RXFIFO and TXFIFO thresholds$/;"	m	struct:sCC1101
+foccfg	CC1101.h	/^  unsigned char foccfg;   \/\/ Frequency offset compensation configuration$/;"	m	struct:sCC1101
+frend0	CC1101.h	/^  unsigned char frend0;   \/\/ Front end TX configuration$/;"	m	struct:sCC1101
+frend1	CC1101.h	/^  unsigned char frend1;   \/\/ Front end RX configuration$/;"	m	struct:sCC1101
+freq0	CC1101.h	/^  unsigned char freq0;    \/\/ Frequency control word, low byte$/;"	m	struct:sCC1101
+freq1	CC1101.h	/^  unsigned char freq1;    \/\/ Frequency control word, middle byte$/;"	m	struct:sCC1101
+freq2	CC1101.h	/^  unsigned char freq2;    \/\/ Frequency control word, high byte$/;"	m	struct:sCC1101
+fscal0	CC1101.h	/^  unsigned char fscal0;   \/\/ Frequency synthesizer calibration$/;"	m	struct:sCC1101
+fscal1	CC1101.h	/^  unsigned char fscal1;   \/\/ Frequency synthesizer calibration$/;"	m	struct:sCC1101
+fscal2	CC1101.h	/^  unsigned char fscal2;   \/\/ Frequency synthesizer calibration$/;"	m	struct:sCC1101
+fscal3	CC1101.h	/^  unsigned char fscal3;   \/\/ Frequency synthesizer calibration$/;"	m	struct:sCC1101
+fsctrl0	CC1101.h	/^  unsigned char fsctrl0;  \/\/ Frequency synthesizer control$/;"	m	struct:sCC1101
+fsctrl1	CC1101.h	/^  unsigned char fsctrl1;  \/\/ Frequency synthesizer control$/;"	m	struct:sCC1101
+fstest	CC1101.h	/^  unsigned char fstest;   \/\/ Frequency synthesizer calibration control$/;"	m	struct:sCC1101
+gA110LR09ChannelList	A110LR09.c	/^const unsigned char gA110LR09ChannelList[] = {$/;"	v
+gA110LR09ChannelLookup	A110LR09.c	/^const struct sA110x2500ChannelList gA110LR09ChannelLookup[] = {$/;"	v	typeref:struct:sA110x2500ChannelList
+gA110LR09Lookup	A110LR09.c	/^const struct sA110x2500Lookup gA110LR09Lookup[] = {$/;"	v	typeref:struct:sA110x2500Lookup
+gA110LR09PowerLookup	A110LR09.c	/^const struct sA110x2500PowerLookup gA110LR09PowerLookup[] = {$/;"	v	typeref:struct:sA110x2500PowerLookup
+gCC1101Settings	CC1101.c	/^static const struct sCC1101 gCC1101Settings = {$/;"	v	typeref:struct:sCC1101	file:
+gConfig	CC1101.c	/^const struct sCC1101 *gConfig = &gCC1101Settings;$/;"	v	typeref:struct:sCC1101
+gDataReceived	A110x2500Radio.cpp	/^static volatile boolean gDataReceived = false;$/;"	v	file:
+gDataTransmitting	A110x2500Radio.cpp	/^static volatile boolean gDataTransmitting = false;$/;"	v	file:
+gGdo	A110x2500Radio.cpp	/^const struct sCC1101Gdo *gGdo[3] = { &gGdo0, NULL, NULL };$/;"	v	typeref:struct:sCC1101Gdo
+gGdo	CC1101.c	/^static const struct sCC1101Gdo *gGdo[3] = { &gGdo0, NULL, NULL };$/;"	v	typeref:struct:sCC1101Gdo	file:
+gGdo0	A110x2500Radio.cpp	/^const struct sCC1101Gdo gGdo0 = {$/;"	v	typeref:struct:sCC1101Gdo
+gGdo0	CC1101.c	/^static const struct sCC1101Gdo gGdo0 = { $/;"	v	typeref:struct:sCC1101Gdo	file:
+gPaTable	CC1101.c	/^static unsigned char gPaTable[8] = { 0xC0 };$/;"	v	file:
+gPhyInfo	A110x2500Radio.cpp	/^static struct sA110LR09PhyInfo gPhyInfo;$/;"	v	typeref:struct:sA110LR09PhyInfo	file:
+gPhyInfo	CC1101.c	/^struct sCC1101PhyInfo gPhyInfo;$/;"	v	typeref:struct:sCC1101PhyInfo
+gSpi	A110x2500Radio.cpp	/^const struct sCC1101Spi gSpi = { $/;"	v	typeref:struct:sCC1101Spi
+gSpi	CC1101.c	/^struct sCC1101Spi gSpi = { SpiInit, SpiRead, SpiWrite };$/;"	v	typeref:struct:sCC1101Spi
+gdo	CC1101.h	/^  struct sCC1101Gdo *gdo[3];  \/\/ Interface for GDOx$/;"	m	struct:sCC1101PhyInfo	typeref:struct:sCC1101PhyInfo::sCC1101Gdo
+gdo0Isr	A110x2500Radio.cpp	/^void A110x2500Radio::gdo0Isr()$/;"	f	class:A110x2500Radio
+getCrcBit	A110x2500Radio.cpp	/^uint8_t A110x2500Radio::getCrcBit()$/;"	f	class:A110x2500Radio
+getLqi	A110x2500Radio.cpp	/^uint8_t A110x2500Radio::getLqi()$/;"	f	class:A110x2500Radio
+getRssi	A110x2500Radio.cpp	/^int8_t A110x2500Radio::getRssi()$/;"	f	class:A110x2500Radio
+iocfg0	CC1101.h	/^  unsigned char iocfg0;   \/\/ GDO0 output pin configuration$/;"	m	struct:sCC1101
+iocfg1	CC1101.h	/^  unsigned char iocfg1;   \/\/ GDO1 output pin configuration  $/;"	m	struct:sCC1101
+iocfg2	CC1101.h	/^  unsigned char iocfg2;   \/\/ GDO2 output pin configuration$/;"	m	struct:sCC1101
+length	A110x2500Radio.h	/^  uint8_t length;       \/\/ Length of the data stream (excluding length field)$/;"	m	struct:sDataStream
+list	A110x2500.h	/^  const unsigned char *list;    \/\/ List of channels$/;"	m	struct:sA110x2500ChannelList
+listApproval	A110x2500.h	/^  } listApproval;$/;"	m	struct:sA110x2500ChannelList	typeref:enum:sA110x2500ChannelList::eA110x2500ChannelList
+lookup	A110LR09.h	/^    struct sA110x2500Lookup *lookup;                \/\/ Configuration lookup table$/;"	m	struct:sA110LR09PhyInfo::sA110LR09Module	typeref:struct:sA110LR09PhyInfo::sA110LR09Module::sA110x2500Lookup
+main	CC1101.c	/^int main(void)$/;"	f
+maxDutyCycle	A110x2500.h	/^  const unsigned int maxDutyCycle;    \/\/ Maximum configuration duty cycle$/;"	m	struct:sA110x2500Lookup
+maxPower	A110x2500.h	/^  const struct sA110x2500PowerLookup maxPower;      \/\/ Maximum configuration power$/;"	m	struct:sA110x2500Lookup	typeref:struct:sA110x2500Lookup::sA110x2500PowerLookup
+mcsm0	CC1101.h	/^  unsigned char mcsm0;    \/\/ Main radio control state machine configuration$/;"	m	struct:sCC1101
+mcsm1	CC1101.h	/^  unsigned char mcsm1;    \/\/ Main radio control state machine configuration$/;"	m	struct:sCC1101
+mcsm2	CC1101.h	/^  unsigned char mcsm2;    \/\/ Main radio control state machine configuration$/;"	m	struct:sCC1101
+mdmcfg0	CC1101.h	/^  unsigned char mdmcfg0;  \/\/ Modem configuration 0$/;"	m	struct:sCC1101
+mdmcfg1	CC1101.h	/^  unsigned char mdmcfg1;  \/\/ Modem configuration 1$/;"	m	struct:sCC1101
+mdmcfg2	CC1101.h	/^  unsigned char mdmcfg2;  \/\/ Modem configuration 2$/;"	m	struct:sCC1101
+mdmcfg3	CC1101.h	/^  unsigned char mdmcfg3;  \/\/ Modem configuration 3$/;"	m	struct:sCC1101
+mdmcfg4	CC1101.h	/^  unsigned char mdmcfg4;  \/\/ Modem configuration 4$/;"	m	struct:sCC1101
+module	A110LR09.h	/^  } module;$/;"	m	struct:sA110LR09PhyInfo	typeref:struct:sA110LR09PhyInfo::sA110LR09Module
+paTable	A110LR09.h	/^    unsigned char paTable[A110LR09_PA_TABLE_SIZE];  \/\/ Current PA table$/;"	m	struct:sA110LR09PhyInfo::sA110LR09Module
+packetAvailable	CC1101.c	/^volatile static bool packetAvailable = false;$/;"	v	file:
+pktctrl0	CC1101.h	/^  unsigned char pktctrl0; \/\/ Packet automation control$/;"	m	struct:sCC1101
+pktctrl1	CC1101.h	/^  unsigned char pktctrl1; \/\/ Packet automation control$/;"	m	struct:sCC1101
+pktlen	CC1101.h	/^  unsigned char pktlen;   \/\/ Packet length$/;"	m	struct:sCC1101
+power_t	A110x2500Radio.h	/^} power_t;$/;"	t	typeref:enum:ePower
+ptest	CC1101.h	/^  unsigned char ptest;    \/\/ Production test$/;"	m	struct:sCC1101
+rcctrl0	CC1101.h	/^  unsigned char rcctrl0;  \/\/ RC oscillator configuration$/;"	m	struct:sCC1101
+rcctrl1	CC1101.h	/^  unsigned char rcctrl1;  \/\/ RC oscillator configuration$/;"	m	struct:sCC1101
+readDataStream	A110x2500Radio.cpp	/^void A110x2500Radio::readDataStream(void)$/;"	f	class:A110x2500Radio
+receiverOn	A110x2500Radio.cpp	/^unsigned char A110x2500Radio::receiverOn(uint8_t *dataField,$/;"	f	class:A110x2500Radio
+rssi	A110x2500Radio.h	/^  int8_t rssi;          \/\/ Receive signal strength indicator$/;"	m	struct:sDataStream
+rssiOffset	A110x2500.h	/^  const unsigned char rssiOffset;                   \/\/ Configuration RSSI offset$/;"	m	struct:sA110x2500Lookup
+rxData	CC1101.c	/^static unsigned char rxData[8];$/;"	v	file:
+sA110LR09Module	A110LR09.h	/^  struct sA110LR09Module$/;"	s	struct:sA110LR09PhyInfo
+sA110LR09PhyInfo	A110LR09.h	/^struct sA110LR09PhyInfo$/;"	s
+sA110x2500BaudRate	A110x2500.h	/^  struct sA110x2500BaudRate$/;"	s	struct:sA110x2500Lookup
+sA110x2500ChannelList	A110x2500.h	/^struct sA110x2500ChannelList$/;"	s
+sA110x2500Lookup	A110x2500.h	/^struct sA110x2500Lookup$/;"	s
+sA110x2500PowerLookup	A110x2500.h	/^struct sA110x2500PowerLookup$/;"	s
+sCC1101	CC1101.h	/^struct sCC1101$/;"	s
+sCC1101Gdo	CC1101.h	/^struct sCC1101Gdo$/;"	s
+sCC1101PhyInfo	CC1101.h	/^struct sCC1101PhyInfo$/;"	s
+sCC1101Spi	CC1101.h	/^struct sCC1101Spi$/;"	s
+sDataStream	A110x2500Radio.h	/^struct sDataStream$/;"	s
+scaleFactor	A110x2500.h	/^    const unsigned int scaleFactor;   \/\/ Scale factor multiplier$/;"	m	struct:sA110x2500Lookup::sA110x2500BaudRate
+setAddress	A110x2500Radio.cpp	/^void A110x2500Radio::setAddress(uint8_t address)$/;"	f	class:A110x2500Radio
+setChannel	A110x2500Radio.cpp	/^void A110x2500Radio::setChannel(channel_t channel)$/;"	f	class:A110x2500Radio
+setPower	A110x2500Radio.cpp	/^void A110x2500Radio::setPower(power_t power)$/;"	f	class:A110x2500Radio
+size	A110x2500.h	/^  const unsigned char size;     \/\/ Number of channels in the list$/;"	m	struct:sA110x2500ChannelList
+sleep	A110x2500Radio.cpp	/^void A110x2500Radio::sleep()$/;"	f	class:A110x2500Radio
+sleep	CC1101.h	/^  volatile bool sleep;        \/\/ Chip sleep flag$/;"	m	struct:sCC1101PhyInfo
+spi	CC1101.h	/^  struct sCC1101Spi *spi;     \/\/ Interface for SPI$/;"	m	struct:sCC1101PhyInfo	typeref:struct:sCC1101PhyInfo::sCC1101Spi
+status	A110x2500Radio.h	/^  uint8_t status;       \/\/ CRC (BIT7) and LQI (BIT6:BIT0)$/;"	m	struct:sDataStream
+sync0	CC1101.h	/^  unsigned char sync0;    \/\/ Sync word, low byte$/;"	m	struct:sCC1101
+sync1	CC1101.h	/^  unsigned char sync1;    \/\/ Sync word, high byte$/;"	m	struct:sCC1101
+test0	CC1101.h	/^  unsigned char test0;    \/\/ Various test settings 0$/;"	m	struct:sCC1101
+test1	CC1101.h	/^  unsigned char test1;    \/\/ Various test settings 1$/;"	m	struct:sCC1101
+test2	CC1101.h	/^  unsigned char test2;    \/\/ Various test settings 2$/;"	m	struct:sCC1101
+transmit	A110x2500Radio.cpp	/^void A110x2500Radio::transmit(uint8_t address,$/;"	f	class:A110x2500Radio
+true	A110LR09.h	/^#define true /;"	d
+true	A110x2500.h	/^#define true /;"	d
+true	CC1101.h	/^#define true /;"	d
+txData	CC1101.c	/^static unsigned char txData[8] = { 0x07, 0x00, 0x00, 'H', 'e', 'l', 'l', '0'};$/;"	v	file:
+value	A110x2500.h	/^    const unsigned int value;         \/\/ Scaled baud rate value$/;"	m	struct:sA110x2500Lookup::sA110x2500BaudRate
+value	A110x2500.h	/^  unsigned char value;    \/\/ Hardware register value representing power$/;"	m	struct:sA110x2500PowerLookup
+worctrl	CC1101.h	/^  unsigned char worctrl;  \/\/ Wake on radio control$/;"	m	struct:sCC1101
+worevt0	CC1101.h	/^  unsigned char worevt0;  \/\/ Low byte event0 timeout$/;"	m	struct:sCC1101
+worevt1	CC1101.h	/^  unsigned char worevt1;  \/\/ High byte event0 timeout$/;"	m	struct:sCC1101
