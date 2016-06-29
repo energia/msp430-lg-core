@@ -640,7 +640,7 @@ _i16 sl_NetAppMDNSUnRegisterService(const _i8 *pServiceName,const _u8 ServiceNam
                     - mDNS is not running                    
                     - Host name error. Host name format is not allowed according to RFC 1033,1034,1035, 6763
                     - List size buffer is bigger than internally allowed in the NWP (API get service list),
-                     change the APIs’ parameters to decrease the size of the list
+                     change the APIs parameters to decrease the size of the list
                                         
 
         \sa              sl_NetAppMDNSUnRegisterService

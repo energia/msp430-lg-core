@@ -153,7 +153,7 @@ void HardwareSerial::begin(unsigned long baud)
 		mod = ((divider&0xF)+1)&0xE;                    // UCBRSx (bit 1-3)
 		divider >>=4;
 	} else {
-		mod = divider&0xFFF0;                           // UCBRFx = INT([(N/16) – INT(N/16)] × 16)
+		mod = divider&0xFFF0;                           // UCBRFx = INT([(N/16) - INT(N/16)] x 16)
 		divider>>=8;
 	}
 	*(&(UCAxBR0) + uartOffset) = divider;
