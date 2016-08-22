@@ -99,6 +99,12 @@ tools.dslite.config.path={path}
 tools.dslite.cmd.path={path}/DebugServer/bin/DSLite
 tools.dslite.upload.pattern={cmd.path} {upload.verbose} load -c "{config.path}/{build.variant}.ccxml" -f "{build.path}/{build.project_name}.elf"
 
+tools.dslite.program.params.verbose=
+tools.dslite.program.params.quiet=
+tools.dslite.program.params.noverify=
+tools.dslite.program.pattern={cmd.path} {program.verbose} load -c "{config.path}/{build.variant}.ccxml" -f "{build.path}/{build.project_name}.elf"
+
+
 # mspdebug
 tools.mspdebug.upload.params.verbose=
 tools.mspdebug.upload.params.quiet=
@@ -106,5 +112,8 @@ tools.mspdebug.path={runtime.tools.mspdebug.path}
 tools.mspdebug.cmd.path={path}/bin/mspdebug
 tools.mspdebug.upload.pattern={cmd.path} {upload.verbose} {upload.protocol} --force-reset "prog {build.path}/{build.project_name}.hex"
 
-
+tools.mspdebug.program.params.verbose=
+tools.mspdebug.program.params.quiet=
+tools.mspdebug.program.params.noverify=
+tools.mspdebug.program.pattern={cmd.path} {program.verbose} {protocol} --force-reset "prog {build.path}/{build.project_name}.hex"
 
