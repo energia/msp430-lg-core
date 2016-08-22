@@ -6,6 +6,10 @@
  * is interested in having the USCIAB0TX_VECTOR and USCIAB0TX_VECTOR
  * installed, the linker won't strip the vectors.*/
 void usci_isr_install(){}
+__attribute__((weak))
+uint16_t i2c_state_isr(){}
+__attribute__((weak))
+uint16_t i2c_txrx_isr(){}
 
 static boolean still_asleep;  // Used to validate whether a user ISR has issued wakeup() inside LPM3/LPM4 sleep modes.
 
