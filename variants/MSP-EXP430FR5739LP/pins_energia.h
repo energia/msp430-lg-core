@@ -63,6 +63,14 @@ static const uint8_t DEBUG_UARTTXD = 2;  /* Transmit Data (TXD) at P2.0 */
 #define DEBUG_UARTTXD_SET_MODE (PORT_SELECTION1 | OUTPUT)
 #define DEBUG_UART_MODULE_OFFSET 0x00
 #endif
+#if defined(__MSP430_HAS_EUSCI_A1__)
+static const uint8_t AUX_UARTRXD = 4;
+static const uint8_t AUX_UARTTXD = 3;
+#define AUX_UARTRXD_SET_MODE (PORT_SELECTION1 | INPUT)
+#define AUX_UARTTXD_SET_MODE (PORT_SELECTION1 | OUTPUT)
+#define AUX_UART_MODULE_OFFSET 0x20
+#define SERIAL1_AVAILABLE 1
+#endif
 
 /* Analog pins */
 /* Note: the Ax assignment is according to energia.nu/Guide_MSP430FraunchPad.html 
