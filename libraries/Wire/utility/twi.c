@@ -198,6 +198,9 @@ void twi_setModule(uint8_t _i2cModule)
 #if defined(__MSP430_HAS_USCI_B1__) || defined(__MSP430_HAS_EUSCI_B1__)
 		I2C_baseAddress = UCB1_BASE;
 #endif
+#if defined(__MSP430_HAS_USCI_B2__) || defined(__MSP430_HAS_EUSCI_B2__)
+		I2C_baseAddress = UCB2_BASE;
+#endif
 	}
 }
 
@@ -376,7 +379,7 @@ void twi_init(void)
     UCBxIE |= (UCALIE|UCNACKIE|UCSTTIE|UCSTPIE|UCRXIE|UCTXIE);
 #endif
 #endif
-#if defined(__MSP430_HAS_EUSCI_B0__) || defined(__MSP430_HAS_EUSCI_B1__)
+#if defined(__MSP430_HAS_EUSCI_B0__) || defined(__MSP430_HAS_EUSCI_B1__) || defined(__MSP430_HAS_EUSCI_B2__)
 	twi_init_port();
 	
     //Disable the USCI module and clears the other bits of control register
@@ -466,7 +469,7 @@ uint8_t twi_readFrom(uint8_t address, uint8_t* data, uint8_t length, uint8_t sen
     UCBxIE |= (UCALIE|UCNACKIE|UCSTPIE|UCRXIE|UCTXIE);  // Enable I2C interrupts
 #endif
 #endif
-#if defined(__MSP430_HAS_EUSCI_B0__) || defined(__MSP430_HAS_EUSCI_B1__)
+#if defined(__MSP430_HAS_EUSCI_B0__) || defined(__MSP430_HAS_EUSCI_B1__) || defined(__MSP430_HAS_EUSCI_B2__)
     UCBxCTLW0 |= UCSWRST;                     // Enable SW reset
     UCBxCTLW0 |= (UCMST);                     // I2C Master, synchronous mode
     UCBxCTLW0 &= ~(UCTR);                     // Configure in receive mode
@@ -508,7 +511,7 @@ uint8_t twi_readFrom(uint8_t address, uint8_t* data, uint8_t length, uint8_t sen
         UCBxCTL1 |= UCTXSTP;                  // Send I2C stop condition after recv
     }
 #endif
-#if defined(__MSP430_HAS_EUSCI_B0__) || defined(__MSP430_HAS_EUSCI_B1__)
+#if defined(__MSP430_HAS_EUSCI_B0__) || defined(__MSP430_HAS_EUSCI_B1__) || defined(__MSP430_HAS_EUSCI_B2__)
     twi_state =  TWI_MRX;                     // Master receive mode
     //while (UCBxCTLW0 & UCTXSTP);              // Ensure stop condition got sent
     UCBxCTLW0 |= UCTXSTT;                     // I2C start condition
@@ -579,7 +582,7 @@ uint8_t twi_writeTo(uint8_t address, uint8_t* data, uint8_t length, uint8_t wait
     UCBxIE |= (UCALIE|UCNACKIE|UCSTPIE|UCTXIE);  // Enable I2C interrupts
 #endif
 #endif
-#if defined(__MSP430_HAS_EUSCI_B0__) || defined(__MSP430_HAS_EUSCI_B1__)
+#if defined(__MSP430_HAS_EUSCI_B0__) || defined(__MSP430_HAS_EUSCI_B1__) || defined(__MSP430_HAS_EUSCI_B2__)
     UCBxCTLW0 |= UCSWRST;                     // Enable SW reset
     UCBxCTLW0 |= (UCMST | UCTR);              //  I2C Master, transmit mode
     UCBxI2CSA = address;                      // Set Slave Address
@@ -620,7 +623,7 @@ uint8_t twi_writeTo(uint8_t address, uint8_t* data, uint8_t length, uint8_t wait
     twi_state =  TWI_MTX;                     // Master Transmit mode
     UCBxCTL1 |= UCTXSTT;                      // I2C start condition
 #endif
-#if defined(__MSP430_HAS_EUSCI_B0__) || defined(__MSP430_HAS_EUSCI_B1__)
+#if defined(__MSP430_HAS_EUSCI_B0__) || defined(__MSP430_HAS_EUSCI_B1__) || defined(__MSP430_HAS_EUSCI_B2__)
     twi_state =  TWI_MTX;                     // Master Transmit mode
     //while (UCBxCTLW0 & UCTXSTP);           // Ensure stop condition got sent
     UCBxCTLW0 |= UCTXSTT;                  // I2C start condition
@@ -988,7 +991,7 @@ uint16_t i2c_state_isr(void)  // I2C Service
 }
 #endif
 
-#if defined(__MSP430_HAS_EUSCI_B0__) || defined(__MSP430_HAS_EUSCI_B1__)
+#if defined(__MSP430_HAS_EUSCI_B0__) || defined(__MSP430_HAS_EUSCI_B1__) || defined(__MSP430_HAS_EUSCI_B2__)
 uint16_t eusci_isr_handler(void)
 {
   uint16_t exit_lpm = 0;
@@ -1167,5 +1170,14 @@ void USCI_B1_ISR(void)
 }	
 #endif
 
-#endif // #if defined(__MSP430_HAS_EUSCI_B0__) || defined(__MSP430_HAS_EUSCI_B1__)
+#if defined(__MSP430_HAS_EUSCI_B2__)
+__attribute__((interrupt(USCI_B2_VECTOR)))
+void USCI_B2_ISR(void)
+{
+	if (eusci_isr_handler()) 
+		__bic_SR_register_on_exit(LPM4_bits); // Exit LPM
+}	
+#endif
+
+#endif // #if defined(__MSP430_HAS_EUSCI_B0__) || defined(__MSP430_HAS_EUSCI_B1__) || defined(__MSP430_HAS_EUSCI_B2__)
 
