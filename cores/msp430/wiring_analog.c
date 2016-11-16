@@ -32,8 +32,6 @@
 #include "wiring_private.h"
 #include "pins_energia.h"
 
-#define DEFAULT_READ_RESOLUTION 10
-
 #if defined(__MSP430_HAS_ADC10__) && !defined(ADC10ENC)
 #define ADC10ENC ENC 
 #endif
@@ -70,6 +68,9 @@
 #define ADCxMEM0 ADCMEM0
 #endif
 
+#ifndef DEFAULT_READ_RESOLUTION
+#define DEFAULT_READ_RESOLUTION 10
+#endif
 static int _readResolution = DEFAULT_READ_RESOLUTION;
 
 #if defined(__MSP430_HAS_ADC10__) || defined(__MSP430_HAS_ADC10_B__) || defined(__MSP430_HAS_ADC__)
