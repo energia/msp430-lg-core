@@ -106,8 +106,8 @@ static const uint8_t A4  = 27;
 static const uint8_t A5  = 28;
 static const uint8_t A6  = 128 + 6; // Not available on BoosterPack header
 static const uint8_t A7  = 128 + 7; // Not available on BoosterPack header;
-static const uint8_t A8  = 31;
-static const uint8_t A9  = 28;
+static const uint8_t A8  = 47;
+static const uint8_t A9  = 31;
 static const uint8_t A10 = 32;
 static const uint8_t A11 = 33;
 static const uint8_t A12 = 23;
@@ -116,34 +116,34 @@ static const uint8_t A14 = 25;
 static const uint8_t A15 = 26;
 
 /*
- FR6989 LaunchPad pin mapping - for all functions see docu
+ FR5994 LaunchPad pin mapping - for all functions see docu
 
                                +--\/--+                                 +--\/--+
                           3.3v |1   21| 5.0v               (TB0.6) P3.7 |40  20| GND
-                    (A10) P1.2 |2   22| GND                (TB0.5) P3.6 |39  19| P5.7 (TB0.5)
-     (UCA3RXD -> Serial1) P6.1 |3   23| P3.0 (A7)          (TA1.1) P3.5 |38  18| P4.4
-     (UCA3TXD -> Serial1) P6.0 |4   24| P3.1 (A6)          (TB0.2) P3.4 |37  17| P5.3 (A12)
-                          P6.2 |5   25| P3.2 (A5)          (TB0.3) P7.3 |36  16| RST
-                    (A11) P1.3 |6   26| P3.3 (A4)          (TB0.4) P2.6 |35  15| P5.0 (UCB1SIMO) (UCB1SDA)
-                          P5.2 |7   27| P1.4 (A8)          (A3)    P2.5 |34  14| P5.1 (UCB1SOMI) (UCB1SCL)
-                  (TB0.6) P6.3 |8   28| P1.5 (A9)                  P4.3 |33  13| P8.3 (TB0.4)
-             (PM_UCB2SCL) P7.1 |9   29| P4.7 (A13)                 P4.2 |32  12| P8.2 (TB0.3)
-             (PM_UCB2SDA) P7.0 |10  30| P8.0 (A14)                 P4.1 |31  11| P8.1 (TA1.2)
+        (TA1.1)      (A2) P1.2 |2   22| GND                        P3.6 |39  19| P5.7 
+     (UCA3RXD -> Serial1) P6.1 |3   23| P3.0 (A12)         (TB0.4) P3.5 |38  18| P4.4 (TB0.5)
+     (UCA3TXD -> Serial1) P6.0 |4   24| P3.1 (A13)         (TB0.3) P3.4 |37  17| P5.3 
+                          P6.2 |5   25| P3.2 (A14)         (TA4.1) P7.3 |36  16| RST
+        (TA1.2)      (A3) P1.3 |6   26| P3.3 (A15)         (TB0.1) P2.6 |35  15| P5.0 (UCB1SIMO) (UCB1SDA)
+             (UCB1CLK)    P5.2 |7   27| P1.4 (A4)                  P2.5 |34  14| P5.1 (UCB1SOMI) (UCB1SCL)
+                          P6.3 |8   28| P1.5 (A5)(TB0.2)   (A11)   P4.3 |33  13| P8.3 
+             (PM_UCB2SCL) P7.1 |9   29| P4.7               (A10)   P4.2 |32  12| P8.2 
+             (PM_UCB2SDA) P7.0 |10  30| P8.0               (A9)    P4.1 |31  11| P8.1 
                                +------+                                 +------+
 
                                  ----+
                                    41| P2.0 (UCA0TXD -> ezFET -> Serial)
                                    42| P2.1 (UCA0RXD -> ezFET -> Serial)
-                                   43| P1.0 (LED1 - RED)         (TA0.1)
-                                   44| P1.1 (LED2 - GREEN)       (A15)
+                                   43| P1.0 (LED1 - RED)         (A0)(TA0.1)
+                                   44| P1.1 (LED2 - GREEN)       (A1)(TA0.2)
                                    45| P5.6 (PUSH1)
                                    46| P5.5 (PUSH2)
                                  ----+
                                  MMC
                                  ----+
-                                   47| P4.0 (SD CS)
-                                   48| P1.6 (SD MOSI)
-                                   49| P2.2 (SD CLK)        (TA0.1)
+                                   47| P4.0 (SD CS)         (A8)
+                                   48| P1.6 (SD MOSI)            
+                                   49| P2.2 (SD CLK)             
                                    50| P1.7 (SD MISO)       (A15)
                                  ----+
 */
@@ -441,7 +441,7 @@ const uint8_t digital_pin_to_timer[] = {
    NOT_ON_TIMER, /* 24 - P3.1 */
    NOT_ON_TIMER, /* 25 - P3.2 */
    NOT_ON_TIMER, /* 26 - P3.3 */
-   T0B1,         /* 27 - P1.4 */
+   NOT_ON_TIMER, /* 27 - P1.4 */
    T0B2,         /* 28 - P1.5 */
    NOT_ON_TIMER, /* 29 - P4.7 */
    NOT_ON_TIMER, /* 30 - P8.0 */
@@ -450,21 +450,21 @@ const uint8_t digital_pin_to_timer[] = {
    NOT_ON_TIMER, /* 33 - P4.3 */
    NOT_ON_TIMER, /* 34 - P2.5 */
    T0B1,         /* 35 - P2.6 */
-   NOT_ON_TIMER, /* 36 - P7.3 */
+   T4A1,         /* 36 - P7.3 */
    T0B3,         /* 37 - P3.4 */
    T0B4,         /* 38 - P3.5 */
-   T0B5,         /* 39 - P3.6 */
+   NOT_ON_TIMER, /* 39 - P3.6 */
    T0B6,         /* 40 - P3.7 */
-   T0B6,         /* 41 - P2.0 */
+   NOT_ON_TIMER, /* 41 - P2.0 */
    NOT_ON_TIMER, /* 42 - P2.1 */
    T0A1,         /* 43 - P1.0 */
    T0A2,         /* 44 - P1.1 */
    NOT_ON_TIMER, /* 45 - P5.6 */
    NOT_ON_TIMER, /* 46 - P5.5 */
    NOT_ON_TIMER, /* 47 - P4.0 */
-   T0B3,         /* 48 - P1.6 */
-   T0B2,         /* 49 - P2.2 */
-   T0B4,         /* 50 - P1.7 */
+   NOT_ON_TIMER, /* 48 - P1.6 */
+   NOT_ON_TIMER, /* 49 - P2.2 */
+   NOT_ON_TIMER, /* 50 - P1.7 */
 };
 
 const uint8_t digital_pin_to_port[] = {
