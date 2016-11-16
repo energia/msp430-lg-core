@@ -145,6 +145,7 @@ static const uint8_t A15 = 26;
                                    48| P1.6 (SD MOSI)            
                                    49| P2.2 (SD CLK)             
                                    50| P1.7 (SD MISO)       (A15)
+                                   51| P7.2 (SD Detect) 
                                  ----+
 */
 
@@ -206,6 +207,7 @@ static const uint8_t P4_0 = 47;
 static const uint8_t P1_6 = 48;
 static const uint8_t P2_2 = 49;
 static const uint8_t P1_7 = 50;
+static const uint8_t P7_2 = 51;
 
 static const uint8_t PUSH1 = 45;
 static const uint8_t PUSH2 = 46;
@@ -465,6 +467,7 @@ const uint8_t digital_pin_to_timer[] = {
    NOT_ON_TIMER, /* 48 - P1.6 */
    NOT_ON_TIMER, /* 49 - P2.2 */
    NOT_ON_TIMER, /* 50 - P1.7 */
+   NOT_ON_TIMER, /* 51 - P7.2 */
 };
 
 const uint8_t digital_pin_to_port[] = {
@@ -519,6 +522,7 @@ const uint8_t digital_pin_to_port[] = {
    P1,        /* 48 - P1.6 */
    P2,        /* 49 - P2.2 */
    P1,        /* 50 - P1.7 */
+   P7,        /* 51 - P7.2 */
 };
 
 const uint8_t digital_pin_to_bit_mask[] = {
@@ -573,6 +577,7 @@ const uint8_t digital_pin_to_bit_mask[] = {
    BV(6),     /* 48 - P1.6 */
    BV(2),     /* 49 - P2.2 */
    BV(7),     /* 50 - P1.7 */
+   BV(2),     /* 51 - P7.2 */
 };
 
 const uint32_t digital_pin_to_analog_in[] = {
@@ -627,6 +632,7 @@ const uint32_t digital_pin_to_analog_in[] = {
         NOT_ON_ADC,    /*  48 - P1.6 */
         NOT_ON_ADC,    /*  49 - P2.2 */
         NOT_ON_ADC,    /*  50 - P1.7 */
+        NOT_ON_ADC,    /*  51 - P7.2 */
 };
 #endif // #ifdef ARDUINO_MAIN
 #endif // #ifndef Pins_Energia_h
