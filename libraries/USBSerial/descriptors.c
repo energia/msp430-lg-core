@@ -229,9 +229,8 @@ const struct tUsbHandle stUsbHandle[]=
 };
 //-------------DEVICE REQUEST LIST---------------------------------------------
 
-const tDEVICE_REQUEST_COMPARE tUsbRequestList[] = 
+const tDEVICE_REQUEST_COMPARE tUsbRequestList[]=
 {
-
     //---- CDC 0 Class Requests -----//
     // GET LINE CODING
     USB_REQ_TYPE_INPUT | USB_REQ_TYPE_CLASS | USB_REQ_TYPE_INTERFACE,

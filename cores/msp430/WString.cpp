@@ -22,6 +22,10 @@
 #include "WString.h"
 #include "avr/dtostrf.h"
 #include "atof.h"
+#include "itoa.h"
+
+extern char* ltoa(  long value, char *string, int radix );
+extern char* ultoa( unsigned long value, char *string, int radix );
 
 /*********************************************/
 /*  Constructors                             */

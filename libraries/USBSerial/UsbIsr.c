@@ -49,12 +49,27 @@
 +----------------------------------------------------------------------------*/
 extern BYTE  bFunctionSuspended;
 
-#ifdef __GNUC__
+#if defined(__TI_COMPILER_VERSION__)
+extern __no_init tEDB0 __data16 tEndPoint0DescriptorBlock;
+extern __no_init tEDB __data16 tInputEndPointDescriptorBlock[];
+extern __no_init tEDB __data16 tOutputEndPointDescriptorBlock[];
+#endif
+
+#if defined(__GNUC__) && (__GNUC__ >= 5)
+#define  tSetupPacket                    (*(tDEVICE_REQUEST*)&USBSUBLK)
+#define  tEndPoint0DescriptorBlock       (*(tEDB0(*))&USBIEPCNF_0)
+#define  tInputEndPointDescriptorBlock   (*(tEDB(*)[7])&USBIEPCNF_1)
+#define  tOutputEndPointDescriptorBlock  (*(tEDB(*)[7])&USBOEPCNF_1)
+#endif
+
+#if (defined(__GNUC__) && (__GNUC__ < 5))
 extern tDEVICE_REQUEST tSetupPacket  __asm__("0x2380");
 extern tEDB0 tEndPoint0DescriptorBlock __asm__("0x0920");
 extern tEDB tInputEndPointDescriptorBlock[7] __asm__("0x23C8");
 extern tEDB tOutputEndPointDescriptorBlock[7] __asm__("0x2388");
-#else
+#endif
+
+#ifdef __IAR_SYSTEMS_ICC__
 extern __no_init tEDB0 __data16 tEndPoint0DescriptorBlock;
 extern __no_init tEDB __data16 tInputEndPointDescriptorBlock[];
 extern __no_init tEDB __data16 tOutputEndPointDescriptorBlock[];
@@ -79,8 +94,8 @@ BOOL PHDCIsReceiveInProgress(BYTE);
 /*----------------------------------------------------------------------------+
 | General Subroutines                                                         |
 +----------------------------------------------------------------------------*/
-#pragma vector=USB_UBM_VECTOR
-__interrupt VOID iUsbInterruptHandler(VOID)
+__attribute__((interrupt(USB_UBM_VECTOR)))
+VOID iUsbInterruptHandler(VOID)
 {
     BYTE bWakeUp = FALSE;
     //Check if the setup interrupt is pending.

@@ -166,7 +166,7 @@ void pinMode_int(uint8_t pin, uint16_t mode)
 	if(pmreg == NOT_A_PIN) return;
 
 	// Store current interrupt state, then disable all interrupts, to avoid that the port map is put into read only mode
-	uint16_t globalInterruptState = __read_status_register() & GIE;
+	uint16_t globalInterruptState = __get_interrupt_state();
 	__disable_interrupt();
 
 	PMAPKEYID = PMAPKEY;
@@ -176,7 +176,7 @@ void pinMode_int(uint8_t pin, uint16_t mode)
 	PMAPKEYID = 0x0;
 
 	// Restore previous interrupt state
-	__bis_SR_register(globalInterruptState);
+	__set_interrupt_state(globalInterruptState);
 #endif
 }
 

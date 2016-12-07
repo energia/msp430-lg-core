@@ -216,7 +216,7 @@ __interrupt
 __attribute__((interrupt(UNMI_VECTOR)))
 #endif
 //UNMI interrupt service routine
-static void UNMI_ISR(void)
+void UNMI_ISR(void)
 {
     switch (__even_in_range(SYSUNIV, SYSUNIV_BUSIFG ))
     {

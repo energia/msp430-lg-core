@@ -41,10 +41,16 @@ extern "C"
 #endif
 
 #ifdef __GNUC__
+#if __GNUC__ < 5
 #define __no_init
+#endif
 #define __data16
+#ifndef __get_SR_register
 #define __get_SR_register() __read_status_register()
+#endif
+#ifndef __even_in_range
 #define __even_in_range(a,b) (a)
+#endif
 #endif // __GNUC__
 
 
@@ -263,10 +269,10 @@ extern BYTE bFunctionSuspended;
 #define ST_ERROR                    0x86
 #define ST_NOENUM_SUSPENDED         0x87
 
-VOID usbStallInEndpoint(BYTE);
-VOID usbStallOutEndpoint(BYTE);
-VOID usbStallEndpoint(BYTE);
-VOID usbClearOEPByteCount(BYTE);
+void usbStallInEndpoint(BYTE);
+void usbStallOutEndpoint(BYTE);
+void usbStallEndpoint(BYTE);
+void usbClearOEPByteCount(BYTE);
 
 
 /*----------------------------------------------------------------------------
@@ -280,7 +286,7 @@ VOID usbClearOEPByteCount(BYTE);
 /**
  * Init the USB HW interface.
  */
-BYTE USB_init(VOID);
+BYTE USB_init(void);
 
 /**
  * Init and start the USB PLL.
@@ -290,7 +296,7 @@ BYTE USB_enable ();
 /**
  * Disables the USB module and PLL.
  */
-BYTE USB_disable(VOID);
+BYTE USB_disable(void);
 
 /*
  * Enables/disables various USB events.
@@ -320,12 +326,12 @@ BYTE USB_reset ();
 /**
  * Suspend USB.
  */
-BYTE USB_suspend(VOID);
+BYTE USB_suspend(void);
 
 /**
  * Resume USB.
  */
-BYTE USB_resume(VOID);
+BYTE USB_resume(void);
 
 /*
  * Force a remote wakeup of the USB host.
@@ -405,48 +411,48 @@ BYTE USB_handleEnumCompleteEvent ();
 /**
  * Send stall handshake for in- and out-endpoint0 (control pipe)
  */
-VOID usbStallEndpoint0(VOID);
+void usbStallEndpoint0(void);
 
 /**
  * Clear byte counter for endpoint0 (control pipe)
  */
-VOID usbClearOEP0ByteCount(VOID);
+void usbClearOEP0ByteCount(void);
 
 /**
  * Send stall handshake for out-endpoint0 (control pipe)
  */
-VOID usbStallOEP0(VOID);
+void usbStallOEP0(void);
 
 /**
  * Send further data over control pipe if needed.
  *     Function is called from control-in IRQ. Do not call from user application
  */
-VOID usbSendNextPacketOnIEP0(VOID);
+void usbSendNextPacketOnIEP0(void);
 
 /**
  * Send data over control pipe to host.
  *     Number of bytes to transmit should be set with
  *     global varible "wBytesRemainingOnIEP0" before function is called.
  */
-VOID usbSendDataPacketOnEP0 (PBYTE pbBuffer);
+void usbSendDataPacketOnEP0 (PBYTE pbBuffer);
 
 /**
  * Receive further data from control pipe if needed.
  *     Function is called from control-out IRQ. Do not call from user application
  */
-VOID usbReceiveNextPacketOnOEP0(VOID);
+void usbReceiveNextPacketOnOEP0(void);
 
 /**
  * Receive data from control pipe.
  *     Number of bytes to receive should be set with
  *     global varible "wBytesRemainingOnOEP0" before function is called.
  */
-VOID usbReceiveDataPacketOnEP0 (PBYTE pbBuffer);
+void usbReceiveDataPacketOnEP0 (PBYTE pbBuffer);
 
 /**
  * Send zero length packet on control pipe.
  */
-VOID usbSendZeroLengthPacketOnIEP0(VOID);
+void usbSendZeroLengthPacketOnIEP0(void);
 
 /*Send data to host.*/
 BYTE MscSendData (const BYTE* data, WORD size);
@@ -455,27 +461,27 @@ BYTE MscSendData (const BYTE* data, WORD size);
  * Decode incoming usb setup packet and call corresponding function
  *     usbDecodeAndProcessUsbRequest is called from IRQ. Do not call from user application
  */
-BYTE usbDecodeAndProcessUsbRequest(VOID);
-BYTE usbClearEndpointFeature(VOID);
-BYTE usbGetConfiguration(VOID);
-BYTE usbGetDeviceDescriptor(VOID);
-BYTE usbGetConfigurationDescriptor(VOID);
-BYTE usbGetStringDescriptor(VOID);
-BYTE usbGetInterface(VOID);
-BYTE usbGetDeviceStatus(VOID);
-BYTE usbGetEndpointStatus(VOID);
-BYTE usbGetInterfaceStatus(VOID);
-BYTE usbSetAddress(VOID);
-BYTE usbSetConfiguration(VOID);
-BYTE usbClearDeviceFeature(VOID);
-BYTE usbSetDeviceFeature(VOID);
-BYTE usbSetEndpointFeature(VOID);
-BYTE usbSetInterface(VOID);
-BYTE usbInvalidRequest(VOID);
+BYTE usbDecodeAndProcessUsbRequest(void);
+BYTE usbClearEndpointFeature(void);
+BYTE usbGetConfiguration(void);
+BYTE usbGetDeviceDescriptor(void);
+BYTE usbGetConfigurationDescriptor(void);
+BYTE usbGetStringDescriptor(void);
+BYTE usbGetInterface(void);
+BYTE usbGetDeviceStatus(void);
+BYTE usbGetEndpointStatus(void);
+BYTE usbGetInterfaceStatus(void);
+BYTE usbSetAddress(void);
+BYTE usbSetConfiguration(void);
+BYTE usbClearDeviceFeature(void);
+BYTE usbSetDeviceFeature(void);
+BYTE usbSetEndpointFeature(void);
+BYTE usbSetInterface(void);
+BYTE usbInvalidRequest(void);
 WORD usbDisableInEndpointInterrupt(BYTE edbIndex);
-VOID usbRestoreInEndpointInterrupt(WORD state);
+void usbRestoreInEndpointInterrupt(WORD state);
 WORD usbDisableOutEndpointInterrupt(BYTE edbIndex);
-VOID usbRestoreOutEndpointInterrupt(WORD state);
+void usbRestoreOutEndpointInterrupt(WORD state);
 
 #define ENUMERATION_COMPLETE 0x01
 

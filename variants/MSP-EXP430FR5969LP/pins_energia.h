@@ -36,6 +36,8 @@
 #define BV(x) (1 << (x))
 #endif
 
+#include <msp430fr5xx_6xxgeneric.h>
+
 
 #if defined(__MSP430_HAS_EUSCI_B0__)
 static const uint8_t SS      = 8;   /* P3.4 */
@@ -197,95 +199,94 @@ static const uint8_t PUSH2 = 28;
 static const uint8_t TEMPSENSOR = 128 + 30; // depends on chip
 
 #ifdef ARDUINO_MAIN
-
 const uint16_t port_to_input[] = {
-	NOT_A_PORT,
-	(uint16_t) &P1IN,
-	(uint16_t) &P2IN,
+   NOT_A_PORT,
+   (uint16_t) P1_BASE,
+   (uint16_t) P2_BASE,
 #ifdef __MSP430_HAS_PORT3_R__
-	(uint16_t) &P3IN,
+   (uint16_t) P3_BASE,
 #endif
 #ifdef __MSP430_HAS_PORT4_R__
-	(uint16_t) &P4IN,
+   (uint16_t) P4_BASE,
 #endif
 #ifdef __MSP430_HAS_PORTJ_R__
-	(uint16_t) &PJIN,
+   (uint16_t) PJ_BASE,
 #endif
 };
 
 const uint16_t port_to_output[] = {
-	NOT_A_PORT,
-	(uint16_t) &P1OUT,
-	(uint16_t) &P2OUT,
+   NOT_A_PORT,
+   (uint16_t) P1_BASE+OFS_P1OUT,
+   (uint16_t) P2_BASE+OFS_P2OUT,
 #ifdef __MSP430_HAS_PORT3_R__
-	(uint16_t) &P3OUT,
+   (uint16_t) P3_BASE+OFS_P3OUT,
 #endif
 #ifdef __MSP430_HAS_PORT4_R__
-	(uint16_t) &P4OUT,
+   (uint16_t)P4_BASE+OFS_P4OUT,
 #endif
 #ifdef __MSP430_HAS_PORTJ_R__
-	(uint16_t) &PJOUT,
+   (uint16_t) PJ_BASE+OFS_PJOUT,
 #endif
 };
 
 const uint16_t port_to_dir[] = {
-	NOT_A_PORT,
-	(uint16_t) &P1DIR,
-	(uint16_t) &P2DIR,
+   NOT_A_PORT,
+   (uint16_t) P1_BASE+OFS_P1DIR,
+   (uint16_t )P2_BASE+OFS_P2DIR,
 #ifdef __MSP430_HAS_PORT3_R__
-	(uint16_t) &P3DIR,
+   (uint16_t) P3_BASE+OFS_P3DIR,
 #endif
 #ifdef __MSP430_HAS_PORT4_R__
-	(uint16_t) &P4DIR,
+   (uint16_t) P4_BASE+OFS_P4DIR,
 #endif
 #ifdef __MSP430_HAS_PORTJ_R__
-	(uint16_t) &PJDIR,
+   (uint16_t) PJ_BASE+OFS_PJDIR,
 #endif
 };
 
 const uint16_t port_to_ren[] = {
-	NOT_A_PORT,
-	(uint16_t) &P1REN,
-	(uint16_t) &P2REN,
-#ifdef __MSP430_HAS_PORT3_R__
-	(uint16_t) &P3REN,
-#endif
-#ifdef __MSP430_HAS_PORT4_R__
-	(uint16_t) &P4REN,
-#endif
-#ifdef __MSP430_HAS_PORTJ_R__
-	(uint16_t) &PJREN,
-#endif
+	   NOT_A_PORT,
+	   (uint16_t) P1_BASE+OFS_P1REN,
+	   (uint16_t )P2_BASE+OFS_P2REN,
+	#ifdef __MSP430_HAS_PORT3_R__
+	   (uint16_t) P3_BASE+OFS_P3REN,
+	#endif
+	#ifdef __MSP430_HAS_PORT4_R__
+	   (uint16_t) P4_BASE+OFS_P4REN,
+	#endif
+	#ifdef __MSP430_HAS_PORTJ_R__
+	   (uint16_t) PJ_BASE+OFS_PJREN,
+	#endif
 };
 
-const uint16_t port_to_sel0[] = {
-	NOT_A_PORT,
-	(uint16_t) &P1SEL0,
-	(uint16_t) &P2SEL0,
-#ifdef __MSP430_HAS_PORT3_R__
-	(uint16_t) &P3SEL0,
-#endif
-#ifdef __MSP430_HAS_PORT4_R__
-	(uint16_t) &P4SEL0,
-#endif
-#ifdef __MSP430_HAS_PORTJ_R__
-	(uint16_t) &PJSEL0,
-#endif
+const uint16_t port_to_sel0[] = {  /* put this PxSEL register under the group of PxSEL0 */
+	   NOT_A_PORT,
+	   (uint16_t) P1_BASE+OFS_P1SEL0,
+	   (uint16_t )P2_BASE+OFS_P2SEL0,
+	#ifdef __MSP430_HAS_PORT3_R__
+	   (uint16_t) P3_BASE+OFS_P3SEL0,
+	#endif
+	#ifdef __MSP430_HAS_PORT4_R__
+	   (uint16_t) P4_BASE+OFS_P4SEL0,
+	#endif
+	#ifdef __MSP430_HAS_PORTJ_R__
+	   (uint16_t) PJ_BASE+OFS_PJSEL0,
+	#endif
 };
 
 const uint16_t port_to_sel1[] = {
-	NOT_A_PORT,
-	(uint16_t) &P1SEL1,
-	(uint16_t) &P2SEL1,
-#ifdef __MSP430_HAS_PORT3_R__
-	(uint16_t) &P3SEL1,
-#endif
-#ifdef __MSP430_HAS_PORT4_R__
-	(uint16_t) &P4SEL1,
-#endif
-#ifdef __MSP430_HAS_PORTJ_R__
-	(uint16_t) &PJSEL1,
-#endif
+	   NOT_A_PORT,
+	   (uint16_t) P1_BASE+OFS_P1SEL1,
+	   (uint16_t )P2_BASE+OFS_P2SEL1,
+	#ifdef __MSP430_HAS_PORT3_R__
+	   (uint16_t) P3_BASE+OFS_P3SEL1,
+	#endif
+	#ifdef __MSP430_HAS_PORT4_R__
+	   (uint16_t) P4_BASE+OFS_P4SEL1,
+	#endif
+	#ifdef __MSP430_HAS_PORTJ_R__
+	   (uint16_t) PJ_BASE+OFS_PJSEL1,
+	#endif
 };
 
 const uint8_t digital_pin_to_timer[] = {

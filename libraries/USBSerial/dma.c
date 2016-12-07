@@ -37,6 +37,7 @@
 #include "defMSP430USB.h"
 #include <descriptors.h>
 #include <string.h>
+#include <stdint.h>
 
 
 #ifdef __REGISTER_MODEL__

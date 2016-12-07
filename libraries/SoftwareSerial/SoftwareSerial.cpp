@@ -115,11 +115,11 @@ inline void SoftwareSerial::tunedDelay(uint16_t delay) {
 bool SoftwareSerial::listen() {
   if (active_object != this) {
     _buffer_overflow = false;
-    uint8_t oldSR = __read_status_register();
+    uint8_t oldSR = __get_interrupt_state();
     noInterrupts();
     _receive_buffer_head = _receive_buffer_tail = 0;
     active_object = this;
-    __write_status_register(oldSR);
+    __set_interrupt_state(oldSR);
     return true;
   }
 
@@ -311,7 +311,7 @@ size_t SoftwareSerial::write(uint8_t b)
   }
 
   //interrupts off
-  uint8_t oldSR = __read_status_register();
+  uint8_t oldSR = __get_interrupt_state();
   noInterrupts();
 
   // Write the start bit
@@ -349,7 +349,7 @@ size_t SoftwareSerial::write(uint8_t b)
   }
   
   // turn interrupts back on if they were on before
-  __write_status_register(oldSR);
+  __set_interrupt_state(oldSR);
   tunedDelay(_tx_delay);
 
   return 1;
@@ -360,10 +360,10 @@ void SoftwareSerial::flush()
   if (!isListening())
     return;
 
-  uint8_t oldSR = __read_status_register();
+  uint8_t oldSR = __get_interrupt_state();
   noInterrupts();
   _receive_buffer_head = _receive_buffer_tail = 0;
-  __write_status_register(oldSR);
+  __set_interrupt_state(oldSR);
 }
 
 int SoftwareSerial::peek()

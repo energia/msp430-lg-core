@@ -175,8 +175,8 @@ typedef struct _tEDB0 {
 #define START_OF_USB_BUFFER   0x1C00
 
 //input and output buffers for EP0
-#define USBIEP0BUF 0x2378
-#define USBOEP0BUF 0x2370
+//#define USBIEP0BUF 0x2378
+//#define USBOEP0BUF 0x2370
 
 #ifdef __cplusplus
 }

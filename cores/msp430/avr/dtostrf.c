@@ -22,19 +22,28 @@
   * This is a crude workaround.
 */
 #include <stdint.h>
+#include <stdio.h>
 #include <math.h>
-
+/*
 char *dtostrf (double val, signed char width, unsigned char prec, char *sout) {
   char fmt[20];
   
   int whole = val;
   float mantissa = val - whole;
 
-  int32_t frac = mantissa * powf(10, prec);
+  int32_t frac = mantissa * powf(10.0, prec);
   if(frac < 0) frac = -frac;
 
   sprintf(fmt, "%%0%dd.%%0%dd", width, prec);
   sprintf(sout, fmt, whole, frac);
   return sout;
 }
+*/
+char *dtostrf (double val, signed char width, unsigned char prec, char *sout) {
+  char fmt[20];
+  sprintf(fmt, "%%%d.%df", width, prec);
+  sprintf(sout, fmt, val);
+  return sout;
+}
+
 

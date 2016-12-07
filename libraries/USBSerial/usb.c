@@ -125,7 +125,7 @@ BYTE activeInterfaceIndex = 0;
  | Hardware Related Structure Definition                                       |
  +----------------------------------------------------------------------------*/
 
-#ifdef __IAR_SYSTEMS_ICC__
+#if defined(__IAR_SYSTEMS_ICC__)
 
 #pragma location = 0x2380
 __no_init tDEVICE_REQUEST __data16 tSetupPacket;
@@ -233,7 +233,7 @@ __no_init BYTE __data16 pbYBufferAddressEp87[EP_MAX_PACKET_SIZE];
 
 #endif
 
-#ifdef __TI_COMPILER_VERSION__
+#if defined(__TI_COMPILER_VERSION__)
 extern __no_init tDEVICE_REQUEST tSetupPacket;
 extern __no_init tEDB0 tEndPoint0DescriptorBlock;
 extern __no_init tEDB tInputEndPointDescriptorBlock[7];
@@ -262,11 +262,42 @@ extern __no_init BYTE pbXBufferAddressEp5[EP_MAX_PACKET_SIZE];
 extern __no_init BYTE pbYBufferAddressEp5[EP_MAX_PACKET_SIZE];
 extern __no_init BYTE pbXBufferAddressEp85[EP_MAX_PACKET_SIZE];
 extern __no_init BYTE pbYBufferAddressEp85[EP_MAX_PACKET_SIZE];
-
 #endif
 
 
-#ifdef __GNUC__
+#if defined(__GNUC__) && (__GNUC__ >= 5)
+//extern const uint8_t dev_serial[12];
+//asm(".equ dev_serial, 0x1FFFF7E8");
+
+#define  tSetupPacket                    (*(tDEVICE_REQUEST*)&USBSUBLK)
+#define  tEndPoint0DescriptorBlock       (*(tEDB0(*))&USBIEPCNF_0)
+#define  tInputEndPointDescriptorBlock   (*(tEDB(*)[7])&USBIEPCNF_1)
+#define  tOutputEndPointDescriptorBlock  (*(tEDB(*)[7])&USBOEPCNF_1)
+#define  abIEP0Buffer                (*(BYTE(*)[EP0_MAX_PACKET_SIZE])USBIEP0BUF)
+#define  abOEP0Buffer                (*(BYTE(*)[EP0_MAX_PACKET_SIZE])USBOEP0BUF)
+#define pbXBufferAddressEp1   (BYTE*)*USBSTABUFF[0x000]
+#define pbYBufferAddressEp1   (BYTE*)*USBSTABUFF[0x040]
+#define pbXBufferAddressEp81  (BYTE*)*USBSTABUFF[0x080]
+#define pbYBufferAddressEp81  (BYTE*)*USBSTABUFF[0x0C0]
+#define  pbXBufferAddressEp2  (BYTE*)*USBSTABUFF[0x100]
+#define  pbYBufferAddressEp2  (BYTE*)*USBSTABUFF[0x140]
+#define  pbXBufferAddressEp82 (BYTE*)*USBSTABUFF[0x180]
+#define  pbYBufferAddressEp82 (BYTE*)*USBSTABUFF[0x1C0]
+#define  pbXBufferAddressEp3  (BYTE*)*USBSTABUFF[0x200]
+#define  pbYBufferAddressEp3  (BYTE*)*USBSTABUFF[0x240]
+#define  pbXBufferAddressEp83 (BYTE*)*USBSTABUFF[0x280]
+#define  pbYBufferAddressEp83 (BYTE*)*USBSTABUFF[0x2C0]
+#define  pbXBufferAddressEp4  (BYTE*)*USBSTABUFF[0x300]
+#define  pbYBufferAddressEp4  (BYTE*)*USBSTABUFF[0x340]
+#define  pbXBufferAddressEp84 (BYTE*)*USBSTABUFF[0x380]
+#define  pbYBufferAddressEp84 (BYTE*)*USBSTABUFF[0x3C0]
+#define  pbXBufferAddressEp5  (BYTE*)*USBSTABUFF[0x400]
+#define  pbYBufferAddressEp5  (BYTE*)*USBSTABUFF[0x440]
+#define  pbXBufferAddressEp85 (BYTE*)*USBSTABUFF[0x480]
+#define  pbYBufferAddressEp85 (BYTE*)*USBSTABUFF[0x4C0]
+#endif
+
+#if defined(__GNUC__) && (__GNUC__ < 5)
 tDEVICE_REQUEST tSetupPacket  __asm__("0x2380");
 tEDB0 tEndPoint0DescriptorBlock  __asm__("0x0920");
 tEDB tInputEndPointDescriptorBlock[7] __asm__("0x23C8");
@@ -298,7 +329,6 @@ BYTE pbXBufferAddressEp5[EP_MAX_PACKET_SIZE] __asm__("0x2000");
 BYTE pbYBufferAddressEp5[EP_MAX_PACKET_SIZE] __asm__("0x2040");
 BYTE pbXBufferAddressEp85[EP_MAX_PACKET_SIZE] __asm__("0x2080");
 BYTE pbYBufferAddressEp85[EP_MAX_PACKET_SIZE] __asm__("0x20C0");
-
 #endif
 
 

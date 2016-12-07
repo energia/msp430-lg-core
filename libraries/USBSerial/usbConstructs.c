@@ -48,7 +48,7 @@
     #include "UsbPHDC.h"
 #endif
 
-#include <intrinsics.h>
+//#include <intrinsics.h>
 #include "usbConstructs.h"
 
 

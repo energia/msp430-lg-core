@@ -46,7 +46,9 @@ extern "C"
 #endif
 
 #ifdef __GNUC__
+#if __GNUC__ < 5
 #define __no_init
+#endif
 #define __data16
 #endif
 
@@ -81,7 +83,6 @@ typedef unsigned long*  PDWORD;
 
 #define SUCCESS 0
 #define FAILURE 1
-#define VOID void
 
 //DEVICE_REQUEST Structure
 typedef struct _tDEVICE_REQUEST {
@@ -102,7 +103,7 @@ typedef struct _tDEVICE_REQUEST_COMPARE {
     BYTE bLengthL;              //Number of bytes of data to transfer (LSByte)
     BYTE bLengthH;              //Number of bytes of data to transfer (MSByte)
     BYTE bCompareMask;          //MSB is bRequest, if set 1, bRequest should be matched
-    BYTE (*pUsbFunction)(VOID); //function pointer
+    BYTE (*pUsbFunction)(void); //function pointer
 } tDEVICE_REQUEST_COMPARE, *ptDEVICE_REQUEST_COMPARE;
 
 //----------------------------------------------------------------------------

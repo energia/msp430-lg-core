@@ -99,7 +99,7 @@
 #define XT2DRIVE_3  0
 #endif
 
-#ifdef __GNUC__
+#if (defined(__GNUC__) && (__GNUC__ < 5))
 #define __get_SR_register() __read_status_register()
 #endif
 
