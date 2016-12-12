@@ -201,16 +201,16 @@ static const uint8_t TEMPSENSOR = 128 + 30; // depends on chip
 #ifdef ARDUINO_MAIN
 const uint16_t port_to_input[] = {
    NOT_A_PORT,
-   (uint16_t) P1_BASE,
-   (uint16_t) P2_BASE,
+   (uint16_t) P1_BASE+OFS_P1IN,
+   (uint16_t) P2_BASE+OFS_P2IN,
 #ifdef __MSP430_HAS_PORT3_R__
-   (uint16_t) P3_BASE,
+   (uint16_t) P3_BASE+OFS_P3IN,
 #endif
 #ifdef __MSP430_HAS_PORT4_R__
-   (uint16_t) P4_BASE,
+   (uint16_t) P4_BASE+OFS_P4IN,
 #endif
 #ifdef __MSP430_HAS_PORTJ_R__
-   (uint16_t) PJ_BASE,
+   (uint16_t) PJ_BASE+OFS_PJIN,
 #endif
 };
 

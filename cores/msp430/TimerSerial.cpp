@@ -212,7 +212,7 @@ __interrupt
 __attribute__((interrupt(TIMER0_A0_VECTOR)))
 #endif
 //Timer0 A0 interrupt service routine
-static void TimerSerial__TxIsr(void)
+void TimerSerial__TxIsr(void)
 {
     TA0CCR0 += TICKS_PER_BIT;       // setup next time to send a bit, OUT will be set then
 
@@ -247,7 +247,7 @@ __interrupt
 __attribute__((interrupt(TIMER0_A1_VECTOR)))
 #endif
 //Timer A1 interrupt service routine
-static void TimerSerial__RxIsr(void)
+void TimerSerial__RxIsr(void)
 {
     static uint8x2_t rx_bits;               // persistent storage for data and mask. fits in one 16 bit register
     volatile uint16_t resetTAIVIFG;         // just reading TAIV will reset the interrupt flag
