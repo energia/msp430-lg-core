@@ -32,8 +32,6 @@
 #include "wiring_private.h"
 #include "pins_energia.h"
 
-#define DEFAULT_READ_RESOLUTION 10
-
 #if defined(__MSP430_HAS_ADC10__) && !defined(ADC10ENC)
 #define ADC10ENC ENC 
 #endif
@@ -70,6 +68,9 @@
 #define ADCxMEM0 ADCMEM0
 #endif
 
+#ifndef DEFAULT_READ_RESOLUTION
+#define DEFAULT_READ_RESOLUTION 10
+#endif
 static int _readResolution = DEFAULT_READ_RESOLUTION;
 
 #if defined(__MSP430_HAS_ADC10__) || defined(__MSP430_HAS_ADC10_B__) || defined(__MSP430_HAS_ADC__)
@@ -165,6 +166,7 @@ void analogWrite(uint8_t pin, int val)
 				pin2timer -= (T0A0_SEL01 - T0A0);    // correct offset
 			}
 			switch(pin2timer) {                     // which timer and CCR?
+#if defined(__MSP430_HAS_TA3__) || defined(__MSP430_HAS_T0A2__) || defined(__MSP430_HAS_T0A3__) || defined(__MSP430_HAS_T0A5__) || defined(__MSP430_HAS_TA5__) 
  			//case: T0A0                            // CCR0 used as period register
 			case T0A1:                              // TimerA0 / CCR1
                                 TA0CCR0 = PWM_PERIOD;           // PWM Period
@@ -172,6 +174,7 @@ void analogWrite(uint8_t pin, int val)
                                 TA0CCR1 = PWM_DUTY(val);       // PWM duty cycle
                                 TA0CTL = TASSEL_2 + MC_1 + analog_div;       // SMCLK, up mode
                                 break;
+#endif
 #if defined(__MSP430_HAS_TA3__) || defined(__MSP430_HAS_T0A3__) || defined(__MSP430_HAS_T0A5__) || defined(__MSP430_HAS_TA5__) 
  			case T0A2:                              // TimerA0 / CCR2
                                 TA0CCR0 = PWM_PERIOD;           // PWM Period

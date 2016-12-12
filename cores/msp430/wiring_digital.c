@@ -59,19 +59,19 @@ void pinMode(uint8_t pin, uint8_t mode)
 	 * Clear bit in PxSEL register to select GPIO function. Other functions like analogWrite(...) 
 	 * will set this bit so need to clear it.
 	 */
-#if (defined(P1SEL_) || defined(P1SEL))
+#if (defined(P1SEL_) || defined(P1SEL) || defined(__MSP430_HAS_P1SEL__))
 	sel = portSel0Register(port);	/* get the port function select register address */
 	*sel &= ~bit;			/* clear bit in pin function select register */
 #endif
-#if (defined(P1SEL2_) || defined(P1SEL2))
+#if (defined(P1SEL2_) || defined(P1SEL2) || defined(__MSP430_HAS_P1SEL2__))
 	sel = portSel2Register(port);	/* get the port function select register address */
 	*sel &= ~bit;			/* clear bit in pin function select register */
 #endif
-#if (defined(P1SEL0_) || defined(P1SEL0))
+#if (defined(P1SEL0_) || defined(P1SEL0) || defined(__MSP430_HAS_P1SEL0__))
 	sel = portSel0Register(port);	/* get the port function select register address */
 	*sel &= ~bit;			/* clear bit in pin function select register */
 #endif
-#if (defined(P1SEL1_) || defined(P1SEL1))
+#if (defined(P1SEL1_) || defined(P1SEL1) || defined(__MSP430_HAS_P1SEL1__))
 	sel = portSel1Register(port);	/* get the port function select register address */
 	*sel &= ~bit;			/* clear bit in pin function select register */
 #endif
@@ -127,7 +127,7 @@ void pinMode_int(uint8_t pin, uint16_t mode)
 		}
 	}
 
-#if (defined(P1SEL_) || defined(P1SEL))
+#if (defined(P1SEL_) || defined(P1SEL) || defined(__MSP430_HAS_P1SEL__))
 	sel = portSel0Register(port);	/* get the port function select register address */
 	if (mode & PORT_SELECTION0) {
 		*sel |= bit;
@@ -135,7 +135,7 @@ void pinMode_int(uint8_t pin, uint16_t mode)
 		*sel &= ~bit;
 	}
 #endif
-#if (defined(P1SEL2_) || defined(P1SEL2))
+#if (defined(P1SEL2_) || defined(P1SEL2) || defined(__MSP430_HAS_P1SEL2__))
 	sel = portSel2Register(port);	/* get the port function select register address */
 	if (mode & PORT_SELECTION1) {
 		*sel |= bit;
@@ -143,7 +143,7 @@ void pinMode_int(uint8_t pin, uint16_t mode)
 		*sel &= ~bit;
 	}
 #endif
-#if (defined(P1SEL0_) || defined(P1SEL0))
+#if (defined(P1SEL0_) || defined(P1SEL0) || defined(__MSP430_HAS_P1SEL0__))
 	sel = portSel0Register(port);	/* get the port function select register address */
 	if (mode & PORT_SELECTION0) {
 		*sel |= bit;
@@ -151,7 +151,7 @@ void pinMode_int(uint8_t pin, uint16_t mode)
 		*sel &= ~bit;
 	}
 #endif
-#if (defined(P1SEL1_) || defined(P1SEL1))
+#if (defined(P1SEL1_) || defined(P1SEL1) || defined(__MSP430_HAS_P1SEL1__))
 	sel = portSel1Register(port);	/* get the port function select register address */
 	if (mode & PORT_SELECTION1) {
 		*sel |= bit;
@@ -192,19 +192,19 @@ int digitalRead(uint8_t pin)
 	 * Clear bit in PxSEL register to select GPIO function. Other functions like analogWrite(...) 
 	 * will set this bit so need to clear it.
 	 */
-#if (defined(P1SEL_) || defined(P1SEL))
+#if (defined(P1SEL_) || defined(P1SEL) || defined(__MSP430_HAS_P1SEL__))
 	sel = portSel0Register(port);	/* get the port function select register address */
 	*sel &= ~bit;			/* clear bit in pin function select register */
 #endif
-#if (defined(P1SEL2_) || defined(P1SEL2))
+#if (defined(P1SEL2_) || defined(P1SEL2) || defined(__MSP430_HAS_P1SEL2__))
 	sel = portSel2Register(port);	/* get the port function select register address */
 	*sel &= ~bit;			/* clear bit in pin function select register */
 #endif
-#if (defined(P1SEL0_) || defined(P1SEL0))
+#if (defined(P1SEL0_) || defined(P1SEL0) || defined(__MSP430_HAS_P1SEL0__))
 	sel = portSel0Register(port);	/* get the port function select register address */
 	*sel &= ~bit;			/* clear bit in pin function select register */
 #endif
-#if (defined(P1SEL1_) || defined(P1SEL1))
+#if (defined(P1SEL1_) || defined(P1SEL1) || defined(__MSP430_HAS_P1SEL1__))
 	sel = portSel1Register(port);	/* get the port function select register address */
 	*sel &= ~bit;			/* clear bit in pin function select register */
 #endif
@@ -227,19 +227,19 @@ void digitalWrite(uint8_t pin, uint8_t val)
 	 * Clear bit in PxSEL register to select GPIO function. Other functions like analogWrite(...) 
 	 * will set this bit so need to clear it.
 	 */
-#if (defined(P1SEL_) || defined(P1SEL))
+#if (defined(P1SEL_) || defined(P1SEL) || defined(__MSP430_HAS_P1SEL__))
 	sel = portSel0Register(port);	/* get the port function select register address */
 	*sel &= ~bit;			/* clear bit in pin function select register */
 #endif
-#if (defined(P1SEL2_) || defined(P1SEL2))
+#if (defined(P1SEL2_) || defined(P1SEL2) || defined(__MSP430_HAS_P1SEL2__))
 	sel = portSel2Register(port);	/* get the port function select register address */
 	*sel &= ~bit;			/* clear bit in pin function select register */
 #endif
-#if (defined(P1SEL0_) || defined(P1SEL0))
+#if (defined(P1SEL0_) || defined(P1SEL0) || defined(__MSP430_HAS_P1SEL0__))
 	sel = portSel0Register(port);	/* get the port function select register address */
 	*sel &= ~bit;			/* clear bit in pin function select register */
 #endif
-#if (defined(P1SEL1_) || defined(P1SEL1))
+#if (defined(P1SEL1_) || defined(P1SEL1) || defined(__MSP430_HAS_P1SEL1__))
 	sel = portSel1Register(port);	/* get the port function select register address */
 	*sel &= ~bit;			/* clear bit in pin function select register */
 #endif

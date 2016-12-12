@@ -19,6 +19,35 @@
 
 #ifdef __MSP430_HAS_EUSCI_B0__
 
+
+#if defined(__MSP430_HAS_EUSCI_B0__)
+#define UCB0_BASE ((uint16_t)&UCB0CTLW0)
+#endif
+#if defined(__MSP430_HAS_EUSCI_B1__)
+#define UCB1_BASE ((uint16_t)&UCB1CTLW0)
+#endif
+#if defined(__MSP430_HAS_EUSCI_B2__)
+#define UCB2_BASE ((uint16_t)&UCB2CTLW0)
+#endif
+
+#if defined(DEFAULT_SPI) && (DEFAULT_SPI == 1)
+uint16_t SPI_baseAddress = UCB1_BASE;
+#else
+uint16_t SPI_baseAddress = UCB0_BASE;
+#endif
+
+#define UCBzCTLW0     (*((volatile uint16_t *)((uint16_t)(SPI_baseAddress + ((uint16_t)&UCB0CTLW0)  - UCB0_BASE))))
+#define UCBzCTL0      (*((volatile uint8_t *) ((uint16_t)(SPI_baseAddress + ((uint16_t)&UCB0CTLW0)+1- UCB0_BASE))))
+#define UCBzCTL1      (*((volatile uint8_t *) ((uint16_t)(SPI_baseAddress + ((uint16_t)&UCB0CTLW0)  - UCB0_BASE))))
+#define UCBzBRW       (*((volatile uint16_t *)((uint16_t)(SPI_baseAddress + ((uint16_t)&UCB0BRW)    - UCB0_BASE))))
+#define UCBzBR0       (*((volatile uint8_t *) ((uint16_t)(SPI_baseAddress + ((uint16_t)&UCB0BRW)    - UCB0_BASE))))
+#define UCBzBR1       (*((volatile uint8_t *) ((uint16_t)(SPI_baseAddress + ((uint16_t)&UCB0BRW)+1  - UCB0_BASE))))
+#define UCBzTXBUF     (*((volatile uint8_t *) ((uint16_t)(SPI_baseAddress + ((uint16_t)&UCB0TXBUF)  - UCB0_BASE))))
+#define UCBzRXBUF     (*((volatile uint8_t *) ((uint16_t)(SPI_baseAddress + ((uint16_t)&UCB0RXBUF)  - UCB0_BASE))))
+#define UCBzIFG       (*((volatile uint8_t *) ((uint16_t)(SPI_baseAddress + ((uint16_t)&UCB0IFG)    - UCB0_BASE))))
+#define UCBzIE        (*((volatile uint8_t *) ((uint16_t)(SPI_baseAddress + ((uint16_t)&UCB0IE)     - UCB0_BASE))))
+
+
 /**
  * USCI flags for various the SPI MODEs
  *
@@ -35,7 +64,7 @@
 #define SPI_MODE_MASK (UCCKPL | UCCKPH)
 
 /**
- * spi_initialize() - Configure USCI UCB0 for SPI mode
+ * spi_initialize() - Configure USCI UCBz for SPI mode
  *
  * P2.0 - CS (active low)
  * P1.5 - SCLK
@@ -46,23 +75,35 @@
 void spi_initialize(void)
 {
 	/* Put USCI in reset mode, source USCI clock from SMCLK. */
-	UCB0CTLW0 = UCSWRST | UCSSEL_2;
+	UCBzCTLW0 = UCSWRST | UCSSEL_2;
 
 	/* SPI in master MODE 0 - CPOL=0 SPHA=0. */
-	UCB0CTLW0 |= SPI_MODE_0 | UCMSB | UCSYNC | UCMST;
+	UCBzCTLW0 |= SPI_MODE_0 | UCMSB | UCSYNC | UCMST;
 
 	/* Set pins to SPI mode. */
+#if defined(DEFAULT_SPI)
+	if (SPI_baseAddress == UCB1_BASE) {
+		pinMode_int(SCK1, SPISCK1_SET_MODE);
+		pinMode_int(MOSI1, SPIMOSI1_SET_MODE);
+		pinMode_int(MISO1, SPIMISO1_SET_MODE);
+	}else{
+		pinMode_int(SCK0, SPISCK0_SET_MODE);
+		pinMode_int(MOSI0, SPIMOSI0_SET_MODE);
+		pinMode_int(MISO0, SPIMISO0_SET_MODE);
+	}
+#else
 	pinMode_int(SCK, SPISCK_SET_MODE);
 	pinMode_int(MOSI, SPIMOSI_SET_MODE);
 	pinMode_int(MISO, SPIMISO_SET_MODE);
+#endif
 
 
 	/* Set initial speed to 4MHz. */
-	UCB0BR0 = SPI_CLOCK_DIV4 & 0xFF;
-	UCB0BR1 = (SPI_CLOCK_DIV4 >> 8 ) & 0xFF;
+	UCBzBR0 = SPI_CLOCK_DIV4 & 0xFF;
+	UCBzBR1 = (SPI_CLOCK_DIV4 >> 8 ) & 0xFF;
 
 	/* Release USCI for operation. */
-	UCB0CTLW0 &= ~UCSWRST;
+	UCBzCTLW0 &= ~UCSWRST;
 }
 
 /**
@@ -71,27 +112,120 @@ void spi_initialize(void)
 void spi_disable(void)
 {
 	/* Put USCI in reset mode. */
-	UCB0CTLW0 |= UCSWRST;
+	UCBzCTLW0 |= UCSWRST;
 }
 
 /**
  * spi_send() - send a byte and recv response.
  */
-uint8_t spi_send(const uint8_t _data)
+uint8_t spi_send(const uint8_t data)
 {
 	/* Wait for previous tx to complete. */
-	while (!(UCB0IFG & UCTXIFG))
-		;
+	while (!(UCBzIFG & UCTXIFG));
 
 	/* Setting TXBUF clears the TXIFG flag. */
-	UCB0TXBUF = _data;
+	UCBzTXBUF = data;
 
 	/* Wait for a rx character? */
-	while (!(UCB0IFG & UCRXIFG))
-		;
+	while (!(UCBzIFG & UCRXIFG));
 
 	/* Reading clears RXIFG flag. */
-	return UCB0RXBUF;
+	return UCBzRXBUF;
+}
+
+uint16_t spi_send16(const uint16_t data)
+{
+	uint16_t datain;
+	/* Wait for previous tx to complete. */
+	while (!(UCBzIFG & UCTXIFG));
+	/* Setting TXBUF clears the TXIFG flag. */
+	UCBzTXBUF = data | 0xFF;
+	/* Wait for previous tx to complete. */
+	while (!(UCBzIFG & UCTXIFG));
+
+	datain = UCBzRXBUF << 8;
+	/* Setting TXBUF clears the TXIFG flag. */
+	UCBzTXBUF = data >> 8;
+
+	/* Wait for a rx character? */
+	while (!(UCBzIFG & UCRXIFG));
+
+	/* Reading clears RXIFG flag. */
+	return (datain | UCBzRXBUF);
+}
+
+void spi_send(void *buf, uint16_t count)
+{
+    uint8_t *ptx = (uint8_t *)buf;
+    uint8_t *prx = (uint8_t *)buf;
+	if (count == 0) return;
+	/* Wait for previous tx to complete. */
+	while (!(UCBzIFG & UCTXIFG));
+	while(count){
+		if (UCBzIFG & UCRXIFG){
+			/* Reading RXBUF clears the RXIFG flag. */
+			*prx++ = UCBzRXBUF;
+		}
+		if (UCBzIFG & UCTXIFG){
+			/* Setting TXBUF clears the TXIFG flag. */
+			UCBzTXBUF = *ptx++;
+			count--;
+		}
+	}
+	/* Wait for last rx character? */
+	while (!(UCBzIFG & UCRXIFG));
+	*prx++ = UCBzRXBUF;
+}
+
+/**
+ * spi_transmit() - send a byte.
+ */
+void spi_transmit(const uint8_t data)
+{
+	/* Wait for previous tx to complete. */
+	while (!(UCBzIFG & UCTXIFG));
+
+	/* Setting TXBUF clears the TXIFG flag. */
+	UCBzTXBUF = data;
+
+	/* Wait for a rx character? */
+	while (!(UCBzIFG & UCRXIFG));
+	/* clear RXIFG flag. */
+	UCBzIFG &= ~UCRXIFG;
+}
+
+void spi_transmit16(const uint16_t data)
+{
+	/* Wait for previous tx to complete. */
+	while (!(UCBzIFG & UCTXIFG));
+	/* Setting TXBUF clears the TXIFG flag. */
+	UCBzTXBUF = data | 0xFF;
+	/* Wait for previous tx to complete. */
+	while (!(UCBzIFG & UCTXIFG));
+	/* Setting TXBUF clears the TXIFG flag. */
+	UCBzTXBUF = data >> 8;
+
+	/* Wait for a rx character? */
+	while (!(UCBzIFG & UCRXIFG));
+	/* clear RXIFG flag. */
+	UCBzIFG &= ~UCRXIFG;
+}
+
+void spi_transmit(void *buf, uint16_t count)
+{
+    uint8_t *ptx = (uint8_t *)buf;
+	if (count == 0) return;
+	while(count){
+		if (UCBzIFG & UCTXIFG){
+			/* Setting TXBUF clears the TXIFG flag. */
+			UCBzTXBUF = *ptx++;
+			count--;
+		}
+	}
+	/* Wait for last rx character? */
+	while (!(UCBzIFG & UCRXIFG));
+	/* clear RXIFG flag. */
+	UCBzIFG &= ~UCRXIFG;
 }
 
 /***SPI_MODE_0
@@ -102,14 +236,14 @@ uint8_t spi_send(const uint8_t _data)
  */
 void spi_set_divisor(const uint16_t clkdiv)
 {
-	/* Hold UCB0 in reset. */
-	UCB0CTLW0 |= UCSWRST;
+	/* Hold UCBz in reset. */
+	UCBzCTLW0 |= UCSWRST;
 
-	UCB0BR0 = clkdiv & 0xFF;
-	UCB0BR1 = (clkdiv >> 8 ) & 0xFF;
+	UCBzBR0 = clkdiv & 0xFF;
+	UCBzBR1 = (clkdiv >> 8 ) & 0xFF;
 
 	/* Release for operation. */
-	UCB0CTLW0 &= ~UCSWRST;
+	UCBzCTLW0 &= ~UCSWRST;
 }
 
 /**
@@ -117,13 +251,13 @@ void spi_set_divisor(const uint16_t clkdiv)
  */
 void spi_set_bitorder(const uint8_t order)
 {
-	/* Hold UCB0 in reset. */
-	UCB0CTLW0 |= UCSWRST;
+	/* Hold UCBz in reset. */
+	UCBzCTLW0 |= UCSWRST;
 
-	UCB0CTLW0 = (UCB0CTLW0 & ~UCMSB) | ((order == 1 /*MSBFIRST*/) ? UCMSB : 0); /* MSBFIRST = 1 */
+	UCBzCTLW0 = (UCBzCTLW0 & ~UCMSB) | ((order == 1 /*MSBFIRST*/) ? UCMSB : 0); /* MSBFIRST = 1 */
 
 	/* Release for operation. */
-	UCB0CTLW0 &= ~UCSWRST;
+	UCBzCTLW0 &= ~UCSWRST;
 }
 
 /**
@@ -131,26 +265,26 @@ void spi_set_bitorder(const uint8_t order)
  */
 void spi_set_datamode(const uint8_t mode)
 {
-	/* Hold UCB0 in reset. */
-	UCB0CTL1 |= UCSWRST;
+	/* Hold UCBz in reset. */
+	UCBzCTL1 |= UCSWRST;
 	switch(mode) {
 	case 0: /* SPI_MODE0 */
-		UCB0CTLW0 = (UCB0CTLW0 & ~SPI_MODE_MASK) | SPI_MODE_0;
+		UCBzCTLW0 = (UCBzCTLW0 & ~SPI_MODE_MASK) | SPI_MODE_0;
 		break;
 	case 1: /* SPI_MODE1 */
-		UCB0CTLW0 = (UCB0CTLW0 & ~SPI_MODE_MASK) | SPI_MODE_1;
+		UCBzCTLW0 = (UCBzCTLW0 & ~SPI_MODE_MASK) | SPI_MODE_1;
 		break;
 	case 2: /* SPI_MODE2 */
-		UCB0CTLW0 = (UCB0CTLW0 & ~SPI_MODE_MASK) | SPI_MODE_2;
+		UCBzCTLW0 = (UCBzCTLW0 & ~SPI_MODE_MASK) | SPI_MODE_2;
 		break;
 	case 4: /* SPI_MODE3 */
-		UCB0CTLW0 = (UCB0CTLW0 & ~SPI_MODE_MASK) | SPI_MODE_3;
+		UCBzCTLW0 = (UCBzCTLW0 & ~SPI_MODE_MASK) | SPI_MODE_3;
 		break;
 	default:
 		break;
 	}
 
 	/* Release for operation. */
-	UCB0CTL1 &= ~UCSWRST;
+	UCBzCTL1 &= ~UCSWRST;
 }
 #endif

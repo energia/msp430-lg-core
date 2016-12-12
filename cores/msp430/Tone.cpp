@@ -41,6 +41,8 @@ Version Modified By Date     Comments
 #include "pins_energia.h"
 #include "Energia.h"
 
+#if defined(__MSP430_HAS_TA3__) || defined(__MSP430_HAS_T0A2__) || defined(__MSP430_HAS_T0A3__) || defined(__MSP430_HAS_T0A5__) || defined(__MSP430_HAS_TA5__) 
+
 // local funcions
 static void initTimers();
 static void setTimer(uint8_t n, unsigned int frequency, unsigned long duration);
@@ -155,7 +157,7 @@ static void setTimer(uint8_t n, unsigned int frequency, unsigned long duration)
   }
   tone_interval[n] = F_TIMER / (2L*frequency);
   if ( duration > 0 )
-    tone_periods[n] = (duration * (F_TIMER)) / (1000L * tone_interval[n]);
+    tone_periods[n] = (duration * (F_TIMER/2)) / (1000L * tone_interval[n]);
   else
     tone_periods[n] = -1;
   switch( n ) // enable IRQ and set next match time in various timer compare registers (if we where not enabled already)
@@ -221,3 +223,5 @@ void TIMER0_A1_ISR(void)
 #endif
   }  
 }
+
+#endif //#if defined(__MSP430_HAS_TA3__) || defined(__MSP430_HAS_T0A2__) || defined(__MSP430_HAS_T0A3__) || defined(__MSP430_HAS_T0A5__) || defined(__MSP430_HAS_TA5__) 
