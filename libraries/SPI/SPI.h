@@ -27,13 +27,13 @@
 #define SPI_MODE3 4
 
 #if defined(__MSP430_HAS_EUSCI_B0__)
-#define UCB0_BASE UCB0CTLW0_
+#define UCB0_BASE ((uint16_t)&UCB0CTLW0)
 #endif
 #if defined(__MSP430_HAS_EUSCI_B1__)
-#define UCB1_BASE UCB1CTLW0_
+#define UCB1_BASE ((uint16_t)&UCB1CTLW0)
 #endif
 #if defined(__MSP430_HAS_EUSCI_B2__)
-#define UCB2_BASE UCB2CTLW0_
+#define UCB2_BASE ((uint16_t)&UCB2CTLW0)
 #endif
 
 

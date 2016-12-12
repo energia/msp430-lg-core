@@ -41,37 +41,37 @@
 
 #include "HardwareSerial.h"
 
-#define UCAxCTLW0     UCA0CTLW0 
-#define UCAxCTL0      UCA0CTL0
-#define UCAxCTL1      UCA0CTL1
-#define UCAxBRW       UCA0BRW
-#define UCAxBR0       UCA0BR0
-#define UCAxBR1       UCA0BR1
-#define UCAxMCTL      UCA0MCTL
-#define UCAxMCTLW     UCA0MCTLW
-#define UCAxMCTLW_L   UCA0MCTLW_L
-#define UCAxMCTLW_H   UCA0MCTLW_H
-#define UCAxSTAT      UCA0STAT
+#define UCAzCTLW0     UCA0CTLW0 
+#define UCAzCTL0      UCA0CTL0
+#define UCAzCTL1      UCA0CTL1
+#define UCAzBRW       UCA0BRW
+#define UCAzBR0       UCA0BR0
+#define UCAzBR1       UCA0BR1
+#define UCAzMCTL      UCA0MCTL
+#define UCAzMCTLW     UCA0MCTLW
+#define UCAzMCTLW_L   UCA0MCTLW_L
+#define UCAzMCTLW_H   UCA0MCTLW_H
+#define UCAzSTAT      UCA0STAT
 #if defined(__MSP430_HAS_EUSCI_A0__) || defined(__MSP430_HAS_EUSCI_A1__)
-#define UCAxRXBUF     UCA0RXBUF_L
-#define UCAxTXBUF     UCA0TXBUF_L
+#define UCAzRXBUF     UCA0RXBUF_L
+#define UCAzTXBUF     UCA0TXBUF_L
 #else
-#define UCAxRXBUF     UCA0RXBUF
-#define UCAxTXBUF     UCA0TXBUF
+#define UCAzRXBUF     UCA0RXBUF
+#define UCAzTXBUF     UCA0TXBUF
 #endif
-#define UCAxABCTL     UCA0ABCTL
-#define UCAxIRCTL     UCA0IRCTL
-#define UCAxIRTCTL    UCA0IRTCTL
-#define UCAxIRRCTL    UCA0IRRCTL
-#define UCAxICTL      UCA0ICTL
+#define UCAzABCTL     UCA0ABCTL
+#define UCAzIRCTL     UCA0IRCTL
+#define UCAzIRTCTL    UCA0IRTCTL
+#define UCAzIRRCTL    UCA0IRRCTL
+#define UCAzICTL      UCA0ICTL
 #if defined(__MSP430_HAS_EUSCI_A0__) || defined(__MSP430_HAS_EUSCI_A1__)
-#define UCAxIE        UCA0IE_L
-#define UCAxIFG       UCA0IFG_L
+#define UCAzIE        UCA0IE_L
+#define UCAzIFG       UCA0IFG_L
 #else
-#define UCAxIE        UCA0IE
-#define UCAxIFG       UCA0IFG
+#define UCAzIE        UCA0IE
+#define UCAzIFG       UCA0IFG
 #endif
-#define UCAxIV        UCA0IV
+#define UCAzIV        UCA0IV
 
 #define SERIAL_BUFFER_SIZE 16
 
@@ -144,25 +144,25 @@ void HardwareSerial::begin(unsigned long baud, uint8_t config)
 
 	delay(10);
 
-	*(&(UCAxCTL1) + uartOffset) = UCSWRST;
-	*(&(UCAxCTL1) + uartOffset) |= UCSSEL_2;                                // SMCLK
-	*(&(UCAxCTL0) + uartOffset) = 0;
-	*(&(UCAxABCTL) + uartOffset) = 0;
+	*(&(UCAzCTL1) + uartOffset) = UCSWRST;
+	*(&(UCAzCTL1) + uartOffset) |= UCSSEL_2;                                // SMCLK
+	*(&(UCAzCTL0) + uartOffset) = 0;
+	*(&(UCAzABCTL) + uartOffset) = 0;
 #if defined(__MSP430_HAS_EUSCI_A0__) || defined(__MSP430_HAS_EUSCI_A1__)
 	if(!oversampling) {
 		mod = ((divider&0xF)+1)&0xE;                    // UCBRSx (bit 1-3)
 		divider >>=4;
 	} else {
-		mod = divider&0xFFF0;                           // UCBRFx = INT([(N/16) - INT(N/16)] x 16)
+		mod = divider&0xFFF0;                           // UCBRFx = INT([(N/16) – INT(N/16)] × 16)
 		divider>>=8;
 	}
-	*(&(UCAxBR0) + uartOffset) = divider;
-	*(&(UCAxBR1) + uartOffset) = divider>>8;
+	*(&(UCAzBR0) + uartOffset) = divider;
+	*(&(UCAzBR1) + uartOffset) = divider>>8;
 
 	uint16_t reg = (oversampling ? UCOS16:0) | mod;
-	*(&(UCAxMCTLW_L) + uartOffset) = reg;
-	*(&(UCAxMCTLW_H) + uartOffset)= reg>>8;
-    *(&(UCAxCTL0) + uartOffset) = (*(&(UCAxCTL0) + uartOffset) & ~SERIAL_PAR_MASK) | config;
+	*(&(UCAzMCTLW_L) + uartOffset) = reg;
+	*(&(UCAzMCTLW_H) + uartOffset)= reg>>8;
+ 	*(&(UCAzCTL0) + uartOffset) = (*(&(UCAzCTL0) + uartOffset) & ~SERIAL_PAR_MASK) | config;
 #else
 	if(!oversampling) {
 		mod = ((divider&0xF)+1)&0xE;                    // UCBRSx (bit 1-3)
@@ -171,15 +171,14 @@ void HardwareSerial::begin(unsigned long baud, uint8_t config)
 		mod = ((divider&0xf8)+0x8)&0xf0;                // UCBRFx (bit 4-7)
 		divider>>=8;
 	}
-	*(&(UCAxBR0) + uartOffset)= divider;
-	*(&(UCAxBR1) + uartOffset) = divider>>8;
-	*(&(UCAxMCTL) + uartOffset) = (unsigned char)(oversampling ? UCOS16:0) | mod;
-    *(&(UCAxCTL0) + uartOffset) = (*(&(UCAxCTL0) + uartOffset) & ~SERIAL_PAR_MASK) | config;
-
+	*(&(UCAzBR0) + uartOffset)= divider;
+	*(&(UCAzBR1) + uartOffset) = divider>>8;
+	*(&(UCAzMCTL) + uartOffset) = (unsigned char)(oversampling ? UCOS16:0) | mod;
+	*(&(UCAzCTL0) + uartOffset) = (*(&(UCAzCTL0) + uartOffset) & ~SERIAL_PAR_MASK) | config;
 #endif	
-	*(&(UCAxCTL1) + uartOffset) &= ~UCSWRST;
+	*(&(UCAzCTL1) + uartOffset) &= ~UCSWRST;
 #if defined(__MSP430_HAS_USCI_A0__) || defined(__MSP430_HAS_USCI_A1__) || defined(__MSP430_HAS_EUSCI_A0__) || defined(__MSP430_HAS_EUSCI_A1__)
-	*(&(UCAxIE) + uartOffset) |= UCRXIE;
+	*(&(UCAzIE) + uartOffset) |= UCRXIE;
 #else
 	*(&(UC0IE) + uartOffset) |= UCA0RXIE;
 #endif	
@@ -237,7 +236,7 @@ size_t HardwareSerial::write(uint8_t c)
 	_tx_buffer->head = i;
 
 #if defined(__MSP430_HAS_USCI_A0__) || defined(__MSP430_HAS_USCI_A1__) || defined(__MSP430_HAS_EUSCI_A0__) || defined(__MSP430_HAS_EUSCI_A1__)
-	*(&(UCAxIE) + uartOffset) |= UCTXIE;
+	*(&(UCAzIE) + uartOffset) |= UCTXIE;
 #else
 	*(&(UC0IE) + uartOffset) |= UCA0TXIE;
 #endif	
@@ -257,7 +256,7 @@ void uart_rx_isr(uint8_t offset)
 #else
 	ring_buffer *rx_buffer_ptr = &rx_buffer;
 #endif
-	unsigned char c = *(&(UCAxRXBUF) + offset);
+	unsigned char c = *(&(UCAzRXBUF) + offset);
 	store_char(c, rx_buffer_ptr);
 }
 
@@ -272,8 +271,8 @@ void uart_tx_isr(uint8_t offset)
 	if (tx_buffer_ptr->head == tx_buffer_ptr->tail) {
 		// Buffer empty, so disable interrupts
 #if defined(__MSP430_HAS_USCI_A0__) || defined(__MSP430_HAS_USCI_A1__) || defined(__MSP430_HAS_EUSCI_A0__) || defined(__MSP430_HAS_EUSCI_A1__)
-		*(&(UCAxIE) + offset) &= ~UCTXIE;
-		*(&(UCAxIFG) + offset) |= UCTXIFG;    // Set Flag again
+		*(&(UCAzIE) + offset) &= ~UCTXIE;
+		*(&(UCAzIFG) + offset) |= UCTXIFG;    // Set Flag again
 #else
 		*(&(UC0IE) + offset) &= ~UCA0TXIE;
 #endif	
@@ -282,7 +281,7 @@ void uart_tx_isr(uint8_t offset)
 
 	unsigned char c = tx_buffer_ptr->buffer[tx_buffer_ptr->tail];
 	tx_buffer_ptr->tail = (tx_buffer_ptr->tail + 1) % SERIAL_BUFFER_SIZE;
-	*(&(UCAxTXBUF) + offset) = c;
+	*(&(UCAzTXBUF) + offset) = c;
 }
 // Preinstantiate Objects //////////////////////////////////////////////////////
 
