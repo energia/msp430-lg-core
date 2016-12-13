@@ -104,36 +104,36 @@ static uint8_t twi_my_addr;
 #define UCB3_BASE __MSP430_BASEADDRESS_EUSCI_B3__
 #endif
 
-#define UCBzCTLW0     (*((volatile uint16_t *)((uint16_t)(OFS_UCBxCTLW0  + UCB0_BASE))))
-#define UCBzCTLW1     (*((volatile uint16_t *)((uint16_t)(OFS_UCBxCTLW1  + UCB0_BASE))))
-#define UCBzCTL0      (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxCTL0   + UCB0_BASE))))
-#define UCBzCTL1      (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxCTL1   + UCB0_BASE))))
-#define UCBzBRW       (*((volatile uint16_t *)((uint16_t)(OFS_UCBxBRW    + UCB0_BASE))))
-#define UCBzBR0       (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxBR0    + UCB0_BASE))))
-#define UCBzBR1       (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxBR1    + UCB0_BASE))))
-#define UCBzMCTL      (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxMCTL   + UCB0_BASE))))
-#define UCBzMCTLW     (*((volatile uint16_t *)((uint16_t)(OFS_UCBxMCTLW  + UCB0_BASE))))
-#define UCBzSTAT      (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxSTAT   + UCB0_BASE))))
-#define UCBzTBCNT     (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxTBCNT  + UCB0_BASE))))
-#define UCBzRXBUF     (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxRXBUF  + UCB0_BASE))))
-#define UCBzTXBUF     (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxTXBUF  + UCB0_BASE))))
-#define UCBzABCTL     (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxABCTL  + UCB0_BASE))))
-#define UCBzIRCTL     (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxIRCTL  + UCB0_BASE))))
-#define UCBzIRTCTL    (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxIRTCTL + UCB0_BASE))))
-#define UCBzIRRCTL    (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxIRRCTL + UCB0_BASE))))
-#define UCBzICTL      (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxICTL   + UCB0_BASE))))
-#define UCBzI2COA     (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxI2COA  + UCB0_BASE))))
-#define UCBzI2COA0    (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxI2COA0 + UCB0_BASE))))
-#define UCBzI2CSA     (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxI2CSA  + UCB0_BASE))))
+#define UCBzCTLW0     (*((volatile uint16_t *)((uint16_t)(OFS_UCBxCTLW0  + I2C_baseAddress))))
+#define UCBzCTLW1     (*((volatile uint16_t *)((uint16_t)(OFS_UCBxCTLW1  + I2C_baseAddress))))
+#define UCBzCTL0      (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxCTL0   + I2C_baseAddress))))
+#define UCBzCTL1      (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxCTL1   + I2C_baseAddress))))
+#define UCBzBRW       (*((volatile uint16_t *)((uint16_t)(OFS_UCBxBRW    + I2C_baseAddress))))
+#define UCBzBR0       (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxBR0    + I2C_baseAddress))))
+#define UCBzBR1       (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxBR1    + I2C_baseAddress))))
+#define UCBzMCTL      (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxMCTL   + I2C_baseAddress))))
+#define UCBzMCTLW     (*((volatile uint16_t *)((uint16_t)(OFS_UCBxMCTLW  + I2C_baseAddress))))
+#define UCBzSTAT      (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxSTAT   + I2C_baseAddress))))
+#define UCBzTBCNT     (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxTBCNT  + I2C_baseAddress))))
+#define UCBzRXBUF     (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxRXBUF  + I2C_baseAddress))))
+#define UCBzTXBUF     (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxTXBUF  + I2C_baseAddress))))
+#define UCBzABCTL     (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxABCTL  + I2C_baseAddress))))
+#define UCBzIRCTL     (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxIRCTL  + I2C_baseAddress))))
+#define UCBzIRTCTL    (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxIRTCTL + I2C_baseAddress))))
+#define UCBzIRRCTL    (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxIRRCTL + I2C_baseAddress))))
+#define UCBzICTL      (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxICTL   + I2C_baseAddress))))
+#define UCBzI2COA     (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxI2COA  + I2C_baseAddress))))
+#define UCBzI2COA0    (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxI2COA0 + I2C_baseAddress))))
+#define UCBzI2CSA     (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxI2CSA  + I2C_baseAddress))))
 #if defined(UCB0ICTL_)
-#define UCBzIE        (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxIE     + UCB0_BASE))))
-#define UCBzIFG       (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxIFG    + UCB0_BASE))))
+#define UCBzIE        (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxIE     + I2C_baseAddress))))
+#define UCBzIFG       (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxIFG    + I2C_baseAddress))))
 #else
-#define UCBzIE        (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxIE     + UCB0_BASE))))
-#define UCBzIFG       (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxIFG    + UCB0_BASE))))
+#define UCBzIE        (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxIE     + I2C_baseAddress))))
+#define UCBzIFG       (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxIFG    + I2C_baseAddress))))
 #endif
-#define UCBzI2CIE     (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxI2CIE  + UCB0_BASE))))
-#define UCBzIV        (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxIV     + UCB0_BASE))))
+#define UCBzI2CIE     (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxI2CIE  + I2C_baseAddress))))
+#define UCBzIV        (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxIV     + I2C_baseAddress))))
 
 #else // #if defined(__MSP430_HAS_USCI_B0__) || defined(__MSP430_HAS_EUSCI_B0__) || defined(__MSP430_HAS_USCI_B1__) || defined(__MSP430_HAS_EUSCI_B1__) || defined(__MSP430_HAS_EUSCI_B2__) || defined(__MSP430_HAS_EUSCI_B3__)
 
@@ -206,24 +206,30 @@ void twi_setModule(uint8_t _i2cModule)
 		I2C_baseAddress = -1;
 	}
 #endif
+#if defined(__MSP430_HAS_USCI__) || defined(__MSP430_HAS_USCI_B0__) || defined(__MSP430_HAS_EUSCI_B0__)
 	if (_i2cModule == 0)
 	{
-#if defined(__MSP430_HAS_USCI__) || defined(__MSP430_HAS_USCI_B0__) || defined(__MSP430_HAS_EUSCI_B0__)
 		I2C_baseAddress = UCB0_BASE;
-#endif
 	}
+#endif
+#if defined(__MSP430_HAS_USCI_B1__) || defined(__MSP430_HAS_EUSCI_B1__)
 	if (_i2cModule == 1)
 	{
-#if defined(__MSP430_HAS_USCI_B1__) || defined(__MSP430_HAS_EUSCI_B1__)
 		I2C_baseAddress = UCB1_BASE;
+	}
 #endif
 #if defined(__MSP430_HAS_USCI_B2__) || defined(__MSP430_HAS_EUSCI_B2__)
+	if (_i2cModule == 2)
+	{
 		I2C_baseAddress = UCB2_BASE;
+	}
 #endif
 #if defined(__MSP430_HAS_USCI_B3__) || defined(__MSP430_HAS_EUSCI_B3__)
+	if (_i2cModule == 3)
+	{
 		I2C_baseAddress = UCB3_BASE;
-#endif
 	}
+#endif
 }
 
 /*
@@ -603,7 +609,7 @@ uint8_t twi_writeTo(uint8_t address, uint8_t* data, uint8_t length, uint8_t wait
 #if (DEFAULT_I2C == -1)	
 	if (I2C_baseAddress == -1)
 	{
-		return (i2c_sw_write(address, length, data, sendStop));
+		return (i2c_sw_write(address, length, data, twi_sendStop));
 	}
 #endif
 #if defined(__MSP430_HAS_USI__)
@@ -631,7 +637,7 @@ uint8_t twi_writeTo(uint8_t address, uint8_t* data, uint8_t length, uint8_t wait
     UCBzCTLW0 |= (UCMST | UCTR);              //  I2C Master, transmit mode
     UCBzI2CSA = address;                      // Set Slave Address
     UCBzTBCNT = length;                       // set number of bytes to transmit
-	if((sendStop) && (length > 0)) {
+	if((twi_sendStop) && (length > 0)) {
 		UCBzCTLW1 |= UCASTP_2;                // do generate Stop after last Byte to send
 	} else {
 		UCBzCTLW1 &= ~UCASTP_2;               // do not generate Stop
@@ -665,7 +671,12 @@ uint8_t twi_writeTo(uint8_t address, uint8_t* data, uint8_t length, uint8_t wait
 #endif
 #if defined(__MSP430_HAS_USCI__) || defined(__MSP430_HAS_USCI_B0__) || defined(__MSP430_HAS_USCI_B1__)
     twi_state =  TWI_MTX;                     // Master Transmit mode
-    UCBzCTL1 |= UCTXSTT;                      // I2C start condition
+	if((twi_sendStop) && (length == 0)) {
+		UCBzCTL1 |= UCTXSTT | UCTXSTP;            // I2C start and stop condition
+		twi_sendStop = false;
+	}else{
+		UCBzCTL1 |= UCTXSTT;                      // I2C start condition
+	}
 #endif
 #if defined(__MSP430_HAS_EUSCI_B0__) || defined(__MSP430_HAS_EUSCI_B1__) || defined(__MSP430_HAS_EUSCI_B2__) || defined(__MSP430_HAS_EUSCI_B3__)
     twi_state =  TWI_MTX;                     // Master Transmit mode
@@ -680,7 +691,7 @@ uint8_t twi_writeTo(uint8_t address, uint8_t* data, uint8_t length, uint8_t wait
 
 #if defined(__MSP430_HAS_USCI__) || defined(__MSP430_HAS_USCI_B0__) || defined(__MSP430_HAS_USCI_B1__)
 	/* Ensure stop/start condition got sent before we exit. */
-	if(sendStop)
+	if(twi_sendStop)
 	{
 		while (UCBzCTL1 & UCTXSTP);	// end with stop condition
 	} else {
