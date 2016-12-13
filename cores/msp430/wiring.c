@@ -68,10 +68,10 @@ void enableXtal()
 #if (!defined(__MSP430FR2XX_4XX_FAMILY__) && (defined(__MSP430_HAS_CS__) || defined(__MSP430_HAS_CS_A__))) 
 	/* section for FR5xx and FR6xx devices */
 	
-	/* All pins as output to reduce power consumption */
-	PJDIR = 0xFF;
 	/* Set all pins low to reduce power consumption */
 	PJOUT = 0;
+	/* All pins as output to reduce power consumption */
+	PJDIR = 0xFF;
 	/* Enable PJ.4/5 as XTAL pins */
 	PJSEL0 = BIT4 | BIT5;
 

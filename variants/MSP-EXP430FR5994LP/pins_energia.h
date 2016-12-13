@@ -218,199 +218,199 @@ static const uint8_t TEMPSENSOR = 128 + 30;
 #ifdef ARDUINO_MAIN
 const uint16_t port_to_input[] = {
    NOT_A_PORT,
-   (uint16_t) (PA_BASE+OFS_PAIN_L),
-   (uint16_t) (PA_BASE+OFS_PAIN_H),
+   (uint16_t) P1_BASE+OFS_P1IN,
+   (uint16_t) (P2_BASE+OFS_P1IN),
 #ifdef __MSP430_HAS_PORT3_R__
-   (uint16_t) (PA_BASE+OFS_PBIN_L),
+   (uint16_t) (P3_BASE+OFS_P1IN),
 #endif
 #ifdef __MSP430_HAS_PORT4_R__
-   (uint16_t) (PA_BASE+OFS_PBIN_H),
+   (uint16_t) (P4_BASE+OFS_P1IN),
 #endif
 #ifdef __MSP430_HAS_PORT5_R__
-   (uint16_t) (PA_BASE+OFS_PCIN_L),
+   (uint16_t) (P5_BASE+OFS_P1IN),
 #endif
 #ifdef __MSP430_HAS_PORT6_R__
-   (uint16_t) (PA_BASE+OFS_PCIN_H),
+   (uint16_t) (P6_BASE+OFS_P1IN),
 #endif
 #ifdef __MSP430_HAS_PORT7_R__
-   (uint16_t) (PA_BASE+OFS_PDIN_L),
+   (uint16_t) (P7_BASE+OFS_P1IN),
 #endif
 #ifdef __MSP430_HAS_PORT8_R__
-   (uint16_t) (PA_BASE+OFS_PDIN_H),
+   (uint16_t) (P8_BASE+OFS_P1IN),
 #endif
 #ifdef __MSP430_HAS_PORT9_R__
-   (uint16_t) (PA_BASE+OFS_PEIN_L),
+   (uint16_t) (P9_BASE+OFS_P1IN),
 #endif
 #ifdef __MSP430_HAS_PORT10_R__
-   (uint16_t) (PA_BASE+OFS_PEIN_H),
+   (uint16_t) (P10_BASE+OFS_P1IN),
 #endif
 #ifdef __MSP430_HAS_PORTJ_R__
-   (uint16_t) (PA_BASE+OFS_PJIN_L),
+   (uint16_t) PJ_BASE+OFS_P1IN,
 #endif
 };
 
 const uint16_t port_to_output[] = {
    NOT_A_PORT,
-   (uint16_t) (PA_BASE+OFS_PAOUT_L),
-   (uint16_t) (PA_BASE+OFS_PAOUT_H),
+   (uint16_t) (P1_BASE+OFS_P1OUT),
+   (uint16_t) (P2_BASE+OFS_P1OUT),
 #ifdef __MSP430_HAS_PORT3_R__
-   (uint16_t) (PA_BASE+OFS_PBOUT_L),
+   (uint16_t) (P3_BASE+OFS_P1OUT),
 #endif
 #ifdef __MSP430_HAS_PORT4_R__
-   (uint16_t) (PA_BASE+OFS_PBOUT_H),
+   (uint16_t)(P4_BASE+OFS_P1OUT),
 #endif
 #ifdef __MSP430_HAS_PORT5_R__
-   (uint16_t) (PA_BASE+OFS_PCOUT_L),
+   (uint16_t) (P5_BASE+OFS_P1OUT),
 #endif
 #ifdef __MSP430_HAS_PORT6_R__
-   (uint16_t) (PA_BASE+OFS_PCOUT_H),
+   (uint16_t) (P6_BASE+OFS_P1OUT),
 #endif
 #ifdef __MSP430_HAS_PORT7_R__
-   (uint16_t) (PA_BASE+OFS_PDOUT_L),
+   (uint16_t) (P7_BASE+OFS_P1OUT),
 #endif
 #ifdef __MSP430_HAS_PORT8_R__
-   (uint16_t) (PA_BASE+OFS_PDOUT_H),
+   (uint16_t) (P8_BASE+OFS_P1OUT),
 #endif
 #ifdef __MSP430_HAS_PORT9_R__
-   (uint16_t) (PA_BASE+OFS_PEOUT_L),
+   (uint16_t) (P9_BASE+OFS_P1OUT),
 #endif
 #ifdef __MSP430_HAS_PORT10_R__
-   (uint16_t) (PA_BASE+OFS_PEOUT_H),
+   (uint16_t) (P10_BASE+OFS_P1OUT),
 #endif
 #ifdef __MSP430_HAS_PORTJ_R__
-   (uint16_t) (PA_BASE+OFS_PJOUT_L),
+   (uint16_t) PJ_BASE+OFS_P1OUT,
 #endif
 };
 
 const uint16_t port_to_dir[] = {
    NOT_A_PORT,
-   (uint16_t) (PA_BASE+OFS_PADIR_L),
-   (uint16_t )(PA_BASE+OFS_PADIR_H),
+   (uint16_t) (P1_BASE+OFS_P1DIR),
+   (uint16_t )(P2_BASE+OFS_P1DIR),
 #ifdef __MSP430_HAS_PORT3_R__
-   (uint16_t) (PA_BASE+OFS_PBDIR_L),
+   (uint16_t) (P3_BASE+OFS_P1DIR),
 #endif
 #ifdef __MSP430_HAS_PORT4_R__
-   (uint16_t) (PA_BASE+OFS_PBDIR_H),
+   (uint16_t) (P4_BASE+OFS_P1DIR),
 #endif
 #ifdef __MSP430_HAS_PORT5_R__
-   (uint16_t) (PA_BASE+OFS_PCDIR_L),
+   (uint16_t) (P5_BASE+OFS_P1DIR),
 #endif
 #ifdef __MSP430_HAS_PORT6_R__
-   (uint16_t) (PA_BASE+OFS_PCDIR_H),
+   (uint16_t) (P6_BASE+OFS_P1DIR),
 #endif
 #ifdef __MSP430_HAS_PORT7_R__
-   (uint16_t) (PA_BASE+OFS_PDDIR_L),
+   (uint16_t) (P7_BASE+OFS_P1DIR),
 #endif
 #ifdef __MSP430_HAS_PORT8_R__
-   (uint16_t) (PA_BASE+OFS_PDDIR_H),
+   (uint16_t) (P8_BASE+OFS_P1DIR),
 #endif
 #ifdef __MSP430_HAS_PORT9_R__
-   (uint16_t) (PA_BASE+OFS_PEDIR_L),
+   (uint16_t) (P9_BASE+OFS_P1DIR),
 #endif
 #ifdef __MSP430_HAS_PORT10_R__
-   (uint16_t) (PA_BASE+OFS_PEDIR_H),
+   (uint16_t) (P10_BASE+OFS_P1DIR),
 #endif
 #ifdef __MSP430_HAS_PORTJ_R__
-   (uint16_t) (PA_BASE+OFS_PJDIR_L),
+   (uint16_t) PJ_BASE+OFS_P1DIR,
 #endif
 };
 
 const uint16_t port_to_ren[] = {
 	   NOT_A_PORT,
-	   (uint16_t) (PA_BASE+OFS_PAREN_L),
-	   (uint16_t )(PA_BASE+OFS_PAREN_H),
+	   (uint16_t) (P1_BASE+OFS_P1REN),
+	   (uint16_t )(P2_BASE+OFS_P1REN),
 	#ifdef __MSP430_HAS_PORT3_R__
-	   (uint16_t) (PA_BASE+OFS_PBREN_L),
+	   (uint16_t) (P3_BASE+OFS_P1REN),
 	#endif
 	#ifdef __MSP430_HAS_PORT4_R__
-	   (uint16_t) (PA_BASE+OFS_PBREN_H),
+	   (uint16_t) (P4_BASE+OFS_P1REN),
 	#endif
 	#ifdef __MSP430_HAS_PORT5_R__
-	   (uint16_t) (PA_BASE+OFS_PCREN_L),
+	   (uint16_t) (P5_BASE+OFS_P1REN),
 	#endif
 	#ifdef __MSP430_HAS_PORT6_R__
-	   (uint16_t) (PA_BASE+OFS_PCREN_H),
+	   (uint16_t) (P6_BASE+OFS_P1REN),
 	#endif
 	#ifdef __MSP430_HAS_PORT7_R__
-	   (uint16_t) (PA_BASE+OFS_PDREN_L),
+	   (uint16_t) (P7_BASE+OFS_P1REN),
 	#endif
 	#ifdef __MSP430_HAS_PORT8_R__
-	   (uint16_t) (PA_BASE+OFS_PDREN_H),
+	   (uint16_t) (P8_BASE+OFS_P1REN),
 	#endif
 	#ifdef __MSP430_HAS_PORT9_R__
-	   (uint16_t) (PA_BASE+OFS_PEREN_L),
+	   (uint16_t) (P9_BASE+OFS_P1REN),
 	#endif
 	#ifdef __MSP430_HAS_PORT10_R__
-	   (uint16_t) (PA_BASE+OFS_PEREN_H),
+	   (uint16_t) (P10_BASE+OFS_P1REN),
 	#endif
 	#ifdef __MSP430_HAS_PORTJ_R__
-	   (uint16_t) (PA_BASE+OFS_PJREN_L),
+	   (uint16_t) PJ_BASE+OFS_P1REN,
 	#endif
 };
 
 const uint16_t port_to_sel0[] = {  /* put this PxSEL register under the group of PxSEL0 */
 	   NOT_A_PORT,
-	   (uint16_t) (PA_BASE+OFS_PASEL0_L),
-	   (uint16_t )(PA_BASE+OFS_PASEL0_H),
+	   (uint16_t) (P1_BASE+OFS_P1SEL0),
+	   (uint16_t )(P2_BASE+OFS_P1SEL0),
 	#ifdef __MSP430_HAS_PORT3_R__
-	   (uint16_t) (PA_BASE+OFS_PBSEL0_L),
+	   (uint16_t) (P3_BASE+OFS_P1SEL0),
 	#endif
 	#ifdef __MSP430_HAS_PORT4_R__
-	   (uint16_t) (PA_BASE+OFS_PBSEL0_H),
+	   (uint16_t) (P4_BASE+OFS_P1SEL0),
 	#endif
 	#ifdef __MSP430_HAS_PORT5_R__
-	   (uint16_t) (PA_BASE+OFS_PCSEL0_L),
+	   (uint16_t) (P5_BASE+OFS_P1SEL0),
 	#endif
 	#ifdef __MSP430_HAS_PORT6_R__
-	   (uint16_t) (PA_BASE+OFS_PCSEL0_H),
+	   (uint16_t) (P6_BASE+OFS_P1SEL0),
 	#endif
 	#ifdef __MSP430_HAS_PORT7_R__
-	   (uint16_t) (PA_BASE+OFS_PDSEL0_L),
+	   (uint16_t) (P7_BASE+OFS_P1SEL0),
 	#endif
 	#ifdef __MSP430_HAS_PORT8_R__
-	   (uint16_t) (PA_BASE+OFS_PDSEL0_H),
+	   (uint16_t) (P8_BASE+OFS_P1SEL0),
 	#endif
 	#ifdef __MSP430_HAS_PORT9_R__
-	   (uint16_t) (PA_BASE+OFS_PESEL0_L),
+	   (uint16_t) (P9_BASE+OFS_P1SEL0),
 	#endif
 	#ifdef __MSP430_HAS_PORT10_R__
-	   (uint16_t) (PA_BASE+OFS_PESEL0_H),
+	   (uint16_t) (P10_BASE+OFS_P1SEL0),
 	#endif
 	#ifdef __MSP430_HAS_PORTJ_R__
-	   (uint16_t) (PA_BASE+OFS_PJSEL0_L),
+	   (uint16_t) PJ_BASE+OFS_P1SEL0,
 	#endif
 };
 
 const uint16_t port_to_sel1[] = {
 	   NOT_A_PORT,
-	   (uint16_t) (PA_BASE+OFS_PASEL1_L),
-	   (uint16_t )(PA_BASE+OFS_PASEL1_H),
+	   (uint16_t) (P1_BASE+OFS_P1SEL1),
+	   (uint16_t )(P2_BASE+OFS_P1SEL1),
 	#ifdef __MSP430_HAS_PORT3_R__
-	   (uint16_t) (PA_BASE+OFS_PBSEL1_L),
+	   (uint16_t) (P3_BASE+OFS_P1SEL1),
 	#endif
 	#ifdef __MSP430_HAS_PORT4_R__
-	   (uint16_t) (PA_BASE+OFS_PBSEL1_H),
+	   (uint16_t) (P4_BASE+OFS_P1SEL1),
 	#endif
 	#ifdef __MSP430_HAS_PORT5_R__
-	   (uint16_t) (PA_BASE+OFS_PCSEL1_L),
+	   (uint16_t) (P5_BASE+OFS_P1SEL1),
 	#endif
 	#ifdef __MSP430_HAS_PORT6_R__
-	   (uint16_t) (PA_BASE+OFS_PCSEL1_H),
+	   (uint16_t) (P6_BASE+OFS_P1SEL1),
 	#endif
 	#ifdef __MSP430_HAS_PORT7_R__
-	   (uint16_t) (PA_BASE+OFS_PDSEL1_L),
+	   (uint16_t) (P7_BASE+OFS_P1SEL1),
 	#endif
 	#ifdef __MSP430_HAS_PORT8_R__
-	   (uint16_t) (PA_BASE+OFS_PDSEL1_H),
+	   (uint16_t) (P8_BASE+OFS_P1SEL1),
 	#endif
 	#ifdef __MSP430_HAS_PORT9_R__
-	   (uint16_t) (PA_BASE+OFS_PESEL1_L),
+	   (uint16_t) (P9_BASE+OFS_P1SEL1),
 	#endif
 	#ifdef __MSP430_HAS_PORT10_R__
-	   (uint16_t) (PA_BASE+OFS_PESEL1_H),
+	   (uint16_t) (P10_BASE+OFS_P1SEL1),
 	#endif
 	#ifdef __MSP430_HAS_PORTJ_R__
-	   (uint16_t) (PA_BASE+OFS_PJSEL1_L),
+	   (uint16_t) PJ_BASE+OFS_P1SEL1,
 	#endif
 };
 
