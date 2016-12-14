@@ -257,7 +257,7 @@ const uint16_t port_to_output[] = {
    (uint16_t) (P3_BASE+OFS_P1OUT),
 #endif
 #ifdef __MSP430_HAS_PORT4_R__
-   (uint16_t)(P4_BASE+OFS_P1OUT),
+   (uint16_t) (P4_BASE+OFS_P1OUT),
 #endif
 #ifdef __MSP430_HAS_PORT5_R__
    (uint16_t) (P5_BASE+OFS_P1OUT),
@@ -285,7 +285,7 @@ const uint16_t port_to_output[] = {
 const uint16_t port_to_dir[] = {
    NOT_A_PORT,
    (uint16_t) (P1_BASE+OFS_P1DIR),
-   (uint16_t )(P2_BASE+OFS_P1DIR),
+   (uint16_t) (P2_BASE+OFS_P1DIR),
 #ifdef __MSP430_HAS_PORT3_R__
    (uint16_t) (P3_BASE+OFS_P1DIR),
 #endif
@@ -318,7 +318,7 @@ const uint16_t port_to_dir[] = {
 const uint16_t port_to_ren[] = {
 	   NOT_A_PORT,
 	   (uint16_t) (P1_BASE+OFS_P1REN),
-	   (uint16_t )(P2_BASE+OFS_P1REN),
+	   (uint16_t) (P2_BASE+OFS_P1REN),
 	#ifdef __MSP430_HAS_PORT3_R__
 	   (uint16_t) (P3_BASE+OFS_P1REN),
 	#endif
@@ -351,7 +351,7 @@ const uint16_t port_to_ren[] = {
 const uint16_t port_to_sel0[] = {  /* put this PxSEL register under the group of PxSEL0 */
 	   NOT_A_PORT,
 	   (uint16_t) (P1_BASE+OFS_P1SEL0),
-	   (uint16_t )(P2_BASE+OFS_P1SEL0),
+	   (uint16_t) (P2_BASE+OFS_P1SEL0),
 	#ifdef __MSP430_HAS_PORT3_R__
 	   (uint16_t) (P3_BASE+OFS_P1SEL0),
 	#endif
@@ -384,7 +384,7 @@ const uint16_t port_to_sel0[] = {  /* put this PxSEL register under the group of
 const uint16_t port_to_sel1[] = {
 	   NOT_A_PORT,
 	   (uint16_t) (P1_BASE+OFS_P1SEL1),
-	   (uint16_t )(P2_BASE+OFS_P1SEL1),
+	   (uint16_t) (P2_BASE+OFS_P1SEL1),
 	#ifdef __MSP430_HAS_PORT3_R__
 	   (uint16_t) (P3_BASE+OFS_P1SEL1),
 	#endif

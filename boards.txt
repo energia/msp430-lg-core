@@ -88,12 +88,12 @@ MSP-EXP430G2231LP.name=MSP-EXP430G2 w/ MSP430G2231
 MSP-EXP430G2231LP.build.mcu=msp430g2231
 MSP-EXP430G2231LP.build.f_cpu=1000000L
 MSP-EXP430G2231LP.build.core=msp430
-MSP-EXP430G2231LP.build.variant=MSP-EXP430G2
+MSP-EXP430G2231LP.build.variant=MSP-EXP430G2231LP
 MSP-EXP430G2231LP.build.board=MSP_EXP430G2231LP
 MSP-EXP430G2231LP.build.extra_flags=-msmall -mcode-region=lower
 
 MSP-EXP430G2231LP.upload.tool=dslite
-MSP-EXP430G2231LP.upload.protocol=rf2500
+MSP-EXP430G2231LP.upload.protocol=dslite
 MSP-EXP430G2231LP.upload.maximum_size=2048
 MSP-EXP430G2231LP.upload.maximum_data_size=256
 
@@ -107,12 +107,12 @@ MSP-EXP430G2452LP.name=MSP-EXP430G2 w/ MSP430G2452
 MSP-EXP430G2452LP.build.mcu=msp430g2452
 MSP-EXP430G2452LP.build.f_cpu=16000000L
 MSP-EXP430G2452LP.build.core=msp430
-MSP-EXP430G2452LP.build.variant=MSP-EXP430G2
+MSP-EXP430G2452LP.build.variant=MSP-EXP430G2452LP
 MSP-EXP430G2452LP.build.board=MSP_EXP430G2452LP
 MSP-EXP430G2452LP.build.extra_flags=-msmall -mcode-region=lower
 
 MSP-EXP430G2452LP.upload.tool=dslite
-MSP-EXP430G2452LP.upload.protocol=rf2500
+MSP-EXP430G2452LP.upload.protocol=dslite
 MSP-EXP430G2452LP.upload.maximum_size=8192
 MSP-EXP430G2452LP.upload.maximum_data_size=256
 
@@ -127,12 +127,12 @@ MSP-EXP430G2553LP.name=MSP-EXP430G2 w/ MSP430G2553
 MSP-EXP430G2553LP.build.mcu=msp430g2553
 MSP-EXP430G2553LP.build.f_cpu=16000000L
 MSP-EXP430G2553LP.build.core=msp430
-MSP-EXP430G2553LP.build.variant=MSP-EXP430G2
+MSP-EXP430G2553LP.build.variant=MSP-EXP430G2553LP
 MSP-EXP430G2553LP.build.board=MSP_EXP430G2553LP
 MSP-EXP430G2553LP.build.extra_flags=-msmall -mcode-region=lower
 
 MSP-EXP430G2553LP.upload.tool=dslite
-MSP-EXP430G2553LP.upload.protocol=rf2500
+MSP-EXP430G2553LP.upload.protocol=dslite
 MSP-EXP430G2553LP.upload.maximum_size=16384
 MSP-EXP430G2553LP.upload.maximum_data_size=512
 
@@ -151,7 +151,7 @@ MSP-EXP430FR5739LP.build.board=MSP_EXP430FR5739LP
 MSP-EXP430FR5739LP.build.extra_flags=-msmall -mcode-region=lower
 
 MSP-EXP430FR5739LP.upload.tool=dslite
-MSP-EXP430FR5739LP.upload.protocol=rf2500
+MSP-EXP430FR5739LP.upload.protocol=dslite
 MSP-EXP430FR5739LP.upload.maximum_size=15743
 MSP-EXP430FR5739LP.upload.maximum_data_size=1024
 
@@ -170,7 +170,7 @@ MSP-EXP430FR5994LP.build.variant=MSP-EXP430FR5994LP
 MSP-EXP430FR5994LP.build.board=MSP_EXP430FR5994LP
 
 MSP-EXP430FR5994LP.upload.tool=dslite
-MSP-EXP430FR5994LP.upload.protocol=rf2500
+MSP-EXP430FR5994LP.upload.protocol=dslite
 MSP-EXP430FR5994LP.upload.maximum_size=260096
 MSP-EXP430FR5994LP.upload.maximum_data_size=2048
 
@@ -189,6 +189,6 @@ MSP-EXP430FR2311LP.build.board=MSP_EXP430FR2311LP
 MSP-EXP430FR2311LP.build.extra_flags=-msmall -mcode-region=lower
 
 MSP-EXP430FR2311LP.upload.tool=dslite
-MSP-EXP430FR2311LP.upload.protocol=rf2500
+MSP-EXP430FR2311LP.upload.protocol=dslite
 MSP-EXP430FR2311LP.upload.maximum_size=3840
 MSP-EXP430FR2311LP.upload.maximum_data_size=1024

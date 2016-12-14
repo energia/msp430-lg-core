@@ -31,19 +31,31 @@ SPIClass::SPIClass(void) {
 
 void SPIClass::setModule(uint8_t module)
 {
-    spiModule = module;
+   spiModule = module;
+#if defined(__MSP430_HAS_EUSCI_B0__)
    if (module == 0)
    {
-#if defined(__MSP430_HAS_EUSCI_B0__)
       SPI_baseAddress = UCB0_BASE;
-#endif
    }
+#endif
+#if defined(__MSP430_HAS_EUSCI_B1__)
    if (module == 1)
    {
-#if defined(__MSP430_HAS_EUSCI_B1__)
       SPI_baseAddress = UCB1_BASE;
-#endif
    }
+#endif
+#if defined(__MSP430_HAS_EUSCI_B2__)
+   if (module == 1)
+   {
+      SPI_baseAddress = UCB2_BASE;
+   }
+#endif
+#if defined(__MSP430_HAS_EUSCI_B3__)
+   if (module == 1)
+   {
+      SPI_baseAddress = UCB3_BASE;
+   }
+#endif
 
 }
 

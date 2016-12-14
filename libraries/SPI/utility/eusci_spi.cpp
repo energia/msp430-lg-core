@@ -40,16 +40,16 @@ uint16_t SPI_baseAddress = UCB1_BASE;
 uint16_t SPI_baseAddress = UCB0_BASE;
 #endif
 
-#define UCBzCTLW0     (*((volatile uint16_t *)((uint16_t)(OFS_UCBxCTLW0  + UCB0_BASE))))
-#define UCBzCTL0      (*((volatile uint8_t *) ((uint16_t)(OFS_UCBxCTL0   + UCB0_BASE))))
-#define UCBzCTL1      (*((volatile uint8_t *) ((uint16_t)(OFS_UCBxCTL1   + UCB0_BASE))))
-#define UCBzBRW       (*((volatile uint16_t *)((uint16_t)(OFS_UCBxBRW    + UCB0_BASE))))
-#define UCBzBR0       (*((volatile uint8_t *) ((uint16_t)(OFS_UCBxBR0    + UCB0_BASE))))
-#define UCBzBR1       (*((volatile uint8_t *) ((uint16_t)(OFS_UCBxBR1    + UCB0_BASE))))
-#define UCBzTXBUF     (*((volatile uint8_t *) ((uint16_t)(OFS_UCBxTXBUF  + UCB0_BASE))))
-#define UCBzRXBUF     (*((volatile uint8_t *) ((uint16_t)(OFS_UCBxRXBUF  + UCB0_BASE))))
-#define UCBzIFG       (*((volatile uint8_t *) ((uint16_t)(OFS_UCBxIFG    + UCB0_BASE))))
-#define UCBzIE        (*((volatile uint8_t *) ((uint16_t)(OFS_UCBxIE     + UCB0_BASE))))
+#define UCBzCTLW0     (*((volatile uint16_t *)((uint16_t)(OFS_UCBxCTLW0  + SPI_baseAddress))))
+#define UCBzCTL0      (*((volatile uint8_t *) ((uint16_t)(OFS_UCBxCTL0   + SPI_baseAddress))))
+#define UCBzCTL1      (*((volatile uint8_t *) ((uint16_t)(OFS_UCBxCTL1   + SPI_baseAddress))))
+#define UCBzBRW       (*((volatile uint16_t *)((uint16_t)(OFS_UCBxBRW    + SPI_baseAddress))))
+#define UCBzBR0       (*((volatile uint8_t *) ((uint16_t)(OFS_UCBxBR0    + SPI_baseAddress))))
+#define UCBzBR1       (*((volatile uint8_t *) ((uint16_t)(OFS_UCBxBR1    + SPI_baseAddress))))
+#define UCBzTXBUF     (*((volatile uint8_t *) ((uint16_t)(OFS_UCBxTXBUF  + SPI_baseAddress))))
+#define UCBzRXBUF     (*((volatile uint8_t *) ((uint16_t)(OFS_UCBxRXBUF  + SPI_baseAddress))))
+#define UCBzIFG       (*((volatile uint8_t *) ((uint16_t)(OFS_UCBxIFG    + SPI_baseAddress))))
+#define UCBzIE        (*((volatile uint8_t *) ((uint16_t)(OFS_UCBxIE     + SPI_baseAddress))))
 
 
 /**

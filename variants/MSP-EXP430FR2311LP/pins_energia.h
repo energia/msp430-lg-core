@@ -200,166 +200,166 @@ const uint16_t port_to_input[] = {
 
 const uint16_t port_to_output[] = {
    NOT_A_PORT,
-   (uint16_t) P1_BASE+OFS_P1OUT,
-   (uint16_t) P2_BASE+OFS_P2OUT,
+   (uint16_t) (P1_BASE+OFS_P1OUT),
+   (uint16_t) (P2_BASE+OFS_P2OUT),
 #ifdef __MSP430_HAS_PORT3_R__
-   (uint16_t) P3_BASE+OFS_P3OUT,
+   (uint16_t) (P3_BASE+OFS_P3OUT),
 #endif
 #ifdef __MSP430_HAS_PORT4_R__
-   (uint16_t)P4_BASE+OFS_P4OUT,
+   (uint16_t) (P4_BASE+OFS_P4OUT),
 #endif
 #ifdef __MSP430_HAS_PORT5_R__
-   (uint16_t) P5_BASE+OFS_P5OUT,
+   (uint16_t) (P5_BASE+OFS_P5OUT),
 #endif
 #ifdef __MSP430_HAS_PORT6_R__
-   (uint16_t) P6_BASE+OFS_P6OUT,
+   (uint16_t) (P6_BASE+OFS_P6OUT),
 #endif
 #ifdef __MSP430_HAS_PORT7_R__
-   (uint16_t) P7_BASE+OFS_P7OUT,
+   (uint16_t) (P7_BASE+OFS_P7OUT),
 #endif
 #ifdef __MSP430_HAS_PORT8_R__
-   (uint16_t) P8_BASE+OFS_P8OUT,
+   (uint16_t) (P8_BASE+OFS_P8OUT),
 #endif
 #ifdef __MSP430_HAS_PORT9_R__
-   (uint16_t) P9_BASE+OFS_P9OUT,
+   (uint16_t) (P9_BASE+OFS_P9OUT),
 #endif
 #ifdef __MSP430_HAS_PORT10_R__
-   (uint16_t) P10_BASE+OFS_P10OUT,
+   (uint16_t) (P10_BASE+OFS_P10OUT),
 #endif
 #ifdef __MSP430_HAS_PORTJ_R__
-   (uint16_t) PJ_BASE+OFS_PJOUT,
+   (uint16_t) (PJ_BASE+OFS_PJOUT),
 #endif
 };
 
 const uint16_t port_to_dir[] = {
    NOT_A_PORT,
-   (uint16_t) P1_BASE+OFS_P1DIR,
-   (uint16_t )P2_BASE+OFS_P2DIR,
+   (uint16_t) (P1_BASE+OFS_P1DIR),
+   (uint16_t) (P2_BASE+OFS_P2DIR),
 #ifdef __MSP430_HAS_PORT3_R__
-   (uint16_t) P3_BASE+OFS_P3DIR,
+   (uint16_t) (P3_BASE+OFS_P3DIR),
 #endif
 #ifdef __MSP430_HAS_PORT4_R__
-   (uint16_t) P4_BASE+OFS_P4DIR,
+   (uint16_t) (P4_BASE+OFS_P4DIR),
 #endif
 #ifdef __MSP430_HAS_PORT5_R__
-   (uint16_t) P5_BASE+OFS_P5DIR,
+   (uint16_t) (P5_BASE+OFS_P5DIR),
 #endif
 #ifdef __MSP430_HAS_PORT6_R__
-   (uint16_t) P6_BASE+OFS_P6DIR,
+   (uint16_t) (P6_BASE+OFS_P6DIR),
 #endif
 #ifdef __MSP430_HAS_PORT7_R__
-   (uint16_t) P7_BASE+OFS_P7DIR,
+   (uint16_t) (P7_BASE+OFS_P7DIR),
 #endif
 #ifdef __MSP430_HAS_PORT8_R__
-   (uint16_t) P8_BASE+OFS_P8DIR,
+   (uint16_t) (P8_BASE+OFS_P8DIR),
 #endif
 #ifdef __MSP430_HAS_PORT9_R__
-   (uint16_t) P9_BASE+OFS_P9DIR,
+   (uint16_t) (P9_BASE+OFS_P9DIR),
 #endif
 #ifdef __MSP430_HAS_PORT10_R__
-   (uint16_t) P10_BASE+OFS_P10DIR,
+   (uint16_t) (P10_BASE+OFS_P10DIR),
 #endif
 #ifdef __MSP430_HAS_PORTJ_R__
-   (uint16_t) PJ_BASE+OFS_PJDIR,
+   (uint16_t) (PJ_BASE+OFS_PJDIR),
 #endif
 };
 
 const uint16_t port_to_ren[] = {
 	   NOT_A_PORT,
-	   (uint16_t) P1_BASE+OFS_P1REN,
-	   (uint16_t )P2_BASE+OFS_P2REN,
+	   (uint16_t) (P1_BASE+OFS_P1REN),
+	   (uint16_t) (P2_BASE+OFS_P2REN),
 	#ifdef __MSP430_HAS_PORT3_R__
-	   (uint16_t) P3_BASE+OFS_P3REN,
+	   (uint16_t) (P3_BASE+OFS_P3REN),
 	#endif
 	#ifdef __MSP430_HAS_PORT4_R__
-	   (uint16_t) P4_BASE+OFS_P4REN,
+	   (uint16_t) (P4_BASE+OFS_P4REN),
 	#endif
 	#ifdef __MSP430_HAS_PORT5_R__
-	   (uint16_t) P5_BASE+OFS_P5REN,
+	   (uint16_t) (P5_BASE+OFS_P5REN),
 	#endif
 	#ifdef __MSP430_HAS_PORT6_R__
-	   (uint16_t) P6_BASE+OFS_P6REN,
+	   (uint16_t) (P6_BASE+OFS_P6REN),
 	#endif
 	#ifdef __MSP430_HAS_PORT7_R__
-	   (uint16_t) P7_BASE+OFS_P7REN,
+	   (uint16_t) (P7_BASE+OFS_P7REN),
 	#endif
 	#ifdef __MSP430_HAS_PORT8_R__
-	   (uint16_t) P8_BASE+OFS_P8REN,
+	   (uint16_t) (P8_BASE+OFS_P8REN),
 	#endif
 	#ifdef __MSP430_HAS_PORT9_R__
-	   (uint16_t) P9_BASE+OFS_P9REN,
+	   (uint16_t) (P9_BASE+OFS_P9REN),
 	#endif
 	#ifdef __MSP430_HAS_PORT10_R__
-	   (uint16_t) P10_BASE+OFS_P10REN,
+	   (uint16_t) (P10_BASE+OFS_P10REN),
 	#endif
 	#ifdef __MSP430_HAS_PORTJ_R__
-	   (uint16_t) PJ_BASE+OFS_PJREN,
+	   (uint16_t) (PJ_BASE+OFS_PJREN),
 	#endif
 };
 
 const uint16_t port_to_sel0[] = {  /* put this PxSEL register under the group of PxSEL0 */
 	   NOT_A_PORT,
-	   (uint16_t) P1_BASE+OFS_P1SEL0,
-	   (uint16_t )P2_BASE+OFS_P2SEL0,
+	   (uint16_t) (P1_BASE+OFS_P1SEL0),
+	   (uint16_t) (P2_BASE+OFS_P2SEL0),
 	#ifdef __MSP430_HAS_PORT3_R__
-	   (uint16_t) P3_BASE+OFS_P3SEL0,
+	   (uint16_t) (P3_BASE+OFS_P3SEL0),
 	#endif
 	#ifdef __MSP430_HAS_PORT4_R__
-	   (uint16_t) P4_BASE+OFS_P4SEL0,
+	   (uint16_t) (P4_BASE+OFS_P4SEL0),
 	#endif
 	#ifdef __MSP430_HAS_PORT5_R__
-	   (uint16_t) P5_BASE+OFS_P5SEL0,
+	   (uint16_t) (P5_BASE+OFS_P5SEL0),
 	#endif
 	#ifdef __MSP430_HAS_PORT6_R__
-	   (uint16_t) P6_BASE+OFS_P6SEL0,
+	   (uint16_t) (P6_BASE+OFS_P6SEL0),
 	#endif
 	#ifdef __MSP430_HAS_PORT7_R__
-	   (uint16_t) P7_BASE+OFS_P7SEL0,
+	   (uint16_t) (P7_BASE+OFS_P7SEL0),
 	#endif
 	#ifdef __MSP430_HAS_PORT8_R__
-	   (uint16_t) P8_BASE+OFS_P8SEL0,
+	   (uint16_t) (P8_BASE+OFS_P8SEL0),
 	#endif
 	#ifdef __MSP430_HAS_PORT9_R__
-	   (uint16_t) P9_BASE+OFS_P9SEL0,
+	   (uint16_t) (P9_BASE+OFS_P9SEL0),
 	#endif
 	#ifdef __MSP430_HAS_PORT10_R__
-	   (uint16_t) P10_BASE+OFS_P10SEL0,
+	   (uint16_t) (P10_BASE+OFS_P10SEL0),
 	#endif
 	#ifdef __MSP430_HAS_PORTJ_R__
-	   (uint16_t) PJ_BASE+OFS_PJSEL0,
+	   (uint16_t) (PJ_BASE+OFS_PJSEL0),
 	#endif
 };
 
 const uint16_t port_to_sel1[] = {
 	   NOT_A_PORT,
-	   (uint16_t) P1_BASE+OFS_P1SEL1,
-	   (uint16_t )P2_BASE+OFS_P2SEL1,
+	   (uint16_t) (P1_BASE+OFS_P1SEL1),
+	   (uint16_t) (P2_BASE+OFS_P2SEL1),
 	#ifdef __MSP430_HAS_PORT3_R__
-	   (uint16_t) P3_BASE+OFS_P3SEL1,
+	   (uint16_t) (P3_BASE+OFS_P3SEL1),
 	#endif
 	#ifdef __MSP430_HAS_PORT4_R__
-	   (uint16_t) P4_BASE+OFS_P4SEL1,
+	   (uint16_t) (P4_BASE+OFS_P4SEL1),
 	#endif
 	#ifdef __MSP430_HAS_PORT5_R__
-	   (uint16_t) P5_BASE+OFS_P5SEL1,
+	   (uint16_t) (P5_BASE+OFS_P5SEL1),
 	#endif
 	#ifdef __MSP430_HAS_PORT6_R__
-	   (uint16_t) P6_BASE+OFS_P6SEL1,
+	   (uint16_t) (P6_BASE+OFS_P6SEL1),
 	#endif
 	#ifdef __MSP430_HAS_PORT7_R__
-	   (uint16_t) P7_BASE+OFS_P7SEL1,
+	   (uint16_t) (P7_BASE+OFS_P7SEL1),
 	#endif
 	#ifdef __MSP430_HAS_PORT8_R__
-	   (uint16_t) P8_BASE+OFS_P8SEL1,
+	   (uint16_t) (P8_BASE+OFS_P8SEL1),
 	#endif
 	#ifdef __MSP430_HAS_PORT9_R__
-	   (uint16_t) P9_BASE+OFS_P9SEL1,
+	   (uint16_t) (P9_BASE+OFS_P9SEL1),
 	#endif
 	#ifdef __MSP430_HAS_PORT10_R__
-	   (uint16_t) P10_BASE+OFS_P10SEL1,
+	   (uint16_t) (P10_BASE+OFS_P10SEL1),
 	#endif
 	#ifdef __MSP430_HAS_PORTJ_R__
-	   (uint16_t) PJ_BASE+OFS_PJSEL1,
+	   (uint16_t) (PJ_BASE+OFS_PJSEL1),
 	#endif
 };
 

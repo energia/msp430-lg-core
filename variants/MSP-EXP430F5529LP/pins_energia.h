@@ -206,97 +206,97 @@ const uint16_t port_to_input[] = {
 
 const uint16_t port_to_output[] = {
    NOT_A_PORT,
-   (uint16_t) P1_BASE+OFS_P1OUT,
-   (uint16_t) P2_BASE+OFS_P2OUT,
+   (uint16_t) (P1_BASE+OFS_P1OUT),
+   (uint16_t) (P2_BASE+OFS_P2OUT),
 #ifdef __MSP430_HAS_PORT3_R__
-   (uint16_t) P3_BASE+OFS_P3OUT,
+   (uint16_t) (P3_BASE+OFS_P3OUT),
 #endif
 #ifdef __MSP430_HAS_PORT4_R__
-   (uint16_t)P4_BASE+OFS_P4OUT,
+   (uint16_t) (P4_BASE+OFS_P4OUT),
 #endif
 #ifdef __MSP430_HAS_PORT5_R__
-   (uint16_t) P5_BASE+OFS_P5OUT,
+   (uint16_t) (P5_BASE+OFS_P5OUT),
 #endif
 #ifdef __MSP430_HAS_PORT6_R__
-   (uint16_t) P6_BASE+OFS_P6OUT,
+   (uint16_t) (P6_BASE+OFS_P6OUT),
 #endif
 #ifdef __MSP430_HAS_PORT7_R__
-   (uint16_t) P7_BASE+OFS_P7OUT,
+   (uint16_t) (P7_BASE+OFS_P7OUT),
 #endif
 #ifdef __MSP430_HAS_PORT8_R__
-   (uint16_t) P8_BASE+OFS_P8OUT,
+   (uint16_t) (P8_BASE+OFS_P8OUT),
 #endif
 };
 
 const uint16_t port_to_dir[] = {
    NOT_A_PORT,
-   (uint16_t) P1_BASE+OFS_P1DIR,
-   (uint16_t )P2_BASE+OFS_P2DIR,
+   (uint16_t) (P1_BASE+OFS_P1DIR),
+   (uint16_t) (P2_BASE+OFS_P2DIR),
 #ifdef __MSP430_HAS_PORT3_R__
-   (uint16_t) P3_BASE+OFS_P3DIR,
+   (uint16_t) (P3_BASE+OFS_P3DIR),
 #endif
 #ifdef __MSP430_HAS_PORT4_R__
-   (uint16_t) P4_BASE+OFS_P4DIR,
+   (uint16_t) (P4_BASE+OFS_P4DIR),
 #endif
 #ifdef __MSP430_HAS_PORT5_R__
-   (uint16_t) P5_BASE+OFS_P5DIR,
+   (uint16_t) (P5_BASE+OFS_P5DIR),
 #endif
 #ifdef __MSP430_HAS_PORT6_R__
-   (uint16_t) P6_BASE+OFS_P6DIR,
+   (uint16_t) (P6_BASE+OFS_P6DIR),
 #endif
 #ifdef __MSP430_HAS_PORT7_R__
-   (uint16_t) P7_BASE+OFS_P7DIR,
+   (uint16_t) (P7_BASE+OFS_P7DIR),
 #endif
 #ifdef __MSP430_HAS_PORT8_R__
-   (uint16_t) P8_BASE+OFS_P8DIR,
+   (uint16_t) (P8_BASE+OFS_P8DIR),
 #endif
 };
 
 const uint16_t port_to_ren[] = {
       NOT_A_PORT,
-      (uint16_t) P1_BASE+OFS_P1REN,
-      (uint16_t )P2_BASE+OFS_P2REN,
+      (uint16_t) (P1_BASE+OFS_P1REN),
+      (uint16_t) (P2_BASE+OFS_P2REN),
    #ifdef __MSP430_HAS_PORT3_R__
-      (uint16_t) P3_BASE+OFS_P3REN,
+      (uint16_t) (P3_BASE+OFS_P3REN),
    #endif
    #ifdef __MSP430_HAS_PORT4_R__
-      (uint16_t) P4_BASE+OFS_P4REN,
+      (uint16_t) (P4_BASE+OFS_P4REN),
    #endif
    #ifdef __MSP430_HAS_PORT5_R__
-      (uint16_t) P5_BASE+OFS_P5REN,
+      (uint16_t) (P5_BASE+OFS_P5REN),
    #endif
    #ifdef __MSP430_HAS_PORT6_R__
-      (uint16_t) P6_BASE+OFS_P6REN,
+      (uint16_t) (P6_BASE+OFS_P6REN),
    #endif
    #ifdef __MSP430_HAS_PORT7_R__
-      (uint16_t) P7_BASE+OFS_P7REN,
+      (uint16_t) (P7_BASE+OFS_P7REN),
    #endif
    #ifdef __MSP430_HAS_PORT8_R__
-      (uint16_t) P8_BASE+OFS_P8REN,
+      (uint16_t) (P8_BASE+OFS_P8REN),
    #endif
 };
 
 const uint16_t port_to_sel0[] = {  /* put this PxSEL register under the group of PxSEL0 */
       NOT_A_PORT,
-      (uint16_t) P1_BASE+OFS_P1SEL,
-      (uint16_t )P2_BASE+OFS_P2SEL,
+      (uint16_t) (P1_BASE+OFS_P1SEL),
+      (uint16_t) (P2_BASE+OFS_P2SEL),
    #ifdef __MSP430_HAS_PORT3_R__
-      (uint16_t) P3_BASE+OFS_P3SEL,
+      (uint16_t) (P3_BASE+OFS_P3SEL),
    #endif
    #ifdef __MSP430_HAS_PORT4_R__
-      (uint16_t) P4_BASE+OFS_P4SEL,
+      (uint16_t) (P4_BASE+OFS_P4SEL),
    #endif
    #ifdef __MSP430_HAS_PORT5_R__
-      (uint16_t) P5_BASE+OFS_P5SEL,
+      (uint16_t) (P5_BASE+OFS_P5SEL),
    #endif
    #ifdef __MSP430_HAS_PORT6_R__
-      (uint16_t) P6_BASE+OFS_P6SEL,
+      (uint16_t) (P6_BASE+OFS_P6SEL),
    #endif
    #ifdef __MSP430_HAS_PORT7_R__
-      (uint16_t) P7_BASE+OFS_P7SEL,
+      (uint16_t) (P7_BASE+OFS_P7SEL),
    #endif
    #ifdef __MSP430_HAS_PORT8_R__
-      (uint16_t) P8_BASE+OFS_P8SEL,
+      (uint16_t) (P8_BASE+OFS_P8SEL),
    #endif
 };
 
