@@ -2,3 +2,4 @@
 *.bz2
 *.zip
 build/
+md5sum.txt

@@ -34,7 +34,7 @@ TAR="${G}tar"
 MSP430_ROOT="$( dirname -- $( readlink -f "${0}" ) )"
 
 
-dl()
+m_download()
 {
 	local fn
 	# SF directlinks
@@ -44,7 +44,7 @@ dl()
 	wget --content-disposition -qO "${fn}" "${1}"
 } 
 
-xtr()
+m_extract()
 {
 	local fn="${1}"
 	local dn="${2}"
@@ -59,7 +59,7 @@ xtr()
 	popd >/dev/null
 } 
 
-add_pack()
+m_pack()
 {
 	local fn="${1}"
 	local en="${2}"
@@ -85,27 +85,30 @@ add_pack()
 
 
 echo '!!! fetch files'
-dl "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${mspgcc_ver}/exports/msp430-gcc-${gcc_ver}_linux32.tar.bz2"
-dl "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${mspgcc_ver}/exports/msp430-gcc-${gcc_ver}_linux64.tar.bz2"
-dl "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${mspgcc_ver}/exports/msp430-gcc-${gcc_ver}_osx.tar.bz2"
-dl "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${mspgcc_ver}/exports/msp430-gcc-${gcc_ver}_win32.zip"
-dl "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${mspgcc_ver}/exports/msp430-gcc-support-files-${mspsupport_ver}.zip"
+m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${mspgcc_ver}/exports/msp430-gcc-${gcc_ver}_linux32.tar.bz2"
+m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${mspgcc_ver}/exports/msp430-gcc-${gcc_ver}_linux64.tar.bz2"
+m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${mspgcc_ver}/exports/msp430-gcc-${gcc_ver}_osx.tar.bz2"
+m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${mspgcc_ver}/exports/msp430-gcc-${gcc_ver}_win32.zip"
+m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${mspgcc_ver}/exports/msp430-gcc-support-files-${mspsupport_ver}.zip"
+m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${mspgcc_ver}/exports/md5sum.txt
+md5sum.exe --check --ignore-missing md5sum.txt
+
 
 echo '!!! untar+patch packages'
 
 [ -d "build" ] && rm -rf build 
 mkdir build
-xtr "msp430-gcc-${gcc_ver}_linux32.tar.bz2" "build"
-xtr "msp430-gcc-${gcc_ver}_linux64.tar.bz2" "build"
-xtr "msp430-gcc-${gcc_ver}_osx.tar.bz2" "build"
-xtr "msp430-gcc-${gcc_ver}_win32.zip" "build"
-xtr "msp430-gcc-support-files-${mspsupport_ver}.zip" "build"
+m_extract "msp430-gcc-${gcc_ver}_linux32.tar.bz2" "build"
+m_extract "msp430-gcc-${gcc_ver}_linux64.tar.bz2" "build"
+m_extract "msp430-gcc-${gcc_ver}_osx.tar.bz2" "build"
+m_extract "msp430-gcc-${gcc_ver}_win32.zip" "build"
+m_extract "msp430-gcc-support-files-${mspsupport_ver}.zip" "build"
 
 echo '!!! add support files'
-add_pack "msp430-gcc-${gcc_ver}_linux32" ".tar.bz2" "build" "msp430-gcc-support-files"
-add_pack "msp430-gcc-${gcc_ver}_linux64" ".tar.bz2" "build" "msp430-gcc-support-files"
-add_pack "msp430-gcc-${gcc_ver}_osx" ".tar.bz2" "build" "msp430-gcc-support-files"
-add_pack "msp430-gcc-${gcc_ver}_win32" ".zip" "build" "msp430-gcc-support-files"
+m_pack "msp430-gcc-${gcc_ver}_linux32" ".tar.bz2" "build" "msp430-gcc-support-files"
+m_pack "msp430-gcc-${gcc_ver}_linux64" ".tar.bz2" "build" "msp430-gcc-support-files"
+m_pack "msp430-gcc-${gcc_ver}_osx" ".tar.bz2" "build" "msp430-gcc-support-files"
+m_pack "msp430-gcc-${gcc_ver}_win32" ".zip" "build" "msp430-gcc-support-files"
 
 rm -f "msp430-gcc-support-files-${mspsupport_ver}.zip"
 
