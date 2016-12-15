@@ -148,7 +148,7 @@ MSP-EXP430FR5739LP.build.f_cpu=16000000L
 MSP-EXP430FR5739LP.build.core=msp430
 MSP-EXP430FR5739LP.build.variant=MSP-EXP430FR5739LP
 MSP-EXP430FR5739LP.build.board=MSP_EXP430FR5739LP
-MSP-EXP430FR5739LP.build.extra_flags=-msmall -mcode-region=lower
+MSP-EXP430FR5739LP.build.extra_flags=-msmall -mcode-region=lower -mhwmult=f5series
 
 MSP-EXP430FR5739LP.upload.tool=dslite
 MSP-EXP430FR5739LP.upload.protocol=dslite

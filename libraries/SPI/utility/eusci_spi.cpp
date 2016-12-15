@@ -34,11 +34,23 @@
 #endif
 
 
-#if defined(DEFAULT_SPI) && (DEFAULT_SPI == 1)
+#if defined(DEFAULT_SPI)
+#if (DEFAULT_SPI == 0)
+uint16_t SPI_baseAddress = UCB0_BASE;
+#endif	
+#if (DEFAULT_SPI == 1)
 uint16_t SPI_baseAddress = UCB1_BASE;
+#endif	
+#if (DEFAULT_SPI == 2)
+uint16_t SPI_baseAddress = UCB2_BASE;
+#endif	
+#if (DEFAULT_SPI == 3)
+uint16_t SPI_baseAddress = UCB3_BASE;
+#endif	
 #else
 uint16_t SPI_baseAddress = UCB0_BASE;
 #endif
+
 
 #define UCBzCTLW0     (*((volatile uint16_t *)((uint16_t)(OFS_UCBxCTLW0  + SPI_baseAddress))))
 #define UCBzCTL0      (*((volatile uint8_t *) ((uint16_t)(OFS_UCBxCTL0   + SPI_baseAddress))))
@@ -86,15 +98,34 @@ void spi_initialize(void)
 
 	/* Set pins to SPI mode. */
 #if defined(DEFAULT_SPI)
-	if (SPI_baseAddress == UCB1_BASE) {
-		pinMode_int(SCK1, SPISCK1_SET_MODE);
-		pinMode_int(MOSI1, SPIMOSI1_SET_MODE);
-		pinMode_int(MISO1, SPIMISO1_SET_MODE);
-	}else{
+#if defined(UCB0_BASE) && defined(SPISCK0_SET_MODE)
+	if (SPI_baseAddress == UCB0_BASE) {
 		pinMode_int(SCK0, SPISCK0_SET_MODE);
 		pinMode_int(MOSI0, SPIMOSI0_SET_MODE);
 		pinMode_int(MISO0, SPIMISO0_SET_MODE);
 	}
+#endif	
+#if defined(UCB1_BASE) && defined(SPISCK1_SET_MODE)
+	if (SPI_baseAddress == UCB1_BASE) {
+		pinMode_int(SCK1, SPISCK1_SET_MODE);
+		pinMode_int(MOSI1, SPIMOSI1_SET_MODE);
+		pinMode_int(MISO1, SPIMISO1_SET_MODE);
+	}
+#endif	
+#if defined(UCB2_BASE) && defined(SPISCK2_SET_MODE)
+	if (SPI_baseAddress == UCB2_BASE) {
+		pinMode_int(SCK2, SPISCK2_SET_MODE);
+		pinMode_int(MOSI2, SPIMOSI2_SET_MODE);
+		pinMode_int(MISO2, SPIMISO2_SET_MODE);
+	}
+#endif	
+#if defined(UCB3_BASE) && defined(SPISCK3_SET_MODE)
+	if (SPI_baseAddress == UCB3_BASE) {
+		pinMode_int(SCK3, SPISCK3_SET_MODE);
+		pinMode_int(MOSI3, SPIMOSI3_SET_MODE);
+		pinMode_int(MISO3, SPIMISO3_SET_MODE);
+	}
+#endif	
 #else
 	pinMode_int(SCK, SPISCK_SET_MODE);
 	pinMode_int(MOSI, SPIMOSI_SET_MODE);

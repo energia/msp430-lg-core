@@ -45,18 +45,17 @@ void SPIClass::setModule(uint8_t module)
    }
 #endif
 #if defined(__MSP430_HAS_EUSCI_B2__)
-   if (module == 1)
+   if (module == 2)
    {
       SPI_baseAddress = UCB2_BASE;
    }
 #endif
 #if defined(__MSP430_HAS_EUSCI_B3__)
-   if (module == 1)
+   if (module == 3)
    {
       SPI_baseAddress = UCB3_BASE;
    }
 #endif
-
 }
 
 /*

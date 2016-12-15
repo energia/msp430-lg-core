@@ -40,7 +40,7 @@ compiler.ldflags=
 compiler.size.cmd=msp430-elf-size
 
 # This can be overriden in boards.txt
-build.extra_flags={compiler.mlarge_flag}
+build.extra_flags={compiler.mlarge_flag} -mhwmult=f5series
 
 # These can be overridden in platform.local.txt
 compiler.c.extra_flags=-I{runtime.tools.msp430-gcc.path}/include -I{runtime.tools.msp430-gcc.path}/msp430-gcc-support-files/include
