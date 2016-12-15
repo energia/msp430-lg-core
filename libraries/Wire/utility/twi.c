@@ -609,7 +609,7 @@ uint8_t twi_writeTo(uint8_t address, uint8_t* data, uint8_t length, uint8_t wait
 #if (DEFAULT_I2C == -1)	
 	if (I2C_baseAddress == -1)
 	{
-		return (i2c_sw_write(address, length, data, twi_sendStop));
+		return (i2c_sw_write(address, length, data, sendStop));
 	}
 #endif
 #if defined(__MSP430_HAS_USI__)
@@ -637,7 +637,7 @@ uint8_t twi_writeTo(uint8_t address, uint8_t* data, uint8_t length, uint8_t wait
     UCBzCTLW0 |= (UCMST | UCTR);              //  I2C Master, transmit mode
     UCBzI2CSA = address;                      // Set Slave Address
     UCBzTBCNT = length;                       // set number of bytes to transmit
-	if((twi_sendStop) && (length > 0)) {
+	if((sendStop) && (length > 0)) {
 		UCBzCTLW1 |= UCASTP_2;                // do generate Stop after last Byte to send
 	} else {
 		UCBzCTLW1 &= ~UCASTP_2;               // do not generate Stop
@@ -671,12 +671,7 @@ uint8_t twi_writeTo(uint8_t address, uint8_t* data, uint8_t length, uint8_t wait
 #endif
 #if defined(__MSP430_HAS_USCI__) || defined(__MSP430_HAS_USCI_B0__) || defined(__MSP430_HAS_USCI_B1__)
     twi_state =  TWI_MTX;                     // Master Transmit mode
-	if((twi_sendStop) && (length == 0)) {
-		UCBzCTL1 |= UCTXSTT | UCTXSTP;            // I2C start and stop condition
-		twi_sendStop = false;
-	}else{
-		UCBzCTL1 |= UCTXSTT;                      // I2C start condition
-	}
+	UCBzCTL1 |= UCTXSTT;                      // I2C start condition
 #endif
 #if defined(__MSP430_HAS_EUSCI_B0__) || defined(__MSP430_HAS_EUSCI_B1__) || defined(__MSP430_HAS_EUSCI_B2__) || defined(__MSP430_HAS_EUSCI_B3__)
     twi_state =  TWI_MTX;                     // Master Transmit mode
@@ -691,7 +686,7 @@ uint8_t twi_writeTo(uint8_t address, uint8_t* data, uint8_t length, uint8_t wait
 
 #if defined(__MSP430_HAS_USCI__) || defined(__MSP430_HAS_USCI_B0__) || defined(__MSP430_HAS_USCI_B1__)
 	/* Ensure stop/start condition got sent before we exit. */
-	if(twi_sendStop)
+	if(sendStop)
 	{
 		while (UCBzCTL1 & UCTXSTP);	// end with stop condition
 	} else {
