@@ -257,7 +257,7 @@ static void twi_init_port(void)
 		return;
 	}
 #endif
-#if defined(__MSP430_HAS_USCI_B0__) || defined(__MSP430_HAS_EUSCI_B0__)
+#if defined(__MSP430_HAS_USCI_B0__) || defined(__MSP430_HAS_EUSCI_B0__) && defined(TWISDA0)
 	if (I2C_baseAddress == UCB0_BASE)
 	{
 		/* Set pins to I2C mode */
@@ -278,7 +278,7 @@ static void twi_init_port(void)
 		pinMode_int(TWISCL0, TWISCL0_SET_MODE);
 	}
 #endif
-#if defined(__MSP430_HAS_USCI_B1__) || defined(__MSP430_HAS_EUSCI_B1__)
+#if defined(__MSP430_HAS_USCI_B1__) || defined(__MSP430_HAS_EUSCI_B1__) && defined(TWISDA1)
 	if (I2C_baseAddress == UCB1_BASE)
 	{
 		/* Set pins to I2C mode */
@@ -299,7 +299,7 @@ static void twi_init_port(void)
 		pinMode_int(TWISCL1, TWISCL1_SET_MODE);
 	}
 #endif
-#if defined(__MSP430_HAS_USCI_B2__) || defined(__MSP430_HAS_EUSCI_B2__)
+#if defined(__MSP430_HAS_USCI_B2__) || defined(__MSP430_HAS_EUSCI_B2__) && defined(TWISDA2)
 	if (I2C_baseAddress == UCB2_BASE)
 	{
 		/* Set pins to I2C mode */
