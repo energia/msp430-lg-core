@@ -36,6 +36,10 @@
 #define BV(x) (1 << (x))
 #endif
 
+// Attribute for placing R/W variables in FRAM
+// Example
+//      uint8_t DisplayBuffer[LCD_MAXIMUM_Y][LCD_MAXIMUM_X] FRAM;
+#define FRAM __attribute__((section(".text")))
 
 #if defined(__MSP430_HAS_EUSCI_B0__)
 static const uint8_t SS      = 8;   /* P3.4 */
