@@ -71,9 +71,11 @@ static const uint8_t DEBUG_UARTTXD = 4;  /* Transmit Data (TXD) at P1.7 */
 #define DEBUG_UART_MODULE_OFFSET 0x00
 #endif
 
+/* Enable P2.6/7 as XTAL pins = FR2311 */
+#define INIT_LFXTAL_PINS P2SEL0 = BIT6 | BIT7
+
 
 /* Analog pins */
-
 static const uint8_t A0  = 5;
 static const uint8_t A1  = 11;
 static const uint8_t A2  = 10;  

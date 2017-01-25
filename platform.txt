@@ -25,7 +25,7 @@ compiler.path={runtime.tools.msp430-gcc.path}/bin/
 compiler.c.cmd=msp430-elf-gcc
 compiler.c.flags=-c -g -O2 {compiler.warning_flags} -ffunction-sections -fdata-sections -MMD
 #compiler.c.elf.flags={compiler.warning_flags} -g -O2 -Wl,--gc-sections
-compiler.c.elf.flags={compiler.warning_flags} -g -gdwarf-3 -gstrict-dwarf -O2 -fno-rtti -fno-exceptions -Wl,--gc-sections,-u,main -lstdc++ -lm -lgcc -lc -Wl,--start-group -Wl,--end-group -I"{runtime.tools.msp430-gcc.path}/msp430-gcc-support-files/include" -T "{build.mcu}.ld" 
+compiler.c.elf.flags={compiler.warning_flags} -g -gdwarf-3 -gstrict-dwarf -O2 -fno-rtti -fno-exceptions -Wl,--gc-sections,-u,main -lstdc++ -lm -lgcc -lc -Wl,--start-group -Wl,--end-group -I"{runtime.tools.msp430-gcc.path}/msp430-gcc-support-files/include" -T "{build.mcu}.ld"
 compiler.c.elf.cmd=msp430-elf-gcc
 compiler.S.flags=-c -x assembler-with-cpp
 compiler.cpp.cmd=msp430-elf-gcc
@@ -97,7 +97,8 @@ tools.dslite.upload.params.quiet=
 tools.dslite.path={runtime.tools.dslite.path}
 tools.dslite.config.path={path}
 tools.dslite.cmd.path={path}/DebugServer/bin/DSLite
-tools.dslite.upload.pattern={cmd.path} {upload.verbose} load -c "{config.path}/{build.variant}.ccxml" -f "{build.path}/{build.project_name}.elf"
+#tools.dslite.upload.pattern={cmd.path} {upload.verbose} load -c "{config.path}/{build.variant}.ccxml" -f "{build.path}/{build.project_name}.elf"
+tools.dslite.upload.pattern={cmd.path} {upload.verbose} load -c "{runtime.platform.path}/variants/{build.variant}/{build.variant}.ccxml" -f "{build.path}/{build.project_name}.elf"
 
 # mspdebug
 tools.mspdebug.upload.params.verbose=

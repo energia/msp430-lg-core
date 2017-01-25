@@ -105,21 +105,16 @@ void enableXtal()
 #endif
 #if (defined(__MSP430FR2XX_4XX_FAMILY__) && (defined(__MSP430_HAS_CS__) || defined(__MSP430_HAS_CS_A__)))
 	/* section for FR2xx and FR4xx devices */
- #if (defined(__MSP430_HAS_PORTJ_R__))
+ #if (defined(INIT_LFXTAL_PINS))
+	INIT_LFXTAL_PINS;
+ #else
+   #if (defined(__MSP430_HAS_PORTJ_R__))
 	/* All pins as output to reduce power consumption */
 	PJDIR = 0xFF;
 	/* Set all pins low to reduce power consumption */
 	PJOUT = 0;
 	/* Enable PJ.4/5 as XTAL pins */
 	PJSEL0 = BIT4 | BIT5;
- #else
-   #if (defined(__MSP430FR4133__))
-	/* Enable P4.1/2 as XTAL pins = FR4133 */
-	P4SEL0 = BIT1 | BIT2;
-   #endif	
-   #if (defined(__MSP430FR2311__))
-	/* Enable P2.6/7 as XTAL pins = FR2311*/
-	P2SEL0 = BIT6 | BIT7;
    #endif	
  #endif	
 

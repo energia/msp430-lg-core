@@ -71,9 +71,11 @@ static const uint8_t DEBUG_UARTTXD = 4;  /* Transmit Data (TXD) at P1.0 */
 #define DEBUG_UART_MODULE_OFFSET 0x00
 #endif
 
+/* Enable P4.1/2 as XTAL pins = FR4133 */
+#define INIT_LFXTAL_PINS 	P4SEL0 = BIT1 | BIT2
+
 
 /* Analog pins */
-
 static const uint8_t A0  = 4;
 static const uint8_t A1  = 3;
 static const uint8_t A2  = 128 + 2;  // Not available on BoosterPack header
