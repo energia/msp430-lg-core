@@ -38,6 +38,11 @@
 
 #include <msp430fr57xxgeneric.h>
 
+// Attribute for placing R/W variables in FRAM
+// Example
+//      uint8_t DisplayBuffer[LCD_MAXIMUM_Y][LCD_MAXIMUM_X] PLACE_IN_FRAM;
+#define PLACE_IN_FRAM __attribute__((section(".text")))
+
 #if defined(__MSP430_HAS_EUSCI_B0__)
 static const uint8_t SS      = 20;  /* P1.3 */
 static const uint8_t SCK     = 6;   /* P2.2 */
