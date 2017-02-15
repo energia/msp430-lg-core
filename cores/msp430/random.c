@@ -35,6 +35,9 @@
  * From:
 static char sccsid[] = "@(#)rand.c	8.1 (Berkeley) 6/14/93";
 */
+
+#if __GNUC__ < 6
+
 #ifndef RANDOM_MAX
 #define RANDOM_MAX 0x7FFFFFFF
 #endif
@@ -88,3 +91,4 @@ srandom(unsigned long seed)
 	next = seed;
 }
 
+#endif //if __GNUC__ < 6

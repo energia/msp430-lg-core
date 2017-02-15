@@ -25,10 +25,13 @@
 
 extern "C" {
   #include "stdlib.h"
+#if __GNUC__ < 6
+  
   /* Using interal random and srandom in file random.c 
    * until msp430-libc adds supports for random and srandom */
   extern long random(void);
   extern void srandom(unsigned long __seed);
+#endif //if __GNUC__ < 6
 }
 
 void randomSeed(unsigned int seed)

@@ -25,9 +25,9 @@
 
 set -e
 
-gcc_ver="5.3.0.224"
-mspgcc_ver="4_02_00_00"
-mspsupport_ver="1.194"
+gcc_ver="6.2.1.16"
+mspgcc_ver="latest"
+mspsupport_ver="1.198"
 
 
 TAR="${G}tar" 
@@ -48,12 +48,11 @@ m_extract()
 {
 	local fn="${1}"
 	local dn="${2}"
-	local command="j"
-	expr "${fn}" : '.*\.gz$' >/dev/null && command="${G}tar -xz -f "
-	expr "${fn}" : '.*\.bz2$' >/dev/null && command="${G}tar -xj -f "
-	expr "${fn}" : '.*\.zip$' >/dev/null && command="${G}unzip"
-	#[ -d "${dn}" ] && rm -rf ./"${dn}"
-	#mkdir "${dn}"
+	local command="echo no valid extension"
+	echo Extracting: "${fn}"
+	expr "${fn}" : '.*\.gz$' >/dev/null && command="${G}tar -xzf "
+	expr "${fn}" : '.*\.bz2$' >/dev/null && command="${G}tar -xjf "
+	expr "${fn}" : '.*\.zip$' >/dev/null && command="${G}unzip -q "
 	pushd "${dn}" >/dev/null
 	${command} ../"${fn}"
 	popd >/dev/null
@@ -65,17 +64,21 @@ m_pack()
 	local en="${2}"
 	local dn="${3}"
 	local an="${4}"
-	local command="j"
-	expr "${en}" : '.*\.gz$' >/dev/null && command="${G}tar -cvzS -f"
-	expr "${en}" : '.*\.bz2$' >/dev/null && command="${G}tar -cvjS -f"
-	expr "${en}" : '.*\.zip$' >/dev/null && command="${G}zip -r"
+	local command="echo no valid extension"
+	echo Packing: "${fn}"
+	expr "${en}" : '.*\.gz$' >/dev/null && command="${G}tar -czf "
+	expr "${en}" : '.*\.bz2$' >/dev/null && command="${G}tar -cjf "
+	expr "${en}" : '.*\.zip$' >/dev/null && command="${G}zip -q -r "
 	pushd "${dn}" >/dev/null
 	cp -r ${an} ${fn}/
     echo energia.msp430-gcc=${gcc_ver} >>${fn}/builtin_tools_versions.txt
     echo energia.mspdebug=0.22 >>${fn}/builtin_tools_versions.txt
     echo energia.msp430-gcc=4.6.3 >>${fn}/builtin_tools_versions.txt
 	[ -d "msp430" ] && rm -rf msp430/
-	mv "${fn}" msp430
+	mkdir msp430
+	cd "${fn}"
+	cp -r * ../msp430
+	cd ..
 	${command} "${fn}${en}" msp430
 	sha256sum --tag "${fn}${en}" >"${fn}${en}".sha256
 	rm -rf msp430/
@@ -90,7 +93,7 @@ m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/
 m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${mspgcc_ver}/exports/msp430-gcc-${gcc_ver}_osx.tar.bz2"
 m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${mspgcc_ver}/exports/msp430-gcc-${gcc_ver}_win32.zip"
 m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${mspgcc_ver}/exports/msp430-gcc-support-files-${mspsupport_ver}.zip"
-m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${mspgcc_ver}/exports/md5sum.txt
+m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${mspgcc_ver}/exports/md5sum.txt"
 md5sum.exe --check --ignore-missing md5sum.txt
 
 
@@ -110,5 +113,5 @@ m_pack "msp430-gcc-${gcc_ver}_linux64" ".tar.bz2" "build" "msp430-gcc-support-fi
 m_pack "msp430-gcc-${gcc_ver}_osx" ".tar.bz2" "build" "msp430-gcc-support-files"
 m_pack "msp430-gcc-${gcc_ver}_win32" ".zip" "build" "msp430-gcc-support-files"
 
-rm -f "msp430-gcc-support-files-${mspsupport_ver}.zip"
+rm -rf "build/msp430-gcc-support-files/"
 
