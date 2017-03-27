@@ -90,7 +90,7 @@ MSP-EXP430G2231LP.build.f_cpu=1000000L
 MSP-EXP430G2231LP.build.core=msp430
 MSP-EXP430G2231LP.build.variant=MSP-EXP430G2231LP
 MSP-EXP430G2231LP.build.board=MSP_EXP430G2231LP
-MSP-EXP430G2231LP.build.extra_flags=-msmall -mcode-region=lower
+MSP-EXP430G2231LP.build.extra_flags=
 
 MSP-EXP430G2231LP.upload.tool=dslite
 MSP-EXP430G2231LP.upload.protocol=dslite
@@ -109,7 +109,7 @@ MSP-EXP430G2452LP.build.f_cpu=16000000L
 MSP-EXP430G2452LP.build.core=msp430
 MSP-EXP430G2452LP.build.variant=MSP-EXP430G2452LP
 MSP-EXP430G2452LP.build.board=MSP_EXP430G2452LP
-MSP-EXP430G2452LP.build.extra_flags=-msmall -mcode-region=lower
+MSP-EXP430G2452LP.build.extra_flags=
 
 MSP-EXP430G2452LP.upload.tool=dslite
 MSP-EXP430G2452LP.upload.protocol=dslite
@@ -129,7 +129,7 @@ MSP-EXP430G2553LP.build.f_cpu=16000000L
 MSP-EXP430G2553LP.build.core=msp430
 MSP-EXP430G2553LP.build.variant=MSP-EXP430G2553LP
 MSP-EXP430G2553LP.build.board=MSP_EXP430G2553LP
-MSP-EXP430G2553LP.build.extra_flags=-msmall -mcode-region=lower
+MSP-EXP430G2553LP.build.extra_flags=
 
 MSP-EXP430G2553LP.upload.tool=dslite
 MSP-EXP430G2553LP.upload.protocol=dslite

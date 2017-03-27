@@ -31,7 +31,6 @@ mspsupport_ver="1.198"
 
 
 TAR="${G}tar" 
-MSP430_ROOT="$( dirname -- $( readlink -f "${0}" ) )"
 
 
 m_download()
@@ -40,9 +39,9 @@ m_download()
 	# SF directlinks
 	fn="$( basename "${1%}" )"
 	# check if already there
-	[ -f "${fn}" ] && return
-	wget --content-disposition -qO "${fn}" "${1}"
-} 
+	[ -f download/"${fn}" ] && return
+	wget --content-disposition -qO download/"${fn}" "${1}"
+}
 
 m_extract()
 {
@@ -54,7 +53,7 @@ m_extract()
 	expr "${fn}" : '.*\.bz2$' >/dev/null && command="${G}tar -xjf "
 	expr "${fn}" : '.*\.zip$' >/dev/null && command="${G}unzip -q "
 	pushd "${dn}" >/dev/null
-	${command} ../"${fn}"
+	${command} ../download/"${fn}"
 	popd >/dev/null
 } 
 
@@ -82,19 +81,23 @@ m_pack()
 	${command} "${fn}${en}" msp430
 	sha256sum --tag "${fn}${en}" >"${fn}${en}".sha256
 	rm -rf msp430/
+	rm -rf "${fn}"/
 	popd >/dev/null
 } 
 
 
 
 echo '!!! fetch files'
+[ -d "download" ] || mkdir download 
 m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${mspgcc_ver}/exports/msp430-gcc-${gcc_ver}_linux32.tar.bz2"
 m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${mspgcc_ver}/exports/msp430-gcc-${gcc_ver}_linux64.tar.bz2"
 m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${mspgcc_ver}/exports/msp430-gcc-${gcc_ver}_osx.tar.bz2"
 m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${mspgcc_ver}/exports/msp430-gcc-${gcc_ver}_win32.zip"
 m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${mspgcc_ver}/exports/msp430-gcc-support-files-${mspsupport_ver}.zip"
 m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${mspgcc_ver}/exports/md5sum.txt"
+cd download
 md5sum.exe --check --ignore-missing md5sum.txt
+cd ..
 
 
 echo '!!! untar+patch packages'
