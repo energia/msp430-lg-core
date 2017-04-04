@@ -322,7 +322,7 @@ unsigned long micros();
 unsigned long millis();
 void disableWatchDog();
 void enableWatchDog();
-void enableXtal();
+void enableXtal() __attribute__((weak));
 
   
 #ifdef __cplusplus
