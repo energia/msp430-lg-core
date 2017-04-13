@@ -2,4 +2,6 @@
 *.bz2
 *.zip
 build/
+download/
+dslite/
 md5sum.txt

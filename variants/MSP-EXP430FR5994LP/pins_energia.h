@@ -77,6 +77,12 @@ static const uint8_t TWISCL2 = 9;   /* P7.1 UCB1 */
 #define SPISCK_SET_MODE  SPISCK1_SET_MODE  
 #define SPIMOSI_SET_MODE SPIMOSI1_SET_MODE 
 #define SPIMISO_SET_MODE SPIMISO1_SET_MODE 
+/* Define the default SD card settings */
+#define SDCARD_SPI_MODULE 0
+#define SDCARD_SS_PIN     SS0
+#define SDCARD_MOSI_PIN   MOSI0
+#define SDCARD_MISO_PIN   MISO0
+#define SDCARD_SCK_PIN    SCK0
 /* Define the default I2C settings */
 #define DEFAULT_I2C 2
 #define TWISDA TWISDA2

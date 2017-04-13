@@ -5,8 +5,8 @@
 # For more info:
 # https://github.com/arduino/Arduino/wiki/Arduino-IDE-1.5-3rd-party-Hardware-specification
 
-name=Energia MSP430 boards
-version=1.0.1
+name=Energia MSP430 boards (elf-GCC)
+version=1.1.0
 
 # MSP430 compile variables
 # --------------------- 
@@ -21,11 +21,11 @@ compiler.warning_flags.all=-Wall -Wextra
 compiler.mlarge_flag=-mlarge -mcode-region=upper
 
 # Default "compiler.path" is correct, change only if you want to overidde the initial value
-compiler.path={runtime.tools.msp430-gcc.path}/bin/
+compiler.path={runtime.tools.msp430-elf-gcc.path}/bin/
 compiler.c.cmd=msp430-elf-gcc
 compiler.c.flags=-c -g -O2 {compiler.warning_flags} -ffunction-sections -fdata-sections -MMD
 #compiler.c.elf.flags={compiler.warning_flags} -g -O2 -Wl,--gc-sections
-compiler.c.elf.flags={compiler.warning_flags} -g -gdwarf-3 -gstrict-dwarf -O2 -fno-rtti -fno-exceptions -Wl,--gc-sections,-u,main -Wl,--start-group -Wl,--end-group -I"{runtime.tools.msp430-gcc.path}/msp430-gcc-support-files/include" -T "{build.mcu}.ld"
+compiler.c.elf.flags={compiler.warning_flags} -g -gdwarf-3 -gstrict-dwarf -O2 -fno-rtti -fno-exceptions -Wl,--gc-sections,-u,main -Wl,--start-group -Wl,--end-group -I"{runtime.tools.msp430-elf-gcc.path}/msp430-gcc-support-files/include" -T "{build.mcu}.ld"
 compiler.c.elf.cmd=msp430-elf-gcc
 compiler.S.flags=-c -x assembler-with-cpp
 compiler.cpp.cmd=msp430-elf-gcc
@@ -43,10 +43,10 @@ compiler.size.cmd=msp430-elf-size
 build.extra_flags={compiler.mlarge_flag} -mhwmult=auto
 
 # These can be overridden in platform.local.txt
-compiler.c.extra_flags=-I{runtime.tools.msp430-gcc.path}/include -I{runtime.tools.msp430-gcc.path}/msp430-gcc-support-files/include
-compiler.c.elf.extra_flags=-L{runtime.tools.msp430-gcc.path}/msp430-gcc-support-files/include
+compiler.c.extra_flags=-I{runtime.tools.msp430-elf-gcc.path}/include -I{runtime.tools.msp430-elf-gcc.path}/msp430-gcc-support-files/include
+compiler.c.elf.extra_flags=-L{runtime.tools.msp430-elf-gcc.path}/msp430-gcc-support-files/include
 compiler.S.extra_flags=
-compiler.cpp.extra_flags=-I{runtime.tools.msp430-gcc.path}/include -I{runtime.tools.msp430-gcc.path}/msp430-gcc-support-files/include
+compiler.cpp.extra_flags=-I{runtime.tools.msp430-elf-gcc.path}/include -I{runtime.tools.msp430-elf-gcc.path}/msp430-gcc-support-files/include
 compiler.ar.extra_flags=
 compiler.objcopy.eep.extra_flags=
 compiler.elf2hex.extra_flags=
@@ -94,7 +94,7 @@ recipe.preproc.macros="{compiler.path}{compiler.cpp.cmd}" {compiler.cpp.flags} {
 # TI's DSLite
 tools.dslite.upload.params.verbose=
 tools.dslite.upload.params.quiet=
-tools.dslite.path={runtime.tools.dslite.path}
+tools.dslite.path={runtime.tools.dslite-6.2.1.1624-1.path}
 tools.dslite.config.path={path}
 tools.dslite.cmd.path={path}/DebugServer/bin/DSLite
 #tools.dslite.upload.pattern={cmd.path} {upload.verbose} load -c "{config.path}/{build.variant}.ccxml" -f "{build.path}/{build.project_name}.elf"

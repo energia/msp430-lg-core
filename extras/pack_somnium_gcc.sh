@@ -70,9 +70,10 @@ m_pack()
 	expr "${en}" : '.*\.zip$' >/dev/null && command="${G}zip -q -r "
 	pushd "${dn}" >/dev/null
 	cp -r ${an} ${fn}/
-    echo energia.msp430-gcc=${gcc_ver} >>${fn}/builtin_tools_versions.txt
-    echo energia.mspdebug=0.22 >>${fn}/builtin_tools_versions.txt
-    echo energia.msp430-gcc=4.6.3 >>${fn}/builtin_tools_versions.txt
+	#echo energia.msp430-gcc-elf=${gcc_ver} >>${fn}/builtin_tools_versions.txt
+	#echo energia.mspdebug=0.22 >>${fn}/builtin_tools_versions.txt
+	#echo energia.msp430-gcc=4.6.3 >>${fn}/builtin_tools_versions.txt
+	[ -f ${fn}/version.properties ] && rm ${fn}/version.properties
 	[ -d "msp430" ] && rm -rf msp430/
 	mkdir msp430
 	cd "${fn}"
@@ -110,11 +111,16 @@ m_extract "msp430-gcc-${gcc_ver}_osx.tar.bz2" "build"
 m_extract "msp430-gcc-${gcc_ver}_win32.zip" "build"
 m_extract "msp430-gcc-support-files-${mspsupport_ver}.zip" "build"
 
-echo '!!! add support files'
-m_pack "msp430-gcc-${gcc_ver}_linux32" ".tar.bz2" "build" "msp430-gcc-support-files"
-m_pack "msp430-gcc-${gcc_ver}_linux64" ".tar.bz2" "build" "msp430-gcc-support-files"
-m_pack "msp430-gcc-${gcc_ver}_osx" ".tar.bz2" "build" "msp430-gcc-support-files"
-m_pack "msp430-gcc-${gcc_ver}_win32" ".zip" "build" "msp430-gcc-support-files"
+echo '!!! rename to elf'
+cd build
+rename -v  msp430-gcc-${gcc_ver} msp430-elf-gcc-${gcc_ver} *
+cd ..
 
-rm -rf "build/msp430-gcc-support-files/"
+echo '!!! add support files'
+m_pack "msp430-elf-gcc-${gcc_ver}_linux32" ".tar.bz2" "build" "msp430-gcc-support-files"
+m_pack "msp430-elf-gcc-${gcc_ver}_linux64" ".tar.bz2" "build" "msp430-gcc-support-files"
+m_pack "msp430-elf-gcc-${gcc_ver}_osx"     ".tar.bz2" "build" "msp430-gcc-support-files"
+m_pack "msp430-elf-gcc-${gcc_ver}_win32"   ".zip"     "build" "msp430-gcc-support-files"
+
+rm -rf "build/msp430-elf-gcc-support-files/"
 

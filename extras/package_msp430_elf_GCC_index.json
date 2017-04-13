@@ -1,0 +1,112 @@
+{
+  "packages": [
+    {
+      "name": "energia",
+      "maintainer": "Energia",
+      "websiteURL": "http://www.energia.nu/",
+      "email": "make@energia.nu",
+      "help": {
+        "online": "http://energia.nu/reference"
+      },
+      "platforms": [
+        {
+          "name": "Energia MSP430 boards (elf-GCC)",
+          "architecture": "msp430elf",
+          "version": "1.1.0",
+          "category": "Energia",
+          "url": "http://www.hpa.tide.ti.com/msp430/energia/msp430-1.1.0.tar.bz2",
+          "archiveFileName": "msp430-1.1.0.tar.bz2",
+          "checksum": "SHA-256:d210297822fc21929ab1c47fce2e367d19467f24831b7283690a586ddd2f7ed8",
+          "size": "2115215",
+          "boards": [
+            {"name": "MSP-EXP430F5529LP"},
+            {"name": "MSP-EXP430FR2311LP"},
+            {"name": "MSP-EXP430FR4133LP"},
+            {"name": "MSP-EXP430FR5739LP"},
+            {"name": "MSP-EXP430FR5969LP"},
+            {"name": "MSP-EXP430FR5994LP"},
+            {"name": "MSP-EXP430FR6989LP"},
+            {"name": "MSP-EXP430G2231LP"},
+            {"name": "MSP-EXP430G2452LP"},
+            {"name": "MSP-EXP430G2553LP"}	
+          ],
+          "toolsDependencies": [
+            {
+              "packager":"energia",
+              "name":"msp430-elf-gcc",
+              "version":"6.2.1.16"
+            },
+            {
+              "packager":"energia",
+              "name":"dslite",
+              "version":"6.2.1.1624-1"
+            },
+            {
+              "packager":"energia",
+              "name":"mspdebug",
+              "version":"0.22"
+            }
+         ]
+        }
+      ],
+      "tools": [
+        {
+          "name":"msp430-elf-gcc",
+          "version":"6.2.1.16",
+          "systems":
+          [
+            {
+              "host":"i686-mingw32",
+              "url":"http://www.hpa.tide.ti.com/msp430/energia/windows/msp430-elf-gcc-6.2.1.16_win32.zip",
+              "archiveFileName":"msp430-elf-gcc-6.2.1.16_win32.zip",
+              "checksum":"SHA-256:73e905330cdb919aeaa223dafe9ff001945d378e636e7bc1f5f9ea2b2e11b1d4",
+              "size":"47733038"
+            },
+            {
+              "host":"x86_64-apple-darwin",
+              "url":"http://www.hpa.tide.ti.com/msp430/energia/macosx/msp430-elf-gcc-6.2.1.16-i386-apple-darwin11.tar.bz2",
+              "archiveFileName":"msp430-elf-gcc-6.2.1.16-i386-apple-darwin11.tar.bz2",
+              "checksum":"SHA-256:95ef09f003cfb89b4e350584a9782dc2bcd2530808cdce4d968b843592a2c060",
+              "size":"32357793"
+            },
+            {
+              "host": "x86_64-linux-gnu",
+              "url": "http://www.hpa.tide.ti.com/msp430/energia/linux64/msp430-elf-gcc-6.2.1.16-i386-x86_64-pc-linux-gnu.tar.bz2",
+              "archiveFileName": "msp430-elf-gcc-6.2.1.16-i386-x86_64-pc-linux-gnu.tar.bz2",
+              "size": "87607164",
+              "checksum": "SHA-256:fc799bdd7489b11c5dd1bf9826fdbbb0026c0af22c5f296497f84e349a37cdd5"
+            }
+          ]
+        },
+        {
+          "name":"dslite",
+          "version":"6.2.1.1624-1",
+          "systems":
+          [
+           {
+              "host":"i686-mingw32",
+              "url":"http://www.hpa.tide.ti.com/msp430/energia/windows/dslite-6.2.1.1624-1.zip",
+              "archiveFileName":"dslite-6.2.1.1624-1.zip",
+              "checksum":"SHA-256:ef08645bbad4657bf3ea0deb825481239543a59dd840f7b018ecd49de471235a",
+              "size":"34541730"
+            },
+            {
+              "host":"x86_64-apple-darwin",
+              "url":"http://www.hpa.tide.ti.com/msp430/energia/macosx/dslite-6.2.1.1624-1-x86_64-apple-darwin.tar.bz2",
+              "archiveFileName":"dslite-6.2.1.1624-1-x86_64-apple-darwin.tar.bz2",
+              "checksum":"SHA-256:6767025e08111f0d78b984363d55b25e0afdc809114053c6631fdef0756428fe",
+              "size":"15384479"
+            },
+            {
+              "host":"x86_64-pc-linux-gnu",
+              "url":"http://www.hpa.tide.ti.com/msp430/energia/linux64/dslite-6.2.1.1624-1-i386-x86_64-pc-linux-gnu.tar.bz2",
+              "archiveFileName":"dslite-6.2.1.1624-1-x86_64-pc-linux-gnu.tar.bz2",
+              "checksum":"SHA-256:0fae3ccda23a9c634eec7bf62f9c9473b96f87e7b2d2e35dbb72a574b11f9fa3",
+              "size":"17793290"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

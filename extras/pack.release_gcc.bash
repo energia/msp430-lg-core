@@ -17,7 +17,7 @@
 #  License along with this library; if not, write to the Free Software
 #  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-VERSION=`grep version= platform.txt | sed 's/version=//g'`
+VERSION=`grep version= platform.txt.oldgcc | sed 's/version=//g'`
 echo $VERSION
 
 PWD=`pwd`
@@ -26,12 +26,14 @@ echo $FOLDERNAME
 THIS_SCRIPT_NAME=`basename $0`
 
 rm -f msp430-$VERSION.tar.bz2
+rm -f msp430-$VERSION.tar.bz2.sha256
 
 cd ..
-gnutar --transform "s|$FOLDERNAME|$FOLDERNAME-$VERSION|g"  --exclude=extras/** --exclude=.git* --exclude=.idea -cjf msp430-$VERSION.tar.bz2 $FOLDERNAME
+tar --transform "s|platform.txt.oldgcc|platform.txt|g"  --exclude=*.sha256 --exclude=*.bz2 --exclude=platform.txt --exclude=variants/MSP-EXP430FR5994LP/** --exclude=variants/MSP-EXP430FR2311LP/** --exclude=extras/** --exclude=.git* --exclude=.idea -cjf msp430-$VERSION.tar.bz2 $FOLDERNAME
 cd -
 
 mv ../msp430-$VERSION.tar.bz2 .
-shasum -a 256 msp430-$VERSION.tar.bz2
-stat -f%z msp430-$VERSION.tar.bz2
+
+sha256sum --tag msp430-$VERSION.tar.bz2 > msp430-$VERSION.tar.bz2.sha256
+stat -f -c%z msp430-$VERSION.tar.bz2
 
