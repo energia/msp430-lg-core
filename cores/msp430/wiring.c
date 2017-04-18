@@ -65,8 +65,8 @@ void enableWatchDogIntervalMode(void);
 
 // enableXtal has a weak attribute so it can be overridden
 // by a user to eliminate the 2-second wait if not present.
-void enableXtal() __attribute__((weak));
-void enableXtal()
+void attribute((weak)) enableXtal(void);
+void enableXtal(void)
 {
 #if (!defined(__MSP430FR2XX_4XX_FAMILY__) && (defined(__MSP430_HAS_CS__) || defined(__MSP430_HAS_CS_A__))) 
 	/* section for FR5xx and FR6xx devices */
@@ -277,9 +277,6 @@ void initClocks(void)
 #else
         #warning No Suitable Frequency found!
 #endif
-	/* SMCLK = DCO / DIVS = nMHz */
-	BCSCTL2 &= ~(DIVS_0);
-	enableXtal();
 #endif
 
 #if defined(__MSP430_HAS_CS__) && defined(__MSP430_HAS_FRAM_FR5XX__)
