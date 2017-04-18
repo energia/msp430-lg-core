@@ -65,7 +65,7 @@ void enableWatchDogIntervalMode(void);
 
 // enableXtal has a weak attribute so it can be overridden
 // by a user to eliminate the 2-second wait if not present.
-void attribute((weak)) enableXtal(void);
+void __attribute__((weak)) enableXtal(void);
 void enableXtal(void)
 {
 #if (!defined(__MSP430FR2XX_4XX_FAMILY__) && (defined(__MSP430_HAS_CS__) || defined(__MSP430_HAS_CS_A__))) 
