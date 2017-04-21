@@ -107,7 +107,7 @@ static uint8_t twi_my_addr;
 #define UCBzIRRCTL    (*((volatile uint8_t  *)((uint16_t)(I2C_baseAddress + ((uint16_t)&UCB0IRRCTL0 - UCB0_BASE))))
 #define UCBzICTL      (*((volatile uint8_t  *)((uint16_t)(I2C_baseAddress + ((uint16_t)&UCB0ICTL)   - UCB0_BASE))))
 #define UCBzI2COA     (*((volatile uint8_t  *)((uint16_t)(I2C_baseAddress + ((uint16_t)&UCB0I2COA)  - UCB0_BASE))))
-#define UCBzI2COA0    (*((volatile uint8_t  *)((uint16_t)(I2C_baseAddress + ((uint16_t)&UCB0I2COA0) - UCB0_BASE))))
+#define UCBzI2COA0    (*((volatile uint16_t  *)((uint16_t)(I2C_baseAddress + ((uint16_t)&UCB0I2COA0) - UCB0_BASE))))
 #define UCBzI2CSA     (*((volatile uint8_t  *)((uint16_t)(I2C_baseAddress + ((uint16_t)&UCB0I2CSA)  - UCB0_BASE))))
 #if defined(UCB0ICTL_)
 #define UCBzIE        (*((volatile uint8_t  *)((uint16_t)(I2C_baseAddress + ((uint16_t)&UCB0ICTL)   - UCB0_BASE))))
