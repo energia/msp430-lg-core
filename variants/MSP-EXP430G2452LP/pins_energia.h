@@ -176,17 +176,17 @@ const uint16_t port_to_sel0[] = {  /* put this PxSEL register under the group of
 
 const uint16_t port_to_sel2[] = {
    NOT_A_PORT,
-#if (defined(P1SEL_) || defined(P1SEL) || defined(__MSP430_HAS_P1SEL2__))
+#if (defined(P1SEL2_) || defined(P1SEL2) || defined(__MSP430_HAS_P1SEL2__))
    (const uint16_t) (&P1SEL2),
 #else
         NOT_A_PORT,
 #endif
-#if (defined(P2SEL_) || defined(P2SEL) || defined(__MSP430_HAS_P2SEL2__))
+#if (defined(P2SEL2_) || defined(P2SEL2) || defined(__MSP430_HAS_P2SEL2__))
    (const uint16_t) (&P2SEL2),
 #else 
         NOT_A_PORT,
 #endif
-#if (defined(P3SEL_) || defined(P3SEL) || defined(__MSP430_HAS_P3SEL2__))
+#if (defined(P3SEL2_) || defined(P3SEL2) || defined(__MSP430_HAS_P3SEL2__))
    (const uint16_t) (&P3SEL2),
 #else
         NOT_A_PORT,

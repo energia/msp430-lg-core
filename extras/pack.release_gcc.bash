@@ -28,9 +28,14 @@ THIS_SCRIPT_NAME=`basename $0`
 rm -f msp430-$VERSION.tar.bz2
 rm -f msp430-$VERSION.tar.bz2.sha256
 
+#filter board.txt
+#sed -r s/(-msmall|-mcode-region=lower|-mhwmult=f5series)// boards.txt > boards.txt.oldgcc
+sed -r s/build\.extra_flags=.*$/build.extra_flags=/ ../boards.txt > ../boards.txt.oldgcc
+
 cd ..
-tar --transform "s|platform.txt.oldgcc|platform.txt|g"  --exclude=*.sha256 --exclude=*.bz2 --exclude=platform.txt --exclude=variants/MSP-EXP430FR5994LP/** --exclude=variants/MSP-EXP430FR2311LP/** --exclude=extras/** --exclude=.git* --exclude=.idea -cjf msp430-$VERSION.tar.bz2 $FOLDERNAME
+tar --transform "s|boards.txt.oldgcc|boards.txt|g" --transform "s|platform.txt.oldgcc|platform.txt|g"  --exclude=*.sha256 --exclude=*.bz2 --exclude=platform.txt --exclude=variants/MSP-EXP430FR5994LP/** --exclude=variants/MSP-EXP430FR2311LP/** --exclude=extras/** --exclude=.git* --exclude=.idea -cjf msp430-$VERSION.tar.bz2 $FOLDERNAME
 cd -
+rm ../boards.txt.oldgcc
 
 mv ../msp430-$VERSION.tar.bz2 .
 
