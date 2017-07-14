@@ -7,9 +7,9 @@
  * installed, the linker won't strip the vectors.*/
 void usci_isr_install(){}
 __attribute__((weak))
-uint16_t i2c_state_isr(){}
+uint16_t i2c_state_isr(){return 0;}
 __attribute__((weak))
-uint16_t i2c_txrx_isr(){}
+uint16_t i2c_txrx_isr(){return 0;}
 
 static boolean still_asleep;  // Used to validate whether a user ISR has issued wakeup() inside LPM3/LPM4 sleep modes.
 

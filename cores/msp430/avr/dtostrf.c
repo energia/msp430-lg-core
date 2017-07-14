@@ -22,6 +22,7 @@
   * This is a crude workaround.
 */
 #include <stdint.h>
+#include <stdio.h>
 #include <math.h>
 
 char *dtostrf (double val, signed char width, unsigned char prec, char *sout) {
