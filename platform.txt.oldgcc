@@ -23,13 +23,12 @@ compiler.mlarge_flag=
 # Default "compiler.path" is correct, change only if you want to overidde the initial value
 compiler.path={runtime.tools.msp430-gcc.path}/bin/
 compiler.c.cmd=msp430-gcc
-compiler.c.flags=-c -g -O2 {compiler.mlarge_flag} {compiler.warning_flags} -ffunction-sections -fdata-sections -MMD
-#compiler.c.elf.flags={compiler.warning_flags} -g -O2 -Wl,--gc-sections
-compiler.c.elf.flags={compiler.warning_flags} -g -O2 {compiler.mlarge_flag} -fno-rtti -fno-exceptions -Wl,--gc-sections,-u,main
+compiler.c.flags=-c -Os {compiler.mlarge_flag} {compiler.warning_flags} -ffunction-sections -fdata-sections -MMD
+compiler.c.elf.flags={compiler.warning_flags} -Os {compiler.mlarge_flag} -fno-rtti -fno-exceptions -Wl,--gc-sections,-u,main
 compiler.c.elf.cmd=msp430-gcc
 compiler.S.flags=-c -x assembler-with-cpp
 compiler.cpp.cmd=msp430-g++
-compiler.cpp.flags=-c -g -O2 {compiler.mlarge_flag} {compiler.warning_flags} -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD
+compiler.cpp.flags=-c -Os {compiler.mlarge_flag} {compiler.warning_flags} -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD
 compiler.ar.cmd=msp430-ar
 compiler.ar.flags=rcs
 compiler.objcopy.cmd=msp430-objcopy
