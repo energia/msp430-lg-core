@@ -23,13 +23,13 @@ compiler.mlarge_flag=-mlarge -mcode-region=upper
 # Default "compiler.path" is correct, change only if you want to overidde the initial value
 compiler.path={runtime.tools.msp430-elf-gcc.path}/bin/
 compiler.c.cmd=msp430-elf-gcc
-compiler.c.flags=-c -g -O2 {compiler.warning_flags} -ffunction-sections -fdata-sections -MMD
-#compiler.c.elf.flags={compiler.warning_flags} -g -O2 -Wl,--gc-sections
-compiler.c.elf.flags={compiler.warning_flags} -g -gdwarf-3 -gstrict-dwarf -O2 -fno-rtti -fno-exceptions -Wl,--gc-sections,-u,main -Wl,--start-group -Wl,--end-group -I"{runtime.tools.msp430-elf-gcc.path}/msp430-gcc-support-files/include" -T "{build.mcu}.ld"
+compiler.c.flags=-c -g -Os {compiler.warning_flags} -ffunction-sections -fdata-sections -MMD
+#compiler.c.elf.flags={compiler.warning_flags} -g -Os -Wl,--gc-sections
+compiler.c.elf.flags={compiler.warning_flags} -g -gdwarf-3 -gstrict-dwarf -Os -fno-rtti -fno-exceptions -Wl,--gc-sections,-u,main -Wl,--start-group -Wl,--end-group -I"{runtime.tools.msp430-elf-gcc.path}/msp430-gcc-support-files/include" -T "{build.mcu}.ld"
 compiler.c.elf.cmd=msp430-elf-gcc
 compiler.S.flags=-c -x assembler-with-cpp
 compiler.cpp.cmd=msp430-elf-gcc
-compiler.cpp.flags=-c -g -O2 {compiler.warning_flags} -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -fno-rtti
+compiler.cpp.flags=-c -g -Os {compiler.warning_flags} -fno-exceptions -ffunction-sections -fdata-sections -fno-threadsafe-statics -MMD -fno-rtti
 compiler.ar.cmd=msp430-elf-ar
 compiler.ar.flags=rcs
 compiler.objcopy.cmd=msp430-elf-objcopy
