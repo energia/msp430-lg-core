@@ -93,7 +93,7 @@ recipe.preproc.macros="{compiler.path}{compiler.cpp.cmd}" {compiler.cpp.flags} {
 # TI's DSLite
 tools.dslite.upload.params.verbose=
 tools.dslite.upload.params.quiet=
-tools.dslite.path={runtime.tools.dslite.path}
+tools.dslite.path={runtime.tools.dslite-7.2.0.2096.path}
 tools.dslite.config.path={path}
 tools.dslite.cmd.path={path}/DebugServer/bin/DSLite
 tools.dslite.upload.pattern={cmd.path} {upload.verbose} load -c "{config.path}/{build.variant}.ccxml" -f "{build.path}/{build.project_name}.elf"
@@ -108,7 +108,7 @@ tools.dslite.program.pattern={cmd.path} {program.verbose} load -c "{config.path}
 tools.mspdebug.upload.params.verbose=
 tools.mspdebug.upload.params.quiet=
 tools.mspdebug.path={runtime.tools.mspdebug.path}
-tools.mspdebug.cmd.path={path}/bin/mspdebug
+tools.mspdebug.cmd.path={path}/mspdebug
 tools.mspdebug.upload.pattern={cmd.path} {upload.verbose} {upload.protocol} --force-reset "prog {build.path}/{build.project_name}.hex"
 
 tools.mspdebug.program.params.verbose=
