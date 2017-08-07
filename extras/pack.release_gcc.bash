@@ -33,7 +33,7 @@ rm -f msp430-$VERSION.tar.bz2.sha256
 sed -r s/build\.extra_flags=.*$/build.extra_flags=/ boards.txt > boards.txt.oldgcc
 
 cd ..
-tar --transform "s|boards.txt.oldgcc|boards.txt|g" --transform "s|platform.txt.oldgcc|platform.txt|g"  --exclude=*.sha256 --exclude=*.bz2 --exclude=boards.txt --exclude=platform.txt --exclude=variants/MSP-EXP430FR5994LP/** --exclude=variants/MSP-EXP430FR2311LP/** --exclude=extras/** --exclude=.git* --exclude=.idea -cjf msp430-$VERSION.tar.bz2 $FOLDERNAME
+tar --transform "s|$FOLDERNAME|$FOLDERNAME-$VERSION|g" --transform "s|boards.txt.oldgcc|boards.txt|g" --transform "s|platform.txt.oldgcc|platform.txt|g"  --exclude=*.sha256 --exclude=*.bz2 --exclude=boards.txt --exclude=platform.txt --exclude=variants/MSP-EXP430FR2311LP --exclude=extras --exclude=.git* --exclude=.idea -cjf msp430-$VERSION.tar.bz2 $FOLDERNAME
 cd -
 rm boards.txt.oldgcc
 
@@ -41,4 +41,3 @@ mv ../msp430-$VERSION.tar.bz2 .
 
 sha256sum --tag msp430-$VERSION.tar.bz2 > msp430-$VERSION.tar.bz2.sha256
 stat -f -c%z msp430-$VERSION.tar.bz2
-
