@@ -228,7 +228,7 @@ static const uint8_t TEMPSENSOR = 128 + 30;
 #ifdef ARDUINO_MAIN
 const uint16_t port_to_input[] = {
    NOT_A_PORT,
-   (uint16_t) P1_BASE+OFS_P1IN,
+   (uint16_t) (P1_BASE+OFS_P1IN),
    (uint16_t) (P2_BASE+OFS_P1IN),
 #ifdef __MSP430_HAS_PORT3_R__
    (uint16_t) (P3_BASE+OFS_P1IN),
@@ -255,7 +255,7 @@ const uint16_t port_to_input[] = {
    (uint16_t) (P10_BASE+OFS_P1IN),
 #endif
 #ifdef __MSP430_HAS_PORTJ_R__
-   (uint16_t) PJ_BASE+OFS_P1IN,
+   (uint16_t) (PJ_BASE+OFS_P1IN),
 #endif
 };
 

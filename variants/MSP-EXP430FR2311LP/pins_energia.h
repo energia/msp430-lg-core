@@ -174,34 +174,34 @@ static const uint8_t TEMPSENSOR = 128 + 12; // depends on chip
 #ifdef ARDUINO_MAIN
 const uint16_t port_to_input[] = {
    NOT_A_PORT,
-   (uint16_t) P1_BASE,
-   (uint16_t) P2_BASE,
+   (uint16_t) (P1_BASE+OFS_P1IN),
+   (uint16_t) (P2_BASE+OFS_P1IN),
 #ifdef __MSP430_HAS_PORT3_R__
-   (uint16_t) P3_BASE,
+   (uint16_t) (P3_BASE+OFS_P1IN),
 #endif
 #ifdef __MSP430_HAS_PORT4_R__
-   (uint16_t) P4_BASE,
+   (uint16_t) (P4_BASE+OFS_P1IN),
 #endif
 #ifdef __MSP430_HAS_PORT5_R__
-   (uint16_t) P5_BASE,
+   (uint16_t) (P5_BASE+OFS_P1IN),
 #endif
 #ifdef __MSP430_HAS_PORT6_R__
-   (uint16_t) P6_BASE,
+   (uint16_t) (P6_BASE+OFS_P1IN),
 #endif
 #ifdef __MSP430_HAS_PORT7_R__
-   (uint16_t) P7_BASE,
+   (uint16_t) (P7_BASE+OFS_P1IN),
 #endif
 #ifdef __MSP430_HAS_PORT8_R__
-   (uint16_t) P8_BASE,
+   (uint16_t) (P8_BASE+OFS_P1IN),
 #endif
 #ifdef __MSP430_HAS_PORT9_R__
-   (uint16_t) P9_BASE,
+   (uint16_t) (P9_BASE+OFS_P1IN),
 #endif
 #ifdef __MSP430_HAS_PORT10_R__
-   (uint16_t) P10_BASE,
+   (uint16_t) (P10_BASE+OFS_P1IN),
 #endif
 #ifdef __MSP430_HAS_PORTJ_R__
-   (uint16_t) PJ_BASE,
+   (uint16_t) (PJ_BASE+OFS_P1IN),
 #endif
 };
 
