@@ -54,8 +54,8 @@ static const uint8_t TWISDA0 = 48;  /* P1.6 UCB0 */
 static const uint8_t TWISCL0 = 50;  /* P1.7 UCB0 */
 static const uint8_t TWISDA1 = 15;  /* P5.0 UCB1 */
 static const uint8_t TWISCL1 = 14;  /* P5.1 UCB1 */
-static const uint8_t TWISDA2 = 10;  /* P7.0 UCB1 */
-static const uint8_t TWISCL2 = 9;   /* P7.1 UCB1 */
+static const uint8_t TWISDA2 = 10;  /* P7.0 UCB2 */
+static const uint8_t TWISCL2 = 9;   /* P7.1 UCB2 */
 #define TWISDA0_SET_MODE (PORT_SELECTION1 | INPUT_PULLUP)
 #define TWISCL0_SET_MODE (PORT_SELECTION1 | INPUT_PULLUP)
 #define TWISDA1_SET_MODE (PORT_SELECTION0 | INPUT_PULLUP)
