@@ -249,6 +249,7 @@ typedef uint8_t byte;
 #define bitClear(value, bit) ((value) &= ~(1UL << (bit)))
 #define bitWrite(value, bit, bitvalue) (bitvalue ? bitSet(value, bit) : bitClear(value, bit))
 
+#define digitalPinToInterrupt(pin) pin
 
 typedef unsigned int word;
 
