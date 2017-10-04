@@ -6,7 +6,7 @@
 # https://github.com/arduino/Arduino/wiki/Arduino-IDE-1.5-3rd-party-Hardware-specification
 
 name=Energia MSP430 boards (elf-GCC)
-version=2.0.0
+version=2.0.1
 
 # MSP430 compile variables
 # --------------------- 

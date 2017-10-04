@@ -106,9 +106,9 @@ static const uint8_t DEBUG_UARTTXD = 4;  /* Transmit Data (TXD) at P1.7 */
                      J13 eZ-FET Connector          |3   DebugUART RX  (P1.6) (A6)
                                                ----+
                                                ----+
-                                                   |21  LED1       (P3.0)   () 
+                                                   |2   LED1       (P1.0)   () 
                      Extra LED's and Switches      |19  LED2       (P1.1)   (A1)
-                                                   |22  PUSH1      (P2.3)   ()
+                                                   |21  PUSH1      (P2.3)   ()
                                                    |8   PUSH2      (P2.7)   ()
                                                ----+
 */
@@ -116,7 +116,7 @@ static const uint8_t DEBUG_UARTTXD = 4;  /* Transmit Data (TXD) at P1.7 */
 // Pin names based on the silkscreen
 //
 
-static const uint8_t P1_0 = 1;
+static const uint8_t P1_0 = 2;
 static const uint8_t P1_1 = 19;
 static const uint8_t P1_2 = 10;
 static const uint8_t P1_3 = 9;
@@ -128,31 +128,21 @@ static const uint8_t P1_7 = 6;
 static const uint8_t P2_0 = 11;
 static const uint8_t P2_1 = 12;
 static const uint8_t P2_2 = 18;
-static const uint8_t P2_3 = 22;
+static const uint8_t P2_3 = 21;
 static const uint8_t P2_4 = 7;
 static const uint8_t P2_5 = 14;
 static const uint8_t P2_6 = 15;
 static const uint8_t P2_7 = 8;
 
-static const uint8_t P3_0 = 21;
+static const uint8_t P3_0 = 22;
 static const uint8_t P3_1 = 13;
 static const uint8_t P3_2 = 17;
 
 
-//static const uint8_t PJ_0 = ;
-//static const uint8_t PJ_1 = ;
-//static const uint8_t PJ_2 = ;
-//static const uint8_t PJ_3 = ;
-//static const uint8_t PJ_4 = ;
-//static const uint8_t PJ_5 = ;
-//static const uint8_t PJ_6 = ;
-//static const uint8_t PJ_7 = ;
-
-
-static const uint8_t LED1 = 5;
+static const uint8_t LED1 = 2;
 static const uint8_t LED2 = 19;
 /* For LaunchPad compatability */
-static const uint8_t RED_LED = 5;
+static const uint8_t RED_LED = 2;
 static const uint8_t GREEN_LED = 19;
 
 static const uint8_t PUSH1 = 21;
@@ -365,8 +355,8 @@ const uint8_t digital_pin_to_timer[] = {
     NOT_ON_TIMER,  /* 18 - P2.2 */
     T0A1,          /* 19 - P1.1 */
     NOT_ON_TIMER,  /* 20 - GND  */
-    NOT_ON_TIMER,  /* 21 - P3.0 */
-    T1B1,          /* 22 - P2.3 */
+    T1B1,          /* 21 - P2.3 */
+    NOT_ON_TIMER,  /* 22 - P3.0 */
 };
 
 const uint8_t digital_pin_to_port[] = {
@@ -391,8 +381,8 @@ const uint8_t digital_pin_to_port[] = {
     P2,          /* 18 - P2.2 */
     P1,          /* 19 - P1.1 */
     NOT_A_PIN,   /* 20 - GND  */
-    P3,          /* 21 - P3.0 */
-    P2,          /* 22 - P2.3 */
+    P2,          /* 21 - P2.3 */
+    P3,          /* 22 - P3.0 */
 };
 
 const uint8_t digital_pin_to_bit_mask[] = {
@@ -417,8 +407,8 @@ const uint8_t digital_pin_to_bit_mask[] = {
     BV(2),       /* 18 - P2.2 */
     BV(1),       /* 19 - P1.1 */
     NOT_A_PIN,   /* 20 - GND  */
-    BV(0),       /* 21 - P3.0 */
-    BV(3),       /* 22 - P2.3 */
+    BV(3),       /* 21 - P2.3 */
+    BV(0),       /* 22 - P3.0 */
 };
 
 const uint32_t digital_pin_to_analog_in[] = {
@@ -443,8 +433,8 @@ const uint32_t digital_pin_to_analog_in[] = {
     NOT_ON_ADC,  /* 18 - P2.2 */
     1,           /* 19 - P1.1 */
     NOT_ON_ADC,  /* 20 - GND  */
-    NOT_ON_ADC,  /* 21 - P3.0 */
-    NOT_ON_ADC,  /* 22 - P2.3 */
+    NOT_ON_ADC,  /* 21 - P2.3 */
+    NOT_ON_ADC,  /* 22 - P3.0 */
 };
 #endif // #ifdef ARDUINO_MAIN
 #endif // #ifndef Pins_Energia_h

@@ -25,15 +25,17 @@ FOLDERNAME=`basename $PWD`
 echo $FOLDERNAME
 THIS_SCRIPT_NAME=`basename $0`
 
-rm -f msp430-$VERSION.tar.bz2
-rm -f msp430-$VERSION.tar.bz2.sha256
+rm -f extras/build/msp430-$VERSION.tar.bz2
+rm -f extras/build/msp430-$VERSION.tar.bz2.sha256
 
 cd ..
-tar --transform "s|$FOLDERNAME|$FOLDERNAME-$VERSION|g"  --exclude=*.sha256 --exclude=*.bz2 --exclude=platform.txt.oldgcc --exclude=extras/** --exclude=.git* --exclude=.idea -cjf msp430-$VERSION.tar.bz2 $FOLDERNAME
+tar --transform "s|$FOLDERNAME|msp430-$VERSION|g"  --exclude=*.sha256 --exclude=*.bz2 --exclude=platform.txt.oldgcc --exclude=extras --exclude=.git* --exclude=.idea -cjf msp430-$VERSION.tar.bz2 $FOLDERNAME
 cd -
 
-mv ../msp430-$VERSION.tar.bz2 .
+[ -d "extras/build" ] || mkdir extras/build 
+mv ../msp430-$VERSION.tar.bz2 ./extras/build/
 
+cd extras/build
 sha256sum --tag msp430-$VERSION.tar.bz2 > msp430-$VERSION.tar.bz2.sha256
 stat -f -c %z msp430-$VERSION.tar.bz2
-
+cd ../..
