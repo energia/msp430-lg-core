@@ -56,6 +56,30 @@ void SPIClass::setModule(uint8_t module)
       SPI_baseAddress = UCB3_BASE;
    }
 #endif
+#if defined(__MSP430_HAS_EUSCI_A0__)
+   if (module == 10)
+   {
+      SPI_baseAddress = UCA0_BASE;
+   }
+#endif
+#if defined(__MSP430_HAS_EUSCI_A1__)
+   if (module == 11)
+   {
+      SPI_baseAddress = UCA1_BASE;
+   }
+#endif
+#if defined(__MSP430_HAS_EUSCI_A2__)
+   if (module == 12)
+   {
+      SPI_baseAddress = UCA2_BASE;
+   }
+#endif
+#if defined(__MSP430_HAS_EUSCI_A3__)
+   if (module == 13)
+   {
+      SPI_baseAddress = UCA3_BASE;
+   }
+#endif
 }
 
 /*

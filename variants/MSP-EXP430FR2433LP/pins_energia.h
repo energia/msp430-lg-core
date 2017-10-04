@@ -45,27 +45,37 @@
 
 
 #if defined(__MSP430_HAS_EUSCI_B0__)
-static const uint8_t SS      = 8;   /* P2.1 */
-static const uint8_t SCK     = 7;   /* P2.3 */
-static const uint8_t MOSI    = 15;  /* P2.4 aka SIMO */
-static const uint8_t MISO    = 14;  /* P2.5 aka SOMI */
+static const uint8_t SS11     = 8;   /* P2.1 */
+static const uint8_t SCK11    = 7;   /* P2.3 */
+static const uint8_t MOSI11   = 15;  /* P2.4 aka SIMO */
+static const uint8_t MISO11   = 14;  /* P2.5 aka SOMI */
 static const uint8_t TWISCL1  = 9;   /* P1.3 SW I2C */
 static const uint8_t TWISDA1  = 10;  /* P1.2 SW I2C */
 static const uint8_t TWISDA0  = 15;  /* P2.4 UCB0 */
 static const uint8_t TWISCL0  = 14;  /* P2.5 UCB0 */
 #define TWISDA0_SET_MODE  (PORT_SELECTION0 | INPUT_PULLUP)
 #define TWISCL0_SET_MODE  (PORT_SELECTION0 | INPUT_PULLUP)
-#define TWISDA1_SET_MODE  (INPUT_PULLUP)
-#define TWISCL1_SET_MODE  (INPUT_PULLUP)
-#define SPISCK_SET_MODE  (PORT_SELECTION0)
-#define SPIMOSI_SET_MODE (PORT_SELECTION0)
-#define SPIMISO_SET_MODE (PORT_SELECTION0)
+#define TWISDA1_SET_MODE  (PORT_SELECTION0 | INPUT_PULLUP)
+#define TWISCL1_SET_MODE  (PORT_SELECTION0 | INPUT_PULLUP)
+#define SPISCK11_SET_MODE  (PORT_SELECTION0)
+#define SPIMOSI11_SET_MODE (PORT_SELECTION0)
+#define SPIMISO11_SET_MODE (PORT_SELECTION0)
+/* Define the default SPI settings */
+#define DEFAULT_SPI 11    /* indicates SPI module A1 => use offset of 10 for A modules */
+#define SS    SS11   
+#define SCK   SCK11  
+#define MOSI  MOSI11
+#define MISO  MISO11
+#define SPISCK_SET_MODE  SPISCK11_SET_MODE
+#define SPIMOSI_SET_MODE SPIMOSI11_SET_MODE
+#define SPIMISO_SET_MODE SPIMISO11_SET_MODE
+
 /* Define the default I2C settings */
 #define DEFAULT_I2C 0    /* indicates SW I2C on module 0 */
-#define TWISDA TWISDA1
-#define TWISCL TWISCL1
-#define TWISDA_SET_MODE  TWISDA1_SET_MODE
-#define TWISCL_SET_MODE  TWISCL1_SET_MODE
+#define TWISDA TWISDA0
+#define TWISCL TWISCL0
+#define TWISDA_SET_MODE  TWISDA0_SET_MODE
+#define TWISCL_SET_MODE  TWISCL0_SET_MODE
 #endif
 
 #if defined(__MSP430_HAS_EUSCI_A0__) || defined(__MSP430_HAS_EUSCI_A1__)
@@ -349,7 +359,7 @@ const uint8_t digital_pin_to_timer[] = {
     NOT_ON_TIMER,  /* 12 - P2.1 */
     NOT_ON_TIMER,  /* 13 - P3.1 */
     NOT_ON_TIMER,  /* 14 - P2.5 */
-    NOT_ON_TIMER,  /* 15 - P2.4 */
+    NOT_ON_TIMER,  /* 15 - P2.6 */
     NOT_ON_TIMER,  /* 16 - RST  */
     NOT_ON_TIMER,  /* 17 - P3.2 */
     NOT_ON_TIMER,  /* 18 - P2.2 */
@@ -375,7 +385,7 @@ const uint8_t digital_pin_to_port[] = {
     P2,          /* 12 - P2.1 */
     P3,          /* 13 - P3.1 */
     P2,          /* 14 - P2.5 */
-    P2,          /* 15 - P2.4 */
+    P2,          /* 15 - P2.6 */
     NOT_A_PIN,   /* 16 - RST  */
     P3,          /* 17 - P3.2 */
     P2,          /* 18 - P2.2 */
@@ -401,7 +411,7 @@ const uint8_t digital_pin_to_bit_mask[] = {
     BV(1),       /* 12 - P2.1 */
     BV(1),       /* 13 - P3.1 */
     BV(5),       /* 14 - P2.5 */
-    BV(4),       /* 15 - P2.4 */
+    BV(6),       /* 15 - P2.6 */
     NOT_A_PIN,   /* 16 - RST  */
     BV(2),       /* 17 - P3.2 */
     BV(2),       /* 18 - P2.2 */
@@ -427,7 +437,7 @@ const uint32_t digital_pin_to_analog_in[] = {
     NOT_ON_ADC,  /* 12 - P2.1 */
     NOT_ON_ADC,  /* 13 - P3.1 */
     NOT_ON_ADC,  /* 14 - P2.5 */
-    NOT_ON_ADC,  /* 15 - P2.4 */
+    NOT_ON_ADC,  /* 15 - P2.6 */
     NOT_ON_ADC,  /* 16 - RST  */
     NOT_ON_ADC,  /* 17 - P3.2 */
     NOT_ON_ADC,  /* 18 - P2.2 */

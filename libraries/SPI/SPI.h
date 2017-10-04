@@ -17,7 +17,7 @@
 #include <Energia.h>
 #include <inttypes.h>
 
-#if defined(__MSP430_HAS_USI__) || defined(__MSP430_HAS_USCI_B0__) || defined(__MSP430_HAS_USCI_B1__) || defined(__MSP430_HAS_USCI__) || defined(__MSP430_HAS_EUSCI_B0__) || defined(__MSP430_HAS_EUSCI_B1__) || defined(__MSP430_HAS_EUSCI_B2__) || defined(__MSP430_HAS_EUSCI_B3__)
+#if defined(__MSP430_HAS_USI__) || defined(__MSP430_HAS_USCI_B0__) || defined(__MSP430_HAS_USCI_B1__) || defined(__MSP430_HAS_USCI__) || defined(__MSP430_HAS_EUSCI_B0__) || defined(__MSP430_HAS_EUSCI_B1__) || defined(__MSP430_HAS_EUSCI_B2__) || defined(__MSP430_HAS_EUSCI_B3__) || defined(DEFAULT_SPI)
 #include "utility/spi_430.h"
 #endif
 
@@ -25,6 +25,7 @@
 #define SPI_MODE1 1
 #define SPI_MODE2 2
 #define SPI_MODE3 4
+
 
 #if defined(__MSP430_HAS_USCI_B0__)
 #define UCB0_BASE __MSP430_BASEADDRESS_USCI_B0__
@@ -50,6 +51,19 @@
 #endif
 #if defined(__MSP430_HAS_EUSCI_B3__)
 #define UCB3_BASE __MSP430_BASEADDRESS_EUSCI_B3__
+#endif
+
+#if defined(__MSP430_HAS_EUSCI_A0__)
+#define UCA0_BASE __MSP430_BASEADDRESS_EUSCI_A0__
+#endif
+#if defined(__MSP430_HAS_EUSCI_A1__)
+#define UCA1_BASE __MSP430_BASEADDRESS_EUSCI_A1__
+#endif
+#if defined(__MSP430_HAS_EUSCI_A2__)
+#define UCA2_BASE __MSP430_BASEADDRESS_EUSCI_A2__
+#endif
+#if defined(__MSP430_HAS_EUSCI_A3__)
+#define UCA3_BASE __MSP430_BASEADDRESS_EUSCI_A3__
 #endif
 
 
