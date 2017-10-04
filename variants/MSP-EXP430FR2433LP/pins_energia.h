@@ -61,7 +61,7 @@ static const uint8_t TWISCL0  = 14;  /* P2.5 UCB0 */
 #define SPIMOSI_SET_MODE (PORT_SELECTION0)
 #define SPIMISO_SET_MODE (PORT_SELECTION0)
 /* Define the default I2C settings */
-#define DEFAULT_I2C -1 /* indicates SW I2C on pseudo module 1 */
+#define DEFAULT_I2C 0    /* indicates SW I2C on module 0 */
 #define TWISDA TWISDA1
 #define TWISCL TWISCL1
 #define TWISDA_SET_MODE  TWISDA1_SET_MODE
