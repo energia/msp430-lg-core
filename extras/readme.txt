@@ -14,21 +14,23 @@ http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/latest/index
 	mspsupport_ver="1.201"
  
 execute: ./extras/pack_somnium_gcc.sh
+-> files are stored in extras/build
 
 
 Build package for old GCC compiler
 ==================================
 update version in platform.txt
 execute: ./extras/pack.release_gcc.bash
+-> files are stored in extras/build
 
 Build package for GCC (elf) compiler
 ====================================
 update version in platform.txt.oldgcc
 execute: ./extras/pack.release_elf_gcc.bash
+-> files are stored in extras/build
 
 
-
-Build release
+Build release Package
 ====================================
 update supported board in package_msp430_elf_GCC_index.json
 update supported comiler package version and checksum in package_msp430_elf_GCC_index.json
