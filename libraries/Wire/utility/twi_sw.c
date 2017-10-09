@@ -28,8 +28,7 @@
 #include "twi_sw.h"
 #include "twi.h"
 
-#if DEFAULT_I2C == -1 /* indicates SW I2C on pseudo module 1 */
-
+#if (DEFAULT_I2C == -1) || defined(LEGACY_I2C) // SW I2C implementation on default or legacy port
 
 #define I2C_DELAY1() __delay_cycles(F_CPU / 1000000UL * 10)
 #define I2C_DELAY2() __delay_cycles(F_CPU / 1000000UL * 20)
@@ -46,10 +45,18 @@ void i2c_sw_stop(void);
 
 void i2c_sw_init(void)
 {
+#if (DEFAULT_I2C == -1) && !defined(LEGACY_I2C) // SW I2C implementation on default and not legacy port
   digitalWrite(TWISDA, LOW);
   digitalWrite(TWISCL, LOW);
   pinMode(TWISDA, INPUT);
   pinMode(TWISCL, INPUT);
+#endif
+#if (DEFAULT_I2C == -1) && defined(LEGACY_I2C) // SW I2C implementation on default and legacy port
+  digitalWrite(TWISDA1, LOW);
+  digitalWrite(TWISCL1, LOW);
+  pinMode(TWISDA1, INPUT);
+  pinMode(TWISCL1, INPUT);
+#endif
 }
 
 uint8_t i2c_sw_read(uint8_t slaveAddress,
@@ -172,4 +179,5 @@ void i2c_sw_stop(void)                      // Send I2C stop command
   I2C_DELAY2();
 }
 
-#endif // #if DEFAULT_I2C = -1 /* indicates SW I2C on pseudo module 1 */
+#endif // #if (DEFAULT_I2C == -1) || defined(LEGACY_I2C) // SW I2C implementation on default or legacy port
+

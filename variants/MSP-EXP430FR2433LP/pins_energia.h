@@ -44,13 +44,12 @@
 #define PLACE_IN_FRAM __attribute__((section(".text")))
 
 
-#if defined(__MSP430_HAS_EUSCI_B0__)
 static const uint8_t SS11     = 8;   /* P2.1 */
 static const uint8_t SCK11    = 7;   /* P2.3 */
 static const uint8_t MOSI11   = 15;  /* P2.4 aka SIMO */
 static const uint8_t MISO11   = 14;  /* P2.5 aka SOMI */
-static const uint8_t TWISCL0  = 9;   /* P1.3 I2C */
 static const uint8_t TWISDA0  = 10;  /* P1.2 I2C */
+static const uint8_t TWISCL0  = 9;   /* P1.3 I2C */
 static const uint8_t TWISDA1  = 15;  /* P2.4 SW UCB0 */
 static const uint8_t TWISCL1  = 14;  /* P2.5 SW UCB0 */
 #define TWISDA0_SET_MODE  (PORT_SELECTION0 | INPUT_PULLUP)
@@ -72,11 +71,12 @@ static const uint8_t TWISCL1  = 14;  /* P2.5 SW UCB0 */
 
 /* Define the default I2C settings */
 #define DEFAULT_I2C 0    /* indicates SW I2C on module 0 */
+#define LEGACY_I2C  -1   /* indicates SW I2C on legacy pins 14/15 */
 #define TWISDA TWISDA0
 #define TWISCL TWISCL0
 #define TWISDA_SET_MODE  TWISDA0_SET_MODE
 #define TWISCL_SET_MODE  TWISCL0_SET_MODE
-#endif
+
 
 #if defined(__MSP430_HAS_EUSCI_A0__) || defined(__MSP430_HAS_EUSCI_A1__)
 static const uint8_t DEBUG_UARTRXD = 3;  /* Receive  Data (RXD) at P1.6 */

@@ -42,7 +42,7 @@
 #include "pins_energia.h"
 #include "twi.h"
 #include "usci_isr_handler.h"
-#if DEFAULT_I2C == -1 // SW I2C implementation on default port
+#if (DEFAULT_I2C == -1) || defined(LEGACY_I2C) // SW I2C implementation on default or legacy port
 #include "twi_sw.h"   // software I2C interface
 #endif
 
@@ -200,7 +200,7 @@ uint16_t I2C_baseAddress = UCB3_BASE;
  */
 void twi_setModule(uint8_t _i2cModule)
 {
-#if DEFAULT_I2C == -1 // SW I2C implementation on default port
+#if (DEFAULT_I2C == -1) || defined(LEGACY_I2C) // SW I2C implementation on default or legacy port
 	if (_i2cModule == -1)
 	{
 		I2C_baseAddress = -1;
@@ -240,11 +240,9 @@ void twi_setModule(uint8_t _i2cModule)
  */
 static void twi_init_port(void)
 {
-#if DEFAULT_I2C == -1 // SW I2C implementation on default port
+#if (DEFAULT_I2C == -1) && defined(LEGACY_I2C) // SW I2C implementation on default and not legacy port
 	if (I2C_baseAddress == -1)
 	{
-		//pinMode_int(TWISDA1, TWISDA1_SET_MODE);
-		//pinMode_int(TWISCL1, TWISCL1_SET_MODE);
 		i2c_sw_init();
 		return;
 	}
@@ -357,7 +355,7 @@ void twi_init(void)
 	twi_sendStop = true;		// default value
 	twi_inRepStart = false;
 
-#if DEFAULT_I2C == -1 // SW I2C implementation on default port
+#if (DEFAULT_I2C == -1) || defined(LEGACY_I2C) // SW I2C implementation on default or legacy port
 	if (I2C_baseAddress == -1)
 	{
 		twi_init_port();
@@ -492,7 +490,7 @@ uint8_t twi_readFrom(uint8_t address, uint8_t* data, uint8_t length, uint8_t sen
 {
 	uint8_t i;
 
-#if (DEFAULT_I2C == -1)
+#if (DEFAULT_I2C == -1) || defined(LEGACY_I2C) // SW I2C implementation on default or legacy port
 	if (I2C_baseAddress == -1)
 	{
 		i2c_sw_read(address, length, data, sendStop);
@@ -606,7 +604,7 @@ uint8_t twi_writeTo(uint8_t address, uint8_t* data, uint8_t length, uint8_t wait
 	twi_error = TWI_ERRROR_NO_ERROR;
 	twi_sendStop = sendStop;
 
-#if (DEFAULT_I2C == -1)	
+#if (DEFAULT_I2C == -1) || defined(LEGACY_I2C) // SW I2C implementation on default or legacy port
 	if (I2C_baseAddress == -1)
 	{
 		return (i2c_sw_write(address, length, data, sendStop));
