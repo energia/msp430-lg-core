@@ -39,7 +39,7 @@ MSP-EXP430FR2433LP.build.extra_flags=-msmall -mcode-region=lower
 MSP-EXP430FR2433LP.upload.tool=dslite
 MSP-EXP430FR2433LP.upload.protocol=dslite
 MSP-EXP430FR2433LP.upload.maximum_size=15360
-MSP-EXP430FR2433LP.upload.maximum_data_size=2048
+MSP-EXP430FR2433LP.upload.maximum_data_size=4096
 
 #MSP-EXP430FR4133
 
