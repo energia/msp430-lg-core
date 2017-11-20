@@ -347,14 +347,14 @@ const uint8_t digital_pin_to_timer[] = {
     NOT_ON_TIMER,  /*  0 - pin count starts at 1 */
     NOT_ON_TIMER,  /*  1 - Vcc */
     NOT_ON_TIMER,  /*  2 - P1.0 */
-    T1A1,          /*  3 - P1.5 */
-    T1A2,          /*  4 - P1.4 */
+    T1A1_SEL1,     /*  3 - P1.5 */
+    T1A2_SEL1,     /*  4 - P1.4 */
     NOT_ON_TIMER,  /*  5 - P1.6 */
     NOT_ON_TIMER,  /*  6 - P1.7 */
     NOT_ON_TIMER,  /*  7 - P2.4 */
     NOT_ON_TIMER,  /*  8 - P2.7 */
     NOT_ON_TIMER,  /*  9 - P1.3 */
-    T0A2,          /* 10 - P1.2 */
+    T0A2_SEL1,     /* 10 - P1.2 */
     NOT_ON_TIMER,  /* 11 - P2.0 */
     NOT_ON_TIMER,  /* 12 - P2.1 */
     NOT_ON_TIMER,  /* 13 - P3.1 */
@@ -363,9 +363,9 @@ const uint8_t digital_pin_to_timer[] = {
     NOT_ON_TIMER,  /* 16 - RST  */
     NOT_ON_TIMER,  /* 17 - P3.2 */
     NOT_ON_TIMER,  /* 18 - P2.2 */
-    T0A1,          /* 19 - P1.1 */
+    T0A1_SEL1,     /* 19 - P1.1 */
     NOT_ON_TIMER,  /* 20 - GND  */
-    T1B1,          /* 21 - P2.3 */
+    T1B1_SEL1,          /* 21 - P2.3 */
     NOT_ON_TIMER,  /* 22 - P3.0 */
 };
 
