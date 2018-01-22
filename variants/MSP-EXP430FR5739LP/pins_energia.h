@@ -89,9 +89,9 @@ static const uint8_t A10 = 128 + 10; //Special this is device's internal temp se
 static const uint8_t A11 = 128 + 11; //Special this is Vcc/2 */
 
 /* 3-axes accelerometer pins */
-static const uint8_t ACC_X  = 12; /* (A6) 16 - P3.0 */
-static const uint8_t ACC_Y  = 13; /* (A5) 17 - P3.1 */
-static const uint8_t ACC_Z  = 14; /* (A4) 18 - P3.0 */
+static const uint8_t ACC_X  = 16; /* (A6) 16 - P3.0 */
+static const uint8_t ACC_Y  = 17; /* (A5) 17 - P3.1 */
+static const uint8_t ACC_Z  = 18; /* (A4) 18 - P3.0 */
 static const uint8_t ACC_ENABLE = 30; /* 30 - P2.7 */
 static const uint8_t NTC_ENABLE = 30; /* 30 - P2.7 */
 
