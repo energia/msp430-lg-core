@@ -87,7 +87,7 @@ class TwoWire : public Stream
     inline size_t write(unsigned int n) { return write((uint8_t)n); }
     inline size_t write(int n) { return write((uint8_t)n); }
     using Print::write;
-    void setModule(uint8_t i2cModule);
+    void setModule(int8_t i2cModule);
 };
 
 extern TwoWire Wire;
