@@ -45,6 +45,9 @@
  * 0b00000101 mask for LCDMEM[position+1] to avoid interferences with symbols
  * Tested on MSP430 FR4133 and FR6989
  *
+ * Dec 26, 2017 Rei Vilo
+ * Added lowercase letters and % symbol
+ *
  ******************************************************************************/
 
 #include "LCD_Launchpad.h"
@@ -155,6 +158,43 @@ const char alphabetBig[26][2] =
     {0x00, 0xAA},  /* "X" */
     {0x00, 0xB0},  /* "Y" */
     {0x90, 0x28}   /* "Z" */
+};
+
+// LCD memory map for lowercase letters
+const char alphabetSmall[26][2] =
+{
+    {0b00011010, 0b00010000},  /* "a" LCD segments a+b+c+e+f+g+m */
+    {0b00011110, 0b00000010},  /* "b" */
+    {0b00011011, 0b00000000},  /* "C" */
+    {0b01110001, 0b00001000},  /* "d" */
+    {0b00011010, 0b00001000},  /* "e" */
+    {0b00000001, 0b00110000},  /* "f" */
+    {0b01110001, 0b00100000},  /* "g" */
+    {0b00001110, 0b00010000},  /* "h" */
+    {0b00000000, 0b00010000},  /* "i" */
+    {0b00001000, 0b01001000},  /* "j" */
+    {0b00000001, 0b01010010},  /* "k" */
+    {0b00000000, 0b01010000},  /* "l" */
+    {0b00101011, 0b00010000},  /* "m" */
+    {0b00001010, 0b00010000},  /* "n" */
+    {0b00111011, 0b00000000},  /* "o" */
+    {0b00001110, 0b10000000},  /* "p" */
+    {0b01100001, 0b00100000},  /* "q" */
+    {0b00001010, 0b00000000},  /* "r" */
+    {0b00010001, 0b00000010},  /* "s" */
+    {0b00011110, 0b00000000},  /* "t" */
+    {0b00111000, 0b00000000},  /* "u" */
+    {0b00001000, 0b00001000},  /* "v" */
+    {0b00101000, 0b00001010},  /* "w" */
+    {0b00000000, 0b10101010},  /* "x" */
+    {0b01110001, 0b01000000},  /* "y" */
+    {0b00010010, 0b00001000}   /* "z" */
+};
+
+// LCD memory map for % symbol
+const char symbol[1][2] =
+{
+    {0b00100111, 0b10101010},  /* "%" LCD segments a+b+c+d+e+f+k+q */
 };
 
 LCD_LAUNCHPAD::LCD_LAUNCHPAD(void) {
@@ -299,6 +339,43 @@ const char alphabetBig[26][2] =
     {0x90, 0x28}   /* "Z" */
 };
 
+// LCD memory map for lowercase letters
+const char alphabetSmall[26][2] =
+{
+    {0b00011010, 0b00010000},  /* "a" LCD segments a+b+c+e+f+g+m */
+    {0b00011110, 0b00000010},  /* "b" */
+    {0b00011011, 0b00000000},  /* "C" */
+    {0b01110001, 0b00001000},  /* "d" */
+    {0b00011010, 0b00001000},  /* "e" */
+    {0b00000001, 0b00110000},  /* "f" */
+    {0b01110001, 0b00100000},  /* "g" */
+    {0b00001110, 0b00010000},  /* "h" */
+    {0b00000000, 0b00010000},  /* "i" */
+    {0b00001000, 0b01001000},  /* "j" */
+    {0b00000001, 0b01010010},  /* "k" */
+    {0b00000000, 0b01010000},  /* "l" */
+    {0b00101011, 0b00010000},  /* "m" */
+    {0b00001010, 0b00010000},  /* "n" */
+    {0b00111011, 0b00000000},  /* "o" */
+    {0b00001110, 0b10000000},  /* "p" */
+    {0b01100001, 0b00100000},  /* "q" */
+    {0b00001010, 0b00000000},  /* "r" */
+    {0b00010001, 0b00000010},  /* "s" */
+    {0b00011110, 0b00000000},  /* "t" */
+    {0b00111000, 0b00000000},  /* "u" */
+    {0b00001000, 0b00001000},  /* "v" */
+    {0b00101000, 0b00001010},  /* "w" */
+    {0b00000000, 0b10101010},  /* "x" */
+    {0b01110001, 0b01000000},  /* "y" */
+    {0b00010010, 0b00001000}   /* "z" */
+};
+
+// LCD memory map for % symbol
+const char symbol[1][2] =
+{
+    {0b00100111, 0b10101010},  /* "%" LCD segments a+b+c+d+e+f+k+q */
+};
+
 LCD_LAUNCHPAD::LCD_LAUNCHPAD(void) {
 }
 
@@ -435,7 +512,7 @@ void LCD_LAUNCHPAD::showChar(char c, int position)
     position = digit_loc[position];
 	
 	if (c >= 0 && c <= 9) c+= '0';
-	if (c >= 'a' && c <= 'z') c-= ('a' - 'A');	
+//	if (c >= 'a' && c <= 'z') c-= ('a' - 'A');	
     if (c == ' ')
     {
         // Display space
@@ -453,6 +530,18 @@ void LCD_LAUNCHPAD::showChar(char c, int position)
         // Display alphabet
         LCDMEM[position] = alphabetBig[c-65][0];
         LCDMEM[position+1] = alphabetBig[c-65][1] | (LCDMEM[position+1] & 0b00000101);
+    }
+    else if (c >= 'a' && c <= 'z')
+    {
+        // Display alphabet
+        LCDMEM[position] = alphabetSmall[c-'a'][0];
+        LCDMEM[position+1] = alphabetSmall[c-'a'][1] | (LCDMEM[position+1] & 0b00000101);
+    }
+    else if (c == '%')
+    {
+        // Display symbol
+        LCDMEM[position] = symbol[0][0];
+        LCDMEM[position+1] = symbol[0][1] | (LCDMEM[position+1] & 0b00000101);
     }
     else
     {
