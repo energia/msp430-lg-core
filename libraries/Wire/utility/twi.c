@@ -176,19 +176,19 @@ static uint8_t twi_my_addr;
 
 
 #if DEFAULT_I2C == -1 // SW I2C implementation on default port
-uint16_t I2C_baseAddress = -1;
+int16_t I2C_baseAddress = -1;
 #endif
 #if DEFAULT_I2C == 0
-uint16_t I2C_baseAddress = UCB0_BASE;
+int16_t I2C_baseAddress = UCB0_BASE;
 #endif
 #if DEFAULT_I2C == 1
-uint16_t I2C_baseAddress = UCB1_BASE;
+int16_t I2C_baseAddress = UCB1_BASE;
 #endif
 #if DEFAULT_I2C == 2
-uint16_t I2C_baseAddress = UCB2_BASE;
+int16_t I2C_baseAddress = UCB2_BASE;
 #endif
 #if DEFAULT_I2C == 3
-uint16_t I2C_baseAddress = UCB3_BASE;
+int16_t I2C_baseAddress = UCB3_BASE;
 #endif
 
 
@@ -198,9 +198,9 @@ uint16_t I2C_baseAddress = UCB3_BASE;
  * Input    Module instance
  * Output   none
  */
-void twi_setModule(uint8_t _i2cModule)
+void twi_setModule(int8_t _i2cModule)
 {
-#if (DEFAULT_I2C == -1) || defined(LEGACY_I2C) // SW I2C implementation on default or legacy port
+#if (DEFAULT_I2C == -1) || defined(LEGACY_I2C) /* SW I2C implementation on default or legacy port */
 	if (_i2cModule == -1)
 	{
 		I2C_baseAddress = -1;
@@ -240,7 +240,7 @@ void twi_setModule(uint8_t _i2cModule)
  */
 static void twi_init_port(void)
 {
-#if (DEFAULT_I2C == -1) && defined(LEGACY_I2C) // SW I2C implementation on default and not legacy port
+#if (DEFAULT_I2C == -1) || defined(LEGACY_I2C) /* SW I2C implementation on default and not legacy port */
 	if (I2C_baseAddress == -1)
 	{
 		i2c_sw_init();
