@@ -45,6 +45,10 @@
  * 0b00000101 mask for LCDMEM[position+1] to avoid interferences with symbols
  * Tested on MSP430 FR4133 and FR6989
  *
+ * Dec 26, 2017 Rei Vilo
+ * Added lowercase letters and % symbol
+ * Tested on MSP430 FR4133 and FR6989
+ *
  ******************************************************************************/
 
 #ifndef LCD_LAUNCHPAD_H_
