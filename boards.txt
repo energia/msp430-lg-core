@@ -190,8 +190,8 @@ MSP-EXP430FR5994LP.build.board=MSP_EXP430FR5994LP
 
 MSP-EXP430FR5994LP.upload.tool=dslite
 MSP-EXP430FR5994LP.upload.protocol=dslite
-MSP-EXP430FR5994LP.upload.maximum_size=260096
-MSP-EXP430FR5994LP.upload.maximum_data_size=2048
+MSP-EXP430FR5994LP.upload.maximum_size=262144
+MSP-EXP430FR5994LP.upload.maximum_data_size=4096
 
 #MSP-EXP430FR2311
 
