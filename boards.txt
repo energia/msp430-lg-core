@@ -19,7 +19,7 @@ MSP-EXP430F5529LP.build.board=MSP_EXP430F5529LP
 
 MSP-EXP430F5529LP.upload.tool=dslite
 MSP-EXP430F5529LP.upload.protocol=dslite
-MSP-EXP430F5529LP.upload.maximum_size=48128
+MSP-EXP430F5529LP.upload.maximum_size=131072
 MSP-EXP430F5529LP.upload.maximum_data_size=8192
 
 #MSP-EXP430FR2433
