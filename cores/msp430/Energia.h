@@ -155,6 +155,13 @@ enum{
   T2B0,
   T2B1,
   T2B2,
+  T3B0,
+  T3B1,
+  T3B2,
+  T3B3,
+  T3B4,
+  T3B5,
+  T3B6,
   T0A0_SEL1,  // here starts the enum for Timer pins
   T0A1_SEL1,  // mapped with PxSEL1
   T0A2_SEL1,
