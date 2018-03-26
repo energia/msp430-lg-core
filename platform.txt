@@ -6,7 +6,7 @@
 # https://github.com/arduino/Arduino/wiki/Arduino-IDE-1.5-3rd-party-Hardware-specification
 
 name=Energia MSP430 boards (elf-GCC)
-version=2.0.1
+version=2.0.2
 
 # MSP430 compile variables
 # --------------------- 
@@ -79,7 +79,7 @@ recipe.output.save_file={build.project_name}.{build.variant}.hex
 
 ## Compute size
 recipe.size.pattern="{compiler.path}{compiler.size.cmd}" -A "{build.path}/{build.project_name}.elf"
-recipe.size.regex=^(?:\.text|\.data|\.bootloader)\s+([0-9]+).*
+recipe.size.regex=^(?:\.text|\.lowtext|\.lower\.text|\.upper\.text|\.lower\.rodata|\.rodata|\.rodata2|\.bootloader)\s+([0-9]+).*
 recipe.size.regex.data=^(?:\.data|\.bss|\.noinit)\s+([0-9]+).*
 recipe.size.regex.eeprom=^(?:\.eeprom)\s+([0-9]+).*
 
@@ -94,7 +94,7 @@ recipe.preproc.macros="{compiler.path}{compiler.cpp.cmd}" {compiler.cpp.flags} {
 # TI's DSLite
 tools.dslite.upload.params.verbose=
 tools.dslite.upload.params.quiet=
-tools.dslite.path={runtime.tools.dslite-6.2.1.1624-1.path}
+tools.dslite.path={runtime.tools.dslite-7.2.0.2096.path}
 tools.dslite.config.path={path}
 tools.dslite.cmd.path={path}/DebugServer/bin/DSLite
 #tools.dslite.upload.pattern={cmd.path} {upload.verbose} load -c "{config.path}/{build.variant}.ccxml" -f "{build.path}/{build.project_name}.elf"
