@@ -257,16 +257,16 @@ void initClocks(void)
 {
 
 #ifdef __MSP430_HAS_BC2__
-#if defined(CAL_BC1_16MHZ) && F_CPU >= 16000000L
+#if (defined(CAL_BC1_16MHZ) || defined(CALDCO_16MHZ_)) && F_CPU >= 16000000L
 	BCSCTL1 = CALBC1_16MHZ;
 	DCOCTL = CALDCO_16MHZ;
-#elif defined(CAL_BC1_12MHZ) && (F_CPU >= 12000000L)
+#elif (defined(CAL_BC1_12MHZ) || defined(CALDCO_12MHZ_)) && (F_CPU >= 12000000L)
 	BCSCTL1 = CALBC1_12MHZ;
 	DCOCTL = CALDCO_12MHZ;
-#elif defined(CAL_BC1_8MHZ) && (F_CPU >= 8000000L)
+#elif (defined(CAL_BC1_8MHZ) || defined(CALDCO_8MHZ_)) && (F_CPU >= 8000000L)
 	BCSCTL1 = CALBC1_8MHZ;
 	DCOCTL = CALDCO_8MHZ;
-#elif defined(CAL_BC1_1MHZ) && (F_CPU >= 1000000L)
+#elif (defined(CAL_BC1_1MHZ) || defined(CALDCO_1MHZ_)) && (F_CPU >= 1000000L)
 	BCSCTL1 = CALBC1_1MHZ;
 	DCOCTL = CALDCO_1MHZ;
 #else
