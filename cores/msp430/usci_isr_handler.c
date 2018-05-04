@@ -119,11 +119,11 @@ void USCIAB0TX_ISR(void)
 	still_asleep = stay_asleep;
 
 	/* USCI_A0 UART interrupt? */
-	if (UC0IFG & UCA0TXIFG)
+	if ((UC0IFG & UCA0TXIFG) && (UC0IE & UCA0TXIE))
 		uart_tx_isr(0);
 
 	/* USCI_B0 I2C TX RX interrupt. */
-	if ((UCB0CTL0 & UCMODE_3) == UCMODE_3 && (UC0IFG & (UCB0TXIFG | UCB0RXIFG)) != 0)
+	if ( ((UCB0CTL0 & UCMODE_3) == UCMODE_3) && ((UC0IFG & UCB0TXIFG) && (UC0IE & UCB0TXIE)) )
 		stay_active = i2c_txrx_isr();
 
 	if (still_asleep != stay_asleep || stay_active)
@@ -137,11 +137,11 @@ void USCIAB0RX_ISR(void)
 	still_asleep = stay_asleep;
 
 	/* USCI_A0 UART interrupt? */
-	if (UC0IFG & UCA0RXIFG)
+	if ((UC0IFG & UCA0RXIFG) && (UC0IE & UCA0RXIE))
 		uart_rx_isr(0);
 
 	/* USCI_B0 I2C state change interrupt. */
-	if ((UCB0STAT & (UCALIFG | UCNACKIFG | UCSTTIFG | UCSTPIFG)) != 0)
+	if ( ((UCB0STAT & (UCALIFG | UCNACKIFG | UCSTTIFG | UCSTPIFG) & UCB0I2CIE) != 0))
 		stay_active = i2c_state_isr(); 
 
 	if (still_asleep != stay_asleep || stay_active)

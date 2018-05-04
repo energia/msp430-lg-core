@@ -50,8 +50,8 @@ static const uint8_t MOSI    = 12;   /* P3.1 aka SIMO */
 static const uint8_t MISO    = 13;   /* P3.2 aka SOMI */
 static const uint8_t TWISDA0  = 12;  /* P3.1 UCB0 */
 static const uint8_t TWISCL0  = 13;  /* P3.2 UCB0 */
-#define TWISDA0_SET_MODE (PORT_SELECTION0 | INPUT_PULLUP)
-#define TWISCL0_SET_MODE (PORT_SELECTION0 | INPUT_PULLUP)
+#define TWISDA0_SET_MODE (PORT_SELECTION0)
+#define TWISCL0_SET_MODE (PORT_SELECTION0)
 #define SPISCK_SET_MODE  (PORT_SELECTION0)
 #define SPIMOSI_SET_MODE (PORT_SELECTION0)
 #define SPIMISO_SET_MODE (PORT_SELECTION0)
