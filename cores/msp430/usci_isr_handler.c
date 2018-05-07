@@ -123,7 +123,7 @@ void USCIAB0TX_ISR(void)
 		uart_tx_isr(0);
 
 	/* USCI_B0 I2C TX RX interrupt. */
-	if ( ((UCB0CTL0 & UCMODE_3) == UCMODE_3) && ((UC0IFG & UCB0TXIFG) && (UC0IE & UCB0TXIE)) )
+	if ( ((UCB0CTL0 & UCMODE_3) == UCMODE_3) &&  (UC0IFG & UC0IE & (UCB0RXIFG | UCB0TXIFG)) )
 		stay_active = i2c_txrx_isr();
 
 	if (still_asleep != stay_asleep || stay_active)
