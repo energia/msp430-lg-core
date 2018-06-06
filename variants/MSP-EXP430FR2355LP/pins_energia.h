@@ -45,10 +45,10 @@
 
 
 #if defined(__MSP430_HAS_EUSCI_B0__)
-static const uint8_t SS      = 8;   /* P3.4 */
-static const uint8_t SCK     = 7;   /* P4.5 */
-static const uint8_t MOSI    = 15;  /* P4.6 aka SIMO */
-static const uint8_t MISO    = 14;  /* P4.7 aka SOMI */
+static const uint8_t SS1      = 8;   /* P3.4 */
+static const uint8_t SCK1     = 7;   /* P4.5 */
+static const uint8_t MOSI1    = 15;  /* P4.6 aka SIMO */
+static const uint8_t MISO1    = 14;  /* P4.7 aka SOMI */
 static const uint8_t TWISCL0  = 9;   /* P1.3 SW I2C */
 static const uint8_t TWISDA0  = 10;  /* P1.2 SW I2C */
 static const uint8_t TWISDA1  = 15;  /* P4.6 UCB1 */
@@ -57,9 +57,19 @@ static const uint8_t TWISCL1  = 14;  /* P4.7 UCB1 */
 #define TWISCL0_SET_MODE  (PORT_SELECTION0 | INPUT_PULLUP)
 #define TWISDA1_SET_MODE  (PORT_SELECTION0 | INPUT_PULLUP)
 #define TWISCL1_SET_MODE  (PORT_SELECTION0 | INPUT_PULLUP)
-#define SPISCK_SET_MODE  (PORT_SELECTION0)
-#define SPIMOSI_SET_MODE (PORT_SELECTION0)
-#define SPIMISO_SET_MODE (PORT_SELECTION0)
+#define SPISCK1_SET_MODE  (PORT_SELECTION0)
+#define SPIMOSI1_SET_MODE (PORT_SELECTION0)
+#define SPIMISO1_SET_MODE (PORT_SELECTION0)
+/* Define the default SPI settings */
+#define DEFAULT_SPI 1
+#define SS    SS1   
+#define SCK   SCK1  
+#define MOSI  MOSI1
+#define MISO  MISO1
+#define SPISCK_SET_MODE  SPISCK1_SET_MODE
+#define SPIMOSI_SET_MODE SPIMOSI1_SET_MODE
+#define SPIMISO_SET_MODE SPIMISO1_SET_MODE
+
 /* Define the default I2C settings */
 #define DEFAULT_I2C 0 
 #define TWISDA TWISDA0
@@ -69,18 +79,20 @@ static const uint8_t TWISCL1  = 14;  /* P4.7 UCB1 */
 #endif
 
 #if defined(__MSP430_HAS_EUSCI_A0__) || defined(__MSP430_HAS_EUSCI_A1__)
-static const uint8_t DEBUG_UARTRXD = 22;  /* Receive  Data (RXD) at P4.2 */
-static const uint8_t DEBUG_UARTTXD = 21;  /* Transmit Data (TXD) at P4.3 */
+static const uint8_t DEBUG_UARTRXD = 42;  /* Receive  Data (RXD) at P4.2 */
+static const uint8_t DEBUG_UARTTXD = 41;  /* Transmit Data (TXD) at P4.3 */
 static const uint8_t AUX_UARTRXD = 3;     /* Receive  Data (RXD) at P1.6 */
 static const uint8_t AUX_UARTTXD = 4;     /* Transmit Data (TXD) at P1.7 */
 #define DEBUG_UARTRXD_SET_MODE (PORT_SELECTION0 | INPUT)
 #define DEBUG_UARTTXD_SET_MODE (PORT_SELECTION0 | OUTPUT)
 #define AUX_UARTRXD_SET_MODE (PORT_SELECTION0 | INPUT)
 #define AUX_UARTTXD_SET_MODE (PORT_SELECTION0 | OUTPUT)
-#define DEBUG_UART_MODULE_OFFSET 0x20
+#define DEBUG_UART_MODULE_OFFSET 0x80
 #define AUX_UART_MODULE_OFFSET 0x00
 #define SERIAL1_AVAILABLE 1
 #endif
+
+#define DEFAULT_TIMER 13 /* timer used for OneMsTaskTimer lib */ 
 
 /* Enable P2.6/7 as XTAL pins = FR2311 */
 #define INIT_LFXTAL_PINS P2SEL0 = BIT6 | BIT7
@@ -100,7 +112,7 @@ static const uint8_t A8  = 26;
 static const uint8_t A9  = 25;
 static const uint8_t A10 = 6;
 static const uint8_t A11 = 24;
-static const uint8_t A12 = 128 + 13; // Not available on BoosterPack header
+static const uint8_t A12 = 128 + 12; // Not available on BoosterPack header
 static const uint8_t A13 = 128 + 13; // Not available on BoosterPack header
 static const uint8_t A14 = 128 + 14; // Not available on BoosterPack header
 static const uint8_t A15 = 128 + 15; // Not available on BoosterPack header
@@ -221,7 +233,7 @@ static const uint8_t GREEN_LED = 44;
 
 static const uint8_t PUSH1 = 45;
 static const uint8_t PUSH2 = 46;
-static const uint8_t TEMPSENSOR = 128 + 30; // depends on chip
+static const uint8_t TEMPSENSOR = 128 + 12; // depends on chip
 
 #ifdef ARDUINO_MAIN
 const uint16_t port_to_input[] = {

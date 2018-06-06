@@ -191,7 +191,7 @@ MSP-EXP430FR2355LP.build.extra_flags=-msmall -mcode-region=lower
 MSP-EXP430FR2355LP.upload.tool=dslite
 MSP-EXP430FR2355LP.upload.protocol=dslite
 MSP-EXP430FR2355LP.upload.maximum_size=32768
-MSP-EXP430FR2355LP.upload.maximum_data_size=1024
+MSP-EXP430FR2355LP.upload.maximum_data_size=4096
 
 
 #MSP-EXP430FR5994
