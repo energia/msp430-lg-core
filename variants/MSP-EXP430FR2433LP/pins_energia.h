@@ -161,7 +161,7 @@ static const uint8_t TEMPSENSOR = 128 + 12; // depends on chip
 
 /* Analog pins */
 
-static const uint8_t A0  = 1;
+static const uint8_t A0  = 2;
 static const uint8_t A1  = 19;
 static const uint8_t A2  = 10;  
 static const uint8_t A3  = 9;

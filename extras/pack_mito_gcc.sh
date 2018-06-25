@@ -27,9 +27,10 @@ set -e
 
 # web page: http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/6_00_00_900/index_FDS.html
 
-gcc_ver="7.3.0.9"
-mspgcc_ver="6_00_00_900"
-mspsupport_ver="1.204"
+gcc_ver="7.3.1.24"
+#mspgcc_ver="6_00_01_000"
+mspgcc_ver="latest"
+mspsupport_ver="1.205"
 
 
 TAR="${G}tar" 
@@ -42,6 +43,7 @@ m_download()
 	fn="$( basename "${1%}" )"
 	# check if already there
 	[ -f extras/download/"${fn}" ] && return
+	echo Fetching: "${fn}"
 	wget --content-disposition -qO extras/download/"${fn}" "${1}"
 }
 
