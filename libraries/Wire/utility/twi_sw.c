@@ -34,13 +34,13 @@
   #define TWISDAx TWISDA
   #define TWISCLx TWISCL
   #define TWISDAx_SET_MODE TWISDA_SET_MODE
-  #define TWISDAx_SET_MODE TWISDA_SET_MODE
+  #define TWISCLx_SET_MODE TWISCL_SET_MODE
 #endif
 #if defined(LEGACY_I2C) && (LEGACY_I2C == -1) /* SW I2C implementation on default and legacy port */
   #define TWISDAx TWISDA1
   #define TWISCLx TWISCL1
   #define TWISDAx_SET_MODE TWISDA1_SET_MODE
-  #define TWISDAx_SET_MODE TWISDA1_SET_MODE
+  #define TWISCLx_SET_MODE TWISCL1_SET_MODE
 #endif
 
 #define I2C_DELAY1() __delay_cycles(F_CPU / 1000000UL * 10)
@@ -59,13 +59,13 @@ void i2c_sw_stop(void);
 void i2c_sw_init(void)
 {
   if (digitalRead(TWISDAx) == 0){ // toggle SCL if SDA is low at startup
-      pinMode_int(TWISCLx, TWISDAx_SET_MODE);
+      pinMode_int(TWISDAx, TWISDAx_SET_MODE);
       digitalWrite(TWISCLx, LOW);
       pinMode(TWISCLx, OUTPUT);
-      pinMode_int(TWISCLx, TWISDAx_SET_MODE);
+      pinMode_int(TWISCLx, TWISCLx_SET_MODE);
   }
-  pinMode(TWISDAx, TWISDAx_SET_MODE);
-  pinMode(TWISCLx, TWISDAx_SET_MODE);
+  pinMode_int(TWISDAx, TWISDAx_SET_MODE);
+  pinMode_int(TWISCLx, TWISCLx_SET_MODE);
 }
 
 uint8_t i2c_sw_read(uint8_t slaveAddress,
@@ -76,7 +76,11 @@ uint8_t i2c_sw_read(uint8_t slaveAddress,
   
   ack_error = i2c_sw_start(slaveAddress, I2C_READ);   // Send Start condition
                                             // [ADDR] + R/W bit = 1
-  if (ack_error) return (ack_error);
+  if (ack_error) 
+  {
+	  i2c_sw_stop();
+	  return (ack_error);
+  }
   for (i = 0; i < numBytes-1; i++) {
     *data++ = i2c_sw_rxByte(0);             // Read data
   }
@@ -130,7 +134,7 @@ uint8_t i2c_sw_txByte(uint8_t data)
       pinMode(TWISDAx, OUTPUT);
     }
     I2C_DELAY2();
-    pinMode(TWISCLx, TWISDAx_SET_MODE);
+    pinMode(TWISCLx, TWISCLx_SET_MODE);
     data <<= 1;                             // Shift bits 1 place to the left
     I2C_DELAY1();                           // Quick delay
     digitalWrite(TWISCLx, LOW);
@@ -140,7 +144,7 @@ uint8_t i2c_sw_txByte(uint8_t data)
   pinMode(TWISDAx, TWISDAx_SET_MODE);
   // Get acknowledge
   I2C_DELAY2();
-  pinMode(TWISCLx, TWISDAx_SET_MODE);
+  pinMode(TWISCLx, TWISCLx_SET_MODE);
   I2C_DELAY2();
   ack_error = digitalRead(TWISDAx);
   digitalWrite(TWISCLx, LOW);
@@ -151,7 +155,7 @@ uint8_t i2c_sw_txByte(uint8_t data)
 void i2c_sw_ack(void)                       // Check for I2C acknowledge
 {
    I2C_DELAY2();
-   pinMode(TWISCLx, TWISDAx_SET_MODE);
+   pinMode(TWISCLx, TWISCLx_SET_MODE);
    I2C_DELAY2();
    digitalWrite(TWISCLx, LOW);
    pinMode(TWISCLx, OUTPUT);
@@ -166,7 +170,7 @@ uint8_t i2c_sw_rxByte(uint8_t lastChar)    // Read 8 bits of I2C data
    I2C_DELAY1();
    while (bits > 0)                         // Loop until all bits are read
    {
-      pinMode(TWISCLx, TWISDAx_SET_MODE);
+      pinMode(TWISCLx, TWISCLx_SET_MODE);
       I2C_DELAY1();
       data <<= 1;                           // Shift bits 1 place to the left
       if (digitalRead(TWISDAx))              // Check digital input
@@ -181,7 +185,7 @@ uint8_t i2c_sw_rxByte(uint8_t lastChar)    // Read 8 bits of I2C data
      pinMode(TWISDAx, OUTPUT);               // Set acknowledge
    }
    I2C_DELAY1();
-   pinMode(TWISCLx, TWISDAx_SET_MODE);
+   pinMode(TWISCLx, TWISCLx_SET_MODE);
    I2C_DELAY1();
    digitalWrite(TWISCLx, LOW);
    pinMode(TWISCLx, OUTPUT);
@@ -194,7 +198,7 @@ void i2c_sw_stop(void)                      // Send I2C stop command
   digitalWrite(TWISDAx, LOW);
   pinMode(TWISDAx, OUTPUT);
   I2C_DELAY2();
-  pinMode(TWISCLx, TWISDAx_SET_MODE);
+  pinMode(TWISCLx, TWISCLx_SET_MODE);
   I2C_DELAY2();
   pinMode(TWISDAx, TWISDAx_SET_MODE);
   I2C_DELAY2();
