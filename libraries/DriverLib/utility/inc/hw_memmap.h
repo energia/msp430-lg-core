@@ -3,6 +3,15 @@
 // Only include parts of code relevant for Energia device
 //
 //*****************************************************************************
+
+/* defines used in DriverLib but not part of GCC4.6*/
+#ifndef __get_SR_register   
+#define __get_SR_register()  __read_status_register()
+#endif
+#ifndef __data16_write_addr
+#define __data16_write_addr(x,y) *(unsigned long int*)(x) = y
+#endif
+
 #ifdef __MSP430FR5969__
 
 /* --COPYRIGHT--,BSD
