@@ -13,7 +13,7 @@ uint16_t i2c_txrx_isr(){return 0;}
 
 static boolean still_asleep;  // Used to validate whether a user ISR has issued wakeup() inside LPM3/LPM4 sleep modes.
 
-#if defined(__MSP430_HAS_USCI_A0__) || defined(__MSP430_HAS_USCI_A1__) || defined(__MSP430_HAS_EUSCI_A0__)
+#if defined(__MSP430_HAS_USCI_A0__) || defined(__MSP430_HAS_USCI_A1__) || defined(__MSP430_HAS_EUSCI_A0__) || defined(__MSP430_HAS_EUSCI_A1__) || defined(__MSP430_HAS_EUSCI_A2__) || defined(__MSP430_HAS_EUSCI_A3__)
 #ifndef USCI_UART_UCRXIFG
 #define USCI_UART_UCRXIFG USCI_UCRXIFG
 #endif
@@ -25,6 +25,13 @@ static boolean still_asleep;  // Used to validate whether a user ISR has issued 
 #define XUSCI_A1_OFFSET (__MSP430_BASEADDRESS_EUSCI_A1__ - __MSP430_BASEADDRESS_EUSCI_A0__)
 #else
 #define XUSCI_A1_OFFSET (__MSP430_BASEADDRESS_USCI_A1__ - __MSP430_BASEADDRESS_USCI_A0__)
+#endif
+
+#if defined(__MSP430_HAS_EUSCI_A0__) && defined(__MSP430_HAS_EUSCI_A2__)
+#define XUSCI_A2_OFFSET (__MSP430_BASEADDRESS_EUSCI_A2__ - __MSP430_BASEADDRESS_EUSCI_A0__)
+#endif
+#if defined(__MSP430_HAS_EUSCI_A0__) && defined(__MSP430_HAS_EUSCI_A3__)
+#define XUSCI_A3_OFFSET (__MSP430_BASEADDRESS_EUSCI_A3__ - __MSP430_BASEADDRESS_EUSCI_A0__)
 #endif
 
 extern CHardwareSerial *Serial;
@@ -63,7 +70,42 @@ void USCIA1_ISR(void)
 		__bic_SR_register_on_exit(LPM4_bits);
 }
 #endif
-#endif //defined(__MSP430_HAS_USCI_A0__) || defined(__MSP430_HAS_USCI_A1__) || defined(__MSP430_HAS_EUSCI_A0__)
+
+#if defined( __MSP430_HAS_USCI_A2__ ) || defined(__MSP430_HAS_EUSCI_A2__)
+__attribute__((interrupt(USCI_A2_VECTOR)))
+void USCIA2_ISR(void)
+{
+	still_asleep = stay_asleep;
+
+	switch ( UCA2IV ) 
+	{
+		case USCI_UART_UCRXIFG: uart_rx_isr(XUSCI_A2_OFFSET); break;
+		case USCI_UART_UCTXIFG: uart_tx_isr(XUSCI_A2_OFFSET); break;
+	}  
+
+	if (still_asleep != stay_asleep)
+		__bic_SR_register_on_exit(LPM4_bits);
+}
+#endif
+
+#if defined( __MSP430_HAS_USCI_A3__ ) || defined(__MSP430_HAS_EUSCI_A3__)
+__attribute__((interrupt(USCI_A3_VECTOR)))
+void USCIA3_ISR(void)
+{
+	still_asleep = stay_asleep;
+
+	switch ( UCA3IV ) 
+	{
+		case USCI_UART_UCRXIFG: uart_rx_isr(XUSCI_A3_OFFSET); break;
+		case USCI_UART_UCTXIFG: uart_tx_isr(XUSCI_A3_OFFSET); break;
+	}  
+
+	if (still_asleep != stay_asleep)
+		__bic_SR_register_on_exit(LPM4_bits);
+}
+#endif
+
+#endif //defined(__MSP430_HAS_USCI_A0__) || defined(__MSP430_HAS_USCI_A1__) || defined(__MSP430_HAS_EUSCI_A0__) || defined(__MSP430_HAS_EUSCI_A1__) || defined(__MSP430_HAS_EUSCI_A2__) || defined(__MSP430_HAS_EUSCI_A3__)
 
 #if defined(__MSP430_HAS_USCI_B0__)
 __attribute__((interrupt(USCI_B0_VECTOR)))
