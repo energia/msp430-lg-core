@@ -39,7 +39,7 @@
 // Attribute for placing R/W variables in FRAM
 // Example
 //      uint8_t DisplayBuffer[LCD_MAXIMUM_Y][LCD_MAXIMUM_X] PLACE_IN_FRAM;
-#define PLACE_IN_FRAM __attribute__((section(".text")))
+#define PLACE_IN_FRAM __attribute__((section(".text#")))
 
 #if defined(__MSP430_HAS_EUSCI_B0__)
 static const uint8_t SS0     = 47;  /* P4.0 */
@@ -92,10 +92,10 @@ static const uint8_t TWISCL2 = 9;   /* P7.1 UCB2 */
 #endif
 
 #if defined(__MSP430_HAS_EUSCI_A0__) || defined(__MSP430_HAS_EUSCI_A1__)
-static const uint8_t DEBUG_UARTRXD = 42;  /* Receive  Data (RXD) at P3.5 */
-static const uint8_t DEBUG_UARTTXD = 41;  /* Transmit Data (TXD) at P3.4 */
-static const uint8_t AUX_UARTRXD = 3;     /* Receive  Data (RXD) at P4.3 */
-static const uint8_t AUX_UARTTXD = 4;     /* Transmit Data (TXD) at P4.2 */
+static const uint8_t DEBUG_UARTRXD = 42;  /* Receive  Data (RXD) at P2.1 */
+static const uint8_t DEBUG_UARTTXD = 41;  /* Transmit Data (TXD) at P2.0 */
+static const uint8_t AUX_UARTRXD = 3;     /* Receive  Data (RXD) at P6.1 */
+static const uint8_t AUX_UARTTXD = 4;     /* Transmit Data (TXD) at P6.0 */
 #define DEBUG_UARTRXD_SET_MODE (PORT_SELECTION1 | INPUT)
 #define DEBUG_UARTTXD_SET_MODE (PORT_SELECTION1 | OUTPUT)
 #define AUX_UARTRXD_SET_MODE (PORT_SELECTION0 | INPUT)

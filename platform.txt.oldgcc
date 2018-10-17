@@ -42,10 +42,10 @@ compiler.size.cmd=msp430-size
 build.extra_flags=
 
 # These can be overridden in platform.local.txt
-compiler.c.extra_flags=-I{runtime.tools.msp430-gcc.path}/include
-compiler.c.elf.extra_flags=-L{runtime.tools.msp430-gcc.path}/include
+compiler.c.extra_flags="-I{runtime.tools.msp430-gcc.path}/include"
+compiler.c.elf.extra_flags="-L{runtime.tools.msp430-gcc.path}/include"
 compiler.S.extra_flags=
-compiler.cpp.extra_flags=-I{runtime.tools.msp430-gcc.path}/include 
+compiler.cpp.extra_flags="-I{runtime.tools.msp430-gcc.path}/include" 
 compiler.ar.extra_flags=
 compiler.objcopy.eep.extra_flags=
 compiler.elf2hex.extra_flags=
@@ -109,10 +109,10 @@ tools.mspdebug.upload.params.verbose=
 tools.mspdebug.upload.params.quiet=
 tools.mspdebug.path={runtime.tools.mspdebug.path}
 tools.mspdebug.cmd.path={path}/mspdebug
-tools.mspdebug.upload.pattern={cmd.path} {upload.verbose} {upload.protocol} --force-reset "prog {build.path}/{build.project_name}.hex"
+tools.mspdebug.upload.pattern={cmd.path} {upload.verbose} {upload.protocol} --force-reset "prog '{build.path}/{build.project_name}.hex'"
 
 tools.mspdebug.program.params.verbose=
 tools.mspdebug.program.params.quiet=
 tools.mspdebug.program.params.noverify=
-tools.mspdebug.program.pattern={cmd.path} {program.verbose} {protocol} --force-reset "prog {build.path}/{build.project_name}.hex"
+tools.mspdebug.program.pattern={cmd.path} {program.verbose} {protocol} --force-reset "prog '{build.path}/{build.project_name}.hex'"
 
