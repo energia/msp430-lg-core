@@ -25,7 +25,7 @@
 
 set -e
 
-# web page: http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/6_00_00_900/index_FDS.html
+# web page: http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/latest/index_FDS.html
 
 gcc_ver="7.3.1.24"
 #mspgcc_ver="6_00_01_000"
