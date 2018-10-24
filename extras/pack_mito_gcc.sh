@@ -25,13 +25,7 @@
 
 set -e
 
-# web page: http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/latest/index_FDS.html
-
-gcc_ver="7.3.1.24"
-#mspgcc_ver="6_00_01_000"
-mspgcc_ver="latest"
-mspsupport_ver="1.205"
-
+source ./extras/versions.sh
 
 TAR="${G}tar" 
 
@@ -43,7 +37,7 @@ m_download()
 	fn="$( basename "${1%}" )"
 	# check if already there
 	[ -f extras/download/"${fn}" ] && return
-	echo Fetching: "${fn}"
+	echo Fetching: "${fn}" - "${1}"
 	wget --content-disposition -qO extras/download/"${fn}" "${1}"
 }
 
@@ -67,6 +61,7 @@ m_pack()
 	local en="${2}"
 	local dn="${3}"
 	local an="${4}"
+	local td="${5}"
 	local command="echo no valid extension"
 	echo Packing: "${fn}"
 	expr "${en}" : '.*\.gz$' >/dev/null && command="${G}tar -czf "
@@ -85,6 +80,8 @@ m_pack()
 	cd ..
 	${command} "${fn}${en}" msp430
 	sha256sum --tag "${fn}${en}" >"${fn}${en}".sha256
+	mv "${fn}${en}" ${td}
+	mv "${fn}${en}".sha256 ${td}
 	rm -rf msp430/
 	rm -rf "${fn}"/
 	popd >/dev/null
@@ -111,6 +108,10 @@ echo '!!! untar+patch packages'
 
 [ -d "extras/build" ] && rm -rf extras/build 
 mkdir extras/build
+mkdir extras/build/windows
+mkdir extras/build/macos
+mkdir extras/build/linux32
+mkdir extras/build/linux64
 m_extract "msp430-gcc-${gcc_ver}_linux32.tar.bz2" "extras/build"
 m_extract "msp430-gcc-${gcc_ver}_linux64.tar.bz2" "extras/build"
 m_extract "msp430-gcc-${gcc_ver}_macos.tar.bz2" "extras/build"
@@ -123,11 +124,10 @@ rename -v  msp430-gcc-${gcc_ver} msp430-elf-gcc-${gcc_ver} *
 cd ../..
 
 echo '!!! add support files'
-m_pack "msp430-elf-gcc-${gcc_ver}_linux32" ".tar.bz2" "extras/build" "msp430-gcc-support-files"
-m_pack "msp430-elf-gcc-${gcc_ver}_linux64" ".tar.bz2" "extras/build" "msp430-gcc-support-files"
-m_pack "msp430-elf-gcc-${gcc_ver}_macos"     ".tar.bz2" "extras/build" "msp430-gcc-support-files"
-m_pack "msp430-elf-gcc-${gcc_ver}_win32"   ".zip"     "extras/build" "msp430-gcc-support-files"
+m_pack "msp430-elf-gcc-${gcc_ver}_linux32" ".tar.bz2" "extras/build" "msp430-gcc-support-files"  "linux32"
+m_pack "msp430-elf-gcc-${gcc_ver}_linux64" ".tar.bz2" "extras/build" "msp430-gcc-support-files"  "linux64"
+m_pack "msp430-elf-gcc-${gcc_ver}_macos"   ".tar.bz2" "extras/build" "msp430-gcc-support-files"  "macos"
+m_pack "msp430-elf-gcc-${gcc_ver}_win32"   ".zip"     "extras/build" "msp430-gcc-support-files"  "windows"
 
 rm -rf "extras/build/msp430-elf-gcc-support-files/"
 rm -rf "extras/build/msp430-gcc-support-files/"
-
