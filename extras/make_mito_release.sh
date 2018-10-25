@@ -52,5 +52,5 @@ source ./extras/pack.release_elf_gcc.bash
 
 echo '--- update energia install files'
 cd extras
-python update_json_data.py -m ${energia_ver} -c ${gcc_ver} -d ${dslite_ver} -u ${energia_url} -f 'package_msp430_elf_GCC_index.json.template' -p '../platform.txt.template'
+python update_json_data.py -m ${energia_ver} -c ${gcc_ver} -d ${dslite_ver} -u ${energia_url} -f 'package_msp430_elf_GCC_index.json.template'
 cd ..

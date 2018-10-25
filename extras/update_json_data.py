@@ -64,20 +64,10 @@ parser.add_argument('-u', '--url', default='http',
                     help='Required: dslite version')
 parser.add_argument('-f', '--package_file', default='package_msp430_elf_GCC_index.json.template',
                     help='Required: package file version')
-parser.add_argument('-p', '--platform_file', default='../platform.txt.template',
-                    help='Required: platform file version')
 args = parser.parse_args()
 
 
 my_url = str(args.url.replace("'","")+"/")
-
-# update platform.txt file
-#---------------------------
-with open(args.platform_file) as f:
-    newText=f.read().replace("version=xxx", "version="+args.msp430).replace("dslite-xxx", "dslite-"+args.dslite)
-
-with open("../platform.txt", "w") as f:
-    f.write(newText)
 
 
 # Generate json file
@@ -169,8 +159,8 @@ with open(args.package_file) as json_file:
     add_tool(tool, json_data)
 
 
-    with open('./build/package_msp430_elf_GCC_index.json', 'w') as outfile:
+    with open('./build/'+args.package_file.replace(".template",""), 'w') as outfile:
         json.dump(json_data, outfile, indent=2)
-    with open('./package_msp430_elf_GCC_index.json', 'w') as outfile:
+    with open('./'+args.package_file.replace(".template",""), 'w') as outfile:
         json.dump(json_data, outfile, indent=2)
 

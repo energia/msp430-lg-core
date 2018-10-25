@@ -1,6 +1,9 @@
 # file to maintain version information used for getting packages and genration
 # eneriga distrubition files
 
+# url where the package can be finally loaded from:
+energia_url="http://www.hpa.tide.ti.com/msp430/energia"
+
 
 # tool versions - used to download and create packages
 
@@ -15,7 +18,13 @@ mspsupport_ver="1.205"
 dslite_url="https://s3.amazonaws.com/energiaUS/tools"
 dslite_ver="8.2.0.1400"
 
+
+# New GCC Compiler (Mito)
 # Energia tools version number - stored in platform.txt
 energia_ver="2.0.3"
-# url where the package can be finally loaded from:
-energia_url="http://www.hpa.tide.ti.com/msp430/energia"
+
+
+# Legacy GCC Compiler
+# Energia tools version number - stored in platform.txt
+energia1_ver="1.0.5"
+legacy_gcc_ver="4.6.6"
