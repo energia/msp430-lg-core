@@ -67,7 +67,7 @@ parser.add_argument('-f', '--package_file', default='package_msp430_elf_GCC_inde
 args = parser.parse_args()
 
 
-my_url = str(args.url.replace("'","")+"/")
+my_url = str(args.url.replace("'",""))
 
 
 # Generate json file

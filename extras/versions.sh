@@ -2,7 +2,7 @@
 # eneriga distrubition files
 
 # url where the package can be finally loaded from:
-energia_url="https://s3.amazonaws.com/energiaUS"
+energia_url="http://energia.nu/downloads/download_core.php?file="
 
 
 # tool versions - used to download and create packages
