@@ -3,9 +3,43 @@ Build instructions:
 Note: Run all commands from the directory above
       Scripts are tested with cygwin
 
+	  
+	  
+Prepare
+=======
+	update version.sh file with correct version information
+	-> see also some instructions there
+	copy/update the json.template file with the current released json files.
+	
+	  
 Build Compiler package with new GCC (elf) compiler
 ==================================================
+	run ./extras/make_mito_release.sh
+	- files are collected from the source defined in version.sh then updated and patched
+	- dslite is assumed to be available on the web ready to use package
+	- the json file is generarated / updated / added with the new or changed version and file details
+	- finally the files are stored in the build folder
 
+
+	
+Build Compiler package with legacy GCC compiler
+==================================================
+	run ./extras/make_release.sh
+	- files are collected from the source defined in version.sh then updated and patched
+	- currently it assumes that the compiler is already available and just taken from the web
+	- dslite is assumed to be available on the web ready to use package
+	- the json file is generarated / updated / added with the new or changed version and file details
+	- finally the files are stored in the build folder
+	
+	
+	
+
+=============================================================================================================
+
+	
+outdated info:
+=================	
+	
 Somnium:
 --------
 Update below version info in pack_somnium_gcc.sh with data from 

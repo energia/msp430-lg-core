@@ -75,20 +75,34 @@ my_url = str(args.url.replace("'","")+"/")
 with open(args.package_file) as json_file:
     json_data = json.load(json_file, object_pairs_hook=OrderedDict)
 
-    tool = OrderedDict({
-        'name': "Energia MSP430 boards (elf-GCC)",
-        'architecture': "msp430elf",
-        'version': args.msp430,
-        'category': "Energia",
-        'url': my_url + "msp430-" + args.msp430 + ".tar.bz2",
-        'archiveFileName': "msp430-" + args.msp430 + ".tar.bz2",
-    })
+    if args.compiler[:1] == "4": # legacy GCC
+        tool = OrderedDict({
+            'name': "Energia MSP430 boards",
+            'architecture': "msp430",
+            'version': args.msp430,
+            'category': "Energia",
+            'url': my_url + "msp430-" + args.msp430 + ".tar.bz2",
+            'archiveFileName': "msp430-" + args.msp430 + ".tar.bz2",
+        })
+    else:
+        tool = OrderedDict({
+            'name': "Energia MSP430 boards (elf-GCC)",
+            'architecture': "msp430elf",
+            'version': args.msp430,
+            'category': "Energia",
+            'url': my_url + "msp430-" + args.msp430 + ".tar.bz2",
+            'archiveFileName': "msp430-" + args.msp430 + ".tar.bz2",
+        })
     update_file_info(tool, '.')
     add_version(tool, json_data)
 
+    if args.compiler[:1] == "4": # legacy GCC
+        compiler_name = 'msp430-gcc'
+    else:
+        compiler_name = 'msp430-elf-gcc'
 
     tool = OrderedDict({
-        'name': 'msp430-elf-gcc',
+        'name': compiler_name,
         'version': args.compiler,
     })
     add_toolsDependencies(tool, json_data)
@@ -105,28 +119,51 @@ with open(args.package_file) as json_file:
     })
     #add_toolsDependencies(tool, json_data)
 
+    if args.compiler[:1] == "4": # legacy GCC
+        tool = OrderedDict({
+            'name': compiler_name,
+            'version': args.compiler,
+            'systems': [
+                {
+                    'host': 'i686-mingw32',
+                    'url': my_url + "windows/" + compiler_name + "-" + args.compiler + "-i686-mingw32.tar.bz2",
+                    'archiveFileName': compiler_name + "-" + args.compiler + "-i686-mingw32.tar.bz2",
+                },
+                {
+                    'host': 'x86_64-apple-darwin',
+                    'url': my_url + 'macosx/' + compiler_name + '-' + args.compiler + '-i386-apple-darwin11.tar.bz2',
+                    'archiveFileName': compiler_name + "-" + args.compiler + '-i386-apple-darwin11.tar.bz2',
+                },
+                {
+                    'host': 'x86_64-pc-linux-gnu',
+                    'url': my_url + 'linux64/' + compiler_name + '-' + args.compiler + '-i386-x86_64-pc-linux-gnu.tar.bz2',
+                    'archiveFileName': compiler_name + '-' + args.compiler + '-i386-x86_64-pc-linux-gnu.tar.bz2',
+                }
+            ]
+        })
+    else:
+        tool = OrderedDict({
+            'name': compiler_name,
+            'version': args.compiler,
+            'systems': [
+                {
+                    'host': 'i686-mingw32',
+                    'url': my_url + "windows/" + compiler_name + "-" + args.compiler + "_win32.zip",
+                    'archiveFileName': compiler_name + "-" + args.compiler + "_win32.zip",
+                },
+                {
+                    'host': 'x86_64-apple-darwin',
+                    'url': my_url + 'macosx/' + compiler_name + '-' + args.compiler + '_macos.tar.bz2',
+                    'archiveFileName': compiler_name + "-" + args.compiler + '_macos.tar.bz2',
+                },
+                {
+                    'host': 'x86_64-pc-linux-gnu',
+                    'url': my_url + 'linux64/' + compiler_name + '-' + args.compiler + '_linux64.tar.bz2',
+                    'archiveFileName': compiler_name + '-' + args.compiler + '_linux64.tar.bz2',
+                }
+            ]
+        })
 
-    tool = OrderedDict({
-        'name': 'msp430-elf-gcc',
-        'version': args.compiler,
-        'systems': [
-            {
-                'host': 'i686-mingw32',
-                'url': my_url + "windows/msp430-elf-gcc-" + args.compiler + "_win32.zip",
-                'archiveFileName': "msp430-elf-gcc-" + args.compiler + "_win32.zip",
-            },
-            {
-                'host': 'x86_64-apple-darwin',
-                'url': my_url + 'macosx/msp430-elf-gcc-' + args.compiler + '_macos.tar.bz2',
-                'archiveFileName': 'msp430-elf-gcc-' + args.compiler + '_macos.tar.bz2',
-            },
-            {
-                'host': 'x86_64-pc-linux-gnu',
-                'url': my_url + 'linux64/msp430-elf-gcc-' + args.compiler + '_linux64.tar.bz2',
-                'archiveFileName': 'msp430-elf-gcc-' + args.compiler + '_linux64.tar.bz2',
-            }
-        ]
-    })
     update_file_info(tool['systems'][0], 'windows')
     update_file_info(tool['systems'][1], 'macos')
     update_file_info(tool['systems'][2], 'linux64')

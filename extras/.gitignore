@@ -1,6 +1,7 @@
 *.tar
 *.bz2
 *.zip
+*.json
 build/
 download/
 dslite/

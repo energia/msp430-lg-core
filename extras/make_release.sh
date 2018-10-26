@@ -27,9 +27,40 @@ set -e
 
 source ./extras/versions.sh
 
+m_download()
+{
+	local fn
+	# SF directlinks
+	fn="$( basename "${1%}" )"
+	# check if already there
+	[ -f extras/download/"${fn}" ] && return
+	echo Fetching: "${fn}" - "${1}"
+	wget --content-disposition -qO extras/download/"${fn}" "${1}"
+}
 
+
+#[ ! -d "extras/build" ] && rm -rf extras/build 
+[ ! -d "extras/build" ] && mkdir extras/build
+[ ! -d "extras/build/windows" ] && mkdir extras/build/windows
+[ ! -d "extras/build/macos" ] && mkdir extras/build/macos
+[ ! -d "extras/build/linux32" ] && mkdir extras/build/linux32
+[ ! -d "extras/build/linux64" ] && mkdir extras/build/linux64
+
+
+ 
 echo '--- do compiler packages'
-source ./extras/pack_mito_gcc.sh
+echo 'prepare gcc'
+echo "this needs to be already available online at: ${dslite_url}"
+m_download "${dslite_url}/windows/msp430-gcc-${legacy_gcc_ver}-i686-mingw32.tar.bz2"
+cp  extras/download/msp430-gcc-${legacy_gcc_ver}-i686-mingw32.tar.bz2 extras/build/windows/
+m_download "${dslite_url}/macosx/msp430-gcc-${legacy_gcc_ver}-i386-apple-darwin11.tar.bz2"
+cp  extras/download/msp430-gcc-${legacy_gcc_ver}-i386-apple-darwin11.tar.bz2 extras/build/macos/
+m_download "${dslite_url}/linux64/msp430-gcc-${legacy_gcc_ver}-i386-x86_64-pc-linux-gnu.tar.bz2"
+cp  extras/download/msp430-gcc-${legacy_gcc_ver}-i386-x86_64-pc-linux-gnu.tar.bz2 extras/build/linux64/
+for filename in $(find extras/build/ -name 'msp430-gcc-*' ); do
+    sha256sum --tag "$filename" >"$filename".sha256
+done
+
 
 
 echo 'prepare dslite'
@@ -47,11 +78,11 @@ done
 
 
 echo '--- do energia package'
-source ./extras/pack.release_elf_gcc.bash
+./extras/pack.release_gcc.bash
 
 
 echo '--- update energia install files'
 cd extras
-echo "python update_json_data.py -m ${energia_ver} -c ${gcc_ver} -d ${dslite_ver} -u ${energia_url} -f 'package_msp430_elf_GCC_index.json.template'"
-python update_json_data.py -m ${energia_ver} -c ${gcc_ver} -d ${dslite_ver} -u ${energia_url} -f 'package_msp430_elf_GCC_index.json.template'
+echo "python update_json_data.py -m ${energia1_ver} -c ${legacy_gcc_ver} -d ${dslite_ver} -u ${energia_url} -f 'package_index.json.template'"
+python update_json_data.py -m ${energia1_ver} -c ${legacy_gcc_ver} -d ${dslite_ver} -u ${energia_url} -f 'package_index.json.template'
 cd ..

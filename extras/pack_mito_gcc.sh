@@ -106,12 +106,12 @@ cd ../..
 
 echo '!!! untar+patch packages'
 
-[ -d "extras/build" ] && rm -rf extras/build 
-mkdir extras/build
-mkdir extras/build/windows
-mkdir extras/build/macos
-mkdir extras/build/linux32
-mkdir extras/build/linux64
+#[ -d "extras/build" ] && rm -rf extras/build 
+#mkdir extras/build
+#mkdir extras/build/windows
+#mkdir extras/build/macos
+#mkdir extras/build/linux32
+#mkdir extras/build/linux64
 m_extract "msp430-gcc-${gcc_ver}_linux32.tar.bz2" "extras/build"
 m_extract "msp430-gcc-${gcc_ver}_linux64.tar.bz2" "extras/build"
 m_extract "msp430-gcc-${gcc_ver}_macos.tar.bz2" "extras/build"
