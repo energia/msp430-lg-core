@@ -2,7 +2,7 @@
 # eneriga distrubition files
 
 # url where the package can be finally loaded from:
-energia_url="http://www.hpa.tide.ti.com/msp430/energia"
+energia_url="https://s3.amazonaws.com/energiaUS"
 
 
 # tool versions - used to download and create packages
