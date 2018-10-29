@@ -113,7 +113,8 @@ m_extract "msp430-gcc-support-files-${mspsupport_ver}.zip" "extras/build"
 
 echo '!!! rename to elf'
 cd extras/build
-rename -v  msp430-gcc-${gcc_ver} msp430-elf-gcc-${gcc_ver} *
+#rename -v  msp430-gcc-${gcc_ver} msp430-elf-gcc-${gcc_ver} *
+for f in msp430-gcc-${gcc_ver}*; do mv "$f" "${f/msp430-gcc-${gcc_ver}/msp430-elf-gcc-${gcc_ver}}"; done
 cd ../..
 
 echo '!!! add support files'

@@ -99,7 +99,7 @@ m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/
 m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${mspgcc_ver}/exports/msp430-gcc-support-files-${mspsupport_ver}.zip"
 m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${mspgcc_ver}/exports/md5sum.txt"
 cd extras/download
-sed -i '/md5sum/d' ./md5sum.txt
+#sed -i '/md5sum/d' ./md5sum.txt
 md5sum.exe --check --ignore-missing md5sum.txt
 cd ../..
 
@@ -107,11 +107,11 @@ cd ../..
 echo '!!! untar+patch packages'
 
 #[ -d "extras/build" ] && rm -rf extras/build 
-#mkdir extras/build
-#mkdir extras/build/windows
-#mkdir extras/build/macos
-#mkdir extras/build/linux32
-#mkdir extras/build/linux64
+[ ! -d "extras/build" ] && mkdir extras/build
+[ ! -d "extras/build/windows" ] && mkdir extras/build/windows
+[ ! -d "extras/build/macos" ] && mkdir extras/build/macos
+[ ! -d "extras/build/linux32" ] && mkdir extras/build/linux32
+[ ! -d "extras/build/linux64" ] && mkdir extras/build/linux64
 m_extract "msp430-gcc-${gcc_ver}_linux32.tar.bz2" "extras/build"
 m_extract "msp430-gcc-${gcc_ver}_linux64.tar.bz2" "extras/build"
 m_extract "msp430-gcc-${gcc_ver}_macos.tar.bz2" "extras/build"
@@ -120,7 +120,8 @@ m_extract "msp430-gcc-support-files-${mspsupport_ver}.zip" "extras/build"
 
 echo '!!! rename to elf'
 cd extras/build
-rename -v  msp430-gcc-${gcc_ver} msp430-elf-gcc-${gcc_ver} *
+#rename -v  msp430-gcc-${gcc_ver} msp430-elf-gcc-${gcc_ver} *
+for f in msp430-gcc-${gcc_ver}*; do mv "$f" "${f/msp430-gcc-${gcc_ver}/msp430-elf-gcc-${gcc_ver}}"; done
 cd ../..
 
 echo '!!! add support files'
