@@ -43,5 +43,5 @@ rm boards.txt.oldgcc
 [ -d "extras/build" ] || mkdir extras/build 
 mv ../msp430-$VERSION.tar.bz2 ./extras/build/
 
-shasum -a 256 --tag extras/build/msp430-$VERSION.tar.bz2 > extras/build/msp430-$VERSION.tar.bz2.sha256
+shasum -a 256 extras/build/msp430-$VERSION.tar.bz2 > extras/build/msp430-$VERSION.tar.bz2.sha256
 stat -f -c%z extras/build/msp430-$VERSION.tar.bz2

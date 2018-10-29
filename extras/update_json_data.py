@@ -6,13 +6,21 @@ import os
 def update_file_info (index, dir):
     newText = ""
     file = index['archiveFileName']
-    with open("build/"+dir+"/"+file+".sha256") as f:
-        newText = f.read().split("=")
+    BSD = False
+    if BSD:
+        with open("build/"+dir+"/"+file+".sha256") as f:
+            newText = f.read().split("=")
 
-    index['checksum'] = "SHA-256:" + newText[1].replace("\n","").replace(" ","")
-    index['size'] = str(os.path.getsize("build/"+dir+"/"+file))
-    return {'checksum': "SHA-256:" + newText[1].replace("\n","").replace(" ",""),
-            'size': str(os.path.getsize("build/" + dir + "/" + file))}
+        index['checksum'] = "SHA-256:" + newText[1].replace("\n","").replace(" ","")
+        index['size'] = str(os.path.getsize("build/"+dir+"/"+file))
+    else:
+        with open("build/" + dir + "/" + file + ".sha256") as f:
+            newText = f.read().split("*")
+
+        index['checksum'] = "SHA-256:" + newText[0].replace("\n", "").replace(" ", "")
+        index['size'] = str(os.path.getsize("build/" + dir + "/" + file))
+    return {'checksum': index['checksum'],
+            'size': index['size'] }
 
 
 def add_version(tooldata, json_data):

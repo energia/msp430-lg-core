@@ -58,7 +58,7 @@ cp  extras/download/msp430-gcc-${legacy_gcc_ver}-i386-apple-darwin11.tar.bz2 ext
 m_download "${dslite_url}/linux64/msp430-gcc-${legacy_gcc_ver}-i386-x86_64-pc-linux-gnu.tar.bz2"
 cp  extras/download/msp430-gcc-${legacy_gcc_ver}-i386-x86_64-pc-linux-gnu.tar.bz2 extras/build/linux64/
 for filename in $(find extras/build/ -name 'msp430-gcc-*' ); do
-    shasum -a 256 --tag "$filename" >"$filename".sha256
+    shasum -a 256 "$filename" >"$filename".sha256
 done
 
 
@@ -73,7 +73,7 @@ m_download "${dslite_url}/linux64/dslite-${dslite_ver}-i386-x86_64-pc-linux-gnu.
 cp  extras/download/dslite-${dslite_ver}-i386-x86_64-pc-linux-gnu.tar.bz2 extras/build/linux64/
 
 for filename in $(find extras/build/ -name 'dslite-*' ); do
-    shasum -a 256 --tag "$filename" >"$filename".sha256
+    shasum -a 256 "$filename" >"$filename".sha256
 done
 
 

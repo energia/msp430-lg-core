@@ -40,6 +40,6 @@ cd -
 mv ../msp430-$VERSION.tar.bz2 ./extras/build/
 
 cd extras/build
-shasum -a 256 --tag msp430-$VERSION.tar.bz2 > msp430-$VERSION.tar.bz2.sha256
+shasum -a 256 msp430-$VERSION.tar.bz2 > msp430-$VERSION.tar.bz2.sha256
 stat -f -c %z msp430-$VERSION.tar.bz2
 cd ../..
