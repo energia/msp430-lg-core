@@ -79,7 +79,7 @@ m_pack()
 	cp -r * ../msp430
 	cd ..
 	${command} "${fn}${en}" msp430
-	sha256sum --tag "${fn}${en}" >"${fn}${en}".sha256
+	shasum -a 256 --tag "${fn}${en}" >"${fn}${en}".sha256
 	mv "${fn}${en}" ${td}
 	mv "${fn}${en}".sha256 ${td}
 	rm -rf msp430/
