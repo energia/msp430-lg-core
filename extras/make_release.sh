@@ -35,6 +35,7 @@ m_download()
 	# check if already there
 	[ -f extras/download/"${fn}" ] && return
 	echo Fetching: "${fn}" - "${1}"
+	[ ! -d "extras/download" ] && mkdir extras/download
 	wget --content-disposition -qO extras/download/"${fn}" "${1}"
 }
 
@@ -50,13 +51,13 @@ m_download()
  
 echo '--- do compiler packages'
 echo 'prepare gcc'
-echo "this needs to be already available online at: ${dslite_url}"
-m_download "${dslite_url}/windows/msp430-gcc-${legacy_gcc_ver}-i686-mingw32.tar.bz2"
-cp  extras/download/msp430-gcc-${legacy_gcc_ver}-i686-mingw32.tar.bz2 extras/build/windows/
-m_download "${dslite_url}/macosx/msp430-gcc-${legacy_gcc_ver}-i386-apple-darwin11.tar.bz2"
-cp  extras/download/msp430-gcc-${legacy_gcc_ver}-i386-apple-darwin11.tar.bz2 extras/build/macos/
-m_download "${dslite_url}/linux64/msp430-gcc-${legacy_gcc_ver}-i386-x86_64-pc-linux-gnu.tar.bz2"
-cp  extras/download/msp430-gcc-${legacy_gcc_ver}-i386-x86_64-pc-linux-gnu.tar.bz2 extras/build/linux64/
+echo "this needs to be already available online at: ${DSLITE_URL}"
+m_download "${DSLITE_URL}/windows/msp430-gcc-${LEGACY_GCC_VER}-i686-mingw32.tar.bz2"
+cp  extras/download/msp430-gcc-${LEGACY_GCC_VER}-i686-mingw32.tar.bz2 extras/build/windows/
+m_download "${DSLITE_URL}/macosx/msp430-gcc-${LEGACY_GCC_VER}-i386-apple-darwin11.tar.bz2"
+cp  extras/download/msp430-gcc-${LEGACY_GCC_VER}-i386-apple-darwin11.tar.bz2 extras/build/macos/
+m_download "${DSLITE_URL}/linux64/msp430-gcc-${LEGACY_GCC_VER}-i386-x86_64-pc-linux-gnu.tar.bz2"
+cp  extras/download/msp430-gcc-${LEGACY_GCC_VER}-i386-x86_64-pc-linux-gnu.tar.bz2 extras/build/linux64/
 for filename in $(find extras/build/ -name 'msp430-gcc-*' ); do
     shasum -a 256 "$filename" >"$filename".sha256
 done
@@ -64,13 +65,13 @@ done
 
 
 echo 'prepare dslite'
-echo "this needs to be already available online at: ${dslite_url}"
-m_download "${dslite_url}/windows/dslite-${dslite_ver}-i686-mingw32.tar.bz2"
-cp  extras/download/dslite-${dslite_ver}-i686-mingw32.tar.bz2 extras/build/windows/
-m_download "${dslite_url}/macosx/dslite-${dslite_ver}-x86_64-apple-darwin.tar.bz2"
-cp  extras/download/dslite-${dslite_ver}-x86_64-apple-darwin.tar.bz2 extras/build/macos/
-m_download "${dslite_url}/linux64/dslite-${dslite_ver}-i386-x86_64-pc-linux-gnu.tar.bz2"
-cp  extras/download/dslite-${dslite_ver}-i386-x86_64-pc-linux-gnu.tar.bz2 extras/build/linux64/
+echo "this needs to be already available online at: ${DSLITE_URL}"
+m_download "${DSLITE_URL}/windows/dslite-${DSLITE_VER}-i686-mingw32.tar.bz2"
+cp  extras/download/dslite-${DSLITE_VER}-i686-mingw32.tar.bz2 extras/build/windows/
+m_download "${DSLITE_URL}/macosx/dslite-${DSLITE_VER}-x86_64-apple-darwin.tar.bz2"
+cp  extras/download/dslite-${DSLITE_VER}-x86_64-apple-darwin.tar.bz2 extras/build/macos/
+m_download "${DSLITE_URL}/linux64/dslite-${DSLITE_VER}-i386-x86_64-pc-linux-gnu.tar.bz2"
+cp  extras/download/dslite-${DSLITE_VER}-i386-x86_64-pc-linux-gnu.tar.bz2 extras/build/linux64/
 
 for filename in $(find extras/build/ -name 'dslite-*' ); do
     shasum -a 256 "$filename" >"$filename".sha256
@@ -82,7 +83,8 @@ echo '--- do energia package'
 
 
 echo '--- update energia install files'
+wget --content-disposition -qO extras/package_index.json.template http://www.energia.nu/packages/package_index.json
 cd extras
-echo "python update_json_data.py -m ${energia1_ver} -c ${legacy_gcc_ver} -d ${dslite_ver} -u ${energia_url} -f 'package_index.json.template'"
-python update_json_data.py -m ${energia1_ver} -c ${legacy_gcc_ver} -d ${dslite_ver} -u ${energia_url} -f 'package_index.json.template'
+echo "python update_json_data.py -a "msp430" -v ${ENERGIA1_VER}  -n "msp430-gcc" -c ${LEGACY_GCC_VER} -d ${DSLITE_VER} -u ${ENERGIA_URL} -f package_index.json.template"
+python update_json_data.py -a "msp430" -v ${ENERGIA1_VER}  -n "msp430-gcc" -c ${LEGACY_GCC_VER} -d ${DSLITE_VER} -u ${ENERGIA_URL} -f package_index.json.template
 cd ..

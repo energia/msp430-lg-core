@@ -19,7 +19,7 @@
 
 source ./extras/versions.sh
 
-VERSION=$energia1_ver
+VERSION=$ENERGIA1_VER
 echo $VERSION
 
 PWD=`pwd`
@@ -33,7 +33,7 @@ rm -f extras/build/msp430-$VERSION.tar.bz2.sha256
 #filter board.txt
 #sed -r s/(-msmall|-mcode-region=lower|-mhwmult=f5series)// boards.txt > boards.txt.oldgcc
 sed -r s/build\.extra_flags=.*$/build.extra_flags=/ boards.txt > boards.txt.oldgcc
-sed -r s/version=xxx/version=$VERSION/ platform.txt.oldgcc | sed -r s/dslite-xxx/dslite-$dslite_ver/ > platform.txt
+sed -r s/version=xxx/version=$VERSION/ platform.txt.oldgcc | sed -r s/dslite-xxx/dslite-$DSLITE_VER/ > platform.txt
 
 cd ..
 tar --transform "s|$FOLDERNAME|msp430-$VERSION|g" --transform "s|boards.txt.oldgcc|boards.txt|g" --exclude=*.sha256 --exclude=*.bz2 --exclude=boards.txt --exclude=platform.txt.oldgcc --exclude=platform.txt.template --exclude=extras --exclude=build --exclude=.git* --exclude=.idea -cjf msp430-$VERSION.tar.bz2 $FOLDERNAME
@@ -44,4 +44,4 @@ rm boards.txt.oldgcc
 mv ../msp430-$VERSION.tar.bz2 ./extras/build/
 
 shasum -a 256 extras/build/msp430-$VERSION.tar.bz2 > extras/build/msp430-$VERSION.tar.bz2.sha256
-stat -f -c%z extras/build/msp430-$VERSION.tar.bz2
+#stat -f -c%z extras/build/msp430-$VERSION.tar.bz2

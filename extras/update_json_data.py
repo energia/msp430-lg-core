@@ -2,6 +2,8 @@ import json
 from collections import OrderedDict
 import argparse
 import os
+import errno, sys
+
 
 def update_file_info (index, dir):
     newText = ""
@@ -26,21 +28,23 @@ def update_file_info (index, dir):
 def add_version(tooldata, json_data):
     found = False
     for t in json_data["packages"][0]['platforms']:
-        if t['name'] == tooldata['name'] and t['version'] == tooldata['version']:
+        if t['architecture'] == tooldata['architecture'] and t['version'] == tooldata['version']:
             found = True
             t = tooldata
     if found == False:
         json_data["packages"][0]['platforms'].append(tooldata)
     return json_data
 
-def add_toolsDependencies(tooldata, json_data):
+def add_toolsDependencies(arch, version, tooldata, json_data):
     found = False
-    for t in json_data['packages'][0]['platforms'][0]['toolsDependencies']:
-        if t['name'] == tooldata['name'] and t['version'] == tooldata['version']:
-            found = True
-            t = tooldata
-    if found == False:
-        json_data['packages'][0]['platforms'][0]['toolsDependencies'].append(tooldata)
+    for p in json_data['packages'][0]['platforms']:
+        if p['architecture'] == arch and p['version'] == version :
+            for t in p['toolsDependencies']:
+                if t['name'] == tooldata['name']: # and t['version'] == tooldata['version']:
+                    found = True
+                    t = tooldata
+            if found == False:
+                p['toolsDependencies'].append(tooldata)
     return json_data
 
 def add_tool(tooldata, json_data):
@@ -60,9 +64,13 @@ workPath = os.getcwd()
 # Read command line parameters
 # Initialisieren des parsers und setzen des Hilfetextes
 parser = argparse.ArgumentParser(description='')
-parser.add_argument('-m', '--msp430', default='1.0.0',
+parser.add_argument('-a', '--arch', default='msp430',
                     help='Required: msp430 version')
-parser.add_argument('-c', '--compiler', default='1.0.1',
+parser.add_argument('-v', '--version', default='1.0.0',
+                    help='Required: msp430 version')
+parser.add_argument('-n', '--cname', default='msp430-elf-gcc',
+                    help='Required: msp430 version')
+parser.add_argument('-c', '--cversion', default='1.0.1',
                     help='Required: compiler version')
 parser.add_argument('-d', '--dslite', default='1.0.2',
                     help='Required: dslite version')
@@ -77,127 +85,78 @@ args = parser.parse_args()
 
 my_url = str(args.url.replace("'",""))
 
-
 # Generate json file
 #-------------------
 with open(args.package_file) as json_file:
     json_data = json.load(json_file, object_pairs_hook=OrderedDict)
+with open(args.package_file, 'w') as json_file:
+    json.dump(json_data, json_file, indent=2) # write back with new format
 
-    if args.compiler[:1] == "4": # legacy GCC
-        tool = OrderedDict({
-            'name': "Energia MSP430 boards",
-            'architecture': "msp430",
-            'version': args.msp430,
-            'category': "Energia",
-            'url': my_url + "msp430-" + args.msp430 + ".tar.bz2",
-            'archiveFileName': "msp430-" + args.msp430 + ".tar.bz2",
-        })
-    else:
-        tool = OrderedDict({
-            'name': "Energia MSP430 boards (elf-GCC)",
-            'architecture': "msp430elf",
-            'version': args.msp430,
-            'category': "Energia",
-            'url': my_url + "msp430-" + args.msp430 + ".tar.bz2",
-            'archiveFileName': "msp430-" + args.msp430 + ".tar.bz2",
-        })
+    #if (workPath+"\compiler_data.py").is_file():
+    from compiler_data import *
+    #else:
+    #    print ("File compiler_data.py missing\n")
+    #    sys.exit(errno.EACCES)
+
+    tool = get_platform(args, my_url)
     update_file_info(tool, '.')
     add_version(tool, json_data)
 
-    if args.compiler[:1] == "4": # legacy GCC
-        compiler_name = 'msp430-gcc'
-    else:
-        compiler_name = 'msp430-elf-gcc'
+    # if args.compiler[:1] == "4": # legacy GCC
+        # compiler_name = args.arch + "-gcc"
+    # else:
+        # compiler_name = args.arch + "-elf-gcc"
 
-    tool = OrderedDict({
-        'name': compiler_name,
-        'version': args.compiler,
-    })
-    add_toolsDependencies(tool, json_data)
+    ctn = getCompilerToolName(args)
+    tool = OrderedDict([
+        ('packager', "energia"),
+        ('name', ctn),
+        ('version', args.cversion),
+    ])
+    add_toolsDependencies(args.arch, args.version, tool, json_data)
 
-    tool = OrderedDict({
-        'name': 'dslite',
-        'version': args.dslite,
-    })
-    add_toolsDependencies(tool, json_data)
+    tool = OrderedDict([
+        ('packager', "energia"),
+        ('name', 'dslite'),
+        ('version', args.dslite),
+    ])
+    add_toolsDependencies(args.arch, args.version, tool, json_data)
 
-    tool = OrderedDict({
-        'name': 'mspdebug',
-        'version': args.mspdebug,
-    })
-    #add_toolsDependencies(tool, json_data)
+    tool = OrderedDict([
+        ('packager', "energia"),
+        ('name', 'mspdebug'),
+        ('version', args.mspdebug),
+    ])
+    #add_toolsDependencies(args.arch, args.version, tool, json_data)
 
-    if args.compiler[:1] == "4": # legacy GCC
-        tool = OrderedDict({
-            'name': compiler_name,
-            'version': args.compiler,
-            'systems': [
-                {
-                    'host': 'i686-mingw32',
-                    'url': my_url + "windows/" + compiler_name + "-" + args.compiler + "-i686-mingw32.tar.bz2",
-                    'archiveFileName': compiler_name + "-" + args.compiler + "-i686-mingw32.tar.bz2",
-                },
-                {
-                    'host': 'x86_64-apple-darwin',
-                    'url': my_url + 'macosx/' + compiler_name + '-' + args.compiler + '-i386-apple-darwin11.tar.bz2',
-                    'archiveFileName': compiler_name + "-" + args.compiler + '-i386-apple-darwin11.tar.bz2',
-                },
-                {
-                    'host': 'x86_64-pc-linux-gnu',
-                    'url': my_url + 'linux64/' + compiler_name + '-' + args.compiler + '-i386-x86_64-pc-linux-gnu.tar.bz2',
-                    'archiveFileName': compiler_name + '-' + args.compiler + '-i386-x86_64-pc-linux-gnu.tar.bz2',
-                }
-            ]
-        })
-    else:
-        tool = OrderedDict({
-            'name': compiler_name,
-            'version': args.compiler,
-            'systems': [
-                {
-                    'host': 'i686-mingw32',
-                    'url': my_url + "windows/" + compiler_name + "-" + args.compiler + "_win32.zip",
-                    'archiveFileName': compiler_name + "-" + args.compiler + "_win32.zip",
-                },
-                {
-                    'host': 'x86_64-apple-darwin',
-                    'url': my_url + 'macosx/' + compiler_name + '-' + args.compiler + '_macos.tar.bz2',
-                    'archiveFileName': compiler_name + "-" + args.compiler + '_macos.tar.bz2',
-                },
-                {
-                    'host': 'x86_64-pc-linux-gnu',
-                    'url': my_url + 'linux64/' + compiler_name + '-' + args.compiler + '_linux64.tar.bz2',
-                    'archiveFileName': compiler_name + '-' + args.compiler + '_linux64.tar.bz2',
-                }
-            ]
-        })
 
+    tool = init_tools_data(args, my_url)
     update_file_info(tool['systems'][0], 'windows')
     update_file_info(tool['systems'][1], 'macos')
     update_file_info(tool['systems'][2], 'linux64')
     add_tool(tool, json_data)
 
-    tool = OrderedDict({
-        'name':'dslite',
-        'version' : args.dslite,
-        'systems' : [
+    tool = OrderedDict([
+        ('name','dslite'),
+        ('version' , args.dslite),
+        ('systems' , [
                 {
-                'host' : 'i686-mingw32',
-                'url' : my_url + "windows/dslite-" + args.dslite + "-i686-mingw32.tar.bz2",
-                'archiveFileName' : "dslite-" + args.dslite + "-i686-mingw32.tar.bz2",
+                    'host' : 'i686-mingw32',
+                    'url' : my_url + "windows/dslite-" + args.dslite + "-i686-mingw32.tar.bz2",
+                    'archiveFileName' : "dslite-" + args.dslite + "-i686-mingw32.tar.bz2",
                 },
                 {
-                'host' :  'x86_64-apple-darwin',
-                'url' : my_url + 'macosx/dslite-' + args.dslite + '-x86_64_apple-darwin.tar.bz2',
-                'archiveFileName' : 'dslite-' + args.dslite + '-x86_64-apple-darwin.tar.bz2',
+                    'host' :  'x86_64-apple-darwin',
+                    'url' : my_url + 'macosx/dslite-' + args.dslite + '-x86_64_apple-darwin.tar.bz2',
+                    'archiveFileName' : 'dslite-' + args.dslite + '-x86_64-apple-darwin.tar.bz2',
                 },
                 {
-                'host' : 'x86_64-pc-linux-gnu',
-                'url' : my_url + 'linux64/dslite-' + args.dslite + '-i386-x86_64-pc-linux-gnu.tar.bz2',
-                'archiveFileName' :  'dslite-' + args.dslite + '-i386-x86_64-pc-linux-gnu.tar.bz2',
+                    'host' : 'x86_64-pc-linux-gnu',
+                    'url' : my_url + 'linux64/dslite-' + args.dslite + '-i386-x86_64-pc-linux-gnu.tar.bz2',
+                    'archiveFileName' :  'dslite-' + args.dslite + '-i386-x86_64-pc-linux-gnu.tar.bz2',
                 }
-            ]
-    })
+            ])
+    ])
     update_file_info(tool['systems'][0], 'windows')
     update_file_info(tool['systems'][1], 'macos')
     update_file_info(tool['systems'][2], 'linux64')

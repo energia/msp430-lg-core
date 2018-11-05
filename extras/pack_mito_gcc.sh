@@ -38,6 +38,7 @@ m_download()
 	# check if already there
 	[ -f extras/download/"${fn}" ] && return
 	echo Fetching: "${fn}" - "${1}"
+	[ ! -d "extras/download" ] && mkdir extras/download
 	wget --content-disposition -qO extras/download/"${fn}" "${1}"
 }
 
@@ -69,7 +70,7 @@ m_pack()
 	expr "${en}" : '.*\.zip$' >/dev/null && command="${G}zip -q -r "
 	pushd "${dn}" >/dev/null
 	cp -r ${an} ${fn}/
-	#echo energia.msp430-gcc-elf=${gcc_ver} >>${fn}/builtin_tools_versions.txt
+	#echo energia.msp430-gcc-elf=${GCC_VER} >>${fn}/builtin_tools_versions.txt
 	#echo energia.mspdebug=0.22 >>${fn}/builtin_tools_versions.txt
 	#echo energia.msp430-gcc=4.6.3 >>${fn}/builtin_tools_versions.txt
 	[ -f ${fn}/version.properties ] && rm ${fn}/version.properties
@@ -91,13 +92,13 @@ m_pack()
 
 echo '!!! fetch files'
 [ -d "extras/download" ] || mkdir extras/download 
-m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${mspgcc_ver}/exports/msp430-gcc-${gcc_ver}_linux32.tar.bz2"
-m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${mspgcc_ver}/exports/msp430-gcc-${gcc_ver}_linux64.tar.bz2"
-m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${mspgcc_ver}/exports/msp430-gcc-${gcc_ver}_macos.tar.bz2"
-m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${mspgcc_ver}/exports/msp430-gcc-${gcc_ver}_win32.zip"
-m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${mspgcc_ver}/exports/msp430-gcc-${gcc_ver}_win64.zip"
-m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${mspgcc_ver}/exports/msp430-gcc-support-files-${mspsupport_ver}.zip"
-m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${mspgcc_ver}/exports/md5sum.txt"
+m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/exports/msp430-gcc-${GCC_VER}_linux32.tar.bz2"
+m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/exports/msp430-gcc-${GCC_VER}_linux64.tar.bz2"
+m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/exports/msp430-gcc-${GCC_VER}_macos.tar.bz2"
+m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/exports/msp430-gcc-${GCC_VER}_win32.zip"
+m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/exports/msp430-gcc-${GCC_VER}_win64.zip"
+m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/exports/msp430-gcc-support-files-${MSPSUPPORT_VER}.zip"
+m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/exports/md5sum.txt"
 cd extras/download
 #sed -i '/md5sum/d' ./md5sum.txt
 md5sum.exe --check --ignore-missing md5sum.txt
@@ -112,23 +113,23 @@ echo '!!! untar+patch packages'
 [ ! -d "extras/build/macos" ] && mkdir extras/build/macos
 [ ! -d "extras/build/linux32" ] && mkdir extras/build/linux32
 [ ! -d "extras/build/linux64" ] && mkdir extras/build/linux64
-m_extract "msp430-gcc-${gcc_ver}_linux32.tar.bz2" "extras/build"
-m_extract "msp430-gcc-${gcc_ver}_linux64.tar.bz2" "extras/build"
-m_extract "msp430-gcc-${gcc_ver}_macos.tar.bz2" "extras/build"
-m_extract "msp430-gcc-${gcc_ver}_win32.zip" "extras/build"
-m_extract "msp430-gcc-support-files-${mspsupport_ver}.zip" "extras/build"
+m_extract "msp430-gcc-${GCC_VER}_linux32.tar.bz2" "extras/build"
+m_extract "msp430-gcc-${GCC_VER}_linux64.tar.bz2" "extras/build"
+m_extract "msp430-gcc-${GCC_VER}_macos.tar.bz2" "extras/build"
+m_extract "msp430-gcc-${GCC_VER}_win32.zip" "extras/build"
+m_extract "msp430-gcc-support-files-${MSPSUPPORT_VER}.zip" "extras/build"
 
 echo '!!! rename to elf'
 cd extras/build
-#rename -v  msp430-gcc-${gcc_ver} msp430-elf-gcc-${gcc_ver} *
-for f in msp430-gcc-${gcc_ver}*; do mv "$f" "${f/msp430-gcc-${gcc_ver}/msp430-elf-gcc-${gcc_ver}}"; done
+#rename -v  msp430-gcc-${GCC_VER} msp430-elf-gcc-${GCC_VER} *
+for f in msp430-gcc-${GCC_VER}*; do mv "$f" "${f/msp430-gcc-${GCC_VER}/msp430-elf-gcc-${GCC_VER}}"; done
 cd ../..
 
 echo '!!! add support files'
-m_pack "msp430-elf-gcc-${gcc_ver}_linux32" ".tar.bz2" "extras/build" "msp430-gcc-support-files"  "linux32"
-m_pack "msp430-elf-gcc-${gcc_ver}_linux64" ".tar.bz2" "extras/build" "msp430-gcc-support-files"  "linux64"
-m_pack "msp430-elf-gcc-${gcc_ver}_macos"   ".tar.bz2" "extras/build" "msp430-gcc-support-files"  "macos"
-m_pack "msp430-elf-gcc-${gcc_ver}_win32"   ".zip"     "extras/build" "msp430-gcc-support-files"  "windows"
+m_pack "msp430-elf-gcc-${GCC_VER}_linux32" ".tar.bz2" "extras/build" "msp430-gcc-support-files"  "linux32"
+m_pack "msp430-elf-gcc-${GCC_VER}_linux64" ".tar.bz2" "extras/build" "msp430-gcc-support-files"  "linux64"
+m_pack "msp430-elf-gcc-${GCC_VER}_macos"   ".tar.bz2" "extras/build" "msp430-gcc-support-files"  "macos"
+m_pack "msp430-elf-gcc-${GCC_VER}_win32"   ".zip"     "extras/build" "msp430-gcc-support-files"  "windows"
 
 rm -rf "extras/build/msp430-elf-gcc-support-files/"
 rm -rf "extras/build/msp430-gcc-support-files/"

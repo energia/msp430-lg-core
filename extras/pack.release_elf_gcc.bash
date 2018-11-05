@@ -19,7 +19,7 @@
 
 source ./extras/versions.sh
 
-VERSION=$energia_ver
+VERSION=$ENERGIA_VER
 echo $VERSION
 
 PWD=`pwd`
@@ -27,19 +27,19 @@ FOLDERNAME=`basename $PWD`
 echo $FOLDERNAME
 THIS_SCRIPT_NAME=`basename $0`
 
-rm -f extras/build/msp430-$VERSION.tar.bz2
-rm -f extras/build/msp430-$VERSION.tar.bz2.sha256
+rm -f extras/build/msp430elf-$VERSION.tar.bz2
+rm -f extras/build/msp430elf-$VERSION.tar.bz2.sha256
 
-sed -r s/version=xxx/version=$VERSION/ platform.txt.template | sed -r s/dslite-xxx/dslite-$dslite_ver/ > platform.txt
+sed -r s/version=xxx/version=$VERSION/ platform.txt.template | sed -r s/dslite-xxx/dslite-$DSLITE_VER/ > platform.txt
 
 cd ..
-tar --transform "s|$FOLDERNAME|msp430-$VERSION|g"  --exclude=*.sha256 --exclude=*.bz2 --exclude=platform.txt.oldgcc --exclude=platform.txt.template --exclude=extras --exclude=.git* --exclude=.idea -cjf msp430-$VERSION.tar.bz2 $FOLDERNAME
+tar --transform "s|$FOLDERNAME|msp430elf-$VERSION|g"  --exclude=*.sha256 --exclude=*.bz2 --exclude=platform.txt.oldgcc --exclude=platform.txt.template --exclude=extras --exclude=.git* --exclude=.idea -cjf msp430elf-$VERSION.tar.bz2 $FOLDERNAME
 cd -
 
 [ -d "extras/build" ] || mkdir extras/build 
-mv ../msp430-$VERSION.tar.bz2 ./extras/build/
+mv ../msp430elf-$VERSION.tar.bz2 ./extras/build/
 
 cd extras/build
-shasum -a 256 msp430-$VERSION.tar.bz2 > msp430-$VERSION.tar.bz2.sha256
-stat -f -c %z msp430-$VERSION.tar.bz2
+shasum -a 256 msp430elf-$VERSION.tar.bz2 > msp430elf-$VERSION.tar.bz2.sha256
+#stat -f -c %z msp430elf-$VERSION.tar.bz2
 cd ../..
