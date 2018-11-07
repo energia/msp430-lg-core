@@ -27,33 +27,21 @@ set -e
 
 source ./extras/versions.sh
 
-
 echo '--- do compiler packages'
-source ./extras/pack_mito_gcc.sh
+source ./extras/pack.mito_gcc.sh
 
-
-echo 'prepare dslite'
-echo "this needs to be already available online at: ${DSLITE_URL}"
-m_download "${DSLITE_URL}/windows/dslite-${DSLITE_VER}-i686-mingw32.tar.bz2"
-cp  extras/download/dslite-${DSLITE_VER}-i686-mingw32.tar.bz2 extras/build/windows/
-m_download "${DSLITE_URL}/macosx/dslite-${DSLITE_VER}-x86_64-apple-darwin.tar.bz2"
-cp  extras/download/dslite-${DSLITE_VER}-x86_64-apple-darwin.tar.bz2 extras/build/macos/
-m_download "${DSLITE_URL}/linux64/dslite-${DSLITE_VER}-i386-x86_64-pc-linux-gnu.tar.bz2"
-cp  extras/download/dslite-${DSLITE_VER}-i386-x86_64-pc-linux-gnu.tar.bz2 extras/build/linux64/
-
-for filename in $(find extras/build/ -name 'dslite-*' ); do
-    shasum -a 256 "$filename" >"$filename".sha256
-done
-
+echo '--- do dslite package'
+./extras/pack.dslite.bash
 
 echo '--- do energia package'
 source ./extras/pack.release_elf_gcc.bash
 
 
 echo '--- update energia install files'
-wget --content-disposition -qO extras/package_index.json.template http://www.energia.nu/packages/package_index.json
+#wget --content-disposition -qO extras/package_index.json.template http://www.energia.nu/packages/package_index.json
 cd extras
-echo "python update_json_data.py -a "msp430elf" -v ${ENERGIA_VER}  -n "msp430-elf-gcc" -c ${GCC_VER} -d ${DSLITE_VER} -u ${ENERGIA_URL} -f package_index.json.template"
-python update_json_data.py -a "msp430elf" -v ${ENERGIA_VER}  -n "msp430-elf-gcc" -c ${GCC_VER} -d ${DSLITE_VER} -u ${ENERGIA_URL} -f package_index.json.template
+echo "python update_json_data.py -a "msp430elf" -v ${ENERGIA_VER}  -n "msp430-elf-gcc" -c ${GCC_VER} -d ${DSLITE_VER} -i ${INO2CPP_VER} -u ${ENERGIA_URL} -f package_index.json.template"
+#python update_json_data.py -a "msp430elf" -v ${ENERGIA_VER}  -n "msp430-elf-gcc" -c ${GCC_VER} -d ${DSLITE_VER} -i ${INO2CPP_VER} -u ${ENERGIA_URL} -f package_index.json.template
+python update_json_data.py -a "msp430elf" -v ${ENERGIA_VER}  -n "msp430-elf-gcc" -c ${GCC_VER} -d ${DSLITE_VER} -i ${INO2CPP_VER} -u ${ENERGIA_URL} -f package_msp430_elf_GCC_index.json.template
 
 cd ..

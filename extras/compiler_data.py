@@ -20,6 +20,8 @@ def get_platform(args, my_url):
 		('category', "Energia"),
 		('url', my_url + args.arch + "-" + args.version + ".tar.bz2"),
 		('archiveFileName', args.arch + "-" + args.version + ".tar.bz2"),
+		('checksum', "0"),
+		('size', ""),
 		("boards", [
 			{"name": "MSP-EXP430F5529"},
 			{"name": "MSP-EXP430FR2433"},
@@ -37,8 +39,8 @@ def get_platform(args, my_url):
 	])
 
 	if args.version[:1] == "1": # patch for legacy GCC
-		tool["name"]	=  "Energia " + arch.upper() + " boards"
-		tool["architecture"]	=  arch
+		tool["name"] =  "Energia " + args.arch.upper() + " boards"
+		tool["architecture"] = args.arch
 		
 	return tool
 

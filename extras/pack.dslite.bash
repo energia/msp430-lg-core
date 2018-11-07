@@ -15,7 +15,7 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-# build and install Mito GCC toolchain for MSP430-Energia
+# package GCC toolchain for Energia
 #
 # prerequisites
 # - bash
@@ -26,20 +26,22 @@
 set -e
 
 source ./extras/versions.sh
-
-echo '--- do compiler package'
-./extras/pack.compiler.bash
-
-echo '--- do dslite package'
-./extras/pack.dslite.bash
-
-echo '--- do energia package'
-./extras/pack.release_gcc.bash
+source ./extras/setup.bash
 
 
-echo '--- update energia install files'
-wget --content-disposition -qO extras/package_index.json.template http://www.energia.nu/packages/package_index.json
-cd extras
-echo "python update_json_data.py -a "msp430" -v ${ENERGIA1_VER}  -n "msp430-gcc" -c ${LEGACY_GCC_VER} -d ${DSLITE_VER} -i ${INO2CPP_VER} -u ${ENERGIA_URL} -f package_index.json.template"
-python update_json_data.py -a "msp430" -v ${ENERGIA1_VER}  -n "msp430-gcc" -c ${LEGACY_GCC_VER} -d ${DSLITE_VER} -i ${INO2CPP_VER} -u ${ENERGIA_URL} -f package_index.json.template
-cd ..
+echo 'prepare dslite'
+echo "this needs to be already available online at: ${DSLITE_URL}"
+m_download "${DSLITE_URL}/windows/dslite-${DSLITE_VER}-i686-mingw32.tar.bz2"
+cp  extras/download/dslite-${DSLITE_VER}-i686-mingw32.tar.bz2 extras/build/windows/
+m_download "${DSLITE_URL}/macosx/dslite-${DSLITE_VER}-x86_64-apple-darwin.tar.bz2"
+cp  extras/download/dslite-${DSLITE_VER}-x86_64-apple-darwin.tar.bz2 extras/build/macos/
+m_download "${DSLITE_URL}/linux64/dslite-${DSLITE_VER}-i386-x86_64-pc-linux-gnu.tar.bz2"
+cp  extras/download/dslite-${DSLITE_VER}-i386-x86_64-pc-linux-gnu.tar.bz2 extras/build/linux64/
+
+for filename in $(find extras/build/ -name 'dslite-*.sha256' ); do
+    rm "$filename" 
+done 
+for filename in $(find extras/build/ -name 'dslite-*' ); do
+    shasum -a 256 "$filename" >"$filename".sha256
+done
+

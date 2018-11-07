@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash 
 
 
 # Copyright (c) 2018 StefanSch
@@ -15,7 +15,7 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-# build and install Mito GCC toolchain for MSP430-Energia
+# package GCC toolchain for Energia
 #
 # prerequisites
 # - bash
@@ -25,21 +25,23 @@
 
 set -e
 
-source ./extras/versions.sh
+m_download()
+{
+	local fn
+	# SF directlinks
+	fn="$( basename "${1%}" )"
+	# check if already there
+	[ -f extras/download/"${fn}" ] && return
+	echo Fetching: "${fn}" - "${1}"
+	[ ! -d "extras/download" ] && mkdir extras/download
+	wget --content-disposition -qO extras/download/"${fn}" "${1}"
+}
 
-echo '--- do compiler package'
-./extras/pack.compiler.bash
 
-echo '--- do dslite package'
-./extras/pack.dslite.bash
-
-echo '--- do energia package'
-./extras/pack.release_gcc.bash
-
-
-echo '--- update energia install files'
-wget --content-disposition -qO extras/package_index.json.template http://www.energia.nu/packages/package_index.json
-cd extras
-echo "python update_json_data.py -a "msp430" -v ${ENERGIA1_VER}  -n "msp430-gcc" -c ${LEGACY_GCC_VER} -d ${DSLITE_VER} -i ${INO2CPP_VER} -u ${ENERGIA_URL} -f package_index.json.template"
-python update_json_data.py -a "msp430" -v ${ENERGIA1_VER}  -n "msp430-gcc" -c ${LEGACY_GCC_VER} -d ${DSLITE_VER} -i ${INO2CPP_VER} -u ${ENERGIA_URL} -f package_index.json.template
-cd ..
+#[ ! -d "extras/build" ] && rm -rf extras/build 
+[ ! -d "extras/build" ] && mkdir extras/build
+[ ! -d "extras/build/windows" ] && mkdir extras/build/windows
+[ ! -d "extras/build/macos" ] && mkdir extras/build/macos
+[ ! -d "extras/build/linux32" ] && mkdir extras/build/linux32
+[ ! -d "extras/build/linux64" ] && mkdir extras/build/linux64
+[ -d "extras/build/linux64" ]  # check to return true

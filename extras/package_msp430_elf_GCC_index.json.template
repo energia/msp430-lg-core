@@ -1,128 +1,128 @@
 {
   "packages": [
     {
-      "name": "energia", 
-      "maintainer": "Energia", 
-      "websiteURL": "http://www.energia.nu/", 
-      "email": "make@energia.nu", 
+      "name": "energia",
+      "maintainer": "Energia",
+      "websiteURL": "http://www.energia.nu/",
+      "email": "make@energia.nu",
       "help": {
         "online": "http://energia.nu/reference"
-      }, 
+      },
       "platforms": [
         {
-          "name": "Energia MSP430 boards (elf-GCC)", 
-          "architecture": "msp430elf", 
-          "version": "2.0.3", 
-          "category": "Energia", 
-          "url": "http://www.hpa.tide.ti.com/msp430/energia/msp430-2.0.3.tar.bz2", 
-          "archiveFileName": "msp430-2.0.3.tar.bz2", 
-          "checksum": "SHA-256:5eadbfa94b5c7d85222ad0e5767fb2f89052e37c644aa36a29bf8a7568961701", 
-          "size": "2115190", 
+          "name": "Energia MSP430 boards (elf-GCC)",
+          "architecture": "msp430elf",
+          "version": "2.0.3",
+          "category": "Energia",
+          "url": "http://www.hpa.tide.ti.com/msp430/energia/msp430-2.0.3.tar.bz2",
+          "archiveFileName": "msp430-2.0.3.tar.bz2",
+          "checksum": "SHA-256:5eadbfa94b5c7d85222ad0e5767fb2f89052e37c644aa36a29bf8a7568961701",
+          "size": "2115190",
           "boards": [
             {
               "name": "MSP-EXP430F5529LP"
-            }, 
+            },
             {
               "name": "MSP-EXP430FR2311LP"
-            }, 
+            },
             {
               "name": "MSP-EXP430FR2433LP"
-            }, 
+            },
             {
               "name": "MSP-EXP430FR4133LP"
-            }, 
+            },
             {
               "name": "MSP-EXP430FR5739LP"
-            }, 
+            },
             {
               "name": "MSP-EXP430FR5969LP"
-            }, 
+            },
             {
               "name": "MSP-EXP430FR5994LP"
-            }, 
+            },
             {
               "name": "MSP-EXP430FR6989LP"
-            }, 
+            },
             {
               "name": "MSP-EXP430G2231LP"
-            }, 
+            },
             {
               "name": "MSP-EXP430G2452LP"
-            }, 
+            },
             {
               "name": "MSP-EXP430G2553LP"
             }
-          ], 
+          ],
           "toolsDependencies": [
             {
-              "packager": "energia", 
-              "name": "msp430-elf-gcc", 
+              "packager": "energia",
+              "name": "msp430-elf-gcc",
               "version": "7.3.1.24"
-            }, 
+            },
             {
-              "packager": "energia", 
-              "name": "dslite", 
+              "packager": "energia",
+              "name": "dslite",
               "version": "8.2.0.1400"
-            }, 
+            },
             {
-              "packager": "energia", 
-              "name": "mspdebug", 
+              "packager": "energia",
+              "name": "mspdebug",
               "version": "0.22"
             }
           ]
         }
-      ], 
+      ],
       "tools": [
         {
-          "name": "msp430-elf-gcc", 
-          "version": "7.3.1.24", 
+          "name": "msp430-elf-gcc",
+          "version": "7.3.1.24",
           "systems": [
             {
-              "host": "i686-mingw32", 
-              "url": "http://www.hpa.tide.ti.com/msp430/energia/windows/msp430-elf-gcc-7.3.1.24_win32.zip", 
-              "archiveFileName": "msp430-elf-gcc-7.3.1.24_win32.zip", 
-              "checksum": "SHA-256:e876afe826459047e92638095fbad096359ec8d8734a42ec12ab591a2445de0b", 
+              "host": "i686-mingw32",
+              "url": "http://www.hpa.tide.ti.com/msp430/energia/windows/msp430-elf-gcc-7.3.1.24_win32.zip",
+              "archiveFileName": "msp430-elf-gcc-7.3.1.24_win32.zip",
+              "checksum": "SHA-256:e876afe826459047e92638095fbad096359ec8d8734a42ec12ab591a2445de0b",
               "size": "73713566"
-            }, 
+            },
             {
-              "host": "x86_64-apple-darwin", 
-              "url": "http://www.hpa.tide.ti.com/msp430/energia/macosx/msp430-elf-gcc-7.3.1.24_macos.tar.bz2", 
-              "archiveFileName": "msp430-elf-gcc-7.3.1.24_macos.tar.bz2", 
-              "checksum": "SHA-256:ee93cddccb696532263efe838b2ccb0f8f548f45c386983adece27b8633f3b41", 
+              "host": "x86_64-apple-darwin",
+              "url": "http://www.hpa.tide.ti.com/msp430/energia/macosx/msp430-elf-gcc-7.3.1.24_macos.tar.bz2",
+              "archiveFileName": "msp430-elf-gcc-7.3.1.24_macos.tar.bz2",
+              "checksum": "SHA-256:ee93cddccb696532263efe838b2ccb0f8f548f45c386983adece27b8633f3b41",
               "size": "58153067"
-            }, 
+            },
             {
-              "host": "x86_64-linux-gnu", 
-              "url": "http://www.hpa.tide.ti.com/msp430/energia/linux64/msp430-elf-gcc-7.3.1.24_linux64.tar.bz2", 
-              "archiveFileName": "msp430-elf-gcc-7.3.1.24_linux64.tar.bz2", 
-              "size": "54826119", 
+              "host": "x86_64-linux-gnu",
+              "url": "http://www.hpa.tide.ti.com/msp430/energia/linux64/msp430-elf-gcc-7.3.1.24_linux64.tar.bz2",
+              "archiveFileName": "msp430-elf-gcc-7.3.1.24_linux64.tar.bz2",
+              "size": "54826119",
               "checksum": "SHA-256:20602030185e6b36eed252b7f7ec682a3d326a2e837453b731a34d02da7a7c7d"
             }
           ]
-        }, 
+        },
         {
-          "name": "dslite", 
-          "version": "8.2.0.1400", 
+          "name": "dslite",
+          "version": "8.2.0.1400",
           "systems": [
             {
-              "host": "i686-mingw32", 
-              "url": "http://www.hpa.tide.ti.com/msp430/energia/windows/dslite-8.2.0.1400-i686-mingw32.tar.bz2", 
-              "archiveFileName": "dslite-8.2.0.1400-i686-mingw32.tar.bz2", 
-              "checksum": "SHA-256:793a4ea6935fd3436cc7f861b23f353609969b951b62812641635bd467814e05", 
+              "host": "i686-mingw32",
+              "url": "http://www.hpa.tide.ti.com/msp430/energia/windows/dslite-8.2.0.1400-i686-mingw32.tar.bz2",
+              "archiveFileName": "dslite-8.2.0.1400-i686-mingw32.tar.bz2",
+              "checksum": "SHA-256:793a4ea6935fd3436cc7f861b23f353609969b951b62812641635bd467814e05",
               "size": "33976575"
-            }, 
+            },
             {
-              "host": "x86_64-apple-darwin", 
-              "url": "http://www.hpa.tide.ti.com/msp430/energia/macosx/dslite-8.2.0.1400-x86_64_apple-darwin.tar.bz2", 
-              "archiveFileName": "dslite-8.2.0.1400-x86_64-apple-darwin.tar.bz2", 
-              "checksum": "SHA-256:366b9139052037e480fcba4b3a4fb5783b6336b93bd5e2f3034f479a8d502784", 
+              "host": "x86_64-apple-darwin",
+              "url": "http://www.hpa.tide.ti.com/msp430/energia/macosx/dslite-8.2.0.1400-x86_64_apple-darwin.tar.bz2",
+              "archiveFileName": "dslite-8.2.0.1400-x86_64-apple-darwin.tar.bz2",
+              "checksum": "SHA-256:366b9139052037e480fcba4b3a4fb5783b6336b93bd5e2f3034f479a8d502784",
               "size": "17527708"
-            }, 
+            },
             {
-              "host": "x86_64-pc-linux-gnu", 
-              "url": "http://www.hpa.tide.ti.com/msp430/energia/linux64/dslite-8.2.0.1400-i386-x86_64-pc-linux-gnu.tar.bz2", 
-              "archiveFileName": "dslite-8.2.0.1400-i386-x86_64-pc-linux-gnu.tar.bz2", 
-              "checksum": "SHA-256:f95b710f36786ba9d28c9cb96e05c812e7eba875afc69753007c8910c3bce7fd", 
+              "host": "x86_64-pc-linux-gnu",
+              "url": "http://www.hpa.tide.ti.com/msp430/energia/linux64/dslite-8.2.0.1400-i386-x86_64-pc-linux-gnu.tar.bz2",
+              "archiveFileName": "dslite-8.2.0.1400-i386-x86_64-pc-linux-gnu.tar.bz2",
+              "checksum": "SHA-256:f95b710f36786ba9d28c9cb96e05c812e7eba875afc69753007c8910c3bce7fd",
               "size": "19182469"
             }
           ]

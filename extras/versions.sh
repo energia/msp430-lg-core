@@ -18,13 +18,14 @@ MSPSUPPORT_VER="1.205"
 DSLITE_URL="https://s3.amazonaws.com/energiaUS/tools"
 DSLITE_VER="8.2.0.1400"
 
+INO2CPP_VER="1.0.4"
 
 # New GCC Compiler (Mito)
 # Energia tools version number - stored in platform.txt
-ENERGIA_VER="2.0.3"
+ENERGIA_VER="2.0.4"
 
 
 # Legacy GCC Compiler
 # Energia tools version number - stored in platform.txt
-ENERGIA1_VER="1.0.6"
+ENERGIA1_VER="1.0.5"
 LEGACY_GCC_VER="4.6.6"

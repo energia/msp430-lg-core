@@ -1,4 +1,5 @@
-#!/bin/bash -ex
+#!/bin/bash 
+#-ex
 
 #  pack.*.bash - Bash script to help packaging samd core releases.
 #  Copyright (c) 2015 Arduino LLC.  All right reserved.
