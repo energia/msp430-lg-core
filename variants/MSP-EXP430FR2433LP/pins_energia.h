@@ -69,6 +69,15 @@ static const uint8_t TWISCL1  = 14;  /* P2.5 SW UCB0 */
 #define SPIMOSI_SET_MODE SPIMOSI11_SET_MODE
 #define SPIMISO_SET_MODE SPIMISO11_SET_MODE
 
+static const uint8_t SS10     = 6;   /* P1.7 */
+static const uint8_t SCK10    = 5;   /* P1.6 */
+static const uint8_t MOSI10   = 4;   /* P1.4 aka SIMO */
+static const uint8_t MISO10   = 3;   /* P1.5 aka SOMI */
+#define SPISCK10_SET_MODE  (PORT_SELECTION0)
+#define SPIMOSI10_SET_MODE (PORT_SELECTION0)
+#define SPIMISO10_SET_MODE (PORT_SELECTION0)
+
+
 /* Define the default I2C settings */
 #define DEFAULT_I2C 0    /* indicates SW I2C on module 0 */
 #define LEGACY_I2C  -1   /* indicates SW I2C on legacy pins 14/15 */
