@@ -69,15 +69,15 @@ static const uint8_t TWISCL1  = 14;  /* P4.7 UCB1 */
 #endif
 
 #if defined(__MSP430_HAS_EUSCI_A0__) || defined(__MSP430_HAS_EUSCI_A1__)
-static const uint8_t DEBUG_UARTRXD = 22;  /* Receive  Data (RXD) at P4.2 */
-static const uint8_t DEBUG_UARTTXD = 21;  /* Transmit Data (TXD) at P4.3 */
+static const uint8_t DEBUG_UARTRXD = 42;  /* Receive  Data (RXD) at P4.2 */
+static const uint8_t DEBUG_UARTTXD = 41;  /* Transmit Data (TXD) at P4.3 */
 static const uint8_t AUX_UARTRXD = 3;     /* Receive  Data (RXD) at P1.6 */
 static const uint8_t AUX_UARTTXD = 4;     /* Transmit Data (TXD) at P1.7 */
 #define DEBUG_UARTRXD_SET_MODE (PORT_SELECTION0 | INPUT)
 #define DEBUG_UARTTXD_SET_MODE (PORT_SELECTION0 | OUTPUT)
 #define AUX_UARTRXD_SET_MODE (PORT_SELECTION0 | INPUT)
 #define AUX_UARTTXD_SET_MODE (PORT_SELECTION0 | OUTPUT)
-#define DEBUG_UART_MODULE_OFFSET 0x20
+#define DEBUG_UART_MODULE_OFFSET 0x80
 #define AUX_UART_MODULE_OFFSET 0x00
 #define SERIAL1_AVAILABLE 1
 #endif
