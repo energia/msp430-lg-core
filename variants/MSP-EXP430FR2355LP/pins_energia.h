@@ -82,6 +82,8 @@ static const uint8_t AUX_UARTTXD = 4;     /* Transmit Data (TXD) at P1.7 */
 #define SERIAL1_AVAILABLE 1
 #endif
 
+#define DEFAULT_TIMER 13 /* timer used for OneMsTaskTimer lib */ 
+
 /* Enable P2.6/7 as XTAL pins = FR2311 */
 #define INIT_LFXTAL_PINS P2SEL0 = BIT6 | BIT7
 
@@ -100,7 +102,7 @@ static const uint8_t A8  = 26;
 static const uint8_t A9  = 25;
 static const uint8_t A10 = 6;
 static const uint8_t A11 = 24;
-static const uint8_t A12 = 128 + 13; // Not available on BoosterPack header
+static const uint8_t A12 = 128 + 12; // Not available on BoosterPack header
 static const uint8_t A13 = 128 + 13; // Not available on BoosterPack header
 static const uint8_t A14 = 128 + 14; // Not available on BoosterPack header
 static const uint8_t A15 = 128 + 15; // Not available on BoosterPack header
@@ -221,7 +223,7 @@ static const uint8_t GREEN_LED = 44;
 
 static const uint8_t PUSH1 = 45;
 static const uint8_t PUSH2 = 46;
-static const uint8_t TEMPSENSOR = 128 + 30; // depends on chip
+static const uint8_t TEMPSENSOR = 128 + 12; // depends on chip
 
 #ifdef ARDUINO_MAIN
 const uint16_t port_to_input[] = {
