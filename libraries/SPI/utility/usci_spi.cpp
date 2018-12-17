@@ -93,7 +93,7 @@ uint8_t spi_send(const uint8_t _data)
 }
 
 #ifdef UC0IFG
-/* redefine or older 2xx devices where the flags are in SFR */
+/* redefine for older 2xx devices where the flags are in SFR */
 #define UCB0IFG  UC0IFG   
 #define UCRXIFG  UCB0RXIFG
 #define UCTXIFG  UCB0TXIFG

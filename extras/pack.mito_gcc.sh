@@ -51,6 +51,7 @@ m_extract()
 	expr "${fn}" : '.*\.gz$' >/dev/null && command="${G}tar -xzf "
 	expr "${fn}" : '.*\.bz2$' >/dev/null && command="${G}tar -xjf "
 	expr "${fn}" : '.*\.zip$' >/dev/null && command="${G}unzip -q "
+	expr "${fn}" : '.*\.7z$' >/dev/null && command="${G}p7zip -d "
 	pushd "${dn}" >/dev/null
 	${command} ../download/"${fn}"
 	popd >/dev/null
@@ -92,11 +93,11 @@ m_pack()
 
 echo '!!! fetch files'
 [ -d "extras/download" ] || mkdir extras/download 
-m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/exports/msp430-gcc-${GCC_VER}_linux32.tar.bz2"
-m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/exports/msp430-gcc-${GCC_VER}_linux64.tar.bz2"
-m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/exports/msp430-gcc-${GCC_VER}_macos.tar.bz2"
-m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/exports/msp430-gcc-${GCC_VER}_win32.zip"
-m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/exports/msp430-gcc-${GCC_VER}_win64.zip"
+m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/exports/msp430-gcc-${GCC_VER}_linux32.7z"
+m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/exports/msp430-gcc-${GCC_VER}_linux64.7z"
+m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/exports/msp430-gcc-${GCC_VER}_macos.7z"
+m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/exports/msp430-gcc-${GCC_VER}_win32.7z"
+m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/exports/msp430-gcc-${GCC_VER}_win64.7z"
 m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/exports/msp430-gcc-support-files-${MSPSUPPORT_VER}.zip"
 m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/exports/md5sum.txt"
 cd extras/download
@@ -113,10 +114,10 @@ echo '!!! untar+patch packages'
 [ ! -d "extras/build/macos" ] && mkdir extras/build/macos
 [ ! -d "extras/build/linux32" ] && mkdir extras/build/linux32
 [ ! -d "extras/build/linux64" ] && mkdir extras/build/linux64
-m_extract "msp430-gcc-${GCC_VER}_linux32.tar.bz2" "extras/build"
-m_extract "msp430-gcc-${GCC_VER}_linux64.tar.bz2" "extras/build"
-m_extract "msp430-gcc-${GCC_VER}_macos.tar.bz2" "extras/build"
-m_extract "msp430-gcc-${GCC_VER}_win32.zip" "extras/build"
+m_extract "msp430-gcc-${GCC_VER}_linux32.7z" "extras/build"
+m_extract "msp430-gcc-${GCC_VER}_linux64.7z" "extras/build"
+m_extract "msp430-gcc-${GCC_VER}_macos.7z" "extras/build"
+m_extract "msp430-gcc-${GCC_VER}_win32.7z" "extras/build"
 m_extract "msp430-gcc-support-files-${MSPSUPPORT_VER}.zip" "extras/build"
 
 echo '!!! rename to elf'
