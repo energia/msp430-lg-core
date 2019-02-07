@@ -248,7 +248,7 @@ HardwareSerial::operator bool() {
 	return true;
 }
 
-void uart_rx_isr(uint8_t offset)
+void uart_rx_isr(uint16_t offset)
 {
 #ifdef SERIAL1_AVAILABLE
 	/* Debug uart aka Serial always gets rx_buffer and aux aka Serial1 gets rx_buffer1 */
@@ -260,7 +260,7 @@ void uart_rx_isr(uint8_t offset)
 	store_char(c, rx_buffer_ptr);
 }
 
-void uart_tx_isr(uint8_t offset)
+void uart_tx_isr(uint16_t offset)
 {
 #ifdef SERIAL1_AVAILABLE
 	/* Debug uart aka Serial always gets rx_buffer and aux aka Serial1 gets rx_buffer1 */

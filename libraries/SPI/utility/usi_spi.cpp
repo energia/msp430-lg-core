@@ -36,6 +36,12 @@ enum USI5 {
 };
 static enum USI5 bResetAdjust;
 
+#if defined(DEFAULT_SPI)
+    uint8_t spiModule = DEFAULT_SPI;
+#else
+    uint8_t spiModule = 0;
+#endif
+
 /**
  * spi_initialize() - Configure USI for SPI mode
  *

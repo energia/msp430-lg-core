@@ -227,7 +227,7 @@ static const uint8_t TEMPSENSOR = 128 + 30;
 
 #ifdef ARDUINO_MAIN
 
-/* Note: Offsets (OFS_) in header files > 1200 are relative to P1_BASE/P2_BASE ! */
+/* Note: Offsets (OFS_) in header files < 1200 are relative to P1_BASE/P2_BASE ! */
 #if defined (__MSP430_HEADER_VERSION__) & (__MSP430_HEADER_VERSION__ < 1200)
   #define P1_X_BASE   P1_BASE
   #define P2_X_BASE   P2_BASE

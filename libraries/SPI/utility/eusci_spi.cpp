@@ -83,15 +83,11 @@ uint16_t SPI_baseAddress = UCB0_BASE;
 #define UCzBRW       (*((volatile uint16_t *)((uint16_t)(OFS_UCBxBRW    + SPI_baseAddress))))
 #define UCzBR0       (*((volatile uint8_t *) ((uint16_t)(OFS_UCBxBR0    + SPI_baseAddress))))
 #define UCzBR1       (*((volatile uint8_t *) ((uint16_t)(OFS_UCBxBR1    + SPI_baseAddress))))
+#define UCzSTATW     ( (spiModule < 10) ? (*((volatile uint8_t *) ((uint16_t)(OFS_UCBxSTATW  + SPI_baseAddress)))) : (*((volatile uint8_t *) ((uint16_t)(OFS_UCAxSTATW  + SPI_baseAddress)))) )
 #define UCzTXBUF     (*((volatile uint8_t *) ((uint16_t)(OFS_UCBxTXBUF  + SPI_baseAddress))))
 #define UCzRXBUF     (*((volatile uint8_t *) ((uint16_t)(OFS_UCBxRXBUF  + SPI_baseAddress))))
-#if (DEFAULT_SPI < 10)
-#define UCzIFG       (*((volatile uint8_t *) ((uint16_t)(OFS_UCBxIFG    + SPI_baseAddress))))
-#define UCzIE        (*((volatile uint8_t *) ((uint16_t)(OFS_UCBxIE     + SPI_baseAddress))))
-#else
-#define UCzIFG       (*((volatile uint8_t *) ((uint16_t)(OFS_UCAxIFG    + SPI_baseAddress))))
-#define UCzIE        (*((volatile uint8_t *) ((uint16_t)(OFS_UCAxIE     + SPI_baseAddress))))
-#endif
+#define UCzIFG       ( (spiModule < 10) ? (*((volatile uint8_t *) ((uint16_t)(OFS_UCBxIFG    + SPI_baseAddress)))) : (*((volatile uint8_t *) ((uint16_t)(OFS_UCAxIFG    + SPI_baseAddress)))) )
+#define UCzIE        ( (spiModule < 10) ? (*((volatile uint8_t *) ((uint16_t)(OFS_UCBxIE     + SPI_baseAddress)))) : (*((volatile uint8_t *) ((uint16_t)(OFS_UCAxIE     + SPI_baseAddress)))) )
 
 
 /**
@@ -118,6 +114,24 @@ uint16_t SPI_baseAddress = UCB0_BASE;
  * P1.7 - MOSI aka SIMO
  *
  */
+
+/* Calculate divisor to keep SPI clock close to 4MHz but never over */
+#ifndef SPI_CLOCK_SPEED
+#define SPI_CLOCK_SPEED 4000000L
+#endif
+
+#if F_CPU < 4000000L
+#define SPI_CLOCK_DIV 1
+#else
+#define SPI_CLOCK_DIV ((F_CPU / SPI_CLOCK_SPEED) + (F_CPU % SPI_CLOCK_SPEED == 0 ? 0:1))
+#endif
+
+#if defined(DEFAULT_SPI)
+    uint8_t spiModule = DEFAULT_SPI;
+#else
+    uint8_t spiModule = 0;
+#endif
+
 void spi_initialize(void)
 {
 	/* Put USCI in reset mode, source USCI clock from SMCLK. */
@@ -192,8 +206,8 @@ void spi_initialize(void)
 
 
 	/* Set initial speed to 4MHz. */
-	UCzBR0 = SPI_CLOCK_DIV4 & 0xFF;
-	UCzBR1 = (SPI_CLOCK_DIV4 >> 8 ) & 0xFF;
+	UCzBR0 = SPI_CLOCK_DIV & 0xFF;
+	UCzBR1 = (SPI_CLOCK_DIV >> 8 ) & 0xFF;
 
 	/* Release USCI for operation. */
 	UCzCTLW0 &= ~UCSWRST;
@@ -204,6 +218,8 @@ void spi_initialize(void)
  */
 void spi_disable(void)
 {
+	/* Wait for previous tx to complete. */
+	while (UCzSTATW & UCBUSY);
 	/* Put USCI in reset mode. */
 	UCzCTLW0 |= UCSWRST;
 }
@@ -214,9 +230,11 @@ void spi_disable(void)
 uint8_t spi_send(const uint8_t data)
 {
 	/* Wait for previous tx to complete. */
-	while (!(UCzIFG & UCTXIFG));
+	while (UCzSTATW & UCBUSY);
+	/* Clear RX Flag */
+	UCzIFG &= ~UCRXIFG;
 
-	/* Setting TXBUF clears the TXIFG flag. */
+	/* Send byte */
 	UCzTXBUF = data;
 
 	/* Wait for a rx character? */
@@ -226,48 +244,62 @@ uint8_t spi_send(const uint8_t data)
 	return UCzRXBUF;
 }
 
+/**
+ * spi_send() - send a word and recv response.
+ */
 uint16_t spi_send16(const uint16_t data)
 {
 	uint16_t datain;
 	/* Wait for previous tx to complete. */
-	while (!(UCzIFG & UCTXIFG));
-	/* Setting TXBUF clears the TXIFG flag. */
+	while (UCzSTATW & UCBUSY);
+	/* Clear RX Flag */
+	UCzIFG &= ~UCRXIFG;
+	
+	/* Send first byte. */
 	UCzTXBUF = data | 0xFF;
+	/* Wait for a rx character? */
+	while (!(UCzIFG & UCRXIFG));
+	datain = UCzRXBUF << 8;
+	
 	/* Wait for previous tx to complete. */
 	while (!(UCzIFG & UCTXIFG));
-
-	datain = UCzRXBUF << 8;
-	/* Setting TXBUF clears the TXIFG flag. */
+	/* send second byte */
 	UCzTXBUF = data >> 8;
 
 	/* Wait for a rx character? */
 	while (!(UCzIFG & UCRXIFG));
-
 	/* Reading clears RXIFG flag. */
 	return (datain | UCzRXBUF);
 }
 
-void spi_send(void *buf, uint16_t count)
+/**
+ * spi_send() - send buffer of byte and recv response.
+ */
+void spi_send(void *buf, uint16_t count) 
 {
-    uint8_t *ptx = (uint8_t *)buf;
-    uint8_t *prx = (uint8_t *)buf;
+	uint8_t *ptx = (uint8_t *)buf;
+	uint8_t *prx = (uint8_t *)buf;
 	if (count == 0) return;
 	/* Wait for previous tx to complete. */
-	while (!(UCzIFG & UCTXIFG));
-	while(count){
-		if (UCzIFG & UCRXIFG){
-			/* Reading RXBUF clears the RXIFG flag. */
-			*prx++ = UCzRXBUF;
-		}
-		if (UCzIFG & UCTXIFG){
-			/* Setting TXBUF clears the TXIFG flag. */
-			UCzTXBUF = *ptx++;
-			count--;
-		}
-	}
-	/* Wait for last rx character? */
-	while (!(UCzIFG & UCRXIFG));
-	*prx++ = UCzRXBUF;
+	while (UCzSTATW & UCBUSY);
+	/* Clear RX Flag */
+	UCzIFG &= ~UCRXIFG;
+	/* put in first char */
+	UCzTXBUF = *ptx++;
+	count--;
+	while(count != 0){
+		while (!(UCzIFG & UCTXIFG)); 
+		/* Setting TXBUF clears the TXIFG flag. */
+		UCzTXBUF = *ptx++;
+		while (!(UCzIFG & UCRXIFG)); 
+		/* Reading RXBUF clears the RXIFG flag. */
+		*prx++ = UCzRXBUF;
+		count--;
+	} 
+	/* get last char */
+	while (!(UCzIFG & UCRXIFG)) count++; 
+	/* Reading RXBUF clears the RXIFG flag. */
+	*prx = UCzRXBUF;
 }
 
 /**
@@ -276,13 +308,15 @@ void spi_send(void *buf, uint16_t count)
 void spi_transmit(const uint8_t data)
 {
 	/* Wait for previous tx to complete. */
-	while (!(UCzIFG & UCTXIFG));
+	while (UCzSTATW & UCBUSY);
+	/* Clear RX Flag */
+	UCzIFG &= ~UCRXIFG;
 
 	/* Setting TXBUF clears the TXIFG flag. */
 	UCzTXBUF = data;
 
-	/* Wait for a rx character? */
-	while (!(UCzIFG & UCRXIFG));
+	/* Wait for previous tx to complete. */
+	while (UCzSTATW & UCBUSY);
 	/* clear RXIFG flag. */
 	UCzIFG &= ~UCRXIFG;
 }
@@ -290,7 +324,7 @@ void spi_transmit(const uint8_t data)
 void spi_transmit16(const uint16_t data)
 {
 	/* Wait for previous tx to complete. */
-	while (!(UCzIFG & UCTXIFG));
+	while (UCzSTATW & UCBUSY);
 	/* Setting TXBUF clears the TXIFG flag. */
 	UCzTXBUF = data | 0xFF;
 	/* Wait for previous tx to complete. */
@@ -298,16 +332,18 @@ void spi_transmit16(const uint16_t data)
 	/* Setting TXBUF clears the TXIFG flag. */
 	UCzTXBUF = data >> 8;
 
-	/* Wait for a rx character? */
-	while (!(UCzIFG & UCRXIFG));
+	/* Wait for previous tx to complete. */
+	while (UCzSTATW & UCBUSY);
 	/* clear RXIFG flag. */
 	UCzIFG &= ~UCRXIFG;
 }
 
 void spi_transmit(void *buf, uint16_t count)
 {
-    uint8_t *ptx = (uint8_t *)buf;
+	uint8_t *ptx = (uint8_t *)buf;
 	if (count == 0) return;
+	/* Wait for previous tx to complete. */
+	while (UCzSTATW & UCBUSY);
 	while(count){
 		if (UCzIFG & UCTXIFG){
 			/* Setting TXBUF clears the TXIFG flag. */
@@ -315,8 +351,8 @@ void spi_transmit(void *buf, uint16_t count)
 			count--;
 		}
 	}
-	/* Wait for last rx character? */
-	while (!(UCzIFG & UCRXIFG));
+	/* Wait for previous tx to complete. */
+	while (UCzSTATW & UCBUSY);
 	/* clear RXIFG flag. */
 	UCzIFG &= ~UCRXIFG;
 }

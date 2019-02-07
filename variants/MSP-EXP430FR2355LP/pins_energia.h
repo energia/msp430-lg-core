@@ -45,10 +45,10 @@
 
 
 #if defined(__MSP430_HAS_EUSCI_B0__)
-static const uint8_t SS      = 8;   /* P3.4 */
-static const uint8_t SCK     = 7;   /* P4.5 */
-static const uint8_t MOSI    = 15;  /* P4.6 aka SIMO */
-static const uint8_t MISO    = 14;  /* P4.7 aka SOMI */
+static const uint8_t SS1      = 8;   /* P3.4 */
+static const uint8_t SCK1     = 7;   /* P4.5 */
+static const uint8_t MOSI1    = 15;  /* P4.6 aka SIMO */
+static const uint8_t MISO1    = 14;  /* P4.7 aka SOMI */
 static const uint8_t TWISCL0  = 9;   /* P1.3 SW I2C */
 static const uint8_t TWISDA0  = 10;  /* P1.2 SW I2C */
 static const uint8_t TWISDA1  = 15;  /* P4.6 UCB1 */
@@ -57,9 +57,19 @@ static const uint8_t TWISCL1  = 14;  /* P4.7 UCB1 */
 #define TWISCL0_SET_MODE  (PORT_SELECTION0 | INPUT_PULLUP)
 #define TWISDA1_SET_MODE  (PORT_SELECTION0 | INPUT_PULLUP)
 #define TWISCL1_SET_MODE  (PORT_SELECTION0 | INPUT_PULLUP)
-#define SPISCK_SET_MODE  (PORT_SELECTION0)
-#define SPIMOSI_SET_MODE (PORT_SELECTION0)
-#define SPIMISO_SET_MODE (PORT_SELECTION0)
+#define SPISCK1_SET_MODE  (PORT_SELECTION0)
+#define SPIMOSI1_SET_MODE (PORT_SELECTION0)
+#define SPIMISO1_SET_MODE (PORT_SELECTION0)
+/* Define the default SPI settings */
+#define DEFAULT_SPI 1
+#define SS    SS1   
+#define SCK   SCK1  
+#define MOSI  MOSI1
+#define MISO  MISO1
+#define SPISCK_SET_MODE  SPISCK1_SET_MODE
+#define SPIMOSI_SET_MODE SPIMOSI1_SET_MODE
+#define SPIMISO_SET_MODE SPIMISO1_SET_MODE
+
 /* Define the default I2C settings */
 #define DEFAULT_I2C 0 
 #define TWISDA TWISDA0

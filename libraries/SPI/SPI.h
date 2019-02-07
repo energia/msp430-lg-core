@@ -86,7 +86,7 @@ private:
     // Pack into the SPISettings class
     _bitOrder = bitOrder;
     _mode     = dataMode ;
-    _rate     =  F_CPU/clock;;
+    _rate     =  F_CPU/clock;
   }
   friend class SPIClass;  
 };

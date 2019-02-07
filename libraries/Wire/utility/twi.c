@@ -1200,6 +1200,7 @@ uint16_t eusci_isr_handler(void)
 	return (exit_lpm);
 }
 
+#if 0 // moved to usci_isr_handler.c
 #if defined(__MSP430_HAS_EUSCI_B0__)
 __attribute__((interrupt(USCI_B0_VECTOR)))
 void USCI_B0_ISR(void)
@@ -1235,6 +1236,7 @@ void USCI_B3_ISR(void)
 		__bic_SR_register_on_exit(LPM4_bits); // Exit LPM
 }
 #endif
+#endif // #if 0 // moved to usci_isr_handler.c
 
 #endif // #if defined(__MSP430_HAS_EUSCI_B0__) || defined(__MSP430_HAS_EUSCI_B1__) || defined(__MSP430_HAS_EUSCI_B2__)
 
