@@ -5,6 +5,8 @@
  * Copyright (c) 2012 by Rick Kimball <rick@kimballsoftware.com>
  * spi abstraction api for msp430
  *
+ * Jan 2019 optimized code 
+ *
  * This file is free software; you can redistribute it and/or modify
  * it under the terms of either the GNU General Public License version 2
  * or the GNU Lesser General Public License version 2.1, both as
@@ -50,28 +52,28 @@
 #if defined(DEFAULT_SPI)
 #if (DEFAULT_SPI == 0)
 uint16_t SPI_baseAddress = UCB0_BASE;
-#endif	
+#endif    
 #if (DEFAULT_SPI == 1)
 uint16_t SPI_baseAddress = UCB1_BASE;
-#endif	
+#endif    
 #if (DEFAULT_SPI == 2)
 uint16_t SPI_baseAddress = UCB2_BASE;
-#endif	
+#endif    
 #if (DEFAULT_SPI == 3)
 uint16_t SPI_baseAddress = UCB3_BASE;
-#endif	
+#endif    
 #if (DEFAULT_SPI == 10)
 uint16_t SPI_baseAddress = UCA0_BASE;
-#endif	
+#endif    
 #if (DEFAULT_SPI == 11)
 uint16_t SPI_baseAddress = UCA1_BASE;
-#endif	
+#endif    
 #if (DEFAULT_SPI == 12)
 uint16_t SPI_baseAddress = UCA2_BASE;
-#endif	1
+#endif    1
 #if (DEFAULT_SPI == 13)
 uint16_t SPI_baseAddress = UCA3_BASE;
-#endif	
+#endif    
 #else
 uint16_t SPI_baseAddress = UCB0_BASE;
 #endif
@@ -98,10 +100,10 @@ uint16_t SPI_baseAddress = UCB0_BASE;
  * value described in Motorola documentation.
  */
 
-#define SPI_MODE_0 (UCCKPH)		/* CPOL=0 CPHA=0 */
-#define SPI_MODE_1 (0)			/* CPOL=0 CPHA=1 */
-#define SPI_MODE_2 (UCCKPL | UCCKPH)	/* CPOL=1 CPHA=0 */
-#define SPI_MODE_3 (UCCKPL)		/* CPOL=1 CPHA=1 */
+#define SPI_MODE_0 (UCCKPH)        /* CPOL=0 CPHA=0 */
+#define SPI_MODE_1 (0)            /* CPOL=0 CPHA=1 */
+#define SPI_MODE_2 (UCCKPL | UCCKPH)    /* CPOL=1 CPHA=0 */
+#define SPI_MODE_3 (UCCKPL)        /* CPOL=1 CPHA=1 */
 
 #define SPI_MODE_MASK (UCCKPL | UCCKPH)
 
@@ -134,83 +136,83 @@ uint16_t SPI_baseAddress = UCB0_BASE;
 
 void spi_initialize(void)
 {
-	/* Put USCI in reset mode, source USCI clock from SMCLK. */
-	UCzCTLW0 = UCSWRST | UCSSEL_2;
+    /* Put USCI in reset mode, source USCI clock from SMCLK. */
+    UCzCTLW0 = UCSWRST | UCSSEL_2;
 
-	/* SPI in master MODE 0 - CPOL=0 SPHA=0. */
-	UCzCTLW0 |= SPI_MODE_0 | UCMSB | UCSYNC | UCMST;
+    /* SPI in master MODE 0 - CPOL=0 SPHA=0. */
+    UCzCTLW0 |= SPI_MODE_0 | UCMSB | UCSYNC | UCMST;
 
-	/* Set pins to SPI mode. */
+    /* Set pins to SPI mode. */
 #if defined(DEFAULT_SPI)
 #if defined(UCB0_BASE) && defined(SPISCK0_SET_MODE)
-	if (SPI_baseAddress == UCB0_BASE) {
-		pinMode_int(SCK0, SPISCK0_SET_MODE);
-		pinMode_int(MOSI0, SPIMOSI0_SET_MODE);
-		pinMode_int(MISO0, SPIMISO0_SET_MODE);
-	}
-#endif	
+    if (SPI_baseAddress == UCB0_BASE) {
+        pinMode_int(SCK0, SPISCK0_SET_MODE);
+        pinMode_int(MOSI0, SPIMOSI0_SET_MODE);
+        pinMode_int(MISO0, SPIMISO0_SET_MODE);
+    }
+#endif    
 #if defined(UCB1_BASE) && defined(SPISCK1_SET_MODE)
-	if (SPI_baseAddress == UCB1_BASE) {
-		pinMode_int(SCK1, SPISCK1_SET_MODE);
-		pinMode_int(MOSI1, SPIMOSI1_SET_MODE);
-		pinMode_int(MISO1, SPIMISO1_SET_MODE);
-	}
-#endif	
+    if (SPI_baseAddress == UCB1_BASE) {
+        pinMode_int(SCK1, SPISCK1_SET_MODE);
+        pinMode_int(MOSI1, SPIMOSI1_SET_MODE);
+        pinMode_int(MISO1, SPIMISO1_SET_MODE);
+    }
+#endif    
 #if defined(UCB2_BASE) && defined(SPISCK2_SET_MODE)
-	if (SPI_baseAddress == UCB2_BASE) {
-		pinMode_int(SCK2, SPISCK2_SET_MODE);
-		pinMode_int(MOSI2, SPIMOSI2_SET_MODE);
-		pinMode_int(MISO2, SPIMISO2_SET_MODE);
-	}
-#endif	
+    if (SPI_baseAddress == UCB2_BASE) {
+        pinMode_int(SCK2, SPISCK2_SET_MODE);
+        pinMode_int(MOSI2, SPIMOSI2_SET_MODE);
+        pinMode_int(MISO2, SPIMISO2_SET_MODE);
+    }
+#endif    
 #if defined(UCB3_BASE) && defined(SPISCK3_SET_MODE)
-	if (SPI_baseAddress == UCB3_BASE) {
-		pinMode_int(SCK3, SPISCK3_SET_MODE);
-		pinMode_int(MOSI3, SPIMOSI3_SET_MODE);
-		pinMode_int(MISO3, SPIMISO3_SET_MODE);
-	}
-#endif	
+    if (SPI_baseAddress == UCB3_BASE) {
+        pinMode_int(SCK3, SPISCK3_SET_MODE);
+        pinMode_int(MOSI3, SPIMOSI3_SET_MODE);
+        pinMode_int(MISO3, SPIMISO3_SET_MODE);
+    }
+#endif    
 #if defined(UCA0_BASE) && defined(SPISCK10_SET_MODE)
-	if (SPI_baseAddress == UCA0_BASE) {
-		pinMode_int(SCK10, SPISCK10_SET_MODE);
-		pinMode_int(MOSI10, SPIMOSI10_SET_MODE);
-		pinMode_int(MISO10, SPIMISO10_SET_MODE);
-	}
-#endif	
+    if (SPI_baseAddress == UCA0_BASE) {
+        pinMode_int(SCK10, SPISCK10_SET_MODE);
+        pinMode_int(MOSI10, SPIMOSI10_SET_MODE);
+        pinMode_int(MISO10, SPIMISO10_SET_MODE);
+    }
+#endif    
 #if defined(UCA1_BASE) && defined(SPISCK11_SET_MODE)
-	if (SPI_baseAddress == UCA1_BASE) {
-		pinMode_int(SCK11, SPISCK11_SET_MODE);
-		pinMode_int(MOSI11, SPIMOSI11_SET_MODE);
-		pinMode_int(MISO11, SPIMISO11_SET_MODE);
-	}
-#endif	
+    if (SPI_baseAddress == UCA1_BASE) {
+        pinMode_int(SCK11, SPISCK11_SET_MODE);
+        pinMode_int(MOSI11, SPIMOSI11_SET_MODE);
+        pinMode_int(MISO11, SPIMISO11_SET_MODE);
+    }
+#endif    
 #if defined(UCA2_BASE) && defined(SPISCK12_SET_MODE)
-	if (SPI_baseAddress == UCA2_BASE) {
-		pinMode_int(SCK12, SPISCK12_SET_MODE);
-		pinMode_int(MOSI12, SPIMOSI12_SET_MODE);
-		pinMode_int(MISO12, SPIMISO12_SET_MODE);
-	}
-#endif	
+    if (SPI_baseAddress == UCA2_BASE) {
+        pinMode_int(SCK12, SPISCK12_SET_MODE);
+        pinMode_int(MOSI12, SPIMOSI12_SET_MODE);
+        pinMode_int(MISO12, SPIMISO12_SET_MODE);
+    }
+#endif    
 #if defined(UCA3_BASE) && defined(SPISCK13_SET_MODE)
-	if (SPI_baseAddress == UCA3_BASE) {
-		pinMode_int(SCK13, SPISCK13_SET_MODE);
-		pinMode_int(MOSI13, SPIMOSI13_SET_MODE);
-		pinMode_int(MISO13, SPIMISO13_SET_MODE);
-	}
-#endif	
+    if (SPI_baseAddress == UCA3_BASE) {
+        pinMode_int(SCK13, SPISCK13_SET_MODE);
+        pinMode_int(MOSI13, SPIMOSI13_SET_MODE);
+        pinMode_int(MISO13, SPIMISO13_SET_MODE);
+    }
+#endif    
 #else
-	pinMode_int(SCK, SPISCK_SET_MODE);
-	pinMode_int(MOSI, SPIMOSI_SET_MODE);
-	pinMode_int(MISO, SPIMISO_SET_MODE);
+    pinMode_int(SCK, SPISCK_SET_MODE);
+    pinMode_int(MOSI, SPIMOSI_SET_MODE);
+    pinMode_int(MISO, SPIMISO_SET_MODE);
 #endif
 
 
-	/* Set initial speed to 4MHz. */
-	UCzBR0 = SPI_CLOCK_DIV & 0xFF;
-	UCzBR1 = (SPI_CLOCK_DIV >> 8 ) & 0xFF;
+    /* Set initial speed to 4MHz. */
+    UCzBR0 = SPI_CLOCK_DIV & 0xFF;
+    UCzBR1 = (SPI_CLOCK_DIV >> 8 ) & 0xFF;
 
-	/* Release USCI for operation. */
-	UCzCTLW0 &= ~UCSWRST;
+    /* Release USCI for operation. */
+    UCzCTLW0 &= ~UCSWRST;
 }
 
 /**
@@ -218,10 +220,10 @@ void spi_initialize(void)
  */
 void spi_disable(void)
 {
-	/* Wait for previous tx to complete. */
-	while (UCzSTATW & UCBUSY);
-	/* Put USCI in reset mode. */
-	UCzCTLW0 |= UCSWRST;
+    /* Wait for previous tx to complete. */
+    while (UCzSTATW & UCBUSY);
+    /* Put USCI in reset mode. */
+    UCzCTLW0 |= UCSWRST;
 }
 
 /**
@@ -229,19 +231,19 @@ void spi_disable(void)
  */
 uint8_t spi_send(const uint8_t data)
 {
-	/* Wait for previous tx to complete. */
-	while (UCzSTATW & UCBUSY);
-	/* Clear RX Flag */
-	UCzIFG &= ~UCRXIFG;
+    /* Wait for previous tx to complete. */
+    while (UCzSTATW & UCBUSY);
+    /* Clear RX Flag */
+    UCzIFG &= ~UCRXIFG;
 
-	/* Send byte */
-	UCzTXBUF = data;
+    /* Send byte */
+    UCzTXBUF = data;
 
-	/* Wait for a rx character? */
-	while (!(UCzIFG & UCRXIFG));
+    /* Wait for a rx character? */
+    while (!(UCzIFG & UCRXIFG));
 
-	/* Reading clears RXIFG flag. */
-	return UCzRXBUF;
+    /* Reading clears RXIFG flag. */
+    return UCzRXBUF;
 }
 
 /**
@@ -249,27 +251,27 @@ uint8_t spi_send(const uint8_t data)
  */
 uint16_t spi_send16(const uint16_t data)
 {
-	uint16_t datain;
-	/* Wait for previous tx to complete. */
-	while (UCzSTATW & UCBUSY);
-	/* Clear RX Flag */
-	UCzIFG &= ~UCRXIFG;
-	
-	/* Send first byte. */
-	UCzTXBUF = data | 0xFF;
-	/* Wait for a rx character? */
-	while (!(UCzIFG & UCRXIFG));
-	datain = UCzRXBUF << 8;
-	
-	/* Wait for previous tx to complete. */
-	while (!(UCzIFG & UCTXIFG));
-	/* send second byte */
-	UCzTXBUF = data >> 8;
+    uint16_t datain;
+    /* Wait for previous tx to complete. */
+    while (UCzSTATW & UCBUSY);
+    /* Clear RX Flag */
+    UCzIFG &= ~UCRXIFG;
+    
+    /* Send first byte. */
+    UCzTXBUF = data | 0xFF;
+    /* Wait for a rx character? */
+    while (!(UCzIFG & UCRXIFG));
+    datain = UCzRXBUF << 8;
+    
+    /* Wait for previous tx to complete. */
+    while (!(UCzIFG & UCTXIFG));
+    /* send second byte */
+    UCzTXBUF = data >> 8;
 
-	/* Wait for a rx character? */
-	while (!(UCzIFG & UCRXIFG));
-	/* Reading clears RXIFG flag. */
-	return (datain | UCzRXBUF);
+    /* Wait for a rx character? */
+    while (!(UCzIFG & UCRXIFG));
+    /* Reading clears RXIFG flag. */
+    return (datain | UCzRXBUF);
 }
 
 /**
@@ -277,22 +279,27 @@ uint16_t spi_send16(const uint16_t data)
  */
 void spi_send(void *buf, uint16_t count) 
 {
-	uint8_t *ptx = (uint8_t *)buf;
-	uint8_t *prx = (uint8_t *)buf;
-	if (count == 0) return;
-	/* Wait for previous tx to complete. */
-	while (UCzSTATW & UCBUSY);
-	/* Clear RX Flag */
-	UCzIFG &= ~UCRXIFG;
-	while(count != 0){
-		while (!(UCzIFG & UCTXIFG)); 
-		/* Setting TXBUF clears the TXIFG flag. */
-		UCzTXBUF = *ptx++;
-		count--;
-		while (!(UCzIFG & UCRXIFG));
-		/* Reading RXBUF clears the RXIFG flag. */
-		*prx++ = UCzRXBUF;
-	}
+    uint8_t *ptx = (uint8_t *)buf;
+    uint8_t *prx = (uint8_t *)buf;
+    volatile uint8_t *pIFG = &UCzIFG;
+    volatile uint16_t *pSTATW = &UCzSTATW;
+    volatile uint8_t *pTX = &UCzTXBUF;
+    volatile uint8_t *pRX = &UCzRXBUF;
+
+    if (count == 0) return;
+    /* Wait for previous tx to complete. */
+    while (*pSTATW & UCBUSY);
+    /* Clear RX Flag */
+    *pIFG &= ~UCRXIFG;
+    while(count != 0){
+        while (!(*pIFG & UCTXIFG));
+        /* Setting TXBUF clears the TXIFG flag. */
+        *pTX = *ptx++;
+        count--;
+        while (!(*pIFG & UCRXIFG));
+        /* Reading RXBUF clears the RXIFG flag. */
+        *prx++ = *pRX;
+    }
 }
 
 /**
@@ -300,54 +307,58 @@ void spi_send(void *buf, uint16_t count)
  */
 void spi_transmit(const uint8_t data)
 {
-	/* Wait for previous tx to complete. */
-	while (UCzSTATW & UCBUSY);
-	/* Clear RX Flag */
-	UCzIFG &= ~UCRXIFG;
+    /* Wait for previous tx to complete. */
+    while (UCzSTATW & UCBUSY);
+    /* Clear RX Flag */
+    UCzIFG &= ~UCRXIFG;
 
-	/* Setting TXBUF clears the TXIFG flag. */
-	UCzTXBUF = data;
+    /* Setting TXBUF clears the TXIFG flag. */
+    UCzTXBUF = data;
 
-	/* Wait for previous tx to complete. */
-	while (UCzSTATW & UCBUSY);
-	/* clear RXIFG flag. */
-	UCzIFG &= ~UCRXIFG;
+    /* Wait for previous tx to complete. */
+    while (UCzSTATW & UCBUSY);
+    /* clear RXIFG flag. */
+    UCzIFG &= ~UCRXIFG;
 }
 
 void spi_transmit16(const uint16_t data)
 {
-	/* Wait for previous tx to complete. */
-	while (UCzSTATW & UCBUSY);
-	/* Setting TXBUF clears the TXIFG flag. */
-	UCzTXBUF = data | 0xFF;
-	/* Wait for previous tx to complete. */
-	while (!(UCzIFG & UCTXIFG));
-	/* Setting TXBUF clears the TXIFG flag. */
-	UCzTXBUF = data >> 8;
+    /* Wait for previous tx to complete. */
+    while (UCzSTATW & UCBUSY);
+    /* Setting TXBUF clears the TXIFG flag. */
+    UCzTXBUF = data | 0xFF;
+    /* Wait for previous tx to complete. */
+    while (!(UCzIFG & UCTXIFG));
+    /* Setting TXBUF clears the TXIFG flag. */
+    UCzTXBUF = data >> 8;
 
-	/* Wait for previous tx to complete. */
-	while (UCzSTATW & UCBUSY);
-	/* clear RXIFG flag. */
-	UCzIFG &= ~UCRXIFG;
+    /* Wait for previous tx to complete. */
+    while (UCzSTATW & UCBUSY);
+    /* clear RXIFG flag. */
+    UCzIFG &= ~UCRXIFG;
 }
 
 void spi_transmit(void *buf, uint16_t count)
 {
-	uint8_t *ptx = (uint8_t *)buf;
-	if (count == 0) return;
-	/* Wait for previous tx to complete. */
-	while (UCzSTATW & UCBUSY);
-	while(count){
-		if (UCzIFG & UCTXIFG){
-			/* Setting TXBUF clears the TXIFG flag. */
-			UCzTXBUF = *ptx++;
-			count--;
-		}
-	}
-	/* Wait for previous tx to complete. */
-	while (UCzSTATW & UCBUSY);
-	/* clear RXIFG flag. */
-	UCzIFG &= ~UCRXIFG;
+    uint8_t *ptx = (uint8_t *)buf;
+    volatile uint8_t *pIFG = &UCzIFG;
+    volatile uint16_t *pSTATW = &UCzSTATW;
+    volatile uint8_t *pTX = &UCzTXBUF;
+
+    if (count == 0) return;
+    /* Wait for previous tx to complete. */
+    while (*pSTATW & UCBUSY);
+    while(count){
+        if (*pIFG & UCTXIFG){
+            /* Setting TXBUF clears the TXIFG flag. */
+            *pTX = *ptx++;
+            count--;
+        }
+    }
+    /* Wait for previous tx to complete. */
+    while (*pSTATW & UCBUSY);
+    /* clear RXIFG flag. */
+    *pIFG &= ~UCRXIFG;
 }
 
 /***SPI_MODE_0
@@ -358,14 +369,14 @@ void spi_transmit(void *buf, uint16_t count)
  */
 void spi_set_divisor(const uint16_t clkdiv)
 {
-	/* Hold UCz in reset. */
-	UCzCTLW0 |= UCSWRST;
+    /* Hold UCz in reset. */
+    UCzCTLW0 |= UCSWRST;
 
-	UCzBR0 = clkdiv & 0xFF;
-	UCzBR1 = (clkdiv >> 8 ) & 0xFF;
+    UCzBR0 = clkdiv & 0xFF;
+    UCzBR1 = (clkdiv >> 8 ) & 0xFF;
 
-	/* Release for operation. */
-	UCzCTLW0 &= ~UCSWRST;
+    /* Release for operation. */
+    UCzCTLW0 &= ~UCSWRST;
 }
 
 /**
@@ -373,13 +384,13 @@ void spi_set_divisor(const uint16_t clkdiv)
  */
 void spi_set_bitorder(const uint8_t order)
 {
-	/* Hold UCz in reset. */
-	UCzCTLW0 |= UCSWRST;
+    /* Hold UCz in reset. */
+    UCzCTLW0 |= UCSWRST;
 
-	UCzCTLW0 = (UCzCTLW0 & ~UCMSB) | ((order == 1 /*MSBFIRST*/) ? UCMSB : 0); /* MSBFIRST = 1 */
+    UCzCTLW0 = (UCzCTLW0 & ~UCMSB) | ((order == 1 /*MSBFIRST*/) ? UCMSB : 0); /* MSBFIRST = 1 */
 
-	/* Release for operation. */
-	UCzCTLW0 &= ~UCSWRST;
+    /* Release for operation. */
+    UCzCTLW0 &= ~UCSWRST;
 }
 
 /**
@@ -387,26 +398,26 @@ void spi_set_bitorder(const uint8_t order)
  */
 void spi_set_datamode(const uint8_t mode)
 {
-	/* Hold UCz in reset. */
-	UCzCTL1 |= UCSWRST;
-	switch(mode) {
-	case 0: /* SPI_MODE0 */
-		UCzCTLW0 = (UCzCTLW0 & ~SPI_MODE_MASK) | SPI_MODE_0;
-		break;
-	case 1: /* SPI_MODE1 */
-		UCzCTLW0 = (UCzCTLW0 & ~SPI_MODE_MASK) | SPI_MODE_1;
-		break;
-	case 2: /* SPI_MODE2 */
-		UCzCTLW0 = (UCzCTLW0 & ~SPI_MODE_MASK) | SPI_MODE_2;
-		break;
-	case 4: /* SPI_MODE3 */
-		UCzCTLW0 = (UCzCTLW0 & ~SPI_MODE_MASK) | SPI_MODE_3;
-		break;
-	default:
-		break;
-	}
+    /* Hold UCz in reset. */
+    UCzCTL1 |= UCSWRST;
+    switch(mode) {
+    case 0: /* SPI_MODE0 */
+        UCzCTLW0 = (UCzCTLW0 & ~SPI_MODE_MASK) | SPI_MODE_0;
+        break;
+    case 1: /* SPI_MODE1 */
+        UCzCTLW0 = (UCzCTLW0 & ~SPI_MODE_MASK) | SPI_MODE_1;
+        break;
+    case 2: /* SPI_MODE2 */
+        UCzCTLW0 = (UCzCTLW0 & ~SPI_MODE_MASK) | SPI_MODE_2;
+        break;
+    case 4: /* SPI_MODE3 */
+        UCzCTLW0 = (UCzCTLW0 & ~SPI_MODE_MASK) | SPI_MODE_3;
+        break;
+    default:
+        break;
+    }
 
-	/* Release for operation. */
-	UCzCTL1 &= ~UCSWRST;
+    /* Release for operation. */
+    UCzCTL1 &= ~UCSWRST;
 }
 #endif
