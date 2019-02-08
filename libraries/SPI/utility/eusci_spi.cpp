@@ -83,7 +83,7 @@ uint16_t SPI_baseAddress = UCB0_BASE;
 #define UCzBRW       (*((volatile uint16_t *)((uint16_t)(OFS_UCBxBRW    + SPI_baseAddress))))
 #define UCzBR0       (*((volatile uint8_t *) ((uint16_t)(OFS_UCBxBR0    + SPI_baseAddress))))
 #define UCzBR1       (*((volatile uint8_t *) ((uint16_t)(OFS_UCBxBR1    + SPI_baseAddress))))
-#define UCzSTATW     ( (spiModule < 10) ? (*((volatile uint8_t *) ((uint16_t)(OFS_UCBxSTATW  + SPI_baseAddress)))) : (*((volatile uint8_t *) ((uint16_t)(OFS_UCAxSTATW  + SPI_baseAddress)))) )
+#define UCzSTATW     ( (spiModule < 10) ? (*((volatile uint16_t *) ((uint16_t)(OFS_UCBxSTATW  + SPI_baseAddress)))) : (*((volatile uint16_t *) ((uint16_t)(OFS_UCAxSTATW  + SPI_baseAddress)))) )
 #define UCzTXBUF     (*((volatile uint8_t *) ((uint16_t)(OFS_UCBxTXBUF  + SPI_baseAddress))))
 #define UCzRXBUF     (*((volatile uint8_t *) ((uint16_t)(OFS_UCBxRXBUF  + SPI_baseAddress))))
 #define UCzIFG       ( (spiModule < 10) ? (*((volatile uint8_t *) ((uint16_t)(OFS_UCBxIFG    + SPI_baseAddress)))) : (*((volatile uint8_t *) ((uint16_t)(OFS_UCAxIFG    + SPI_baseAddress)))) )
@@ -284,22 +284,15 @@ void spi_send(void *buf, uint16_t count)
 	while (UCzSTATW & UCBUSY);
 	/* Clear RX Flag */
 	UCzIFG &= ~UCRXIFG;
-	/* put in first char */
-	UCzTXBUF = *ptx++;
-	count--;
 	while(count != 0){
 		while (!(UCzIFG & UCTXIFG)); 
 		/* Setting TXBUF clears the TXIFG flag. */
 		UCzTXBUF = *ptx++;
-		while (!(UCzIFG & UCRXIFG)); 
+		count--;
+		while (!(UCzIFG & UCRXIFG));
 		/* Reading RXBUF clears the RXIFG flag. */
 		*prx++ = UCzRXBUF;
-		count--;
-	} 
-	/* get last char */
-	while (!(UCzIFG & UCRXIFG)) count++; 
-	/* Reading RXBUF clears the RXIFG flag. */
-	*prx = UCzRXBUF;
+	}
 }
 
 /**
