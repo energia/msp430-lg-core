@@ -290,9 +290,10 @@ void spi_send(void *buf, uint16_t count)
     /* Wait for previous tx to complete. */
     while (*pSTATW & UCBUSY);
     /* Clear RX Flag */
-    *pIFG &= ~UCRXIFG;
+    //*pIFG &= ~UCRXIFG;
+    UCzRXBUF; /* readind RXBUF to clear error bits and UCRXIFG */
     while(count != 0){
-        while (!(*pIFG & UCTXIFG));
+        //while (!(*pIFG & UCTXIFG)); /* no needed as we check RXIFG */
         /* Setting TXBUF clears the TXIFG flag. */
         *pTX = *ptx++;
         count--;
