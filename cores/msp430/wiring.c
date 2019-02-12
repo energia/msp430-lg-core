@@ -141,11 +141,19 @@ void enableXtal(void)
 	/* If starting the XTAL timed out then fall back to REFO */
 	if(!timeout) {
 		/* ACLK = REFO = ~ 32 KHz */
-		vlo_freq = 0;
+		vlo_freq = 32768;
 		/* Source ACLK from REFO */
 		CSCTL4 |= SELA__REFOCLK;
+		CSCTL3 |= SELREF__REFOCLK;
+
+
+		/* Clear the Oscillator fault interrupt flag */
+		CSCTL7 &= ~(DCOFFG|XT1OFFG|FLLULIFG);
+		SFRIFG1 &= ~OFIFG;
+
 	}else{
 		/* Source ACLK from LFXT */
+		CSCTL3 &= ~SELREF__REFOCLK;
 		CSCTL4 &= ~SELA__REFOCLK;
 	}
 #endif

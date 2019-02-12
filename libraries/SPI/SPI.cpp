@@ -15,12 +15,6 @@
 
 #include "SPI.h"
 
-#if defined(DEFAULT_SPI)
-    uint8_t spiModule = DEFAULT_SPI;
-#else
-    uint8_t spiModule = 0;
-#endif
-
 SPIClass::SPIClass(void) {
 #if defined(DEFAULT_SPI)
    setModule(DEFAULT_SPI);

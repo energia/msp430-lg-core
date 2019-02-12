@@ -54,7 +54,11 @@
 #define SPI_CLOCK_DIV() ((F_CPU / SPI_CLOCK_SPEED) + (F_CPU % SPI_CLOCK_SPEED == 0 ? 0:1))
 #endif
 
-#define SPI_CLOCK_DIV_DEFAULT (F_CPU / 4)
+#if defined(DEFAULT_SPI)
+    uint8_t spiModule = DEFAULT_SPI;
+#else
+    uint8_t spiModule = 0;
+#endif
 
 void spi_initialize(void)
 {
@@ -80,18 +84,6 @@ void spi_disable(void)
     UCB0CTL1 |= UCSWRST;                // Put USCI in reset mode
 }
 
-/**
- * spi_send() - send a byte and recv response
- */
-uint8_t spi_send(const uint8_t _data)
-{
-	UCB0TXBUF = _data; // setting TXBUF clears the TXIFG flag
-	while (UCB0STAT & UCBUSY)
-		; // wait for SPI TX/RX to finish
-
-	return UCB0RXBUF; // reading clears RXIFG flag
-}
-
 #ifdef UC0IFG
 /* redefine for older 2xx devices where the flags are in SFR */
 #define UCB0IFG  UC0IFG   
@@ -99,48 +91,77 @@ uint8_t spi_send(const uint8_t _data)
 #define UCTXIFG  UCB0TXIFG
 #endif
 
-uint16_t spi_send16(const uint16_t data)
+/**
+ * spi_send() - send a byte and recv response
+ */
+uint8_t spi_send(const uint8_t data)
 {
-	uint16_t datain;
 	/* Wait for previous tx to complete. */
 	while (!(UCB0IFG & UCTXIFG));
-	/* Setting TXBUF clears the TXIFG flag. */
-	UCB0TXBUF = data | 0xFF;
-	/* Wait for previous tx to complete. */
-	while (!(UCB0IFG & UCTXIFG));
+	/* Clear RX Flag */
+	UCB0IFG &= ~UCRXIFG;
 
-	datain = UCB0RXBUF << 8;
-	/* Setting TXBUF clears the TXIFG flag. */
-	UCB0TXBUF = data >> 8;
+	/* Send byte */
+	UCB0TXBUF = data;
 
 	/* Wait for a rx character? */
 	while (!(UCB0IFG & UCRXIFG));
 
 	/* Reading clears RXIFG flag. */
+	return UCB0RXBUF;
+}
+
+
+
+/**
+ * spi_send() - send a word and recv response.
+ */
+uint16_t spi_send16(const uint16_t data)
+{
+	uint16_t datain;
+	/* Wait for previous tx to complete. */
+	while (!(UCB0IFG & UCTXIFG));
+	/* Clear RX Flag */
+	UCB0IFG &= ~UCRXIFG;
+	
+	/* Send first byte. */
+	UCB0TXBUF = data | 0xFF;
+	/* Wait for a rx character? */
+	while (!(UCB0IFG & UCRXIFG));
+	datain = UCB0RXBUF << 8;
+	
+	/* Wait for previous tx to complete. */
+	while (!(UCB0IFG & UCTXIFG));
+	/* send second byte */
+	UCB0TXBUF = data >> 8;
+
+	/* Wait for a rx character? */
+	while (!(UCB0IFG & UCRXIFG));
+	/* Reading clears RXIFG flag. */
 	return (datain | UCB0RXBUF);
 }
 
-void spi_send(void *buf, uint16_t count)
+/**
+ * spi_send() - send buffer of byte and recv response.
+ */
+void spi_send(void *buf, uint16_t count) 
 {
     uint8_t *ptx = (uint8_t *)buf;
     uint8_t *prx = (uint8_t *)buf;
-	if (count == 0) return;
-	/* Wait for previous tx to complete. */
-	while (!(UCB0IFG & UCTXIFG));
-	while(count){
-		if (UCB0IFG & UCRXIFG){
-			/* Reading RXBUF clears the RXIFG flag. */
-			*prx++ = UCB0RXBUF;
-		}
-		if (UCB0IFG & UCTXIFG){
-			/* Setting TXBUF clears the TXIFG flag. */
-			UCB0TXBUF = *ptx++;
-			count--;
-		}
-	}
-	/* Wait for last rx character? */
-	while (!(UCB0IFG & UCRXIFG));
-	*prx++ = UCB0RXBUF;
+    if (count == 0) return;
+    /* Wait for previous tx to complete. */
+    while (!(UCB0IFG & UCTXIFG));
+    /* Clear RX Flag */
+    UCB0IFG &= ~UCRXIFG;
+    while(count){
+        while (!(UCB0IFG & UCTXIFG)); 
+        /* Setting TXBUF clears the TXIFG flag. */
+        UCB0TXBUF = *ptx++;
+        count--;
+        while (!(UCB0IFG & UCRXIFG)); 
+        /* Reading RXBUF clears the RXIFG flag. */
+        *prx++ = UCB0RXBUF;
+    } 
 }
 
 /**

@@ -66,6 +66,34 @@ static volatile uint8_t intChangeVectP3 = 0x00;
 static volatile voidFuncPtr intFuncP4[NUM_INTS_PER_PORT];
 static volatile uint8_t intChangeVectP4 = 0x00;
 #endif
+#if defined(PORT5_VECTOR)
+static volatile voidFuncPtr intFuncP5[NUM_INTS_PER_PORT];
+static volatile uint8_t intChangeVectP5 = 0x00;
+#endif
+#if defined(PORT6_VECTOR)
+static volatile voidFuncPtr intFuncP6[NUM_INTS_PER_PORT];
+static volatile uint8_t intChangeVectP6 = 0x00;
+#endif
+#if defined(PORT7_VECTOR)
+static volatile voidFuncPtr intFuncP7[NUM_INTS_PER_PORT];
+static volatile uint8_t intChangeVectP7 = 0x00;
+#endif
+#if defined(PORT8_VECTOR)
+static volatile voidFuncPtr intFuncP8[NUM_INTS_PER_PORT];
+static volatile uint8_t intChangeVectP8 = 0x00;
+#endif
+#if defined(PORT9_VECTOR)
+static volatile voidFuncPtr intFuncP9[NUM_INTS_PER_PORT];
+static volatile uint8_t intChangeVectP9 = 0x00;
+#endif
+#if defined(PORT10_VECTOR)
+static volatile voidFuncPtr intFuncP10[NUM_INTS_PER_PORT];
+static volatile uint8_t intChangeVectP10 = 0x00;
+#endif
+#if defined(PORT11_VECTOR)
+static volatile voidFuncPtr intFuncP11[NUM_INTS_PER_PORT];
+static volatile uint8_t intChangeVectP11 = 0x00;
+#endif
 
 void attachInterrupt(uint8_t interruptNum, void (*userFunc)(void), int mode) {
 	uint8_t bit = digitalPinToBitMask(interruptNum);
@@ -101,7 +129,7 @@ void attachInterrupt(uint8_t interruptNum, void (*userFunc)(void), int mode) {
 		break;
 	#endif
     #if defined(PORT3_VECTOR)
-case P3:
+    case P3:
 		if(mode != CHANGE) {
 			P3IES = mode ? P3IES | bit : P3IES & ~bit;
 		} else {
@@ -114,7 +142,7 @@ case P3:
 		break;
     #endif
     #if defined(PORT4_VECTOR)
-case P4:
+    case P4:
 		if(mode != CHANGE) {
 			P4IES = mode ? P4IES | bit : P4IES & ~bit;
 		} else {
@@ -126,7 +154,99 @@ case P4:
 		P4IE |= bit;
 		break;
     #endif
-	default:
+    #if defined(PORT5_VECTOR)
+    case P5:
+        if(mode != CHANGE) {
+            P5IES = mode ? P5IES | bit : P5IES & ~bit;
+        } else {
+            intChangeVectP5 |= bit;
+            P5IES = (P5IN & bit) ? (P5IES | bit) : (P5IES & ~bit);
+        }
+        P5IFG &= ~bit;
+        intFuncP5[bit_pos(bit)] = userFunc;
+        P5IE |= bit;
+        break;
+    #endif
+    #if defined(PORT6_VECTOR)
+    case P6:
+        if(mode != CHANGE) {
+            P6IES = mode ? P6IES | bit : P6IES & ~bit;
+        } else {
+            intChangeVectP6 |= bit;
+            P6IES = (P6IN & bit) ? (P6IES | bit) : (P6IES & ~bit);
+        }
+        P6IFG &= ~bit;
+        intFuncP6[bit_pos(bit)] = userFunc;
+        P6IE |= bit;
+        break;
+    #endif
+    #if defined(PORT7_VECTOR)
+    case P7:
+        if(mode != CHANGE) {
+            P7IES = mode ? P7IES | bit : P7IES & ~bit;
+        } else {
+            intChangeVectP7 |= bit;
+            P7IES = (P7IN & bit) ? (P7IES | bit) : (P7IES & ~bit);
+        }
+        P7IFG &= ~bit;
+        intFuncP7[bit_pos(bit)] = userFunc;
+        P7IE |= bit;
+        break;
+    #endif
+    #if defined(PORT8_VECTOR)
+    case P8:
+        if(mode != CHANGE) {
+            P8IES = mode ? P8IES | bit : P8IES & ~bit;
+        } else {
+            intChangeVectP8 |= bit;
+            P8IES = (P8IN & bit) ? (P8IES | bit) : (P8IES & ~bit);
+        }
+        P8IFG &= ~bit;
+        intFuncP8[bit_pos(bit)] = userFunc;
+        P8IE |= bit;
+        break;
+    #endif
+    #if defined(PORT9_VECTOR)
+    case P9:
+        if(mode != CHANGE) {
+            P9IES = mode ? P9IES | bit : P9IES & ~bit;
+        } else {
+            intChangeVectP9 |= bit;
+            P9IES = (P9IN & bit) ? (P9IES | bit) : (P9IES & ~bit);
+        }
+        P9IFG &= ~bit;
+        intFuncP9[bit_pos(bit)] = userFunc;
+        P9IE |= bit;
+        break;
+    #endif
+    #if defined(PORT10_VECTOR)
+    case P10:
+        if(mode != CHANGE) {
+            P10IES = mode ? P10IES | bit : P10IES & ~bit;
+        } else {
+            intChangeVectP10 |= bit;
+            P10IES = (P10IN & bit) ? (P10IES | bit) : (P10IES & ~bit);
+        }
+        P10IFG &= ~bit;
+        intFuncP10[bit_pos(bit)] = userFunc;
+        P10IE |= bit;
+        break;
+    #endif
+    #if defined(PORT11_VECTOR)
+    case P11:
+        if(mode != CHANGE) {
+            P11IES = mode ? P11IES | bit : P11IES & ~bit;
+        } else {
+            intChangeVectP11 |= bit;
+            P11IES = (P11IN & bit) ? (P11IES | bit) : (P11IES & ~bit);
+        }
+        P11IFG &= ~bit;
+        intFuncP11[bit_pos(bit)] = userFunc;
+        P11IE |= bit;
+        break;
+    #endif
+
+    default:
 		break;
 	}
 
@@ -261,6 +381,181 @@ void Port_4(void)
 					(P4IFG & ~BV(i)) : P4IFG;
 			} else {
 				P4IFG &= ~BV(i);
+			}
+		}
+	}
+	if (stay_asleep != still_sleeping) {
+		__bic_SR_register_on_exit(LPM4_bits);
+	}
+}
+#endif
+
+#if defined(PORT5_VECTOR)
+__attribute__((interrupt(PORT5_VECTOR)))
+void Port_5(void)
+{
+	uint8_t i;
+	boolean still_sleeping = stay_asleep;
+
+	for(i = 0; i < 8; i++) {
+		if((P5IFG & BV(i)) && intFuncP5[i]) {
+			intFuncP5[i]();
+			if(intChangeVectP5 & BV(i)){
+				P5IES ^= BV(i);
+				P5IFG = ((P5IN & BV(i)) == (P5IES & BV(i))) ? \
+					(P5IFG & ~BV(i)) : P5IFG;
+			} else {
+				P5IFG &= ~BV(i);
+			}
+		}
+	}
+	if (stay_asleep != still_sleeping) {
+		__bic_SR_register_on_exit(LPM4_bits);
+	}
+}
+#endif
+
+#if defined(PORT6_VECTOR)
+__attribute__((interrupt(PORT6_VECTOR)))
+void Port_6(void)
+{
+	uint8_t i;
+	boolean still_sleeping = stay_asleep;
+
+	for(i = 0; i < 8; i++) {
+		if((P6IFG & BV(i)) && intFuncP6[i]) {
+			intFuncP6[i]();
+			if(intChangeVectP6 & BV(i)){
+				P6IES ^= BV(i);
+				P6IFG = ((P6IN & BV(i)) == (P6IES & BV(i))) ? \
+					(P6IFG & ~BV(i)) : P6IFG;
+			} else {
+				P6IFG &= ~BV(i);
+			}
+		}
+	}
+	if (stay_asleep != still_sleeping) {
+		__bic_SR_register_on_exit(LPM4_bits);
+	}
+}
+#endif
+
+#if defined(PORT7_VECTOR)
+__attribute__((interrupt(PORT7_VECTOR)))
+void Port_7(void)
+{
+	uint8_t i;
+	boolean still_sleeping = stay_asleep;
+
+	for(i = 0; i < 8; i++) {
+		if((P7IFG & BV(i)) && intFuncP7[i]) {
+			intFuncP7[i]();
+			if(intChangeVectP7 & BV(i)){
+				P7IES ^= BV(i);
+				P7IFG = ((P7IN & BV(i)) == (P7IES & BV(i))) ? \
+					(P7IFG & ~BV(i)) : P7IFG;
+			} else {
+				P7IFG &= ~BV(i);
+			}
+		}
+	}
+	if (stay_asleep != still_sleeping) {
+		__bic_SR_register_on_exit(LPM4_bits);
+	}
+}
+#endif
+
+#if defined(PORT8_VECTOR)
+__attribute__((interrupt(PORT8_VECTOR)))
+void Port_8(void)
+{
+	uint8_t i;
+	boolean still_sleeping = stay_asleep;
+
+	for(i = 0; i < 8; i++) {
+		if((P8IFG & BV(i)) && intFuncP8[i]) {
+			intFuncP8[i]();
+			if(intChangeVectP8 & BV(i)){
+				P8IES ^= BV(i);
+				P8IFG = ((P8IN & BV(i)) == (P8IES & BV(i))) ? \
+					(P8IFG & ~BV(i)) : P8IFG;
+			} else {
+				P8IFG &= ~BV(i);
+			}
+		}
+	}
+	if (stay_asleep != still_sleeping) {
+		__bic_SR_register_on_exit(LPM4_bits);
+	}
+}
+#endif
+
+#if defined(PORT9_VECTOR)
+__attribute__((interrupt(PORT9_VECTOR)))
+void Port_9(void)
+{
+	uint9_t i;
+	boolean still_sleeping = stay_asleep;
+
+	for(i = 0; i < 8; i++) {
+		if((P9IFG & BV(i)) && intFuncP9[i]) {
+			intFuncP9[i]();
+			if(intChangeVectP9 & BV(i)){
+				P9IES ^= BV(i);
+				P9IFG = ((P9IN & BV(i)) == (P9IES & BV(i))) ? \
+					(P9IFG & ~BV(i)) : P9IFG;
+			} else {
+				P9IFG &= ~BV(i);
+			}
+		}
+	}
+	if (stay_asleep != still_sleeping) {
+		__bic_SR_register_on_exit(LPM4_bits);
+	}
+}
+#endif
+
+#if defined(PORT10_VECTOR)
+__attribute__((interrupt(PORT10_VECTOR)))
+void Port_10(void)
+{
+	uint10_t i;
+	boolean still_sleeping = stay_asleep;
+
+	for(i = 0; i < 8; i++) {
+		if((P10IFG & BV(i)) && intFuncP10[i]) {
+			intFuncP10[i]();
+			if(intChangeVectP10 & BV(i)){
+				P10IES ^= BV(i);
+				P10IFG = ((P10IN & BV(i)) == (P10IES & BV(i))) ? \
+					(P10IFG & ~BV(i)) : P10IFG;
+			} else {
+				P10IFG &= ~BV(i);
+			}
+		}
+	}
+	if (stay_asleep != still_sleeping) {
+		__bic_SR_register_on_exit(LPM4_bits);
+	}
+}
+#endif
+
+#if defined(PORT11_VECTOR)
+__attribute__((interrupt(PORT11_VECTOR)))
+void Port_11(void)
+{
+	uint11_t i;
+	boolean still_sleeping = stay_asleep;
+
+	for(i = 0; i < 8; i++) {
+		if((P11IFG & BV(i)) && intFuncP11[i]) {
+			intFuncP11[i]();
+			if(intChangeVectP11 & BV(i)){
+				P11IES ^= BV(i);
+				P11IFG = ((P11IN & BV(i)) == (P11IES & BV(i))) ? \
+					(P11IFG & ~BV(i)) : P11IFG;
+			} else {
+				P11IFG &= ~BV(i);
 			}
 		}
 	}
