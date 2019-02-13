@@ -234,7 +234,9 @@ uint8_t spi_send(const uint8_t data)
     /* Wait for previous tx to complete. */
     while (UCzSTATW & UCBUSY);
     /* Clear RX Flag */
-    UCzIFG &= ~UCRXIFG;
+    //UCzIFG &= ~UCRXIFG;
+    UCzRXBUF; /* reading RXBUF to clear error bits and UCRXIFG */
+
 
     /* Send byte */
     UCzTXBUF = data;
@@ -255,8 +257,9 @@ uint16_t spi_send16(const uint16_t data)
     /* Wait for previous tx to complete. */
     while (UCzSTATW & UCBUSY);
     /* Clear RX Flag */
-    UCzIFG &= ~UCRXIFG;
-    
+    //UCzIFG &= ~UCRXIFG;
+    UCzRXBUF; /* reading RXBUF to clear error bits and UCRXIFG */
+
     /* Send first byte. */
     UCzTXBUF = data | 0xFF;
     /* Wait for a rx character? */
@@ -291,7 +294,7 @@ void spi_send(void *buf, uint16_t count)
     while (*pSTATW & UCBUSY);
     /* Clear RX Flag */
     //*pIFG &= ~UCRXIFG;
-    UCzRXBUF; /* readind RXBUF to clear error bits and UCRXIFG */
+    UCzRXBUF; /* reading RXBUF to clear error bits and UCRXIFG */
     while(count != 0){
         //while (!(*pIFG & UCTXIFG)); /* no needed as we check RXIFG */
         /* Setting TXBUF clears the TXIFG flag. */
@@ -311,7 +314,8 @@ void spi_transmit(const uint8_t data)
     /* Wait for previous tx to complete. */
     while (UCzSTATW & UCBUSY);
     /* Clear RX Flag */
-    UCzIFG &= ~UCRXIFG;
+    //UCzIFG &= ~UCRXIFG;
+    UCzRXBUF; /* reading RXBUF to clear error bits and UCRXIFG */
 
     /* Setting TXBUF clears the TXIFG flag. */
     UCzTXBUF = data;
@@ -319,7 +323,9 @@ void spi_transmit(const uint8_t data)
     /* Wait for previous tx to complete. */
     while (UCzSTATW & UCBUSY);
     /* clear RXIFG flag. */
-    UCzIFG &= ~UCRXIFG;
+    //UCzIFG &= ~UCRXIFG;
+    UCzRXBUF; /* reading RXBUF to clear error bits and UCRXIFG */
+
 }
 
 void spi_transmit16(const uint16_t data)
@@ -336,7 +342,9 @@ void spi_transmit16(const uint16_t data)
     /* Wait for previous tx to complete. */
     while (UCzSTATW & UCBUSY);
     /* clear RXIFG flag. */
-    UCzIFG &= ~UCRXIFG;
+    //UCzIFG &= ~UCRXIFG;
+    UCzRXBUF; /* reading RXBUF to clear error bits and UCRXIFG */
+
 }
 
 void spi_transmit(void *buf, uint16_t count)
@@ -359,7 +367,9 @@ void spi_transmit(void *buf, uint16_t count)
     /* Wait for previous tx to complete. */
     while (*pSTATW & UCBUSY);
     /* clear RXIFG flag. */
-    *pIFG &= ~UCRXIFG;
+    //*pIFG &= ~UCRXIFG;
+    UCzRXBUF; /* reading RXBUF to clear error bits and UCRXIFG */
+
 }
 
 /***SPI_MODE_0
