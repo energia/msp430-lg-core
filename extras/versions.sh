@@ -22,10 +22,10 @@ INO2CPP_VER="1.0.4"
 
 # New GCC Compiler (Mito)
 # Energia tools version number - stored in platform.txt
-ENERGIA_VER="2.0.4"
+ENERGIA_VER="2.0.5"
 
 
 # Legacy GCC Compiler
 # Energia tools version number - stored in platform.txt
-ENERGIA1_VER="1.0.5"
+ENERGIA1_VER="1.0.6"
 LEGACY_GCC_VER="4.6.6"
