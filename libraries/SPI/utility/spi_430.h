@@ -41,6 +41,7 @@
 #endif
 
 extern uint16_t SPI_baseAddress;  
+extern uint8_t spiModule;
 
 void spi_initialize(void);
 void spi_disable(void);

@@ -144,6 +144,17 @@ void enableXtal(void)
 		vlo_freq = 32768;
 		/* Source ACLK from REFO */
 		CSCTL4 |= SELA__REFOCLK;
+		CSCTL3 |= SELREF__REFOCLK;
+
+
+		/* Clear the Oscillator fault interrupt flag */
+		CSCTL7 &= ~(DCOFFG|XT1OFFG|FLLULIFG);
+		SFRIFG1 &= ~OFIFG;
+
+	}else{
+		/* Source ACLK from LFXT */
+		CSCTL3 &= ~SELREF__REFOCLK;
+		CSCTL4 &= ~SELA__REFOCLK;
 	}
 #endif
 

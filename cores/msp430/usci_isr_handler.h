@@ -8,10 +8,13 @@ typedef void CHardwareSerial;
 #ifdef __cplusplus
 extern "C" {
 #endif
-void uart_tx_isr(uint8_t offset);
-void uart_rx_isr(uint8_t offset);
+void uart_tx_isr(uint16_t offset);
+void uart_rx_isr(uint16_t offset);
+void spi_tx_isr(uint16_t offset);
+void spi_rx_isr(uint16_t offset);
 uint16_t i2c_txrx_isr(void);
 uint16_t i2c_state_isr(void);
+uint16_t eusci_isr_handler(void);
 void usci_isr_install(void);
 #ifdef __cplusplus
 }
