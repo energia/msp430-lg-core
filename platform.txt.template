@@ -6,7 +6,7 @@
 # https://github.com/arduino/Arduino/wiki/Arduino-IDE-1.5-3rd-party-Hardware-specification
 
 name=Energia MSP430 boards (elf-GCC)
-version=2.0.2
+version=xxx
 
 # MSP430 compile variables
 # --------------------- 
@@ -67,7 +67,7 @@ recipe.S.o.pattern="{compiler.path}{compiler.c.cmd}" {compiler.S.flags} -mmcu={b
 recipe.ar.pattern="{compiler.path}{compiler.ar.cmd}" {compiler.ar.flags} {compiler.ar.extra_flags} "{archive_file_path}" "{object_file}"
 
 ## Combine gc-sections, archives, and objects
-recipe.c.combine.pattern="{compiler.path}{compiler.c.elf.cmd}" {compiler.c.elf.flags} -mmcu={build.mcu} {compiler.c.elf.extra_flags} {build.extra_flags} -o "{build.path}/{build.project_name}.elf" {object_files} "{build.path}/{archive_file}" "-L{build.path}" -lm
+recipe.c.combine.pattern="{compiler.path}{compiler.c.elf.cmd}" {compiler.c.elf.flags} -mmcu={build.mcu} {compiler.c.elf.extra_flags} {build.extra_flags} -o "{build.path}/{build.project_name}.elf" {object_files} "{build.path}/{archive_file}" "-L{build.path}" -lstdc++ -lgcc -lm
 
 ## Create output files (.eep and .hex)
 recipe.objcopy.eep.pattern="{compiler.path}{compiler.objcopy.cmd}" {compiler.objcopy.eep.flags} {compiler.objcopy.eep.extra_flags} "{build.path}/{build.project_name}.elf" "{build.path}/{build.project_name}.eep"
@@ -94,7 +94,7 @@ recipe.preproc.macros="{compiler.path}{compiler.cpp.cmd}" {compiler.cpp.flags} {
 # TI's DSLite
 tools.dslite.upload.params.verbose=
 tools.dslite.upload.params.quiet=
-tools.dslite.path={runtime.tools.dslite-7.2.0.2096.path}
+tools.dslite.path={runtime.tools.dslite-xxx.path}
 tools.dslite.config.path={path}
 tools.dslite.cmd.path={path}/DebugServer/bin/DSLite
 #tools.dslite.upload.pattern={cmd.path} {upload.verbose} load -c "{config.path}/{build.variant}.ccxml" -f "{build.path}/{build.project_name}.elf"

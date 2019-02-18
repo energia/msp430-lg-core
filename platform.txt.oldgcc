@@ -6,7 +6,7 @@
 # https://github.com/arduino/Arduino/wiki/Arduino-IDE-1.5-3rd-party-Hardware-specification
 
 name=Energia MSP430 boards
-version=1.0.3
+version=xxx
 
 # AVR compile variables
 # --------------------- 
@@ -93,7 +93,7 @@ recipe.preproc.macros="{compiler.path}{compiler.cpp.cmd}" {compiler.cpp.flags} {
 # TI's DSLite
 tools.dslite.upload.params.verbose=
 tools.dslite.upload.params.quiet=
-tools.dslite.path={runtime.tools.dslite-7.4.0.1099.path}
+tools.dslite.path={runtime.tools.dslite-xxx.path}
 tools.dslite.config.path={path}
 tools.dslite.cmd.path={path}/DebugServer/bin/DSLite
 tools.dslite.upload.pattern={cmd.path} {upload.verbose} load -c "{config.path}/{build.variant}.ccxml" -f "{build.path}/{build.project_name}.elf"

@@ -1,7 +1,11 @@
 *.tar
 *.bz2
 *.zip
+*.pyc
+package_index.json*
 build/
 download/
 dslite/
+.idea/
+__pycache__/
 md5sum.txt

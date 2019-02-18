@@ -502,6 +502,53 @@ void twi_setClock(uint32_t frequency)
 }
 
 /*
+ * Function twi_disable
+ * Desc     disables the twi interface
+ * Input    none
+ * Output   none
+ */
+void twi_disable(void)
+{
+    UCBzCTLW0 |= (UCSWRST);
+}
+
+/*
+ * Function twi_setClock
+ * Desc     sets the clock speed for the the twi interface
+ * Input    none
+ * Output   none
+ */
+void twi_setClock(uint32_t frequency)
+{
+#if defined(__MSP430_HAS_USI__)
+    /* 100 KHz for all */
+#endif
+
+#if defined(__MSP430_HAS_USCI__) \
+ || defined(__MSP430_HAS_USCI_B0__) || defined(__MSP430_HAS_USCI_B1__)
+    /*
+     * Compute the clock divider that achieves less than or
+     * equal to 100kHz.  The numerator is biased to favor a larger
+     * clock divider so that the resulting clock is always less than or equal
+     * to the desired clock, never greater.
+     */
+    UCBzBR0 = (unsigned char)((F_CPU / frequency) & 0xFF);
+    UCBzBR1 = (unsigned char)((F_CPU / frequency) >> 8);
+
+#endif
+#if defined(__MSP430_HAS_EUSCI_B0__) || defined(__MSP430_HAS_EUSCI_B1__) || defined(__MSP430_HAS_EUSCI_B2__) || defined(__MSP430_HAS_EUSCI_B3__)
+    /*
+     * Compute the clock divider that achieves the fastest speed less than or
+     * equal to the desired speed.  The numerator is biased to favor a larger
+     * clock divider so that the resulting clock is always less than or equal
+     * to the desired clock, never greater.
+     */
+    UCBzBRW = (unsigned short)(F_CPU / frequency);
+
+#endif
+}
+
+/*
  * Function twi_setAddress
  * Desc     sets slave address and enables interrupt
  * Input    none

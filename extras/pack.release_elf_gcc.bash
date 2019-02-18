@@ -1,4 +1,5 @@
-#!/bin/bash -ex
+#!/bin/bash 
+#-ex
 
 #  pack.*.bash - Bash script to help packaging samd core releases.
 #  Copyright (c) 2015 Arduino LLC.  All right reserved.
@@ -17,7 +18,9 @@
 #  License along with this library; if not, write to the Free Software
 #  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
-VERSION=`grep version= platform.txt | sed 's/version=//g'`
+source ./extras/versions.sh
+
+VERSION=$ENERGIA_VER
 echo $VERSION
 
 PWD=`pwd`
@@ -25,17 +28,17 @@ FOLDERNAME=`basename $PWD`
 echo $FOLDERNAME
 THIS_SCRIPT_NAME=`basename $0`
 
-rm -f extras/build/msp430-$VERSION.tar.bz2
-rm -f extras/build/msp430-$VERSION.tar.bz2.sha256
+rm -f extras/build/msp430elf-$VERSION.tar.bz2
+rm -f extras/build/msp430elf-$VERSION.tar.bz2.sha256
+
+sed -r s/version=xxx/version=$VERSION/ platform.txt.template | sed -r s/dslite-xxx/dslite-$DSLITE_VER/ > platform.txt
 
 cd ..
-tar --transform "s|$FOLDERNAME|msp430-$VERSION|g"  --exclude=*.sha256 --exclude=*.bz2 --exclude=platform.txt.oldgcc --exclude=extras --exclude=.git* --exclude=.idea -cjf msp430-$VERSION.tar.bz2 $FOLDERNAME
+tar --transform "s|$FOLDERNAME|msp430elf-$VERSION|g"  --exclude=*.sha256 --exclude=*.bz2 --exclude=platform.txt.oldgcc --exclude=platform.txt.template --exclude=extras --exclude=.git* --exclude=.idea -cjf msp430elf-$VERSION.tar.bz2 $FOLDERNAME
 cd -
 
 [ -d "extras/build" ] || mkdir extras/build 
-mv ../msp430-$VERSION.tar.bz2 ./extras/build/
+mv ../msp430elf-$VERSION.tar.bz2 ./extras/build/
 
-cd extras/build
-sha256sum --tag msp430-$VERSION.tar.bz2 > msp430-$VERSION.tar.bz2.sha256
-stat -f -c %z msp430-$VERSION.tar.bz2
-cd ../..
+shasum -a 256 extras/build/msp430elf-$VERSION.tar.bz2 > extras/build/msp430elf-$VERSION.tar.bz2.sha256
+#stat -f -c %z msp430elf-$VERSION.tar.bz2
