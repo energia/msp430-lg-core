@@ -102,7 +102,7 @@ m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/
 m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/exports/md5sum.txt"
 cd extras/download
 #sed -i '/md5sum/d' ./md5sum.txt
-md5sum.exe --check --ignore-missing md5sum.txt
+md5sum --check --ignore-missing md5sum.txt
 cd ../..
 
 
