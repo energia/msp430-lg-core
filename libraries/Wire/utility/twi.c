@@ -426,11 +426,16 @@ void twi_disable(void)
 /*
  * Function twi_setClock
  * Desc     sets the clock speed for the the twi interface
- * Input    none
+ * Input    frequency of the SCL
  * Output   none
  */
 void twi_setClock(uint32_t frequency)
 {
+    if (frequency > 400000UL)
+    {
+        frequency = 400000UL;
+    }
+    
 #if defined(__MSP430_HAS_USI__)
     /* 100 KHz for all */
 #endif
