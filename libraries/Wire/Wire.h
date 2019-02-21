@@ -39,6 +39,9 @@
 // WIRE_HAS_END means Wire has end()
 #define WIRE_HAS_END 1
 
+#define I2C_100kHz 100000UL
+#define I2C_400kHz 400000UL
+
 class TwoWire : public Stream
 {
   private:
