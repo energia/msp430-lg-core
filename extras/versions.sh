@@ -28,4 +28,7 @@ ENERGIA_VER="2.0.5"
 # Legacy GCC Compiler
 # Energia tools version number - stored in platform.txt
 ENERGIA1_VER="1.0.6"
-LEGACY_GCC_VER="4.6.6"
+# GCC version to load
+LOAD_GCC_VER="4.6.6"
+# GCC version after patching and packing
+LEGACY_GCC_VER="4.6.7"
