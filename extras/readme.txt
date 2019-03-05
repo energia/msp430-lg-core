@@ -17,7 +17,7 @@ Build Compiler package with new GCC (elf) compiler
 	run ./extras/make_mito_release.sh
 	- files are collected from the source defined in version.sh then updated and patched
 	- dslite is assumed to be available on the web ready to use package
-	- the json file is generarated / updated / added with the new or changed version and file details
+	- the json file is generated / updated / added with the new or changed version and file details
 	- finally the files are stored in the build folder
 
 
@@ -28,8 +28,14 @@ Build Compiler package with legacy GCC compiler
 	- files are collected from the source defined in version.sh then updated and patched
 	- currently it assumes that the compiler is already available and just taken from the web
 	- dslite is assumed to be available on the web ready to use package
-	- the json file is generarated / updated / added with the new or changed version and file details
+	- the json file is generated / updated / added with the new or changed version and file details
 	- finally the files are stored in the build folder
+    
+    Patch function:
+    ---------------
+    when providing a patch file within the patches folder this will be applied to the legacy GCC compiler package 
+    during the release build. The script will add the header and linker file and also update the msp430.h and 
+    msp430mcu.spec file.
 	
 	
 	
