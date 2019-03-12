@@ -1225,7 +1225,7 @@ uint16_t eusci_isr_handler(void)
                      exit_lpm = 1; //__bic_SR_register_on_exit(LPM4_bits); // Exit LPM
                   }
                }
-          } else if (twi_state == TWI_MRX) {      // Master receive mode
+          } else if (twi_state == TWI_STX) {      // Slave transmit mode
                // copy data to output register
                UCBzTXBUF = twi_txBuffer[twi_txBufferIndex++];
                // if there is more to send, ack, otherwise nack
