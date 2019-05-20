@@ -36,7 +36,7 @@
 #define BV(x) (1 << (x))
 #endif
 
-#include <msp430fr5xx_6xxgeneric.h>
+#include <msp430fr2xx_4xxgeneric.h>
 
 // Attribute for placing R/W variables in FRAM
 // Example
