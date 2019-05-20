@@ -44,8 +44,8 @@ static const uint8_t TWISCL1  = 9;   /* P2.1 SW I2C */
 static const uint8_t TWISDA1  = 10;  /* P2.2 SW I2C */
 static const uint8_t TWISDA0  = 15;  /* P1.7 */
 static const uint8_t TWISCL0  = 14;  /* P1.6 */
-static const uint8_t DEBUG_UARTRXD = 3;  /* Receive  Data (RXD) at P1.1 */
-static const uint8_t DEBUG_UARTTXD = 4;  /* Transmit Data (TXD) at P1.2 */
+static const uint8_t DEBUG_UARTRXD = 4;  /* Receive  Data (RXD) at P1.2 */
+static const uint8_t DEBUG_UARTTXD = 3;  /* Transmit Data (TXD) at P1.1 */
 #define TWISDA1_SET_MODE  (INPUT)
 #define TWISCL1_SET_MODE  (INPUT)
 #if defined(__MSP430_HAS_USCI__)
