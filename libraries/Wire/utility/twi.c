@@ -114,6 +114,7 @@ static uint8_t twi_my_addr;
 #define UCBzMCTL      (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxMCTL   + I2C_baseAddress))))
 #define UCBzMCTLW     (*((volatile uint16_t *)((uint16_t)(OFS_UCBxMCTLW  + I2C_baseAddress))))
 #define UCBzSTAT      (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxSTAT   + I2C_baseAddress))))
+#define UCBzSTATW     (*((volatile uint16_t *)((uint16_t)(OFS_UCBxSTATW  + I2C_baseAddress))))
 #define UCBzTBCNT     (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxTBCNT  + I2C_baseAddress))))
 #define UCBzRXBUF     (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxRXBUF  + I2C_baseAddress))))
 #define UCBzTXBUF     (*((volatile uint8_t  *)((uint16_t)(OFS_UCBxTXBUF  + I2C_baseAddress))))
@@ -206,6 +207,12 @@ void twi_setModule(int8_t _i2cModule)
           I2C_baseAddress = -1;
      }
 #endif
+#if defined(__MSP430_HAS_USI__)
+     if (_i2cModule == 0)
+     {
+          I2C_baseAddress = 0;
+     }
+#endif
 #if defined(__MSP430_HAS_USCI__) || defined(__MSP430_HAS_USCI_B0__) || defined(__MSP430_HAS_EUSCI_B0__)
      if (_i2cModule == 0)
      {
@@ -244,6 +251,14 @@ static void twi_init_port(void)
      if (I2C_baseAddress == -1)
      {
           i2c_sw_init();
+          return;
+     }
+#endif
+#if defined(__MSP430_HAS_USI__)
+     if (I2C_baseAddress == 0)
+     {
+          pinMode_int(TWISDA0, INPUT_PULLUP);
+          pinMode_int(TWISCL0, INPUT_PULLUP);
           return;
      }
 #endif
@@ -364,7 +379,7 @@ void twi_init(void)
 #endif
 
 #if defined(__MSP430_HAS_USI__)
-
+     twi_init_port();
      /* 100 KHz for all */
 #if (F_CPU >= 16000000L) || (F_CPU >= 12000000L)
      USICKCTL = USIDIV_7;
@@ -420,7 +435,13 @@ void twi_init(void)
  */
 void twi_disable(void)
 {
+#if defined(__MSP430_HAS_USI__)
+    /* Disable USI */
+    USICTL0 |= USISWRST;
+#else
+     /* Disable USCI */
     UCBzCTLW0 |= (UCSWRST);
+#endif
 }
 
 /*
@@ -660,6 +681,10 @@ uint8_t twi_writeTo(uint8_t address, uint8_t* data, uint8_t length, uint8_t wait
      USICTL1 &= ~USISTTIE;
      /* I2C master mode */
      USICTL0 |= USIMST;
+
+     if(length == 0) {
+         return 0;
+     }
 #endif
 #if defined(__MSP430_HAS_USCI__) || defined(__MSP430_HAS_USCI_B0__) || defined(__MSP430_HAS_USCI_B1__)
     UCBzCTL1 = UCSWRST;                      // Enable SW reset
