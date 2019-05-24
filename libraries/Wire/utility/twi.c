@@ -682,9 +682,6 @@ uint8_t twi_writeTo(uint8_t address, uint8_t* data, uint8_t length, uint8_t wait
      /* I2C master mode */
      USICTL0 |= USIMST;
 
-     if(length == 0) {
-         return 0;
-     }
 #endif
 #if defined(__MSP430_HAS_USCI__) || defined(__MSP430_HAS_USCI_B0__) || defined(__MSP430_HAS_USCI_B1__)
     UCBzCTL1 = UCSWRST;                      // Enable SW reset
