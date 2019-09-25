@@ -256,31 +256,30 @@ uint16_t spi_send16(const uint16_t data)
     uint16_t datain;
     /* Wait for previous tx to complete. */
     while (UCzSTATW & UCBUSY);
-    /* Clear RX Flag */
-    //UCzIFG &= ~UCRXIFG;
     UCzRXBUF; /* reading RXBUF to clear error bits and UCRXIFG */
 
-    /* Send first byte. */
-    //UCzTXBUF = data | 0xFF; // (data | 0xFF) is always 0xFF
-    UCzTXBUF = data & 0xFF; // send LSB first
-    
-    /* Wait for a rx character? */
-    while (!(UCzIFG & UCRXIFG));
-    //datain = UCzRXBUF << 8; // receive MSB first - very strange
-    datain = UCzRXBUF & 255; // receive LSB first
-    
-    /* Wait for previous tx to complete. */
-    //while (!(UCzIFG & UCTXIFG)); // is it needed? we already received a byte
-                                   // i. e. tx is complete
-    /* send second byte */
-    UCzTXBUF = data >> 8; // send MSB
+    if (UCzCTLW0 & UCBSM) // MSB first?
+    {
+        UCzTXBUF = data >> 8; // send MSB first
+        while (!(UCzIFG & UCRXIFG)); /* Wait for a rx character */
+        datain = UCzRXBUF; // receive MSB first
 
-    /* Wait for a rx character? */
-    while (!(UCzIFG & UCRXIFG));
-    /* Reading clears RXIFG flag. */
-    //return (datain | UCzRXBUF);
-    uint16_t tmp = UCzRXBUF;      // receive MSB
-    return (datain | (tmp << 8)); //
+        UCzTXBUF = data & 255; // send LSB
+        while (!(UCzIFG & UCRXIFG)); /* Wait for a rx character */
+        return ((datain << 8) | UCzRXBUF); // receive LSB
+    }
+    else
+    {
+        UCzTXBUF = data & 0xFF; // send LSB first
+        /* Wait for a rx character */
+        while (!(UCzIFG & UCRXIFG));
+        datain = UCzRXBUF & 255; // receive LSB first
+        UCzTXBUF = data >> 8; // send MSB
+        /* Wait for a rx character */
+        while (!(UCzIFG & UCRXIFG));
+        uint16_t tmp = UCzRXBUF;      // receive MSB
+        return (datain | (tmp << 8)); //
+    }
 }
 
 /**
@@ -340,20 +339,23 @@ void spi_transmit16(const uint16_t data)
 {
     /* Wait for previous tx to complete. */
     while (UCzSTATW & UCBUSY);
-    /* Setting TXBUF clears the TXIFG flag. */
-    //UCzTXBUF = data | 0xFF; // (data | 0xFF) is always 0xFF
-    UCzTXBUF = data & 0xFF;
-    /* Wait for previous tx to complete. */
-    while (!(UCzIFG & UCTXIFG));
-    /* Setting TXBUF clears the TXIFG flag. */
-    UCzTXBUF = data >> 8;
+    
+    if (UCzCTLW0 & UCBSM) // MSB first?
+    {
+        UCzTXBUF = data >> 8; // send MSB first
+        while (UCzSTATW & UCBUSY);
+        UCzTXBUF = data & 255; // send LSB
+    }
+    else
+    {
+        UCzTXBUF = data & 0xFF; // send LSB first
+        while (UCzSTATW & UCBUSY);
+        UCzTXBUF = data >> 8; // send MSB
+    }
 
-    /* Wait for previous tx to complete. */
     while (UCzSTATW & UCBUSY);
     /* clear RXIFG flag. */
-    //UCzIFG &= ~UCRXIFG;
     UCzRXBUF; /* reading RXBUF to clear error bits and UCRXIFG */
-
 }
 
 void spi_transmit(void *buf, uint16_t count)
@@ -376,8 +378,6 @@ void spi_transmit(void *buf, uint16_t count)
     }
     /* Wait for previous tx to complete. */
     while (*pSTATW & UCBUSY);
-    /* clear RXIFG flag. */
-    //*pIFG &= ~UCRXIFG;
     UCzRXBUF; /* reading RXBUF to clear error bits and UCRXIFG */
 
 }
