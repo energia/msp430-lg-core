@@ -261,20 +261,26 @@ uint16_t spi_send16(const uint16_t data)
     UCzRXBUF; /* reading RXBUF to clear error bits and UCRXIFG */
 
     /* Send first byte. */
-    UCzTXBUF = data | 0xFF;
+    //UCzTXBUF = data | 0xFF; // (data | 0xFF) is always 0xFF
+    UCzTXBUF = data & 0xFF; // send LSB first
+    
     /* Wait for a rx character? */
     while (!(UCzIFG & UCRXIFG));
-    datain = UCzRXBUF << 8;
+    //datain = UCzRXBUF << 8; // receive MSB first - very strange
+    datain = UCzRXBUF & 255; // receive LSB first
     
     /* Wait for previous tx to complete. */
-    while (!(UCzIFG & UCTXIFG));
+    //while (!(UCzIFG & UCTXIFG)); // is it needed? we already received a byte
+                                   // i. e. tx is complete
     /* send second byte */
-    UCzTXBUF = data >> 8;
+    UCzTXBUF = data >> 8; // send MSB
 
     /* Wait for a rx character? */
     while (!(UCzIFG & UCRXIFG));
     /* Reading clears RXIFG flag. */
-    return (datain | UCzRXBUF);
+    //return (datain | UCzRXBUF);
+    uint16_t tmp = UCzRXBUF;      // receive MSB
+    return (datain | (tmp << 8)); //
 }
 
 /**
@@ -282,6 +288,8 @@ uint16_t spi_send16(const uint16_t data)
  */
 void spi_send(void *buf, uint16_t count) 
 {
+    if (count == 0) return;
+    
     uint8_t *ptx = (uint8_t *)buf;
     uint8_t *prx = (uint8_t *)buf;
     volatile uint8_t *pIFG = &UCzIFG;
@@ -289,12 +297,12 @@ void spi_send(void *buf, uint16_t count)
     volatile uint8_t *pTX = &UCzTXBUF;
     volatile uint8_t *pRX = &UCzRXBUF;
 
-    if (count == 0) return;
     /* Wait for previous tx to complete. */
     while (*pSTATW & UCBUSY);
     /* Clear RX Flag */
     //*pIFG &= ~UCRXIFG;
-    UCzRXBUF; /* reading RXBUF to clear error bits and UCRXIFG */
+    //UCzRXBUF; /* reading RXBUF to clear error bits and UCRXIFG */
+    *pRX; // should be faster since pRX contains calculated address
     while(count != 0){
         //while (!(*pIFG & UCTXIFG)); /* no needed as we check RXIFG */
         /* Setting TXBUF clears the TXIFG flag. */
@@ -333,7 +341,8 @@ void spi_transmit16(const uint16_t data)
     /* Wait for previous tx to complete. */
     while (UCzSTATW & UCBUSY);
     /* Setting TXBUF clears the TXIFG flag. */
-    UCzTXBUF = data | 0xFF;
+    //UCzTXBUF = data | 0xFF; // (data | 0xFF) is always 0xFF
+    UCzTXBUF = data & 0xFF;
     /* Wait for previous tx to complete. */
     while (!(UCzIFG & UCTXIFG));
     /* Setting TXBUF clears the TXIFG flag. */
@@ -349,12 +358,13 @@ void spi_transmit16(const uint16_t data)
 
 void spi_transmit(void *buf, uint16_t count)
 {
+    if (count == 0) return;
+
     uint8_t *ptx = (uint8_t *)buf;
     volatile uint8_t *pIFG = &UCzIFG;
     volatile uint16_t *pSTATW = &UCzSTATW;
     volatile uint8_t *pTX = &UCzTXBUF;
 
-    if (count == 0) return;
     /* Wait for previous tx to complete. */
     while (*pSTATW & UCBUSY);
     while(count){
