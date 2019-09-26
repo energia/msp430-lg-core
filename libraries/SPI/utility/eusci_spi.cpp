@@ -264,7 +264,7 @@ uint16_t spi_send16(const uint16_t data)
         while (!(UCzIFG & UCRXIFG)); /* Wait for a rx character */
         datain = UCzRXBUF; // receive MSB first
 
-        UCzTXBUF = data & 255; // send LSB
+        UCzTXBUF = data & 0xFF; // send LSB
         while (!(UCzIFG & UCRXIFG)); /* Wait for a rx character */
         return ((datain << 8) | UCzRXBUF); // receive LSB
     }
@@ -273,7 +273,7 @@ uint16_t spi_send16(const uint16_t data)
         UCzTXBUF = data & 0xFF; // send LSB first
         /* Wait for a rx character */
         while (!(UCzIFG & UCRXIFG));
-        datain = UCzRXBUF & 255; // receive LSB first
+        datain = UCzRXBUF; // receive LSB first
         UCzTXBUF = data >> 8; // send MSB
         /* Wait for a rx character */
         while (!(UCzIFG & UCRXIFG));
@@ -298,8 +298,6 @@ void spi_send(void *buf, uint16_t count)
 
     /* Wait for previous tx to complete. */
     while (*pSTATW & UCBUSY);
-    /* Clear RX Flag */
-    //*pIFG &= ~UCRXIFG;
     //UCzRXBUF; /* reading RXBUF to clear error bits and UCRXIFG */
     *pRX; // should be faster since pRX contains calculated address
     while(count != 0){
@@ -320,8 +318,6 @@ void spi_transmit(const uint8_t data)
 {
     /* Wait for previous tx to complete. */
     while (UCzSTATW & UCBUSY);
-    /* Clear RX Flag */
-    //UCzIFG &= ~UCRXIFG;
     UCzRXBUF; /* reading RXBUF to clear error bits and UCRXIFG */
 
     /* Setting TXBUF clears the TXIFG flag. */
@@ -329,8 +325,6 @@ void spi_transmit(const uint8_t data)
 
     /* Wait for previous tx to complete. */
     while (UCzSTATW & UCBUSY);
-    /* clear RXIFG flag. */
-    //UCzIFG &= ~UCRXIFG;
     UCzRXBUF; /* reading RXBUF to clear error bits and UCRXIFG */
 
 }
@@ -343,13 +337,13 @@ void spi_transmit16(const uint16_t data)
     if (UCzCTLW0 & UCBSM) // MSB first?
     {
         UCzTXBUF = data >> 8; // send MSB first
-        while (UCzSTATW & UCBUSY);
-        UCzTXBUF = data & 255; // send LSB
+        while (!(UCzIFG & UCTXIFG)); // waiting for TX buffer is ready
+        UCzTXBUF = data & 0xFF; // send LSB
     }
     else
     {
         UCzTXBUF = data & 0xFF; // send LSB first
-        while (UCzSTATW & UCBUSY);
+        while (!(UCzIFG & UCTXIFG)); // waiting for TX buffer is ready
         UCzTXBUF = data >> 8; // send MSB
     }
 
