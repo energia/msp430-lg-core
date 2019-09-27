@@ -29,18 +29,24 @@
 #define SPI_LSBMSB_MASK (USILSB)
 
 /* deal with USI5 errata see: document slaz061b */
-enum USI5 {
-    USI5_NO_ADJUST=0,
-    USI5_ADJUST=1,
-    USI5_SENT=2,
-};
-static enum USI5 bResetAdjust;
+void USI5_workaround()
+{
+    uint8_t savepins = P1OUT & (BIT5 | BIT6); // save pins 5, 6
+    P1OUT = (P1OUT & ~(BIT5 | BIT6)) | (P1IN & (BIT5 | BIT6)); // output to pins 5, 6 their input values
+                                                               // because USI outputs are turned off and
+                                                               // we don't want any changes on SCLK, MOSI
 
-#if defined(DEFAULT_SPI)
-    uint8_t spiModule = DEFAULT_SPI;
-#else
-    uint8_t spiModule = 0;
-#endif
+    USICTL0  &= ~(USIPE5 | USIPE6 | USIOE); // turn off SCLK and MOSI for a while for USI5 workaround
+    USICTL0  |= USIMST;                     // USI is SPI MASTER
+    P1DIR |= BIT5 | BIT6;                   // configure P1.5, P1.6 as P1OUT
+
+    USICNT = 1;                             // USI5 errata workaround
+    while (!(USICTL1 & USIIFG));            // wait for transmit to complete
+    USISRL;                                 // read incoming data and clear USIIFG
+
+    USICTL0  |= USIPE5 | USIPE6 | USIPE7 | USIOE;    // turn on MISO, SCLK and MOSI
+    P1OUT = (P1OUT & ~(BIT5 | BIT6)) | savepins;
+}
 
 /**
  * spi_initialize() - Configure USI for SPI mode
@@ -55,15 +61,15 @@ void spi_initialize(void)
 {
     USICTL0  |= USISWRST;                   // put USI in reset mode, source USI clock from SMCLK
     USICTL0  |= USIPE5 | USIPE6 | USIPE7 | USIMST | USIOE;
-    USICKCTL |= USIDIV_2 | USISSEL_2;       // default speed 4MHz 16MHz/4
+    USICKCTL = (USICKCTL & ~(USISSEL_7 | USIDIV_7)) | USIDIV_2 | USISSEL_2; // default speed 4MHz 16MHz/4
     USICTL1   = USICKPH;                    // SPI_MODE_0
 
-    P1OUT |= BIT5 | BIT6;                   // SPI OUTPUT PINS LOW
+    P1OUT |= BIT5 | BIT6;                   // SPI OUTPUT PINS HIGH -- why???
     P1DIR = (P1DIR & ~BIT7) | BIT5 | BIT6;  // configure P1.5, P1.6, P1.7 for USI
 
     USICTL0 &= ~USISWRST;                   // release USI for operation
 
-    bResetAdjust = USI5_ADJUST;
+    USI5_workaround();
 }
 
 void spi_disable(void) {
@@ -73,40 +79,25 @@ void spi_disable(void) {
 /**
  * spi_send() - send a byte and recv response
  */
+
 uint8_t spi_send(const uint8_t _data)
 {
     USISRL = _data;
-
-    // SPI master generates one additional clock after module reset if USICKPH is set.
-    if ( bResetAdjust == USI5_ADJUST ) {
-        USICNT=7;   // adjust first time send
-        bResetAdjust = USI5_SENT;
-    }
-    else {
-        USICNT = 8;
-    }
-
+    USICNT = 8;
     while (!(USICTL1 & USIIFG)) {
         ; // wait for an USICNT to decrement to 0
     }
-
     return USISRL; // reading clears RXIFG flag
 }
 
 uint16_t spi_send16(const uint16_t data)
 {
-	uint16_t rxdata;
-    if (!( USICTL0 & USILSB ))
-	{
-		// MSB first
-		rxdata = (spi_send((data>>8) & 0xFF) << 8);
-		rxdata |= spi_send(data & 0xFF);
-	}else{
-		// LSB first
-		rxdata = spi_send(data & 0xFF);
-		rxdata |= (spi_send((data>>8) & 0xFF) << 8);
-	}
-	return (rxdata);
+ USISR = data;
+ USICNT = 16 | USI16B;
+ while (!(USICTL1 & USIIFG)) {
+        ; // wait for an USICNT to decrement to 0
+ }
+ return USISR;
 }
 
 void spi_send(void *buf, uint16_t count)
@@ -123,39 +114,28 @@ void spi_send(void *buf, uint16_t count)
 /**
  * spi_transmit() - send a byte
  */
+
 void spi_transmit(const uint8_t _data)
 {
     USISRL = _data;
-
-    // SPI master generates one additional clock after module reset if USICKPH is set.
-    if ( bResetAdjust == USI5_ADJUST ) {
-        USICNT=7;   // adjust first time send
-        bResetAdjust = USI5_SENT;
-    }
-    else {
-        USICNT = 8;
-    }
-
+    USICNT = 8;
     while (!(USICTL1 & USIIFG)) {
         ; // wait for an USICNT to decrement to 0
     }
 
-    // clear RXIFG flag
-	USICTL1 &= ~USIIFG;
+    // clear USIIFG flag
+    USISRL;
 }
 
 void spi_transmit16(const uint16_t data)
 {
-    if (!( USICTL0 & USILSB ))
-	{
-		// MSB first
-		spi_tx((data>>8) & 0xFF);
-		spi_tx(data & 0xFF);
-	}else{
-		// LSB first
-		spi_tx(data & 0xFF);
-		spi_tx((data>>8) & 0xFF);
-	}
+//	spi_transmit(data & 0xFF);
+//	spi_transmit((data>>8) & 0xFF);
+ USISR = data;
+ USICNT = 16 | USI16B;
+ while (!(USICTL1 & USIIFG)) {
+        ; // wait for an USICNT to decrement to 0
+ }
 }
 
 void spi_transmit(void *buf, uint16_t count)
@@ -163,7 +143,7 @@ void spi_transmit(void *buf, uint16_t count)
     uint8_t *p = (uint8_t *)buf;
 	if (count == 0) return;
 	while(count){
-		spi_tx(*p++);
+		spi_transmit(*p++);
 		count--;
 	}
 }
@@ -232,15 +212,9 @@ void spi_set_datamode(const uint8_t mode)
     }
     USICTL0 &= ~USISWRST;       // release for operation
 
-    if ( USICTL1 & USICKPH ) {
-        if ( bResetAdjust != USI5_SENT ) {
-            bResetAdjust = USI5_ADJUST;
-        }
-    }
-    else  {
-        bResetAdjust = USI5_NO_ADJUST;
-    }
+    if ( USICTL1 & USICKPH ) USI5_workaround();
 }
+
 #else
     //#warning "Error! This device doesn't have a USI peripheral"
 #endif
