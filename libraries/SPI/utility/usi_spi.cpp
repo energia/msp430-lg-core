@@ -129,8 +129,6 @@ void spi_transmit(const uint8_t _data)
 
 void spi_transmit16(const uint16_t data)
 {
-//	spi_transmit(data & 0xFF);
-//	spi_transmit((data>>8) & 0xFF);
  USISR = data;
  USICNT = 16 | USI16B;
  while (!(USICTL1 & USIIFG)) {
