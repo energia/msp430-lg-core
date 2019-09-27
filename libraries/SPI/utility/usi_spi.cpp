@@ -26,7 +26,15 @@
  * value described in Motorola documentation.
  */
 #define SPI_DIV_MASK    (USIDIV0 | USIDIV1 | USIDIV2)
+#define SPI_SSEL_MASK    (USISSEL0 | USISSEL1 | USISSEL2)
 #define SPI_LSBMSB_MASK (USILSB)
+
+#if defined(DEFAULT_SPI)
+    uint8_t spiModule = DEFAULT_SPI;
+#else
+    uint8_t spiModule = 0;
+#endif
+
 
 /* deal with USI5 errata see: document slaz061b */
 void USI5_workaround()
@@ -61,7 +69,7 @@ void spi_initialize(void)
 {
     USICTL0  |= USISWRST;                   // put USI in reset mode, source USI clock from SMCLK
     USICTL0  |= USIPE5 | USIPE6 | USIPE7 | USIMST | USIOE;
-    USICKCTL = (USICKCTL & ~(USISSEL_7 | USIDIV_7)) | USIDIV_2 | USISSEL_2; // default speed 4MHz 16MHz/4
+    USICKCTL = (USICKCTL & ~(SPI_SSEL_MASK | SPI_DIV_MASK)) | USIDIV_2 | USISSEL_2; // default speed 4MHz 16MHz/4
     USICTL1   = USICKPH;                    // SPI_MODE_0
 
     P1OUT |= BIT5 | BIT6;                   // SPI OUTPUT PINS HIGH -- why???
