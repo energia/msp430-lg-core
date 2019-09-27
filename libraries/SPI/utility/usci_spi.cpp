@@ -124,21 +124,28 @@ uint16_t spi_send16(const uint16_t data)
 	/* Clear RX Flag */
 	UCB0IFG &= ~UCRXIFG;
 	
-	/* Send first byte. */
-	UCB0TXBUF = data | 0xFF;
-	/* Wait for a rx character? */
-	while (!(UCB0IFG & UCRXIFG));
-	datain = UCB0RXBUF << 8;
+	if (UCB0CTL0 & UCMSB) // MSB first?
+	{
+		UCB0TXBUF = data >> 8;          /* Send first byte. */
+		while (!(UCB0IFG & UCRXIFG));   /* Wait for a rx character? */
+		datain = UCB0RXBUF;             /* receive MSB */
+		
+		UCB0TXBUF = data | 0xFF;        /* send second byte */
+		while (!(UCB0IFG & UCRXIFG));   /* Wait for a rx character? */
+		/* Reading clears RXIFG flag. */
+		return ((datain << 8) | UCB0RXBUF);
+	} else {
+		UCB0TXBUF = data & 0xFF;        /* Send first byte. */
+		while (!(UCB0IFG & UCRXIFG));   /* Wait for a rx character? */
+		datain = UCB0RXBUF;
+		/* send second byte */
+		UCB0TXBUF = data >> 8;
+		while (!(UCB0IFG & UCRXIFG));   /* Wait for a rx character? */
+		/* Reading clears RXIFG flag. */
+		uint16_t tmp = UCB0RXBUF;        /* receive MSB */
+		return (datain | (tmp << 8));
+	}
 	
-	/* Wait for previous tx to complete. */
-	while (!(UCB0IFG & UCTXIFG));
-	/* send second byte */
-	UCB0TXBUF = data >> 8;
-
-	/* Wait for a rx character? */
-	while (!(UCB0IFG & UCRXIFG));
-	/* Reading clears RXIFG flag. */
-	return (datain | UCB0RXBUF);
 }
 
 /**
@@ -180,13 +187,22 @@ void spi_transmit16(const uint16_t data)
 {
 	/* Wait for previous tx to complete. */
 	while (!(UCB0IFG & UCTXIFG));
-	/* Setting TXBUF clears the TXIFG flag. */
-	UCB0TXBUF = data | 0xFF;
-	/* Wait for previous tx to complete. */
-	while (!(UCB0IFG & UCTXIFG));
-	/* Setting TXBUF clears the TXIFG flag. */
-	UCB0TXBUF = data >> 8;
-
+	if (UCB0CTL0 & UCMSB) // MSB first?
+	{
+		/* Setting TXBUF clears the TXIFG flag. */
+		UCB0TXBUF = data >> 8;
+		/* Wait for previous tx to complete. */
+		while (!(UCB0IFG & UCTXIFG));
+		/* Setting TXBUF clears the TXIFG flag. */
+		UCB0TXBUF = data & 0xFF;
+	}else{
+		/* Setting TXBUF clears the TXIFG flag. */
+		UCB0TXBUF = data & 0xFF;
+		/* Wait for previous tx to complete. */
+		while (!(UCB0IFG & UCTXIFG));
+		/* Setting TXBUF clears the TXIFG flag. */
+		UCB0TXBUF = data >> 8;
+	}
 	while (UCB0STAT & UCBUSY); // wait for SPI TX/RX to finish
 	// clear RXIFG flag
 	UCB0IFG &= ~UCRXIFG;

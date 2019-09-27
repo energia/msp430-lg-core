@@ -258,7 +258,7 @@ uint16_t spi_send16(const uint16_t data)
     while (UCzSTATW & UCBUSY);
     UCzRXBUF; /* reading RXBUF to clear error bits and UCRXIFG */
 
-    if (UCzCTLW0 & UCBSM) // MSB first?
+    if (UCzCTLW0 & UCMSB) // MSB first?
     {
         UCzTXBUF = data >> 8; // send MSB first
         while (!(UCzIFG & UCRXIFG)); /* Wait for a rx character */
@@ -334,7 +334,7 @@ void spi_transmit16(const uint16_t data)
     /* Wait for previous tx to complete. */
     while (UCzSTATW & UCBUSY);
     
-    if (UCzCTLW0 & UCBSM) // MSB first?
+    if (UCzCTLW0 & UCMSB) // MSB first?
     {
         UCzTXBUF = data >> 8; // send MSB first
         while (!(UCzIFG & UCTXIFG)); // waiting for TX buffer is ready
