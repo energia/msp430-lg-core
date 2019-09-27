@@ -96,8 +96,16 @@ uint8_t spi_send(const uint8_t _data)
 uint16_t spi_send16(const uint16_t data)
 {
 	uint16_t rxdata;
-	rxdata = spi_send(data & 0xFF);
-	rxdata |= (spi_send((data>>8) & 0xFF) << 8);
+    if (!( USICTL0 & USILSB ))
+	{
+		// MSB first
+		rxdata = (spi_send((data>>8) & 0xFF) << 8);
+		rxdata |= spi_send(data & 0xFF);
+	}else{
+		// LSB first
+		rxdata = spi_send(data & 0xFF);
+		rxdata |= (spi_send((data>>8) & 0xFF) << 8);
+	}
 	return (rxdata);
 }
 
@@ -138,8 +146,16 @@ void spi_transmit(const uint8_t _data)
 
 void spi_transmit16(const uint16_t data)
 {
-	spi_tx(data & 0xFF);
-	spi_tx((data>>8) & 0xFF);
+    if (!( USICTL0 & USILSB ))
+	{
+		// MSB first
+		spi_tx((data>>8) & 0xFF);
+		spi_tx(data & 0xFF);
+	}else{
+		// LSB first
+		spi_tx(data & 0xFF);
+		spi_tx((data>>8) & 0xFF);
+	}
 }
 
 void spi_transmit(void *buf, uint16_t count)
