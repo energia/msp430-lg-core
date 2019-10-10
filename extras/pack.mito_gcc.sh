@@ -36,6 +36,7 @@ m_download()
 	# SF directlinks
 	fn="$( basename "${1%}" )"
 	# check if already there
+	# echo Check: "${fn}" - "${1}"
 	[ -f extras/download/"${fn}" ] && return
 	echo Fetching: "${fn}" - "${1}"
 	[ ! -d "extras/download" ] && mkdir extras/download
@@ -50,7 +51,7 @@ m_extract()
 	echo Extracting: "${fn}"
 	expr "${fn}" : '.*\.gz$' >/dev/null && command="${G}tar -xzf "
 	expr "${fn}" : '.*\.bz2$' >/dev/null && command="${G}tar -xjf "
-	expr "${fn}" : '.*\.zip$' >/dev/null && command="${G}unzip -q "
+	expr "${fn}" : '.*\.zip$' >/dev/null && command="${G}unzip -q -o "
 	expr "${fn}" : '.*\.7z$' >/dev/null && command="${G}p7zip -d "
 	pushd "${dn}" >/dev/null
 	${command} ../download/"${fn}"
@@ -80,16 +81,29 @@ m_pack()
 	cd "${fn}"
 	cp -r * ../msp430
 	cd ..
+	pause "start packing..."
 	${command} "${fn}${en}" msp430
-	shasum -a 256 "${fn}${en}" >"${fn}${en}".sha256
-	mv "${fn}${en}" ${td}
-	mv "${fn}${en}".sha256 ${td}
+	if [ "$(expr substr $(uname -s) 1 6)" == "CYGWIN" ]; then
+		sha256sum "${fn}${en}" >"${fn}${en}".sha256
+	else
+		shasum -a 256 "${fn}${en}" >"${fn}${en}".sha256
+	fi
+	mv -f "${fn}${en}" ${td}
+	mv -f "${fn}${en}".sha256 ${td}
 	rm -rf msp430/
 	rm -rf "${fn}"/
 	popd >/dev/null
 } 
 
-
+pause()
+{
+	
+	#echo current path:
+	#pwd
+	echo ${1}
+	#echo Hit Enter
+	#read -p "$*"
+}
 
 echo '!!! fetch files'
 [ -d "extras/download" ] || mkdir extras/download 
@@ -99,9 +113,11 @@ m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/
 m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/exports/msp430-gcc-${GCC_VER}_win32.zip"
 m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/exports/msp430-gcc-${GCC_VER}_win64.zip"
 m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/exports/msp430-gcc-support-files-${MSPSUPPORT_VER}.zip"
+[ -f extras/download/md5sum.txt ] && rm extras/download/md5sum.txt
 m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/exports/md5sum.txt"
 cd extras/download
 #sed -i '/md5sum/d' ./md5sum.txt
+echo check checksum
 md5sum --check --ignore-missing md5sum.txt
 cd ../..
 
@@ -120,19 +136,25 @@ m_extract "msp430-gcc-${GCC_VER}_linux64.tar.bz2" "extras/build"
 m_extract "msp430-gcc-${GCC_VER}_macos.tar.bz2" "extras/build"
 m_extract "msp430-gcc-${GCC_VER}_win32.zip" "extras/build"
 m_extract "msp430-gcc-support-files-${MSPSUPPORT_VER}.zip" "extras/build"
+pause "done extract"
 
 echo '!!! rename to elf'
 cd extras/build
 #rename -v  msp430-gcc-${GCC_VER} msp430-elf-gcc-${GCC_VER} *
+for f in msp430-elf-gcc*; do rm -rf  "$f"; done
+for f in msp430-gcc-${GCC_VER}*; do echo mv "$f" "${f/msp430-gcc-${GCC_VER}/msp430-elf-gcc-${GCC_VER}}"; done
 for f in msp430-gcc-${GCC_VER}*; do mv "$f" "${f/msp430-gcc-${GCC_VER}/msp430-elf-gcc-${GCC_VER}}"; done
 cd ../..
+pause "done rename"
 
-echo '!!! add support files'
+echo '!!! add support files and pack again'
 m_pack "msp430-elf-gcc-${GCC_VER}_linux32" ".tar.bz2" "extras/build" "msp430-gcc-support-files"  "linux32"
 m_pack "msp430-elf-gcc-${GCC_VER}_linux64" ".tar.bz2" "extras/build" "msp430-gcc-support-files"  "linux64"
 m_pack "msp430-elf-gcc-${GCC_VER}_macos"   ".tar.bz2" "extras/build" "msp430-gcc-support-files"  "macos"
 m_pack "msp430-elf-gcc-${GCC_VER}_win32"   ".zip"     "extras/build" "msp430-gcc-support-files"  "windows"
 m_pack "msp430-elf-gcc-${GCC_VER}_win64"   ".zip"     "extras/build" "msp430-gcc-support-files"  "windows64"
+pause "done packing"
 
+echo '!!! clean up'
 rm -rf "extras/build/msp430-elf-gcc-support-files/"
 rm -rf "extras/build/msp430-gcc-support-files/"

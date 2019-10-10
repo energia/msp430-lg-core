@@ -41,6 +41,11 @@ cd -
 mv ../msp430elf-$VERSION.tar.bz2 ./extras/build/
 
 cd extras/build
-shasum -a 256 msp430elf-$VERSION.tar.bz2 > msp430elf-$VERSION.tar.bz2.sha256
+if [ "$(expr substr $(uname -s) 1 6)" == "CYGWIN" ]; then
+	sha256sum msp430elf-$VERSION.tar.bz2 > msp430elf-$VERSION.tar.bz2.sha256
+else
+	shasum -a 256 msp430elf-$VERSION.tar.bz2 > msp430elf-$VERSION.tar.bz2.sha256
+fi
+
 cd ../..
 #stat -f -c %z msp430elf-$VERSION.tar.bz2

@@ -39,9 +39,13 @@ m_download "${DSLITE_URL}/linux64/dslite-${DSLITE_VER}-i386-x86_64-pc-linux-gnu.
 cp  extras/download/dslite-${DSLITE_VER}-i386-x86_64-pc-linux-gnu.tar.bz2 extras/build/linux64/
 
 for filename in $(find extras/build/ -name 'dslite-*.sha256' ); do
-    rm "$filename" 
+	rm "$filename" 
 done 
 for filename in $(find extras/build/ -name 'dslite-*' ); do
-    shasum -a 256 "$filename" >"$filename".sha256
+	if [ "$(expr substr $(uname -s) 1 6)" == "CYGWIN" ]; then
+		sha256sum "$filename" >"$filename".sha256
+	else
+		shasum -a 256 "$filename" >"$filename".sha256
+	fi
 done
 
