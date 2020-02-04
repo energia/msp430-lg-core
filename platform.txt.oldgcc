@@ -109,10 +109,10 @@ tools.mspdebug.upload.params.verbose=
 tools.mspdebug.upload.params.quiet=
 tools.mspdebug.path={runtime.tools.mspdebug.path}
 tools.mspdebug.cmd.path={path}/mspdebug
-tools.mspdebug.upload.pattern={cmd.path} {upload.verbose} {upload.protocol} --force-reset "prog '{build.path}/{build.project_name}.hex'"
+tools.mspdebug.upload.pattern={cmd.path} {upload.verbose} {upload.protocol} --force-reset "prog {build.path}/{build.project_name}.hex"
 
 tools.mspdebug.program.params.verbose=
 tools.mspdebug.program.params.quiet=
 tools.mspdebug.program.params.noverify=
-tools.mspdebug.program.pattern={cmd.path} {program.verbose} {protocol} --force-reset "prog '{build.path}/{build.project_name}.hex'"
+tools.mspdebug.program.pattern={cmd.path} {program.verbose} {protocol} --force-reset "prog {build.path}/{build.project_name}.hex"
 
