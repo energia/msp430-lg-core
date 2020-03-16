@@ -438,6 +438,9 @@ void twi_disable(void)
 #if defined(__MSP430_HAS_USI__)
     /* Disable USI */
     USICTL0 |= USISWRST;
+#elif defined(__MSP430_HAS_USCI__)
+     /* Disable USCI */
+    UCBzCTL1 |= (UCSWRST);
 #else
      /* Disable USCI */
     UCBzCTLW0 |= (UCSWRST);
