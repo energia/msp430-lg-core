@@ -26,19 +26,22 @@
 set -e
 
 source ./extras/versions.sh
+source ./extras/macro_lib.sh
 
 echo '--- do compiler packages'
 source ./extras/pack.mito_gcc.sh
 
 echo '--- do dslite package'
-./extras/pack.dslite.bash
+source ./extras/pack.dslite.sh
 
 echo '--- do energia package'
-source ./extras/pack.release_elf_gcc.bash
+source ./extras/pack.release_elf_gcc.sh
 
 
 echo '--- update energia install files'
 #wget --content-disposition -qO extras/package_index.json.template http://www.energia.nu/packages/package_index.json
+curl -L -x ${http_proxy} -o extras/package_index.json.template http://www.energia.nu/packages/package_index.json
+
 cd extras
 echo "python update_json_data.py -a "msp430elf" -v ${ENERGIA_VER}  -n "msp430-elf-gcc" -c ${GCC_VER} -d ${DSLITE_VER} -i ${INO2CPP_VER} -u ${ENERGIA_URL} -f package_index.json.template"
 #python update_json_data.py -a "msp430elf" -v ${ENERGIA_VER}  -n "msp430-elf-gcc" -c ${GCC_VER} -d ${DSLITE_VER} -i ${INO2CPP_VER} -u ${ENERGIA_URL} -f package_index.json.template

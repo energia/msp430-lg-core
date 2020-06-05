@@ -26,45 +26,27 @@
 set -e
 
 source ./extras/versions.sh
-source ./extras/setup.bash
-
-
-m_extract()
-{
-	local fn="${1}"
-	local wd="${2}"
-	local command="echo no valid extension"
-	echo Extracting: "${fn}"
-	expr "${fn}" : '.*\.gz$' >/dev/null && command="${G}tar -xzf "
-	expr "${fn}" : '.*\.bz2$' >/dev/null && command="${G}tar -xjf "
-	expr "${fn}" : '.*\.zip$' >/dev/null && command="${G}unzip -q "
-	pushd "${wd}" >/dev/null
-	${command} ../download/"${fn}"
-    if [ ! -f "msp430-gcc-${LEGACY_GCC_VER}" ]; then
-        echo rename to "msp430-gcc-${LEGACY_GCC_VER}"
-        mv "msp430-gcc-${LOAD_GCC_VER}" "msp430-gcc-${LEGACY_GCC_VER}"
-    fi
-	popd >/dev/null
-} 
+source ./extras/macro_lib.sh
 
 m_pack()
 {
-	local fn="${1}"
-	local en="${2}"
-	local wd="${3}"
-	local td="${4}"
-	local command="echo no valid extension"
-	echo Packing: "${fn}"
-	expr "${en}" : '.*\.gz$' >/dev/null && command="${G}tar -czf "
-	expr "${en}" : '.*\.bz2$' >/dev/null && command="${G}tar -cjf "
-	expr "${en}" : '.*\.zip$' >/dev/null && command="${G}zip -q -r "
-	pushd "${wd}" >/dev/null
+    local fn="${1}"
+    local en="${2}"
+    local wd="${3}"
+    local td="${4}"
+    local command="echo no valid extension"
+    echo Packing: "${fn}"
+    expr "${en}" : '.*\.gz$' >/dev/null && command="${G}tar -czf "
+    expr "${en}" : '.*\.bz2$' >/dev/null && command="${G}tar -cjf "
+    expr "${en}" : '.*\.zip$' >/dev/null && command="${G}zip -q -r "
+
+    pushd "${wd}" >/dev/null
     for d in */; { 
         ${command} "${fn}${en}" "$d"
         shasum -a 256 "${fn}${en}" >"${fn}${en}".sha256
         #rm -rf "${fn}"/
     }
-	popd >/dev/null
+    popd >/dev/null
     mv "${wd}/${fn}${en}" ${td}
     mv "${wd}/${fn}${en}".sha256 ${td}
 }  
@@ -72,13 +54,19 @@ m_pack()
 
 m_patch()
 {
-	local fn="${1}"
-	local en="${2}"
-	local wd="${3}"
-	local td="${4}"
+    local fn="${1}"
+    local en="${2}"
+    local wd="${3}"
+    local td="${4}"
     [ -d "extras/temp" ] && rm -rf extras/temp
     mkdir extras/temp
     m_extract "msp430-gcc-${LOAD_GCC_VER}${fn}${en}" "${wd}"
+    pushd "${wd}" >/dev/null
+    if [ ! -f "msp430-gcc-${LEGACY_GCC_VER}" ]; then
+        echo rename to "msp430-gcc-${LEGACY_GCC_VER}"
+        mv "msp430-gcc-${LOAD_GCC_VER}" "msp430-gcc-${LEGACY_GCC_VER}"
+    fi
+    popd >/dev/null
     for filename in $(find extras/patches/ -name 'patch_*.zip' ); {
         echo Patching: $filename
         python extras/patch_msp430.py --patch=$(basename -- "$filename") --path="${wd}/msp430-gcc-${LEGACY_GCC_VER}"
@@ -87,6 +75,8 @@ m_patch()
     m_pack "msp430-gcc-${LEGACY_GCC_VER}${fn}" "${en}" "${wd}" "${td}"
     [ -d "extras/temp" ] && rm -rf extras/temp
 }
+
+m_setup 
  
 echo '--- do compiler packages'
 echo 'prepare gcc'
@@ -106,3 +96,5 @@ m_patch  "-i386-x86_64-pc-linux-gnu" ".tar.bz2" "extras/temp"  "extras/build/lin
 #for filename in $(find extras/build/ -name 'msp430-gcc-*' ); do
 #    shasum -a 256 "$filename" >"$filename".sha256
 #done
+
+echo done

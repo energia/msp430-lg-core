@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 
-# Copyright (c) 2018 StefanSch
+# Copyright (c) 2016 StefanSch
 # 
 # Permission to use, copy, modify, and distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -15,7 +15,7 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-# build and install Mito GCC toolchain for MSP430-Energia
+# build and install Somnium GCC toolchain for MSP430-Energia
 #
 # prerequisites
 # - bash
@@ -24,57 +24,53 @@
 #
 
 set -e
-
-source ./extras/versions.sh
 source ./extras/macro_lib.sh 
+
+
+GCC_VER="6.4.0.32"
+MSPGCC_VER="latest"
+MSPSUPPORT_VER="1.201"
+
+
+
+
 
 
 echo '!!! fetch files'
 [ -d "extras/download" ] || mkdir extras/download 
 m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/exports/msp430-gcc-${GCC_VER}_linux32.tar.bz2"
 m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/exports/msp430-gcc-${GCC_VER}_linux64.tar.bz2"
-m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/exports/msp430-gcc-${GCC_VER}_macos.tar.bz2"
+m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/exports/msp430-gcc-${GCC_VER}_osx.tar.bz2"
 m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/exports/msp430-gcc-${GCC_VER}_win32.zip"
-m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/exports/msp430-gcc-${GCC_VER}_win64.zip"
 m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/exports/msp430-gcc-support-files-${MSPSUPPORT_VER}.zip"
-[ -f extras/download/md5sum.txt ] && rm extras/download/md5sum.txt
 m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/exports/md5sum.txt"
 cd extras/download
-#sed -i '/md5sum/d' ./md5sum.txt
-echo check checksum
 md5sum --check --ignore-missing md5sum.txt
-#md5sum --check --status md5sum.txt
 cd ../..
 
 
 echo '!!! untar+patch packages'
 
-m_setup
-
+[ -d "extras/build" ] && rm -rf extras/build 
+mkdir extras/build
 m_extract "msp430-gcc-${GCC_VER}_linux32.tar.bz2" "extras/build"
 m_extract "msp430-gcc-${GCC_VER}_linux64.tar.bz2" "extras/build"
-m_extract "msp430-gcc-${GCC_VER}_macos.tar.bz2" "extras/build"
+m_extract "msp430-gcc-${GCC_VER}_osx.tar.bz2" "extras/build"
 m_extract "msp430-gcc-${GCC_VER}_win32.zip" "extras/build"
 m_extract "msp430-gcc-support-files-${MSPSUPPORT_VER}.zip" "extras/build"
-pause "done extract"
 
 echo '!!! rename to elf'
 cd extras/build
 #rename -v  msp430-gcc-${GCC_VER} msp430-elf-gcc-${GCC_VER} *
-for f in msp430-elf-gcc*; do rm -rf  "$f"; done
-for f in msp430-gcc-${GCC_VER}*; do echo mv "$f" "${f/msp430-gcc-${GCC_VER}/msp430-elf-gcc-${GCC_VER}}"; done
 for f in msp430-gcc-${GCC_VER}*; do mv "$f" "${f/msp430-gcc-${GCC_VER}/msp430-elf-gcc-${GCC_VER}}"; done
 cd ../..
-pause "done rename"
 
-echo '!!! add support files and pack again'
-m_pack "msp430-elf-gcc-${GCC_VER}_linux32" ".tar.bz2" "extras/build" "msp430-gcc-support-files"  "linux32"
-m_pack "msp430-elf-gcc-${GCC_VER}_linux64" ".tar.bz2" "extras/build" "msp430-gcc-support-files"  "linux64"
-m_pack "msp430-elf-gcc-${GCC_VER}_macos"   ".tar.bz2" "extras/build" "msp430-gcc-support-files"  "macos"
-m_pack "msp430-elf-gcc-${GCC_VER}_win32"   ".tar.bz2"     "extras/build" "msp430-gcc-support-files"  "windows"
-m_pack "msp430-elf-gcc-${GCC_VER}_win64"   ".tar.bz2"     "extras/build" "msp430-gcc-support-files"  "windows64"
-pause "done packing"
+echo '!!! add support files'
+m_pack "msp430-elf-gcc-${GCC_VER}_linux32" ".tar.bz2" "extras/build" "msp430-gcc-support-files"
+m_pack "msp430-elf-gcc-${GCC_VER}_linux64" ".tar.bz2" "extras/build" "msp430-gcc-support-files"
+m_pack "msp430-elf-gcc-${GCC_VER}_osx"     ".tar.bz2" "extras/build" "msp430-gcc-support-files"
+m_pack "msp430-elf-gcc-${GCC_VER}_win32"   ".zip"     "extras/build" "msp430-gcc-support-files"
 
-echo '!!! clean up'
 rm -rf "extras/build/msp430-elf-gcc-support-files/"
 rm -rf "extras/build/msp430-gcc-support-files/"
+

@@ -28,17 +28,19 @@ set -e
 source ./extras/versions.sh
 
 echo '--- do compiler package'
-./extras/pack.compiler.bash
+./extras/pack.compiler.sh
 
 echo '--- do dslite package'
-./extras/pack.dslite.bash
+./extras/pack.dslite.sh
 
 echo '--- do energia package'
-./extras/pack.release_gcc.bash
+./extras/pack.release_gcc.sh
 
 
 echo '--- update energia install files'
-wget --content-disposition -qO extras/package_index.json.template http://www.energia.nu/packages/package_index.json
+#wget --content-disposition -qO extras/package_index.json.template http://www.energia.nu/packages/package_index.json
+curl -L -x ${http_proxy} -o extras/package_index.json.template http://www.energia.nu/packages/package_index.json
+
 cd extras
 echo "python update_json_data.py -a "msp430" -v ${ENERGIA1_VER}  -n "msp430-gcc" -c ${LEGACY_GCC_VER} -d ${DSLITE_VER} -i ${INO2CPP_VER} -u ${ENERGIA_URL} -f package_index.json.template"
 python update_json_data.py -a "msp430" -v ${ENERGIA1_VER}  -n "msp430-gcc" -c ${LEGACY_GCC_VER} -d ${DSLITE_VER} -i ${INO2CPP_VER} -u ${ENERGIA_URL} -f package_index.json.template
