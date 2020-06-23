@@ -28,22 +28,15 @@ set -e
 m_download()
 {
 	local fn
-	local proxy
 	# SF directlinks
 	fn="$( basename "${1%}" )"
-	# set Proxy
-	if [ -n "${https_proxy}" ]; then
-	  p_proxy="-x ${https_proxy}"
-	else
-	  p_proxy=""
-	fi	
 	# check if already there
 	[ -f extras/download/"${fn}" ] && return
 	echo Fetching: "${fn}" - "${1}"
 	[ ! -d "extras/download" ] && mkdir extras/download
 	#wget --content-disposition -qO extras/download/"${fn}" "${1}"
-	#echo curl -L ${p_proxy} -o extras/download/"${fn}" "${1}"
-	curl -L ${p_proxy} -o extras/download/"${fn}" "${1}"
+	#echo curl -L ${https_proxy} -o extras/download/"${fn}" "${1}"
+	curl -L ${https_proxy} -o extras/download/"${fn}" "${1}"
 }
 
 m_extract()
