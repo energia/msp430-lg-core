@@ -39,10 +39,10 @@ cp  extras/download/dslite-${DSLITE_VER}-x86_64-apple-darwin.tar.bz2 extras/buil
 m_download "${DSLITE_URL}/linux64/dslite-${DSLITE_VER}-i386-x86_64-pc-linux-gnu.tar.bz2"
 cp  extras/download/dslite-${DSLITE_VER}-i386-x86_64-pc-linux-gnu.tar.bz2 extras/build/tools/linux64/
 
-for filename in $(find extras/build/ -name 'dslite-*.sha256' ); do
+for filename in $(find extras/build/tools/ -name 'dslite-*.sha256' ); do
    rm "$filename" 
 done 
-for filename in $(find extras/build/ -name 'dslite-*' ); do
+for filename in $(find extras/build/tools/ -name 'dslite-*' ); do
    if [ "$(expr substr $(uname -s) 1 6)" == "CYGWIN" ]; then
       sha256sum "$filename" >"$filename".sha256
    else
