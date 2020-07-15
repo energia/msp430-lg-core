@@ -58,8 +58,8 @@ m_patch()
     local en="${2}"
     local wd="${3}"
     local td="${4}"
-    [ -d "extras/temp" ] && rm -rf extras/temp
-    mkdir extras/temp
+    [ -d "extras/build/temp" ] && rm -rf extras/build/temp
+    mkdir extras/build/temp
     m_extract "msp430-gcc-${LOAD_GCC_VER}${fn}${en}" "${wd}"
     pushd "${wd}" >/dev/null
     if [ ! -f "msp430-gcc-${LEGACY_GCC_VER}" ]; then
@@ -73,7 +73,7 @@ m_patch()
     }
 
     m_pack "msp430-gcc-${LEGACY_GCC_VER}${fn}" "${en}" "${wd}" "${td}"
-    [ -d "extras/temp" ] && rm -rf extras/temp
+    [ -d "extras/build/temp" ] && rm -rf extras/build/temp
 }
 
 m_setup 
@@ -82,18 +82,18 @@ echo '--- do compiler packages'
 echo 'prepare gcc'
 echo "this needs to be already available online at: ${DSLITE_URL}"
 m_download "${DSLITE_URL}/windows/msp430-gcc-${LOAD_GCC_VER}-i686-mingw32.tar.bz2"
-m_patch "-i686-mingw32" ".tar.bz2" "extras/temp"  "extras/build/windows"
+m_patch "-i686-mingw32" ".tar.bz2" "extras/build/temp"  "extras/build/tools/windows"
 
 m_download "${DSLITE_URL}/macosx/msp430-gcc-${LOAD_GCC_VER}-i386-apple-darwin11.tar.bz2"
-m_patch  "-i386-apple-darwin11" ".tar.bz2" "extras/temp"  "extras/build/macos"
+m_patch  "-i386-apple-darwin11" ".tar.bz2" "extras/build/temp"  "extras/build/tools/macos"
 
 m_download "${DSLITE_URL}/linux64/msp430-gcc-${LOAD_GCC_VER}-i386-x86_64-pc-linux-gnu.tar.bz2"
-m_patch  "-i386-x86_64-pc-linux-gnu" ".tar.bz2" "extras/temp"  "extras/build/linux64"
+m_patch  "-i386-x86_64-pc-linux-gnu" ".tar.bz2" "extras/build/temp"  "extras/build/tools/linux64"
 
-#for filename in $(find extras/build/ -name 'msp430-gcc-*.sha256' ); do
+#for filename in $(find extras/build/tools/ -name 'msp430-gcc-*.sha256' ); do
 #    rm "$filename" 
 #done
-#for filename in $(find extras/build/ -name 'msp430-gcc-*' ); do
+#for filename in $(find extras/build/tools/ -name 'msp430-gcc-*' ); do
 #    shasum -a 256 "$filename" >"$filename".sha256
 #done
 

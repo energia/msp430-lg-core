@@ -45,7 +45,7 @@ def main():
     #mpy="32se"  #i devices
 
 
-    zf = zipfile.ZipFile('../../patches/' + patch, mode='r')
+    zf = zipfile.ZipFile('../../../patches/' + patch, mode='r')
     for finfo in zf.infolist():
         ifile = zf.open(finfo)
 
@@ -70,7 +70,7 @@ def main():
 
     print (cpu + " " + mpy)
 
-    zf = zipfile.ZipFile('../../patches/' + patch, mode='r')
+    zf = zipfile.ZipFile('../../../patches/' + patch, mode='r')
     zf.extractall() 
     #zf.printdir()
     zf.close()

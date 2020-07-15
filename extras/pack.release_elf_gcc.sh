@@ -28,8 +28,8 @@ FOLDERNAME=`basename $PWD`
 echo $FOLDERNAME
 THIS_SCRIPT_NAME=`basename $0`
 
-rm -f extras/build/msp430elf-$VERSION.tar.bz2
-rm -f extras/build/msp430elf-$VERSION.tar.bz2.sha256
+rm -f extras/build/cores/msp430elf-$VERSION.tar.bz2
+rm -f extras/build/cores/msp430elf-$VERSION.tar.bz2.sha256
 
 sed -r s/version=xxx/version=$VERSION/ platform.txt.template | sed -r s/dslite-xxx/dslite-$DSLITE_VER/ > platform.txt
 
@@ -38,14 +38,15 @@ tar --transform "s|$FOLDERNAME|msp430elf-$VERSION|g"  --exclude=*.sha256 --exclu
 cd -
 
 [ -d "extras/build" ] || mkdir extras/build 
-mv ../msp430elf-$VERSION.tar.bz2 ./extras/build/
+[ -d "extras/build/cores" ] || mkdir extras/build/cores 
+mv ../msp430elf-$VERSION.tar.bz2 ./extras/build/cores
 
-cd extras/build
+cd extras/build/cores
 if [ "$(expr substr $(uname -s) 1 6)" == "CYGWIN" ]; then
 	sha256sum msp430elf-$VERSION.tar.bz2 > msp430elf-$VERSION.tar.bz2.sha256
 else
 	shasum -a 256 msp430elf-$VERSION.tar.bz2 > msp430elf-$VERSION.tar.bz2.sha256
 fi
 
-cd ../..
+cd ../../..
 #stat -f -c %z msp430elf-$VERSION.tar.bz2

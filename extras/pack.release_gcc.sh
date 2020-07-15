@@ -28,8 +28,8 @@ FOLDERNAME=`basename $PWD`
 echo $FOLDERNAME
 THIS_SCRIPT_NAME=`basename $0`
 
-rm -f extras/build/msp430-$VERSION.tar.bz2
-rm -f extras/build/msp430-$VERSION.tar.bz2.sha256
+rm -f extras/build/cores/msp430-$VERSION.tar.bz2
+rm -f extras/build/cores/msp430-$VERSION.tar.bz2.sha256
 
 #filter board.txt
 #sed -r s/(-msmall|-mcode-region=lower|-mhwmult=f5series)// boards.txt > boards.txt.oldgcc
@@ -42,10 +42,11 @@ cd -
 rm boards.txt.oldgcc
 
 [ -d "extras/build" ] || mkdir extras/build 
-mv ../msp430-$VERSION.tar.bz2 ./extras/build/
+[ -d "extras/build/cores" ] || mkdir extras/build/cores 
+mv ../msp430-$VERSION.tar.bz2 ./extras/build/cores
 
 
-cd extras/build
+cd extras/build/cores
 shasum -a 256 msp430-$VERSION.tar.bz2 > msp430-$VERSION.tar.bz2.sha256
-cd ../..
-#stat -f -c%z extras/build/msp430-$VERSION.tar.bz2
+cd ../../..
+#stat -f -c%z extras/build/cores/msp430-$VERSION.tar.bz2

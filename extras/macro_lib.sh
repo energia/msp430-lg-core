@@ -50,8 +50,8 @@ m_extract()
 	expr "${fn}" : '.*\.zip$' >/dev/null && command="${G}unzip -q -o " && [ -d $( basename "${fn%%.*}" .zip ) ] && rm -rf $( basename "${fn%%.*}" .zip )/
 	expr "${fn}" : '.*\.7z$' >/dev/null && command="${G}p7zip -d " && [ -d $( basename "${fn%%.*}" .7z ) ] && rm -rf $( basename "${fn%%.*}" .7z )/
 	pushd "${dn}" >/dev/null
-	echo ${command} ../download/"${fn}"
-	${command} ../download/"${fn}"
+	echo ${command} ../../download/"${fn}"
+	${command} ../../download/"${fn}"
 	popd >/dev/null
 } 
 
@@ -109,12 +109,14 @@ m_setup()
 {
 	#[ ! -d "extras/build" ] && rm -rf extras/build 
 	[ ! -d "extras/build" ] && mkdir extras/build
-	[ ! -d "extras/build/windows" ] && mkdir extras/build/windows
-	[ ! -d "extras/build/windows64" ] && mkdir extras/build/windows64
-	[ ! -d "extras/build/macos" ] && mkdir extras/build/macos
-	[ ! -d "extras/build/linux32" ] && mkdir extras/build/linux32
-	[ ! -d "extras/build/linux64" ] && mkdir extras/build/linux64
-	[ -d "extras/build/linux64" ]  # check to return true
+	[ ! -d "extras/build/cores" ] && mkdir extras/build/cores
+	[ ! -d "extras/build/tools" ] && mkdir extras/build/tools
+	[ ! -d "extras/build/tools/windows" ] && mkdir extras/build/tools/windows
+	[ ! -d "extras/build/tools/windows64" ] && mkdir extras/build/tools/windows64
+	[ ! -d "extras/build/tools/macos" ] && mkdir extras/build/tools/macos
+	[ ! -d "extras/build/tools/linux32" ] && mkdir extras/build/tools/linux32
+	[ ! -d "extras/build/tools/linux64" ] && mkdir extras/build/tools/linux64
+	[ -d "extras/build/tools/linux64" ]  # check to return true
 }
 
 echo script_lib loaded
