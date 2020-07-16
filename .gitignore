@@ -1,4 +1,9 @@
 *.tar
 *.bz2
 *.zip
+*.7z
 *.sha256
+*.xxx
+*.bak
+platform.txt
+extras/*.json

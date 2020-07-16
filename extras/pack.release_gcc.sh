@@ -20,7 +20,7 @@
 
 source ./extras/versions.sh
 
-VERSION=$ENERGIA_VER
+VERSION=$ENERGIA1_VER
 echo $VERSION
 
 PWD=`pwd`
@@ -28,24 +28,25 @@ FOLDERNAME=`basename $PWD`
 echo $FOLDERNAME
 THIS_SCRIPT_NAME=`basename $0`
 
-rm -f extras/build/msp430elf-$VERSION.tar.bz2
-rm -f extras/build/msp430elf-$VERSION.tar.bz2.sha256
+rm -f extras/build/cores/msp430-$VERSION.tar.bz2
+rm -f extras/build/cores/msp430-$VERSION.tar.bz2.sha256
 
-sed -r s/version=xxx/version=$VERSION/ platform.txt.template | sed -r s/dslite-xxx/dslite-$DSLITE_VER/ > platform.txt
+#filter board.txt
+#sed -r s/(-msmall|-mcode-region=lower|-mhwmult=f5series)// boards.txt > boards.txt.oldgcc
+sed -r s/build\.extra_flags=.*$/build.extra_flags=/ boards.txt > boards.txt.oldgcc
+sed -r s/version=xxx/version=$VERSION/ platform.txt.oldgcc | sed -r s/dslite-xxx/dslite-$DSLITE_VER/ > platform.txt
 
 cd ..
-tar --transform "s|$FOLDERNAME|msp430elf-$VERSION|g"  --exclude=*.sha256 --exclude=*.bz2 --exclude=platform.txt.oldgcc --exclude=platform.txt.template --exclude=extras --exclude=.git* --exclude=.idea -cjf msp430elf-$VERSION.tar.bz2 $FOLDERNAME
+tar --transform "s|$FOLDERNAME|msp430-$VERSION|g" --transform "s|boards.txt.oldgcc|boards.txt|g" --exclude=*.sha256 --exclude=*.bz2 --exclude=boards.txt --exclude=platform.txt.oldgcc --exclude=platform.txt.template --exclude=extras --exclude=build --exclude=.git* --exclude=.idea -cjf msp430-$VERSION.tar.bz2 $FOLDERNAME
 cd -
+rm boards.txt.oldgcc
 
 [ -d "extras/build" ] || mkdir extras/build 
-mv ../msp430elf-$VERSION.tar.bz2 ./extras/build/
+[ -d "extras/build/cores" ] || mkdir extras/build/cores 
+mv ../msp430-$VERSION.tar.bz2 ./extras/build/cores
 
-cd extras/build
-if [ "$(expr substr $(uname -s) 1 6)" == "CYGWIN" ]; then
-	sha256sum msp430elf-$VERSION.tar.bz2 > msp430elf-$VERSION.tar.bz2.sha256
-else
-	shasum -a 256 msp430elf-$VERSION.tar.bz2 > msp430elf-$VERSION.tar.bz2.sha256
-fi
 
-cd ../..
-#stat -f -c %z msp430elf-$VERSION.tar.bz2
+cd extras/build/cores
+shasum -a 256 msp430-$VERSION.tar.bz2 > msp430-$VERSION.tar.bz2.sha256
+cd ../../..
+#stat -f -c%z extras/build/cores/msp430-$VERSION.tar.bz2

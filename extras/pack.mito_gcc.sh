@@ -26,84 +26,8 @@
 set -e
 
 source ./extras/versions.sh
+source ./extras/macro_lib.sh 
 
-TAR="${G}tar" 
-
-
-m_download()
-{
-	local fn
-	# SF directlinks
-	fn="$( basename "${1%}" )"
-	# check if already there
-	# echo Check: "${fn}" - "${1}"
-	[ -f extras/download/"${fn}" ] && return
-	echo Fetching: "${fn}" - "${1}"
-	[ ! -d "extras/download" ] && mkdir extras/download
-	wget --content-disposition -qO extras/download/"${fn}" "${1}"
-}
-
-m_extract()
-{
-	local fn="${1}"
-	local dn="${2}"
-	local command="echo no valid extension"
-	echo Extracting: "${fn}"
-	expr "${fn}" : '.*\.gz$' >/dev/null && command="${G}tar -xzf "
-	expr "${fn}" : '.*\.bz2$' >/dev/null && command="${G}tar -xjf "
-	expr "${fn}" : '.*\.zip$' >/dev/null && command="${G}unzip -q -o "
-	expr "${fn}" : '.*\.7z$' >/dev/null && command="${G}p7zip -d "
-	pushd "${dn}" >/dev/null
-	${command} ../download/"${fn}"
-	popd >/dev/null
-} 
-
-m_pack()
-{
-	local fn="${1}"
-	local en="${2}"
-	local dn="${3}"
-	local an="${4}"
-	local td="${5}"
-	local command="echo no valid extension"
-	echo Packing: "${fn}"
-	expr "${en}" : '.*\.gz$' >/dev/null && command="${G}tar -czf "
-	expr "${en}" : '.*\.bz2$' >/dev/null && command="${G}tar -cjf "
-	expr "${en}" : '.*\.zip$' >/dev/null && command="${G}zip -q -r "
-	pushd "${dn}" >/dev/null
-	cp -r ${an} ${fn}/
-	#echo energia.msp430-gcc-elf=${GCC_VER} >>${fn}/builtin_tools_versions.txt
-	#echo energia.mspdebug=0.22 >>${fn}/builtin_tools_versions.txt
-	#echo energia.msp430-gcc=4.6.3 >>${fn}/builtin_tools_versions.txt
-	[ -f ${fn}/version.properties ] && rm ${fn}/version.properties
-	[ -d "msp430" ] && rm -rf msp430/
-	mkdir msp430
-	cd "${fn}"
-	cp -r * ../msp430
-	cd ..
-	pause "start packing..."
-	${command} "${fn}${en}" msp430
-	if [ "$(expr substr $(uname -s) 1 6)" == "CYGWIN" ]; then
-		sha256sum "${fn}${en}" >"${fn}${en}".sha256
-	else
-		shasum -a 256 "${fn}${en}" >"${fn}${en}".sha256
-	fi
-	mv -f "${fn}${en}" ${td}
-	mv -f "${fn}${en}".sha256 ${td}
-	rm -rf msp430/
-	rm -rf "${fn}"/
-	popd >/dev/null
-} 
-
-pause()
-{
-	
-	#echo current path:
-	#pwd
-	echo ${1}
-	#echo Hit Enter
-	#read -p "$*"
-}
 
 echo '!!! fetch files'
 [ -d "extras/download" ] || mkdir extras/download 
@@ -119,42 +43,39 @@ cd extras/download
 #sed -i '/md5sum/d' ./md5sum.txt
 echo check checksum
 md5sum --check --ignore-missing md5sum.txt
+#md5sum --check --status md5sum.txt
 cd ../..
 
+[ -d "extras/build/tools" ] || mkdir extras/build/tools
 
 echo '!!! untar+patch packages'
 
-#[ -d "extras/build" ] && rm -rf extras/build 
-[ ! -d "extras/build" ] && mkdir extras/build
-[ ! -d "extras/build/windows" ] && mkdir extras/build/windows
-[ ! -d "extras/build/windows64" ] && mkdir extras/build/windows64
-[ ! -d "extras/build/macos" ] && mkdir extras/build/macos
-[ ! -d "extras/build/linux32" ] && mkdir extras/build/linux32
-[ ! -d "extras/build/linux64" ] && mkdir extras/build/linux64
-m_extract "msp430-gcc-${GCC_VER}_linux32.tar.bz2" "extras/build"
-m_extract "msp430-gcc-${GCC_VER}_linux64.tar.bz2" "extras/build"
-m_extract "msp430-gcc-${GCC_VER}_macos.tar.bz2" "extras/build"
-m_extract "msp430-gcc-${GCC_VER}_win32.zip" "extras/build"
-m_extract "msp430-gcc-support-files-${MSPSUPPORT_VER}.zip" "extras/build"
+m_setup
+
+m_extract "msp430-gcc-${GCC_VER}_linux32.tar.bz2" "extras/build/tools"
+m_extract "msp430-gcc-${GCC_VER}_linux64.tar.bz2" "extras/build/tools"
+m_extract "msp430-gcc-${GCC_VER}_macos.tar.bz2" "extras/build/tools"
+m_extract "msp430-gcc-${GCC_VER}_win32.zip" "extras/build/tools"
+m_extract "msp430-gcc-support-files-${MSPSUPPORT_VER}.zip" "extras/build/tools"
 pause "done extract"
 
 echo '!!! rename to elf'
-cd extras/build
+cd extras/build/tools
 #rename -v  msp430-gcc-${GCC_VER} msp430-elf-gcc-${GCC_VER} *
 for f in msp430-elf-gcc*; do rm -rf  "$f"; done
 for f in msp430-gcc-${GCC_VER}*; do echo mv "$f" "${f/msp430-gcc-${GCC_VER}/msp430-elf-gcc-${GCC_VER}}"; done
 for f in msp430-gcc-${GCC_VER}*; do mv "$f" "${f/msp430-gcc-${GCC_VER}/msp430-elf-gcc-${GCC_VER}}"; done
-cd ../..
+cd ../../..
 pause "done rename"
 
 echo '!!! add support files and pack again'
-m_pack "msp430-elf-gcc-${GCC_VER}_linux32" ".tar.bz2" "extras/build" "msp430-gcc-support-files"  "linux32"
-m_pack "msp430-elf-gcc-${GCC_VER}_linux64" ".tar.bz2" "extras/build" "msp430-gcc-support-files"  "linux64"
-m_pack "msp430-elf-gcc-${GCC_VER}_macos"   ".tar.bz2" "extras/build" "msp430-gcc-support-files"  "macos"
-m_pack "msp430-elf-gcc-${GCC_VER}_win32"   ".zip"     "extras/build" "msp430-gcc-support-files"  "windows"
-m_pack "msp430-elf-gcc-${GCC_VER}_win64"   ".zip"     "extras/build" "msp430-gcc-support-files"  "windows64"
+m_pack "msp430-elf-gcc-${GCC_VER}_linux32" ".tar.bz2" "extras/build/tools" "msp430-gcc-support-files"  "linux32"
+m_pack "msp430-elf-gcc-${GCC_VER}_linux64" ".tar.bz2" "extras/build/tools" "msp430-gcc-support-files"  "linux64"
+m_pack "msp430-elf-gcc-${GCC_VER}_macos"   ".tar.bz2" "extras/build/tools" "msp430-gcc-support-files"  "macos"
+m_pack "msp430-elf-gcc-${GCC_VER}_win32"   ".tar.bz2" "extras/build/tools" "msp430-gcc-support-files"  "windows"
+m_pack "msp430-elf-gcc-${GCC_VER}_win64"   ".tar.bz2" "extras/build/tools" "msp430-gcc-support-files"  "windows64"
 pause "done packing"
 
 echo '!!! clean up'
-rm -rf "extras/build/msp430-elf-gcc-support-files/"
-rm -rf "extras/build/msp430-gcc-support-files/"
+rm -rf "extras/build/tools/msp430-elf-gcc-support-files/"
+rm -rf "extras/build/tools/msp430-gcc-support-files/"

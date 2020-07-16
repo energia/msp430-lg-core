@@ -9,3 +9,5 @@ dslite/
 .idea/
 __pycache__/
 md5sum.txt
+
+*.URL

@@ -26,26 +26,27 @@
 set -e
 
 source ./extras/versions.sh
-source ./extras/setup.bash
+source ./extras/macro_lib.sh
 
+m_setup
 
 echo 'prepare dslite'
-echo "this needs to be already available online at: ${DSLITE_URL}"
-m_download "${DSLITE_URL}/windows/dslite-${DSLITE_VER}-i686-mingw32.tar.bz2"
-cp  extras/download/dslite-${DSLITE_VER}-i686-mingw32.tar.bz2 extras/build/windows/
-m_download "${DSLITE_URL}/macosx/dslite-${DSLITE_VER}-x86_64-apple-darwin.tar.bz2"
-cp  extras/download/dslite-${DSLITE_VER}-x86_64-apple-darwin.tar.bz2 extras/build/macos/
-m_download "${DSLITE_URL}/linux64/dslite-${DSLITE_VER}-i386-x86_64-pc-linux-gnu.tar.bz2"
-cp  extras/download/dslite-${DSLITE_VER}-i386-x86_64-pc-linux-gnu.tar.bz2 extras/build/linux64/
+echo "this needs to be already available online at: ${TOOLS_URL}"
+m_download "${TOOLS_URL}/windows/dslite-${DSLITE_VER}-i686-mingw32.tar.bz2"
+cp  extras/download/dslite-${DSLITE_VER}-i686-mingw32.tar.bz2 extras/build/tools/windows/
+m_download "${TOOLS_URL}/macosx/dslite-${DSLITE_VER}-x86_64-apple-darwin.tar.bz2"
+cp  extras/download/dslite-${DSLITE_VER}-x86_64-apple-darwin.tar.bz2 extras/build/tools/macos/
+m_download "${TOOLS_URL}/linux64/dslite-${DSLITE_VER}-i386-x86_64-pc-linux-gnu.tar.bz2"
+cp  extras/download/dslite-${DSLITE_VER}-i386-x86_64-pc-linux-gnu.tar.bz2 extras/build/tools/linux64/
 
-for filename in $(find extras/build/ -name 'dslite-*.sha256' ); do
-	rm "$filename" 
+for filename in $(find extras/build/tools/ -name 'dslite-*.sha256' ); do
+   rm "$filename" 
 done 
-for filename in $(find extras/build/ -name 'dslite-*' ); do
-	if [ "$(expr substr $(uname -s) 1 6)" == "CYGWIN" ]; then
-		sha256sum "$filename" >"$filename".sha256
-	else
-		shasum -a 256 "$filename" >"$filename".sha256
-	fi
+for filename in $(find extras/build/tools/ -name 'dslite-*' ); do
+   if [ "$(expr substr $(uname -s) 1 6)" == "CYGWIN" ]; then
+      sha256sum "$filename" >"$filename".sha256
+   else
+      shasum -a 256 "$filename" >"$filename".sha256
+   fi
 done
 
