@@ -101,7 +101,7 @@ with open(args.package_file+".xxx", 'w') as json_file:
     #    sys.exit(errno.EACCES)
 
     tool = get_platform(args, my_url)
-    update_file_info(tool, '.')
+    update_file_info(tool, 'cores')
     add_version(tool, json_data)
 
     # if args.compiler[:1] == "4": # legacy GCC
@@ -141,9 +141,9 @@ with open(args.package_file+".xxx", 'w') as json_file:
 
 
     tool = init_tools_data(args, my_url)
-    update_file_info(tool['systems'][0], 'windows')
-    update_file_info(tool['systems'][1], 'macos')
-    update_file_info(tool['systems'][2], 'linux64')
+    update_file_info(tool['systems'][0], 'tools/windows')
+    update_file_info(tool['systems'][1], 'tools/macos')
+    update_file_info(tool['systems'][2], 'tools/linux64')
     add_tool(tool, json_data)
 
     tool = OrderedDict([
@@ -167,9 +167,9 @@ with open(args.package_file+".xxx", 'w') as json_file:
                 }
             ])
     ])
-    update_file_info(tool['systems'][0], 'windows')
-    update_file_info(tool['systems'][1], 'macos')
-    update_file_info(tool['systems'][2], 'linux64')
+    update_file_info(tool['systems'][0], 'tools/windows')
+    update_file_info(tool['systems'][1], 'tools/macos')
+    update_file_info(tool['systems'][2], 'tools/linux64')
     add_tool(tool, json_data)
 
 
