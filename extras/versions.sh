@@ -14,7 +14,7 @@ MSPGCC_VER="latest"
 MSPSUPPORT_VER="1.208"
 
 # url where dslite should be grabed for the package:
-DSLITE_URL="https://s3.amazonaws.com/energiaUS/tools"
+TOOLS_URL="https://s3.amazonaws.com/energiaUS/tools"
 DSLITE_VER="9.3.0.1863"
 
 INO2CPP_VER="1.0.4"

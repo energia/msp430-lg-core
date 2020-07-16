@@ -4,25 +4,27 @@ import argparse
 import os
 import errno, sys
 
+import hashlib
+ 
+def getSHA256(filename):
+# Python program to find SHA256 hash string of a file
+    sha256_hash = hashlib.sha256()
+    with open(filename,"rb") as f:
+        # Read and update hash string value in blocks of 4K
+        for byte_block in iter(lambda: f.read(4096),b""):
+            sha256_hash.update(byte_block)
+        #print(sha256_hash.hexdigest())
+        return(sha256_hash.hexdigest())
+    return 0
 
 def update_file_info (index, dir):
     newText = ""
     file = index['archiveFileName']
     BSD = False
-    if BSD:
-        with open("build/"+dir+"/"+file+".sha256") as f:
-            newText = f.read().split("=")
-
-        index['checksum'] = "SHA-256:" + newText[1].replace("\n","").replace(" ","")
-        index['size'] = str(os.path.getsize("build/"+dir+"/"+file))
-    else:
-        with open("build/" + dir + "/" + file + ".sha256") as f:
-            newText = f.read().split("*")
-
-        index['checksum'] = "SHA-256:" + newText[0].replace("\n", "").replace(" ", "")
-        index['size'] = str(os.path.getsize("build/" + dir + "/" + file))
-    return {'checksum': index['checksum'],
-            'size': index['size'] }
+    sha256 = getSHA256("build/"+dir+"/"+file)
+    index['checksum'] = "SHA-256:" + str(sha256)
+    index['size'] = str(os.path.getsize("build/" + dir + "/" + file))
+    return {'checksum': index['checksum'], 'size': index['size'] }
 
 
 def add_version(tooldata, json_data):
@@ -78,14 +80,17 @@ parser.add_argument('-i', '--ino2cpp', default='1.0.4',
                     help='Required: dslite version')
 parser.add_argument('-e', '--mspdebug', default='0.22',
                     help='Required: mspdebug version')
-parser.add_argument('-u', '--url', default='http',
-                    help='Required: dslite version')
+parser.add_argument('-u', '--core_url', default='http',
+                    help='Required: core url')
+parser.add_argument('-t', '--tools_url', default='http',
+                    help='Required: tools url')
 parser.add_argument('-f', '--package_file', default='package_msp430_elf_GCC_index.json.template',
                     help='Required: package file version')
 args = parser.parse_args()
 
 
-my_url = str(args.url.replace("'",""))
+core_url  = str(args.core_url.replace("'",""))
+tools_url = str(args.tools_url.replace("'",""))
 
 # Generate json file
 #-------------------
@@ -100,7 +105,7 @@ with open(args.package_file+".xxx", 'w') as json_file:
     #    print ("File compiler_data.py missing\n")
     #    sys.exit(errno.EACCES)
 
-    tool = get_platform(args, my_url)
+    tool = get_platform(args, core_url)
     update_file_info(tool, 'cores')
     add_version(tool, json_data)
 
@@ -140,7 +145,7 @@ with open(args.package_file+".xxx", 'w') as json_file:
         add_toolsDependencies(args.arch, args.version, tool, json_data)
 
 
-    tool = init_tools_data(args, my_url)
+    tool = init_tools_data(args, tools_url)
     update_file_info(tool['systems'][0], 'tools/windows')
     update_file_info(tool['systems'][1], 'tools/macos')
     update_file_info(tool['systems'][2], 'tools/linux64')
@@ -152,17 +157,17 @@ with open(args.package_file+".xxx", 'w') as json_file:
         ('systems' , [
                 {
                     'host' : 'i686-mingw32',
-                    'url' : my_url + "windows/dslite-" + args.dslite + "-i686-mingw32.tar.bz2",
+                    'url' : tools_url + "windows/dslite-" + args.dslite + "-i686-mingw32.tar.bz2",
                     'archiveFileName' : "dslite-" + args.dslite + "-i686-mingw32.tar.bz2",
                 },
                 {
                     'host' :  'x86_64-apple-darwin',
-                    'url' : my_url + 'macosx/dslite-' + args.dslite + '-x86_64_apple-darwin.tar.bz2',
+                    'url' : tools_url + 'macosx/dslite-' + args.dslite + '-x86_64_apple-darwin.tar.bz2',
                     'archiveFileName' : 'dslite-' + args.dslite + '-x86_64-apple-darwin.tar.bz2',
                 },
                 {
                     'host' : 'x86_64-pc-linux-gnu',
-                    'url' : my_url + 'linux64/dslite-' + args.dslite + '-i386-x86_64-pc-linux-gnu.tar.bz2',
+                    'url' : tools_url + 'linux64/dslite-' + args.dslite + '-i386-x86_64-pc-linux-gnu.tar.bz2',
                     'archiveFileName' :  'dslite-' + args.dslite + '-i386-x86_64-pc-linux-gnu.tar.bz2',
                 }
             ])
