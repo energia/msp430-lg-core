@@ -17,7 +17,9 @@ MSPSUPPORT_VER="1.208"
 TOOLS_URL="https://s3.amazonaws.com/energiaUS/tools"
 DSLITE_VER="9.3.0.1863"
 
+# other tool versions:
 INO2CPP_VER="1.0.4"
+MSPDEBUG_VER="0.24"
 
 # New GCC Compiler (Mito)
 # Energia tools version number - stored in platform.txt

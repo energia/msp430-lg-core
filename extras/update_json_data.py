@@ -78,7 +78,7 @@ parser.add_argument('-d', '--dslite', default='1.0.2',
                     help='Required: dslite version')
 parser.add_argument('-i', '--ino2cpp', default='1.0.4',
                     help='Required: dslite version')
-parser.add_argument('-e', '--mspdebug', default='0.22',
+parser.add_argument('-e', '--mspdebug', default='0.24',
                     help='Required: mspdebug version')
 parser.add_argument('-u', '--core_url', default='http',
                     help='Required: core url')
@@ -141,7 +141,7 @@ with open(args.package_file+".xxx", 'w') as json_file:
         ('name', 'mspdebug'),
         ('version', args.mspdebug),
     ])
-    if args.arch == "msp430":
+    if args.arch == "msp430" or args.arch == "msp430elf":
         add_toolsDependencies(args.arch, args.version, tool, json_data)
 
 
@@ -175,6 +175,60 @@ with open(args.package_file+".xxx", 'w') as json_file:
     update_file_info(tool['systems'][0], 'tools/windows')
     update_file_info(tool['systems'][1], 'tools/macos')
     update_file_info(tool['systems'][2], 'tools/linux64')
+    add_tool(tool, json_data)
+
+
+    tool = OrderedDict([
+        ("name", "mspdebug"),
+        ("version", args.mspdebug),
+        ("systems", [
+            {
+              "host": "i686-mingw32",
+              "url": tools_url + "windows/mspdebug-" + args.mspdebug + "-i686-mingw32.tar.bz2",
+              "archiveFileName": "mspdebug-" + args.mspdebug + "-i686-mingw32.tar.bz2",
+            },
+            {
+              "host": "x86_64-apple-darwin",
+              "url": tools_url + "tools/macosx/mspdebug-" + args.mspdebug + "-x86_64-apple-darwin.tar.bz2",
+              "archiveFileName": "mspdebug-" + args.mspdebug + "-x86_64-apple-darwin.tar.bz2",
+            },
+            {
+              "host": "x86_64-pc-linux-gnu",
+              "url": tools_url + "tools/linux64/mspdebug-" + args.mspdebug + "-i386-x86_64-pc-linux-gnu.tar.bz2",
+              "archiveFileName": "mspdebug-" + args.mspdebug + "-i386-x86_64-pc-linux-gnu.tar.bz2",
+            }
+        ])
+    ])
+    update_file_info(tool['systems'][0], 'tools/windows')
+    update_file_info(tool['systems'][1], 'tools/macos')
+    update_file_info(tool['systems'][2], 'tools/linux64')
+    add_tool(tool, json_data)
+
+
+    tool = OrderedDict([
+        ("name", "ino2cpp"),
+        ("version", args.ino2cpp),
+        ("systems", [
+            {
+              "host": "i686-mingw32",
+              "url": tools_url + "tools/ino2cpp-" + args.ino2cpp + ".tar.bz2",
+              "archiveFileName": "ino2cpp-" + args.ino2cpp + ".tar.bz2",
+            },
+            {
+              "host": "x86_64-apple-darwin",
+              "url": tools_url + "tools/ino2cpp-" + args.ino2cpp + ".tar.bz2",
+              "archiveFileName": "ino2cpp-" + args.ino2cpp + ".tar.bz2",
+            },
+            {
+              "host": "x86_64-pc-linux-gnu",
+              "url": tools_url + "tools/ino2cpp-" + args.ino2cpp + ".tar.bz2",
+              "archiveFileName": "ino2cpp-" + args.ino2cpp + ".tar.bz2",
+            }
+        ])
+    ])
+    update_file_info(tool['systems'][0], 'tools')
+    update_file_info(tool['systems'][1], 'tools')
+    update_file_info(tool['systems'][2], 'tools')
     add_tool(tool, json_data)
 
 

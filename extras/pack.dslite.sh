@@ -50,3 +50,18 @@ for filename in $(find extras/build/tools/ -name 'dslite-*' ); do
    fi
 done
 
+echo 'prepare ino2cpp'
+echo "this needs to be already available online at: ${TOOLS_URL}"
+m_download "${TOOLS_URL}/ino2cpp-${INO2CPP_VER}.tar.bz2"
+cp  extras/download/ino2cpp-${INO2CPP_VER}.tar.bz2 extras/build/tools/
+
+
+echo 'prepare mspdebug'
+echo "this needs to be already available online at: ${TOOLS_URL}"
+m_download "${TOOLS_URL}/windows/mspdebug-${MSPDEBUG_VER}-i686-mingw32.tar.bz2"
+cp  extras/download/mspdebug-${MSPDEBUG_VER}-i686-mingw32.tar.bz2 extras/build/tools/windows/
+m_download "${TOOLS_URL}/macosx/mspdebug-${MSPDEBUG_VER}-x86_64-apple-darwin.tar.bz2"
+cp  extras/download/mspdebug-${MSPDEBUG_VER}-x86_64-apple-darwin.tar.bz2 extras/build/tools/macos/
+m_download "${TOOLS_URL}/linux64/mspdebug-${MSPDEBUG_VER}-i386-x86_64-pc-linux-gnu.tar.bz2"
+cp  extras/download/mspdebug-${MSPDEBUG_VER}-i386-x86_64-pc-linux-gnu.tar.bz2 extras/build/tools/linux64/
+
