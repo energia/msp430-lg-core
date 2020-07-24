@@ -147,7 +147,7 @@ with open(args.package_file+".xxx", 'w') as json_file:
 
     tool = init_tools_data(args, tools_url)
     update_file_info(tool['systems'][0], 'tools/windows')
-    update_file_info(tool['systems'][1], 'tools/macos')
+    update_file_info(tool['systems'][1], 'tools/macosx')
     update_file_info(tool['systems'][2], 'tools/linux64')
     add_tool(tool, json_data)
 
@@ -173,7 +173,7 @@ with open(args.package_file+".xxx", 'w') as json_file:
             ])
     ])
     update_file_info(tool['systems'][0], 'tools/windows')
-    update_file_info(tool['systems'][1], 'tools/macos')
+    update_file_info(tool['systems'][1], 'tools/macosx')
     update_file_info(tool['systems'][2], 'tools/linux64')
     add_tool(tool, json_data)
 
@@ -200,7 +200,7 @@ with open(args.package_file+".xxx", 'w') as json_file:
         ])
     ])
     update_file_info(tool['systems'][0], 'tools/windows')
-    update_file_info(tool['systems'][1], 'tools/macos')
+    update_file_info(tool['systems'][1], 'tools/macosx')
     update_file_info(tool['systems'][2], 'tools/linux64')
     add_tool(tool, json_data)
 

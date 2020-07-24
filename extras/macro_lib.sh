@@ -113,7 +113,7 @@ m_setup()
 	[ ! -d "extras/build/tools" ] && mkdir extras/build/tools
 	[ ! -d "extras/build/tools/windows" ] && mkdir extras/build/tools/windows
 	[ ! -d "extras/build/tools/windows64" ] && mkdir extras/build/tools/windows64
-	[ ! -d "extras/build/tools/macos" ] && mkdir extras/build/tools/macos
+	[ ! -d "extras/build/tools/macosx" ] && mkdir extras/build/tools/macosx
 	[ ! -d "extras/build/tools/linux32" ] && mkdir extras/build/tools/linux32
 	[ ! -d "extras/build/tools/linux64" ] && mkdir extras/build/tools/linux64
 	[ -d "extras/build/tools/linux64" ]  # check to return true
