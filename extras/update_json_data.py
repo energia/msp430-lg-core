@@ -90,7 +90,7 @@ args = parser.parse_args()
 
 
 core_url  = str(args.core_url.replace("'",""))
-tools_url = str(args.tools_url.replace("'",""))
+tools_url = str(args.tools_url.replace("'",""))+"/"
 
 # Generate json file
 #-------------------
