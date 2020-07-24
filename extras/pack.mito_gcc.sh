@@ -33,7 +33,7 @@ echo '!!! fetch files'
 [ -d "extras/download" ] || mkdir extras/download 
 m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/exports/msp430-gcc-${GCC_VER}_linux32.tar.bz2"
 m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/exports/msp430-gcc-${GCC_VER}_linux64.tar.bz2"
-m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/exports/msp430-gcc-${GCC_VER}_macosx.tar.bz2"
+m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/exports/msp430-gcc-${GCC_VER}_macos.tar.bz2"
 m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/exports/msp430-gcc-${GCC_VER}_win32.zip"
 m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/exports/msp430-gcc-${GCC_VER}_win64.zip"
 m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/exports/msp430-gcc-support-files-${MSPSUPPORT_VER}.zip"
@@ -54,7 +54,7 @@ m_setup
 
 m_extract "msp430-gcc-${GCC_VER}_linux32.tar.bz2" "extras/build/tools"
 m_extract "msp430-gcc-${GCC_VER}_linux64.tar.bz2" "extras/build/tools"
-m_extract "msp430-gcc-${GCC_VER}_macosx.tar.bz2" "extras/build/tools"
+m_extract "msp430-gcc-${GCC_VER}_macos.tar.bz2" "extras/build/tools"
 m_extract "msp430-gcc-${GCC_VER}_win32.zip" "extras/build/tools"
 m_extract "msp430-gcc-support-files-${MSPSUPPORT_VER}.zip" "extras/build/tools"
 pause "done extract"
@@ -71,7 +71,7 @@ pause "done rename"
 echo '!!! add support files and pack again'
 m_pack "msp430-elf-gcc-${GCC_VER}_linux32" ".tar.bz2" "extras/build/tools" "msp430-gcc-support-files"  "linux32"
 m_pack "msp430-elf-gcc-${GCC_VER}_linux64" ".tar.bz2" "extras/build/tools" "msp430-gcc-support-files"  "linux64"
-m_pack "msp430-elf-gcc-${GCC_VER}_macosx"   ".tar.bz2" "extras/build/tools" "msp430-gcc-support-files"  "macosx"
+m_pack "msp430-elf-gcc-${GCC_VER}_macos"   ".tar.bz2" "extras/build/tools" "msp430-gcc-support-files"  "macosx"
 m_pack "msp430-elf-gcc-${GCC_VER}_win32"   ".tar.bz2" "extras/build/tools" "msp430-gcc-support-files"  "windows"
 m_pack "msp430-elf-gcc-${GCC_VER}_win64"   ".tar.bz2" "extras/build/tools" "msp430-gcc-support-files"  "windows64"
 pause "done packing"

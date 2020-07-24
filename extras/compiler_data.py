@@ -81,8 +81,8 @@ def init_tools_data(args, my_url):
 				},
 				{
 					'host': 'x86_64-apple-darwin',
-					'url': my_url + 'macosx/' + args.cname + '-' + args.cversion + '_macosx.tar.bz2',
-					'archiveFileName': args.cname + "-" + args.cversion + '_macosx.tar.bz2',
+					'url': my_url + 'macosx/' + args.cname + '-' + args.cversion + '_macos.tar.bz2',
+					'archiveFileName': args.cname + "-" + args.cversion + '_macos.tar.bz2',
 				},
 				{
 					'host': 'x86_64-pc-linux-gnu',
