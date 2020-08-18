@@ -46,6 +46,7 @@ md5sum --check --ignore-missing md5sum.txt
 #md5sum --check --status md5sum.txt
 cd ../..
 
+[ -d "extras/build" ] || mkdir extras/build
 [ -d "extras/build/tools" ] || mkdir extras/build/tools
 
 echo '!!! untar+patch packages'
