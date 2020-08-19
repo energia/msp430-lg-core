@@ -80,8 +80,8 @@ recipe.output.save_file={build.project_name}.{build.variant}.hex
 
 ## Compute size
 recipe.size.pattern="{compiler.path}{compiler.size.cmd}" -A "{build.path}/{build.project_name}.elf"
-recipe.size.regex=^(?:\.text|\.lowtext|\.lower\.text|\.upper\.text|\.lower\.rodata|\.rodata|\.rodata2|\.bootloader)\s+([0-9]+).*
-recipe.size.regex.data=^(?:\.data|\.bss|\.noinit)\s+([0-9]+).*
+recipe.size.regex=^(?:\.text|\.lowtext|\.lower\.text|\.upper\.text|\.lower\.rodata|\.rodata|\.rodata2|\.bootloader|\.lower\.data|\.upper\.data|\.data)\s+([0-9]+).*
+recipe.size.regex.data=^(?:\.bss|\.lower\.bss|\.noinit|\.heap)\s+([0-9]+).*
 recipe.size.regex.eeprom=^(?:\.eeprom)\s+([0-9]+).*
 
 ## Preprocessor

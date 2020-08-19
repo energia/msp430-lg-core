@@ -23,7 +23,7 @@ MSPDEBUG_VER="0.24"
 
 # New GCC Compiler (Mito)
 # Energia tools version number - stored in platform.txt
-ENERGIA_VER="2.0.7"
+ENERGIA_VER="2.0.8"
 
 
 # Legacy GCC Compiler

@@ -49,3 +49,5 @@ echo python update_json_data.py -a "msp430elf" -v ${ENERGIA_VER}  -n "msp430-elf
 python update_json_data.py -a "msp430elf" -v ${ENERGIA_VER}  -n "msp430-elf-gcc" -c ${GCC_VER} -d ${DSLITE_VER} -e ${MSPDEBUG_VER} -i ${INO2CPP_VER} -u ${ENERGIA_URL} -t ${TOOLS_URL} -f package_msp430_elf_GCC_index.json.template
 
 cd ..
+
+source ./extras/gen_upload.sh

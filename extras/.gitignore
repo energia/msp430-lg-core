@@ -10,4 +10,6 @@ dslite/
 __pycache__/
 md5sum.txt
 
+aws_upload.sh
+
 *.URL
