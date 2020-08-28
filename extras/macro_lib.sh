@@ -35,7 +35,7 @@ m_download()
 	echo Fetching: "${fn}" - "${1}"
 	[ ! -d "extras/download" ] && mkdir extras/download
 	#wget --content-disposition -qO extras/download/"${fn}" "${1}"
-	#echo curl -L ${https_proxy} -o extras/download/"${fn}" "${1}"
+	echo curl -L ${https_proxy} -o extras/download/"${fn}" "${1}"
 	curl -L ${https_proxy} -o extras/download/"${fn}" "${1}"
 }
 

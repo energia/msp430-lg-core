@@ -31,18 +31,19 @@ source ./extras/macro_lib.sh
 
 echo '!!! fetch files'
 [ -d "extras/download" ] || mkdir extras/download 
-m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/exports/msp430-gcc-${GCC_VER}_linux32.tar.bz2"
-m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/exports/msp430-gcc-${GCC_VER}_linux64.tar.bz2"
-m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/exports/msp430-gcc-${GCC_VER}_macos.tar.bz2"
-m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/exports/msp430-gcc-${GCC_VER}_win32.zip"
-m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/exports/msp430-gcc-${GCC_VER}_win64.zip"
-m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/exports/msp430-gcc-support-files-${MSPSUPPORT_VER}.zip"
+m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/export/msp430-gcc-${GCC_VER}_linux32.tar.bz2"
+m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/export/msp430-gcc-${GCC_VER}_linux64.tar.bz2"
+m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/export/msp430-gcc-${GCC_VER}_macos.tar.bz2"
+m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/export/msp430-gcc-${GCC_VER}_win32.zip"
+m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/export/msp430-gcc-${GCC_VER}_win64.zip"
+m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/export/msp430-gcc-support-files-${MSPSUPPORT_VER}.zip"
 [ -f extras/download/md5sum.txt ] && rm extras/download/md5sum.txt
-m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/exports/md5sum.txt"
+m_download "http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/${MSPGCC_VER}/export/md5sum.txt"
 cd extras/download
 #sed -i '/md5sum/d' ./md5sum.txt
 echo check checksum
-md5sum --check --ignore-missing md5sum.txt
+# md5 checksum file currently not provided
+#md5sum --check --ignore-missing md5sum.txt
 #md5sum --check --status md5sum.txt
 cd ../..
 

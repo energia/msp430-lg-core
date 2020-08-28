@@ -8,10 +8,11 @@ ENERGIA_URL="http://energia.nu/downloads/download_core.php?file="
 
 # gcc compiler versions can be found here:
 # web page: http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/latest/index_FDS.html
-GCC_VER="8.3.0.16"
+# web page: https://www.ti.com/tool/download/MSP430-GCC-OPENSOURCE
+GCC_VER="9.2.0.50"
 #MSPGCC_VER="6_01_01_000"
-MSPGCC_VER="latest"
-MSPSUPPORT_VER="1.208"
+MSPGCC_VER="9_2_0_0"
+MSPSUPPORT_VER="1.210"
 
 # url where dslite should be grabed for the package:
 TOOLS_URL="https://s3.amazonaws.com/energiaUS/tools"
@@ -23,7 +24,7 @@ MSPDEBUG_VER="0.24"
 
 # New GCC Compiler (Mito)
 # Energia tools version number - stored in platform.txt
-ENERGIA_VER="2.0.8"
+ENERGIA_VER="2.0.9"
 
 
 # Legacy GCC Compiler
