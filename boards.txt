@@ -35,7 +35,7 @@ MSP-EXP430FR2433LP.build.f_cpu=8000000L
 MSP-EXP430FR2433LP.build.core=msp430
 MSP-EXP430FR2433LP.build.variant=MSP-EXP430FR2433LP
 MSP-EXP430FR2433LP.build.board=MSP_EXP430FR2433LP
-MSP-EXP430FR2433LP.build.extra_flags=-msmall -mcode-region=lower
+MSP-EXP430FR2433LP.build.extra_flags=-msmall
 
 MSP-EXP430FR2433LP.upload.tool=dslite
 MSP-EXP430FR2433LP.upload.protocol=dslite
@@ -54,7 +54,7 @@ MSP-EXP430FR4133LP.build.f_cpu=8000000L
 MSP-EXP430FR4133LP.build.core=msp430
 MSP-EXP430FR4133LP.build.variant=MSP-EXP430FR4133LP
 MSP-EXP430FR4133LP.build.board=MSP_EXP430FR4133LP
-MSP-EXP430FR4133LP.build.extra_flags=-msmall -mcode-region=lower
+MSP-EXP430FR4133LP.build.extra_flags=-msmall
 
 MSP-EXP430FR4133LP.upload.tool=dslite
 MSP-EXP430FR4133LP.upload.protocol=dslite
@@ -190,7 +190,7 @@ MSP-EXP430FR5739LP.build.f_cpu=16000000L
 MSP-EXP430FR5739LP.build.core=msp430
 MSP-EXP430FR5739LP.build.variant=MSP-EXP430FR5739LP
 MSP-EXP430FR5739LP.build.board=MSP_EXP430FR5739LP
-MSP-EXP430FR5739LP.build.extra_flags=-msmall -mcode-region=lower -mhwmult=f5series
+MSP-EXP430FR5739LP.build.extra_flags=-msmall -mhwmult=f5series
 
 MSP-EXP430FR5739LP.upload.tool=mspdebug
 MSP-EXP430FR5739LP.upload.protocol=rf2500
@@ -209,7 +209,7 @@ MSP-EXP430FR2355LP.build.f_cpu=16000000L
 MSP-EXP430FR2355LP.build.core=msp430
 MSP-EXP430FR2355LP.build.variant=MSP-EXP430FR2355LP
 MSP-EXP430FR2355LP.build.board=MSP_EXP430FR2355LP
-MSP-EXP430FR2355LP.build.extra_flags=-msmall -mcode-region=lower
+MSP-EXP430FR2355LP.build.extra_flags=-msmall
 
 MSP-EXP430FR2355LP.upload.tool=dslite
 MSP-EXP430FR2355LP.upload.protocol=dslite
@@ -248,7 +248,7 @@ MSP-EXP430FR2311LP.build.f_cpu=16000000L
 MSP-EXP430FR2311LP.build.core=msp430
 MSP-EXP430FR2311LP.build.variant=MSP-EXP430FR2311LP
 MSP-EXP430FR2311LP.build.board=MSP_EXP430FR2311LP
-MSP-EXP430FR2311LP.build.extra_flags=-msmall -mcode-region=lower
+MSP-EXP430FR2311LP.build.extra_flags=-msmall
 
 MSP-EXP430FR2311LP.upload.tool=dslite
 MSP-EXP430FR2311LP.upload.protocol=dslite

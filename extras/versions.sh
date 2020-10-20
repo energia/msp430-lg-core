@@ -12,7 +12,7 @@ ENERGIA_URL="http://energia.nu/downloads/download_core.php?file="
 GCC_VER="9.2.0.50"
 #MSPGCC_VER="6_01_01_000"
 MSPGCC_VER="9_2_0_0"
-MSPSUPPORT_VER="1.210"
+MSPSUPPORT_VER="1.209"
 
 # url where dslite should be grabed for the package:
 TOOLS_URL="https://s3.amazonaws.com/energiaUS/tools"
@@ -24,7 +24,7 @@ MSPDEBUG_VER="0.24"
 
 # New GCC Compiler (Mito)
 # Energia tools version number - stored in platform.txt
-ENERGIA_VER="2.0.9"
+ENERGIA_VER="2.0.10"
 
 
 # Legacy GCC Compiler

@@ -36,7 +36,7 @@ sed -r s/version=xxx/version=$VERSION/ platform.txt.template | sed -r s/dslite-x
 sed -z 's/[0-9]+\s*[\n\r]+[^\.]+\.upload\.maximum_size_ext=//g' boards.txt > boards.txt.elfgcc
 
 cd ..
-tar --transform "s|$FOLDERNAME|msp430elf-$VERSION|g" --transform "s|boards.txt.elfgcc|boards.txt|g" --exclude=*.sha256 --exclude=*.bz2 --exclude=platform.txt.oldgcc --exclude=platform.txt.template --exclude=extras --exclude=.git* --exclude=.idea -cjf msp430elf-$VERSION.tar.bz2 $FOLDERNAME
+tar --transform "s|$FOLDERNAME|msp430elf-$VERSION|g" --transform "s|boards.txt.elfgcc|boards.txt|g" --exclude=*.sha256 --exclude=*.bz2 --exclude=platform.txt.oldgcc --exclude=platform.txt.template --exclude=boards.txt --exclude=extras --exclude=.git* --exclude=.idea -cjf msp430elf-$VERSION.tar.bz2 $FOLDERNAME
 cd -
 rm boards.txt.elfgcc
 
