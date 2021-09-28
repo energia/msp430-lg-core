@@ -10,9 +10,9 @@ ENERGIA_URL="http://energia.nu/downloads/download_core.php?file="
 # web page: http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/latest/index_FDS.html
 # web page: https://www.ti.com/tool/download/MSP430-GCC-OPENSOURCE
 GCC_VER="9.3.1.11"
-#MSPGCC_VER="6_01_01_000"
-MSPGCC_VER="9_3_1_1"
-MSPSUPPORT_VER="1.211"
+#string in path between MSPGCC and export
+MSPGCC_VER="9_3_1_2"
+MSPSUPPORT_VER="1.212"
 
 # url where dslite should be grabed for the package:
 TOOLS_URL="https://s3.amazonaws.com/energiaUS/tools"
