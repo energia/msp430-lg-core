@@ -88,6 +88,7 @@ class HardwareSerial : public Stream
 		void begin(unsigned long, uint8_t config=SERIAL_8N1);
 		void end();
 		virtual int available(void);
+		virtual int availableForWrite(void);
 		virtual int peek(void);
 		virtual int read(void);
 		virtual void flush(void);
