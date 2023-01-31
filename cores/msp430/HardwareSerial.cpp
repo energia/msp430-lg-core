@@ -197,6 +197,18 @@ int HardwareSerial::available(void)
 	return (unsigned int)(SERIAL_BUFFER_SIZE + _rx_buffer->head - _rx_buffer->tail) % SERIAL_BUFFER_SIZE;
 }
 
+int HardwareSerial::availableForWrite(void)
+{
+	unsigned int head;
+	unsigned int tail;
+	
+	head = _tx_buffer->head;
+	tail = _tx_buffer->tail;
+	if (head >= tail)
+		return (int)(SERIAL_BUFFER_SIZE - 1 - head + tail);
+	return (int)(tail - head - 1);
+}
+
 int HardwareSerial::peek(void)
 {
 	if (_rx_buffer->head == _rx_buffer->tail) {

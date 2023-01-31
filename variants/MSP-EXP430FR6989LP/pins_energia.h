@@ -188,6 +188,46 @@ static const uint8_t RED_LED = 43;
 static const uint8_t GREEN_LED = 44;
 static const uint8_t TEMPSENSOR = 128 + 30;
 
+//LCD connector
+static const uint8_t P8_3 = 47;
+static const uint8_t P8_2 = 48;
+static const uint8_t P8_1 = 49;
+static const uint8_t P8_0 = 50;
+static const uint8_t P5_6 = 51;
+static const uint8_t P5_5 = 52;
+static const uint8_t P5_4 = 53;
+static const uint8_t P7_4 = 54;
+static const uint8_t P4_6 = 55;
+static const uint8_t P4_5 = 56;
+static const uint8_t P4_4 = 57;
+static const uint8_t P5_7 = 58;
+static const uint8_t P5_2 = 59;
+static const uint8_t P5_1 = 60;
+static const uint8_t P5_0 = 61;
+static const uint8_t P10_2= 62;
+static const uint8_t P10_1= 63;
+static const uint8_t P7_6 = 64;
+static const uint8_t P7_5 = 65;
+static const uint8_t P6_7 = 66;
+static const uint8_t P7_0 = 67;
+static const uint8_t P7_1 = 68;
+static const uint8_t P7_2 = 69;
+static const uint8_t P7_3 = 70;
+static const uint8_t P5_3 = 71;
+static const uint8_t P7_7 = 72;
+static const uint8_t P10_0= 73;
+//static const uint8_t NC = 74;
+//static const uint8_t NC = 75;
+//static const uint8_t NC = 76;
+//static const uint8_t NC = 77;
+//static const uint8_t NC = 78;
+//static const uint8_t NC = 79;
+//static const uint8_t NC = 80;
+static const uint8_t P6_6 = 81;
+static const uint8_t P6_5 = 82;
+static const uint8_t P6_4 = 83;
+static const uint8_t P6_3 = 84;
+
 #ifdef ARDUINO_MAIN
 const uint16_t port_to_input[] = {
    NOT_A_PORT,
@@ -435,6 +475,45 @@ const uint8_t digital_pin_to_timer[] = {
 	NOT_ON_TIMER, /* 44 - P9.7 */
 	T0A2,         /* 45 - P1.1 */
 	T1A1,         /* 46 - P1.2 */
+
+	NOT_ON_TIMER, /* 47 - P8_3  */
+	NOT_ON_TIMER, /* 48 - P8_2  */
+	NOT_ON_TIMER, /* 49 - P8_1  */
+	NOT_ON_TIMER, /* 50 - P8_0  */
+	NOT_ON_TIMER, /* 51 - P5_6  */
+	NOT_ON_TIMER, /* 52 - P5_5  */
+	NOT_ON_TIMER, /* 53 - P5_4  */
+	NOT_ON_TIMER, /* 54 - P7_4  */
+	NOT_ON_TIMER, /* 55 - P4_6  */
+	NOT_ON_TIMER, /* 56 - P4_5  */
+	NOT_ON_TIMER, /* 57 - P4_4  */
+	NOT_ON_TIMER, /* 58 - P5_7  */
+	NOT_ON_TIMER, /* 59 - P5_2  */
+	NOT_ON_TIMER, /* 60 - P5_1  */
+	NOT_ON_TIMER, /* 61 - P5_0  */
+	NOT_ON_TIMER, /* 62 - P10_2 */
+	NOT_ON_TIMER, /* 63 - P10_1 */
+	NOT_ON_TIMER, /* 64 - P7_6  */
+	NOT_ON_TIMER, /* 65 - P7_5  */
+	NOT_ON_TIMER, /* 66 - P6_7  */
+	NOT_ON_TIMER, /* 67 - P7_0  */
+	NOT_ON_TIMER, /* 68 - P7_1  */
+	NOT_ON_TIMER, /* 69 - P7_2  */
+	NOT_ON_TIMER, /* 70 - P7_3  */
+	NOT_ON_TIMER, /* 71 - P5_3  */
+	NOT_ON_TIMER, /* 72 - P7_7  */
+	NOT_ON_TIMER, /* 73 - P10_0 */
+	NOT_ON_TIMER, /* 74 - NC  */
+	NOT_ON_TIMER, /* 75 - NC  */
+	NOT_ON_TIMER, /* 76 - NC  */
+	NOT_ON_TIMER, /* 77 - NC  */
+	NOT_ON_TIMER, /* 78 - NC  */
+	NOT_ON_TIMER, /* 79 - NC  */
+	NOT_ON_TIMER, /* 80 - NC  */
+	NOT_ON_TIMER, /* 81 - P6_6  */
+	NOT_ON_TIMER, /* 82 - P6_5  */
+	NOT_ON_TIMER, /* 83 - P6_4  */
+	NOT_ON_TIMER, /* 84 - P6_3  */
 };
 
 const uint8_t digital_pin_to_port[] = {
@@ -485,6 +564,45 @@ const uint8_t digital_pin_to_port[] = {
 	P9,        /* 44 - P9.7 */
 	P1,        /* 45 - P1.1 */
 	P1,        /* 46 - P1.2 */
+
+	P8,        /* 47 - P8_3  */
+	P8,        /* 48 - P8_2  */
+	P8,        /* 49 - P8_1  */
+	P8,        /* 50 - P8_0  */
+	P5,        /* 51 - P5_6  */
+	P5,        /* 52 - P5_5  */
+	P5,        /* 53 - P5_4  */
+	P7,        /* 54 - P7_4  */
+	P4,        /* 55 - P4_6  */
+	P4,        /* 56 - P4_5  */
+	P4,        /* 57 - P4_4  */
+	P5,        /* 58 - P5_7  */
+	P5,        /* 59 - P5_2  */
+	P5,        /* 60 - P5_1  */
+	P5,        /* 61 - P5_0  */
+	P10,       /* 62 - P10_2 */
+	P10,       /* 63 - P10_1 */
+	P7,        /* 64 - P7_6  */
+	P7,        /* 65 - P7_5  */
+	P6,        /* 66 - P6_7  */
+	P7,        /* 67 - P7_0  */
+	P7,        /* 68 - P7_1  */
+	P7,        /* 69 - P7_2  */
+	P7,        /* 70 - P7_3  */
+	P5,        /* 71 - P5_3  */
+	P7,        /* 72 - P7_7  */
+	P10,       /* 73 - P10_0 */
+	NOT_A_PIN, /* 74 - NC  */
+	NOT_A_PIN, /* 75 - NC  */
+	NOT_A_PIN, /* 76 - NC  */
+	NOT_A_PIN, /* 77 - NC  */
+	NOT_A_PIN, /* 78 - NC  */
+	NOT_A_PIN, /* 79 - NC  */
+	NOT_A_PIN, /* 80 - NC  */
+	P6,        /* 81 - P6_6  */
+	P6,        /* 82 - P6_5  */
+	P6,        /* 83 - P6_4  */
+	P6,        /* 84 - P6_3  */
 };
 
 const uint8_t digital_pin_to_bit_mask[] = {
@@ -535,6 +653,45 @@ const uint8_t digital_pin_to_bit_mask[] = {
 	BV(7),     /* 44 - P9.7 */
 	BV(1),     /* 45 - P1.1 */
 	BV(2),     /* 46 - P1.2 */
+
+	BV(3),     /* 47 - P8_3  */
+	BV(2),     /* 48 - P8_2  */
+	BV(1),     /* 49 - P8_1  */
+	BV(0),     /* 50 - P8_0  */
+	BV(6),     /* 51 - P5_6  */
+	BV(5),     /* 52 - P5_5  */
+	BV(4),     /* 53 - P5_4  */
+	BV(4),     /* 54 - P7_4  */
+	BV(6),     /* 55 - P4_6  */
+	BV(5),     /* 56 - P4_5  */
+	BV(4),     /* 57 - P4_4  */
+	BV(7),     /* 58 - P5_7  */
+	BV(2),     /* 59 - P5_2  */
+	BV(1),     /* 60 - P5_1  */
+	BV(0),     /* 61 - P5_0  */
+	BV(2),     /* 62 - P10_2 */
+	BV(1),     /* 63 - P10_1 */
+	BV(6),     /* 64 - P7_6  */
+	BV(5),     /* 65 - P7_5  */
+	BV(7),     /* 66 - P6_7  */
+	BV(0),     /* 67 - P7_0  */
+	BV(1),     /* 68 - P7_1  */
+	BV(2),     /* 69 - P7_2  */
+	BV(3),     /* 70 - P7_3  */
+	BV(3),     /* 71 - P5_3  */
+	BV(7),     /* 72 - P7_7  */
+	BV(0),     /* 73 - P10_0 */
+	NOT_A_PIN, /* 74 - NC  */
+	NOT_A_PIN, /* 75 - NC  */
+	NOT_A_PIN, /* 76 - NC  */
+	NOT_A_PIN, /* 77 - NC  */
+	NOT_A_PIN, /* 78 - NC  */
+	NOT_A_PIN, /* 79 - NC  */
+	NOT_A_PIN, /* 80 - NC  */
+	BV(6),     /* 81 - P6_6  */
+	BV(5),     /* 82 - P6_5  */
+	BV(4),     /* 83 - P6_4  */
+	BV(3),     /* 84 - P6_3  */
 };
 
 const uint32_t digital_pin_to_analog_in[] = {
@@ -585,6 +742,45 @@ const uint32_t digital_pin_to_analog_in[] = {
         15,             /*  44 - P9.7 */
         NOT_ON_ADC,     /*  45 - P1.1 */
         NOT_ON_ADC,     /*  46 - P1.2 */
+
+        NOT_ON_ADC,     /*  47 - P8_3  */
+        NOT_ON_ADC,     /*  48 - P8_2  */
+        NOT_ON_ADC,     /*  49 - P8_1  */
+        NOT_ON_ADC,     /*  50 - P8_0  */
+        NOT_ON_ADC,     /*  51 - P5_6  */
+        NOT_ON_ADC,     /*  52 - P5_5  */
+        NOT_ON_ADC,     /*  53 - P5_4  */
+        NOT_ON_ADC,     /*  54 - P7_4  */
+        NOT_ON_ADC,     /*  55 - P4_6  */
+        NOT_ON_ADC,     /*  56 - P4_5  */
+        NOT_ON_ADC,     /*  57 - P4_4  */
+        NOT_ON_ADC,     /*  58 - P5_7  */
+        NOT_ON_ADC,     /*  59 - P5_2  */
+        NOT_ON_ADC,     /*  60 - P5_1  */
+        NOT_ON_ADC,     /*  61 - P5_0  */
+        NOT_ON_ADC,     /*  62 - P10_2 */
+        NOT_ON_ADC,     /*  63 - P10_1 */
+        NOT_ON_ADC,     /*  64 - P7_6  */
+        NOT_ON_ADC,     /*  65 - P7_5  */
+        NOT_ON_ADC,     /*  66 - P6_7  */
+        NOT_ON_ADC,     /*  67 - P7_0  */
+        NOT_ON_ADC,     /*  68 - P7_1  */
+        NOT_ON_ADC,     /*  69 - P7_2  */
+        NOT_ON_ADC,     /*  70 - P7_3  */
+        NOT_ON_ADC,     /*  71 - P5_3  */
+        NOT_ON_ADC,     /*  72 - P7_7  */
+        NOT_ON_ADC,     /*  73 - P10_0 */
+        NOT_ON_ADC,     /*  74 - NC  */
+        NOT_ON_ADC,     /*  75 - NC  */
+        NOT_ON_ADC,     /*  76 - NC  */
+        NOT_ON_ADC,     /*  77 - NC  */
+        NOT_ON_ADC,     /*  78 - NC  */
+        NOT_ON_ADC,     /*  79 - NC  */
+        NOT_ON_ADC,     /*  80 - NC  */
+        NOT_ON_ADC,     /*  81 - P6_6  */
+        NOT_ON_ADC,     /*  82 - P6_5  */
+        NOT_ON_ADC,     /*  83 - P6_4  */
+        NOT_ON_ADC,     /*  84 - P6_3  */
 };
 #endif // #ifdef ARDUINO_MAIN
 #endif // #ifndef Pins_Energia_h
